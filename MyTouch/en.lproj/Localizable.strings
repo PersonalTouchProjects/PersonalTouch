@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  MyTouch
+
+  Created by Tommy Lin on 2018/6/29.
+  Copyright © 2018年 NTU HCI Lab. All rights reserved.
+*/
+
+"Exam" = "Exam";
+"Exam Description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+"Start Exam" = "Start Exam";
