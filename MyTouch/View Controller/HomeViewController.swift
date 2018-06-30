@@ -51,7 +51,7 @@ class HomeViewController: UIViewController {
     
     @objc func handleButton(_ sender: UIButton) {
         
-        let taskViewController = TaskViewController()
+        let taskViewController = TapTaskViewController()
         present(taskViewController, animated: true, completion: nil)
     }
 }

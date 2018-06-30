@@ -18,3 +18,15 @@ struct RawTouch {
     
     var radiusTolerance: CGFloat
 }
+
+extension UITouch {
+    
+    var rawTouch: RawTouch {
+        return RawTouch(
+            timestamp: Date().timeIntervalSince1970,
+            location: self.location(in: nil),
+            radius: self.majorRadius,
+            radiusTolerance: self.majorRadiusTolerance
+        )
+    }
+}

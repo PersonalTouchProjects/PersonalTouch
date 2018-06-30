@@ -57,6 +57,7 @@ class TaskViewController: UIViewController {
         startButton.setBackgroundImage(UIImage.buttonBackgroundImage(color: view.tintColor), for: .normal)
         
         stopButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
+        stopButton.addTarget(self, action: #selector(handleStopButton(_:)), for: .touchUpInside)
         
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
@@ -103,6 +104,11 @@ class TaskViewController: UIViewController {
             
             topSpacing.heightAnchor.constraint(equalTo: bottomSpacing.heightAnchor, multiplier: 2)
         ])
+        
+        feedbackLabel.isHidden = true
     }
     
+    @objc func handleStopButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
 }
