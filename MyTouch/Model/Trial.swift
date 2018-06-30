@@ -14,7 +14,7 @@ protocol Trial {
     
     var endTime: TimeInterval { get }
     
-    var rawTouches: [RawTouch] { get }
+    var rawTouchTracks: [RawTouchTrack] { get }
     
     var success: Bool { get }
 }

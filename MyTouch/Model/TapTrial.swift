@@ -16,7 +16,7 @@ struct TapTrial: Trial {
     
     var endTime: TimeInterval = Date.distantFuture.timeIntervalSince1970
     
-    var rawTouches: [RawTouch] = []
+    var rawTouchTracks: [RawTouchTrack] = []
     
     var success: Bool = false
     
