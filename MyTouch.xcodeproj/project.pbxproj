@@ -21,6 +21,7 @@
 		6548AA0F20E66DAD00B7C73F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA0E20E66DAD00B7C73F /* HomeViewController.swift */; };
 		6548AA1820E6717000B7C73F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6548AA1A20E6717000B7C73F /* Localizable.strings */; };
 		6548AA1F20E6770200B7C73F /* UIImage+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */; };
+		6548AA2620E75E0100B7C73F /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2520E75E0100B7C73F /* TaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		6548AA1C20E6718200B7C73F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		6548AA1D20E6718200B7C73F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+HCI.swift"; sourceTree = "<group>"; };
+		6548AA2520E75E0100B7C73F /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				6548AA0E20E66DAD00B7C73F /* HomeViewController.swift */,
+				6548AA2520E75E0100B7C73F /* TaskViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				6548AA1F20E6770200B7C73F /* UIImage+HCI.swift in Sources */,
 				6548AA0320E6664A00B7C73F /* TapTrial.swift in Sources */,
 				6548AA0720E666CF00B7C73F /* SwipeTrial.swift in Sources */,
+				6548AA2620E75E0100B7C73F /* TaskViewController.swift in Sources */,
 				6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

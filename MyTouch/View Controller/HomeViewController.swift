@@ -16,22 +16,26 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = NSLocalizedString("Exam", comment: "")
+        title = NSLocalizedString("Exam", comment: "")
+        
+        view.backgroundColor = .white
         
         descriptionLabel.text = NSLocalizedString("Exam Description", comment: "")
         descriptionLabel.numberOfLines = 0
         descriptionLabel.lineBreakMode = .byWordWrapping
         descriptionLabel.textAlignment = .center
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         startExamButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
         startExamButton.setTitleColor(.white, for: .normal)
         startExamButton.setBackgroundImage(UIImage.buttonBackgroundImage(color: view.tintColor), for: .normal)
-        startExamButton.translatesAutoresizingMaskIntoConstraints = false
+        startExamButton.addTarget(self, action: #selector(handleButton(_:)), for: .touchUpInside)
         
         view.addSubview(descriptionLabel)
         view.addSubview(startExamButton)
         
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        startExamButton.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -45,4 +49,9 @@ class HomeViewController: UIViewController {
         ])
     }
     
+    @objc func handleButton(_ sender: UIButton) {
+        
+        let taskViewController = TaskViewController()
+        present(taskViewController, animated: true, completion: nil)
+    }
 }
