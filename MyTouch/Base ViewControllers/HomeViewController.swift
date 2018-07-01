@@ -51,7 +51,10 @@ class HomeViewController: UIViewController {
     
     @objc func handleButton(_ sender: UIButton) {
         
-        let taskViewController = TapTaskViewController()
-        present(taskViewController, animated: true, completion: nil)
+        let taskViewController = TapTaskPracticeViewController()
+        let navController = UINavigationController(rootViewController: taskViewController)
+        navController.setNavigationBarHidden(true, animated: false)
+        
+        present(navController, animated: true, completion: nil)
     }
 }

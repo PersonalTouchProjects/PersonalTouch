@@ -8,22 +8,26 @@
 
 import UIKit
 
-class TapTaskExampleView: TouchTrackingView {
+class TapPracticeView: TouchTrackingView {
 
     let targetView = UIView()
     let targetSize = CGSize(width: 80, height: 80)
     
+    let tapGestureRecognizer = UITapGestureRecognizer()
+    private(set) var tapRecognized = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        isMultipleTouchEnabled = true
-        isTrackEnabled = true
-        isVisualLogEnabled = true
+
         
         targetView.backgroundColor = tintColor
         targetView.layer.cornerRadius = 8.0
         
         addSubview(targetView)
+        
+        tapGestureRecognizer.addTarget(self, action: #selector(handleTap(_:)))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func layoutSubviews() {
@@ -39,5 +43,25 @@ class TapTaskExampleView: TouchTrackingView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        
+        switch sender.state {
+        case .ended:
+            print("===========")
+            
+            if targetView.bounds.contains(sender.location(in: targetView)) {
+                tapRecognized = true
+            }
+            
+        default:
+            break
+        }
+        
+    }
+    
+    func reset() {
+        tapRecognized = false
     }
 }

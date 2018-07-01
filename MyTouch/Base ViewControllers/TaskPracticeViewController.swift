@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskViewController: UIViewController {
+class TaskPracticeViewController: UIViewController {
     
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
@@ -27,7 +27,7 @@ class TaskViewController: UIViewController {
                     newView.topAnchor.constraintEqualToSystemSpacingBelow(descriptionLabel.bottomAnchor, multiplier: 1.0),
                     newView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
                     newView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
-                    startButton.topAnchor.constraintEqualToSystemSpacingBelow(newView.bottomAnchor, multiplier: 1.0)
+                    actionButton.topAnchor.constraintEqualToSystemSpacingBelow(newView.bottomAnchor, multiplier: 1.0)
                 ])
     
                 newView.setContentHuggingPriority(.defaultLow, for: .vertical)
@@ -35,8 +35,8 @@ class TaskViewController: UIViewController {
         }
     }
     
-    let startButton = UIButton(type: .custom)
-    let stopButton = UIButton(type: .system)
+    let actionButton = UIButton(type: .custom)
+    let cancelButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,24 +52,25 @@ class TaskViewController: UIViewController {
         feedbackLabel.text = NSLocalizedString("Very Good", comment: "")
         feedbackLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
         
-        startButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
-        startButton.setTitleColor(.white, for: .normal)
-        startButton.setBackgroundImage(UIImage.buttonBackgroundImage(color: view.tintColor), for: .normal)
+        actionButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
+        actionButton.setTitleColor(.white, for: .normal)
+        actionButton.setBackgroundImage(UIImage.buttonBackgroundImage(color: view.tintColor), for: .normal)
+        actionButton.addTarget(self, action: #selector(handleActionButton(_:)), for: .touchUpInside)
         
-        stopButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
-        stopButton.addTarget(self, action: #selector(handleStopButton(_:)), for: .touchUpInside)
+        cancelButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
+        cancelButton.addTarget(self, action: #selector(handleCancelButton(_:)), for: .touchUpInside)
         
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(feedbackLabel)
-        view.addSubview(startButton)
-        view.addSubview(stopButton)
+        view.addSubview(actionButton)
+        view.addSubview(cancelButton)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         feedbackLabel.translatesAutoresizingMaskIntoConstraints = false
-        startButton.translatesAutoresizingMaskIntoConstraints = false
-        stopButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
@@ -78,13 +79,13 @@ class TaskViewController: UIViewController {
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            stopButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
-            stopButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
+            cancelButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            startButton.bottomAnchor.constraint(equalTo: stopButton.topAnchor, constant: -20),
-            startButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            startButton.widthAnchor.constraint(equalToConstant: 343),
-            startButton.heightAnchor.constraint(equalToConstant: 50)
+            actionButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
+            actionButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            actionButton.widthAnchor.constraint(equalToConstant: 343),
+            actionButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
         let topSpacing = UILayoutGuide()
@@ -100,7 +101,7 @@ class TaskViewController: UIViewController {
             feedbackLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             feedbackLabel.bottomAnchor.constraint(equalTo: bottomSpacing.topAnchor),
             
-            startButton.topAnchor.constraintEqualToSystemSpacingBelow(bottomSpacing.bottomAnchor, multiplier: 1.0),
+            actionButton.topAnchor.constraintEqualToSystemSpacingBelow(bottomSpacing.bottomAnchor, multiplier: 1.0),
             
             topSpacing.heightAnchor.constraint(equalTo: bottomSpacing.heightAnchor, multiplier: 2)
         ])
@@ -108,7 +109,19 @@ class TaskViewController: UIViewController {
         feedbackLabel.isHidden = true
     }
     
-    @objc func handleStopButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+    @objc private func handleActionButton(_ sender: UIButton) {
+        actionButtonDidSelect()
+    }
+    
+    @objc private func handleCancelButton(_ sender: UIButton) {
+        cancelButtonDidSelect()
+    }
+    
+    func actionButtonDidSelect() {
+        
+    }
+    
+    func cancelButtonDidSelect() {
+        
     }
 }

@@ -22,12 +22,34 @@ extension TouchTrackingViewDelegate {
 
 class TouchTrackingView: UIView {
 
-    var isTrackEnabled = false
-    var isVisualLogEnabled = false
+    var isTrackEnabled = true
+    var isVisualLogEnabled = false {
+        didSet {
+            if isVisualLogEnabled == false {
+                subviews.forEach {
+                    if $0 is VisualLogView { $0.removeFromSuperview() }
+                }
+            }
+        }
+    }
     
     var delegate: TouchTrackingViewDelegate?
     
     private(set) var tracks = [[UITouch]]()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        backgroundColor = .white
+        isMultipleTouchEnabled = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        backgroundColor = .white
+        isMultipleTouchEnabled = true
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -102,6 +124,8 @@ class TouchTrackingView: UIView {
         super.touchesCancelled(touches, with: event)
         
         guard isTrackEnabled else { return }
+        
+        // TODO: Add touches to tracks?
         
         tracks = tracks.filter {
             $0.last?.phase == .ended
