@@ -26,12 +26,12 @@
 		6548AA2B20E769F600B7C73F /* TapPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2A20E769F600B7C73F /* TapPracticeView.swift */; };
 		6548AA2D20E7A84000B7C73F /* RawTouchTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2C20E7A84000B7C73F /* RawTouchTrack.swift */; };
 		6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */; };
+		65721BE920E9F4E900466E22 /* TapTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65721BE820E9F4E900466E22 /* TapTrialView.swift */; };
 		6592ACF920E90667006A1BCB /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6592ACF820E90667006A1BCB /* CountdownView.swift */; };
 		65F9245F20E800C900A32BB0 /* TouchTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9245E20E800C900A32BB0 /* TouchTrackingView.swift */; };
 		65F9246120E8A81100A32BB0 /* TaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9246020E8A81100A32BB0 /* TaskTrialViewController.swift */; };
 		65F9246320E8D24000A32BB0 /* TaskEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9246220E8D24000A32BB0 /* TaskEndViewController.swift */; };
 		65F9246620E8D39A00A32BB0 /* TapTaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9246520E8D39A00A32BB0 /* TapTaskTrialViewController.swift */; };
-		65F9246820E8D3AD00A32BB0 /* TapTaskEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9246720E8D3AD00A32BB0 /* TapTaskEndViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,12 +59,12 @@
 		6548AA2A20E769F600B7C73F /* TapPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapPracticeView.swift; sourceTree = "<group>"; };
 		6548AA2C20E7A84000B7C73F /* RawTouchTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawTouchTrack.swift; sourceTree = "<group>"; };
 		6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HCI.swift"; sourceTree = "<group>"; };
+		65721BE820E9F4E900466E22 /* TapTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTrialView.swift; sourceTree = "<group>"; };
 		6592ACF820E90667006A1BCB /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
 		65F9245E20E800C900A32BB0 /* TouchTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTrackingView.swift; sourceTree = "<group>"; };
 		65F9246020E8A81100A32BB0 /* TaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTrialViewController.swift; sourceTree = "<group>"; };
 		65F9246220E8D24000A32BB0 /* TaskEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEndViewController.swift; sourceTree = "<group>"; };
 		65F9246520E8D39A00A32BB0 /* TapTaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTaskTrialViewController.swift; sourceTree = "<group>"; };
-		65F9246720E8D3AD00A32BB0 /* TapTaskEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTaskEndViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,8 +144,8 @@
 			children = (
 				6548AA2820E769DC00B7C73F /* TapTaskPracticeViewController.swift */,
 				65F9246520E8D39A00A32BB0 /* TapTaskTrialViewController.swift */,
-				65F9246720E8D3AD00A32BB0 /* TapTaskEndViewController.swift */,
 				6548AA2A20E769F600B7C73F /* TapPracticeView.swift */,
+				65721BE820E9F4E900466E22 /* TapTrialView.swift */,
 			);
 			path = "Tap Task";
 			sourceTree = "<group>";
@@ -238,10 +238,10 @@
 				6548A9FF20E6655500B7C73F /* RawTouch.swift in Sources */,
 				6592ACF920E90667006A1BCB /* CountdownView.swift in Sources */,
 				6548AA0B20E667BB00B7C73F /* DragAndDropTrial.swift in Sources */,
+				65721BE920E9F4E900466E22 /* TapTrialView.swift in Sources */,
 				65F9246620E8D39A00A32BB0 /* TapTaskTrialViewController.swift in Sources */,
 				6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */,
 				6548AA0120E665E800B7C73F /* Trial.swift in Sources */,
-				65F9246820E8D3AD00A32BB0 /* TapTaskEndViewController.swift in Sources */,
 				6548AA0F20E66DAD00B7C73F /* HomeViewController.swift in Sources */,
 				6548AA2920E769DC00B7C73F /* TapTaskPracticeViewController.swift in Sources */,
 				6548AA2D20E7A84000B7C73F /* RawTouchTrack.swift in Sources */,

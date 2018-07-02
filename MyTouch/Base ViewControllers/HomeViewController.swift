@@ -54,6 +54,7 @@ class HomeViewController: UIViewController {
         let taskViewController = TapTaskPracticeViewController()
         let navController = UINavigationController(rootViewController: taskViewController)
         navController.setNavigationBarHidden(true, animated: false)
+        navController.modalTransitionStyle = .flipHorizontal
         
         present(navController, animated: true, completion: nil)
     }

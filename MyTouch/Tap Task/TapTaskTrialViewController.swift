@@ -12,7 +12,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
 
     var trialsLeft = 3
     
-    let tapTrialView = TapPracticeView()
+    let tapTrialView = TapTrialView()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +21,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
         
         self.trialView = tapTrialView
         tapTrialView.delegate = self
+        tapTrialView.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,8 +33,9 @@ class TapTaskTrialViewController: TaskTrialViewController {
         super.actionButtonDidSelect()
         
         if trialsLeft == 0 {
-            let endViewController = TapTaskEndViewController()
-            navigationController?.pushViewController(endViewController, animated: false)
+            dismiss(animated: true, completion: nil)
+//            let endViewController = TapTaskEndViewController()
+//            navigationController?.pushViewController(endViewController, animated: false)
         } else {
             startTrial(countdown: 3.0)
         }
@@ -53,6 +55,29 @@ class TapTaskTrialViewController: TaskTrialViewController {
         alertController.preferredAction = cancelAction
         
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension TapTaskTrialViewController: TapTrialViewDataSource {
+    
+    func numberOfColumn(_ tapTrialView: TapTrialView) -> Int {
+        return 5
+    }
+    
+    func numberOfRow(_ tapTrialView: TapTrialView) -> Int {
+        return 5
+    }
+    
+    func targetColumn(_ tapTrialView: TapTrialView) -> Int {
+        return Int(arc4random() % 5)
+    }
+    
+    func targetRow(_ tapTrialView: TapTrialView) -> Int {
+        return Int(arc4random() % 5)
+    }
+    
+    func targetSize(_ tapTrialView: TapTrialView) -> CGSize {
+        return CGSize(width: 80, height: 80)
     }
 }
 

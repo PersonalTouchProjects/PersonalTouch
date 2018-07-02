@@ -91,6 +91,8 @@ class TaskTrialViewController: UIViewController {
                 self.trialView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
                 self.trialView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
             ])
+            
+            self.trialView.layoutIfNeeded()
         }
     }
     

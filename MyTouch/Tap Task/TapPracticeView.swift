@@ -47,18 +47,9 @@ class TapPracticeView: TouchTrackingView {
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         
-        switch sender.state {
-        case .ended:
-            print("===========")
-            
-            if targetView.bounds.contains(sender.location(in: targetView)) {
-                tapRecognized = true
-            }
-            
-        default:
-            break
+        if targetView.bounds.contains(sender.location(in: targetView)) {
+            tapRecognized = true
         }
-        
     }
     
     func reset() {
