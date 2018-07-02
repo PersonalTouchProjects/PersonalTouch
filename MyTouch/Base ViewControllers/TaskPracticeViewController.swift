@@ -14,11 +14,11 @@ class TaskPracticeViewController: UIViewController {
     let descriptionLabel = UILabel()
     let feedbackLabel = UILabel()
     
-    var tutorialView: UIView? {
+    var practiceView: UIView? {
         didSet {
             oldValue?.removeFromSuperview()
             
-            if let newView = tutorialView {
+            if let newView = practiceView {
                 
                 self.view.addSubview(newView)
                 newView.translatesAutoresizingMaskIntoConstraints = false

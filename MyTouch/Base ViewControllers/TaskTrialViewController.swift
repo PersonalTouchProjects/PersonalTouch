@@ -14,6 +14,10 @@ class TaskTrialViewController: UIViewController {
     let cancelButton = UIButton(type: .system)
     
     var trialView = UIView()
+    let countDownView = CountdownView()
+    
+    private(set) var trialStartDate = Date.distantPast
+    private(set) var trialEndDate = Date.distantFuture
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +34,11 @@ class TaskTrialViewController: UIViewController {
         
         view.addSubview(actionButton)
         view.addSubview(cancelButton)
+        view.addSubview(countDownView)
         
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        countDownView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
@@ -42,6 +48,11 @@ class TaskTrialViewController: UIViewController {
             actionButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             actionButton.widthAnchor.constraint(equalToConstant: 343),
             actionButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            countDownView.topAnchor.constraint(equalTo: view.topAnchor),
+            countDownView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            countDownView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            countDownView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -61,20 +72,30 @@ class TaskTrialViewController: UIViewController {
         
     }
     
-    func startTrial() {
+    func startTrial(countdown: TimeInterval = 0.0) {
         
-        view.addSubview(trialView)
-        trialView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            trialView.topAnchor.constraint(equalTo: view.topAnchor),
-            trialView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            trialView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            trialView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        countDownView.isHidden = false
+        countDownView.countdown = countdown
+        countDownView.fire {
+            
+            self.countDownView.isHidden = true
+            
+            self.trialStartDate = Date()
+            self.trialEndDate = Date.distantFuture
+            
+            self.view.addSubview(self.trialView)
+            self.trialView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                self.trialView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                self.trialView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+                self.trialView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+                self.trialView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            ])
+        }
     }
     
     func endTrial() {
-        
+        trialEndDate = Date()
         trialView.removeFromSuperview()
     }
 }

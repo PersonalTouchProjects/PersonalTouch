@@ -15,7 +15,16 @@ class TapTaskPracticeViewController: TaskPracticeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tutorialView = tapTaskPracticeView
+        self.titleLabel.text = "Tap Task Practice"
+        self.descriptionLabel.text = "Please tap on the blue square in the screen."
+        
+        self.actionButton.setTitle("Start Task (30 trials)", for: .normal)
+        self.cancelButton.setTitle("Try Again", for: .normal)
+        
+        self.actionButton.isEnabled = false
+        self.cancelButton.isEnabled = false
+        
+        self.practiceView = tapTaskPracticeView
         tapTaskPracticeView.delegate = self
     }
     
@@ -29,7 +38,12 @@ class TapTaskPracticeViewController: TaskPracticeViewController {
     override func cancelButtonDidSelect() {
         super.cancelButtonDidSelect()
         
-        dismiss(animated: true, completion: nil)
+        tapTaskPracticeView.reset()
+        tapTaskPracticeView.isHidden = false
+        feedbackLabel.isHidden = true
+        
+        actionButton.isEnabled = false
+        cancelButton.isEnabled = false
     }
 }
 
@@ -45,5 +59,8 @@ extension TapTaskPracticeViewController: TouchTrackingViewDelegate {
         
         tapTaskPracticeView.isHidden = true
         feedbackLabel.isHidden = false
+        
+        actionButton.isEnabled = true
+        cancelButton.isEnabled = true
     }
 }

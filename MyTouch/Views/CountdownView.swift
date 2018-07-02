@@ -10,7 +10,7 @@ import UIKit
 
 class CountdownView: UIView {
 
-    let countdown = 3
+    var countdown: TimeInterval = 3.5
     
     let label = UILabel()
     
@@ -23,7 +23,9 @@ class CountdownView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        label.text = "\(countdown)"
+        backgroundColor = .white
+        
+        label.text = "\(Int(countdown))"
         label.font = UIFont.monospacedDigitSystemFont(ofSize: 144, weight: .medium)
         label.isHidden = true
         
@@ -51,7 +53,7 @@ class CountdownView: UIView {
         label.isHidden = false
         
         if remain == 0 {
-            remain = countdown
+            remain = Int(countdown)
         } else {
             remain -= 1
         }

@@ -10,64 +10,62 @@ import UIKit
 
 class TapTaskTrialViewController: TaskTrialViewController {
 
+    var trialsLeft = 3
+    
     let tapTrialView = TapPracticeView()
-    let countDownView = CountdownView()
-    
-    var isTrialEnded = false
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tapTrialView.isVisualLogEnabled = true
-        tapTrialView.delegate = self
+        cancelButton.setTitle("Cancel", for: .normal)
         
         self.trialView = tapTrialView
-        
-        view.addSubview(countDownView)
-        countDownView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            countDownView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            countDownView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            countDownView.widthAnchor.constraint(equalToConstant: 100),
-            countDownView.heightAnchor.constraint(equalToConstant: 100)
-        ])
+        tapTrialView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        actionButton.isHidden = true
-        cancelButton.isHidden = true
-        countDownView.fire {
-            self.startTrial()
-        }
+        self.startTrial(countdown: 3)
     }
     
     override func actionButtonDidSelect() {
         super.actionButtonDidSelect()
         
-        if isTrialEnded {
+        if trialsLeft == 0 {
             let endViewController = TapTaskEndViewController()
             navigationController?.pushViewController(endViewController, animated: false)
         } else {
-            startTrial()
+            startTrial(countdown: 3.0)
         }
     }
     
     override func cancelButtonDidSelect() {
         super.cancelButtonDidSelect()
 
-        dismiss(animated: true, completion: nil)
+        let alertController = UIAlertController(title: "Are You Sure?", message: "All data will be discarded.", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Leave", style: .destructive) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        let cancelAction = UIAlertAction(title: "Stay", style: .default, handler: nil)
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        alertController.preferredAction = cancelAction
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 
 extension TapTaskTrialViewController: TouchTrackingViewDelegate {
     
     func touchTrackingViewDidEndTracking(_ touchTrackingView: TouchTrackingView) {
-        isTrialEnded = true
+        trialsLeft -= 1
         endTrial()
-        actionButton.isHidden = false
-        cancelButton.isHidden = false
+        
+        if trialsLeft > 0 {
+            actionButton.setTitle("Next (\(trialsLeft) left)", for: .normal)
+        } else {
+            actionButton.setTitle("Next Task", for: .normal)
+        }
     }
 }
