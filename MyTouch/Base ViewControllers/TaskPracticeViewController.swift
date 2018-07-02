@@ -29,7 +29,7 @@ class TaskPracticeViewController: UIViewController {
                     newView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
                     actionButton.topAnchor.constraintEqualToSystemSpacingBelow(newView.bottomAnchor, multiplier: 1.0)
                 ])
-    
+                
                 newView.setContentHuggingPriority(.defaultLow, for: .vertical)
             }
         }

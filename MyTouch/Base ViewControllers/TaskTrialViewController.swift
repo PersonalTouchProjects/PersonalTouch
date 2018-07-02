@@ -70,6 +70,17 @@ class TaskTrialViewController: UIViewController {
     
     func cancelButtonDidSelect() {
         
+        let alertController = UIAlertController(title: "Are You Sure?", message: "All data will be discarded.", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Leave", style: .destructive) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        let cancelAction = UIAlertAction(title: "Stay", style: .default, handler: nil)
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        alertController.preferredAction = cancelAction
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     func startTrial(countdown: TimeInterval = 0.0) {

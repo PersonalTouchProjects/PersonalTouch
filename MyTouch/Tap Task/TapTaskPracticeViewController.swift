@@ -26,6 +26,7 @@ class TapTaskPracticeViewController: TaskPracticeViewController {
         
         self.practiceView = tapTaskPracticeView
         tapTaskPracticeView.delegate = self
+        tapTaskPracticeView.isVisualLogEnabled = true
     }
     
     override func actionButtonDidSelect() {
@@ -56,10 +57,10 @@ extension TapTaskPracticeViewController: TouchTrackingViewDelegate {
         } else {
             feedbackLabel.text = "Sad"
         }
-        
+
         tapTaskPracticeView.isHidden = true
         feedbackLabel.isHidden = false
-        
+
         actionButton.isEnabled = true
         cancelButton.isEnabled = true
     }

@@ -14,6 +14,7 @@ class TapPracticeView: TouchTrackingView {
     let targetSize = CGSize(width: 80, height: 80)
     
     let tapGestureRecognizer = UITapGestureRecognizer()
+    let touchUpInsideGestureRecognizer = TouchUpInsideGestureRecognizer()
     private(set) var tapRecognized = false
     
     override init(frame: CGRect) {
@@ -56,3 +57,4 @@ class TapPracticeView: TouchTrackingView {
         tapRecognized = false
     }
 }
+

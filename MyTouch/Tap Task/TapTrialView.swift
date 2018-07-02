@@ -22,6 +22,9 @@ class TapTrialView: TouchTrackingView {
     
     let targetView = UIView()
     
+    let tapGestureRecognizer = UITapGestureRecognizer()
+    let touchUpInsideGestureRecognizer = TouchUpInsideGestureRecognizer()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -29,6 +32,16 @@ class TapTrialView: TouchTrackingView {
         targetView.layer.cornerRadius = 8.0
         
         addSubview(targetView)
+        
+        tapGestureRecognizer.addTarget(self, action: #selector(handleTap(_:)))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        tapGestureRecognizer.delegate = self
+        addGestureRecognizer(tapGestureRecognizer)
+        
+        touchUpInsideGestureRecognizer.addTarget(self, action: #selector(handleGestureRecognizer(_:)))
+        touchUpInsideGestureRecognizer.cancelsTouchesInView = false
+        touchUpInsideGestureRecognizer.delegate = self
+        targetView.addGestureRecognizer(touchUpInsideGestureRecognizer)
     }
     
     override func layoutSubviews() {
@@ -60,5 +73,23 @@ class TapTrialView: TouchTrackingView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            print("TAPPPPPPPPPPPP")
+        }
+    }
+    
+    @objc func handleGestureRecognizer(_ sender: TouchUpInsideGestureRecognizer) {
+        if sender.state == .ended {
+            print("YOOOOOOOOOOOOO")
+        }
+    }
+}
 
+extension TapTrialView: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }

@@ -12,7 +12,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
     
     let tapTrialView = TapTrialView()
     
-    var positions = positionGenerator(columns: 2, rows: 2, repeats: 2).shuffled()
+    var positions = positionGenerator(columns: 5, rows: 5, repeats: 1).shuffled()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,32 +36,16 @@ class TapTaskTrialViewController: TaskTrialViewController {
             startTrial(countdown: 3.0)
         }
     }
-    
-    override func cancelButtonDidSelect() {
-        super.cancelButtonDidSelect()
-
-        let alertController = UIAlertController(title: "Are You Sure?", message: "All data will be discarded.", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Leave", style: .destructive) { (action) in
-            self.dismiss(animated: true, completion: nil)
-        }
-        let cancelAction = UIAlertAction(title: "Stay", style: .default, handler: nil)
-        
-        alertController.addAction(confirmAction)
-        alertController.addAction(cancelAction)
-        alertController.preferredAction = cancelAction
-        
-        present(alertController, animated: true, completion: nil)
-    }
 }
 
 extension TapTaskTrialViewController: TapTrialViewDataSource {
     
     func numberOfColumn(_ tapTrialView: TapTrialView) -> Int {
-        return 2
+        return 5
     }
     
     func numberOfRow(_ tapTrialView: TapTrialView) -> Int {
-        return 2
+        return 5
     }
     
     func targetColumn(_ tapTrialView: TapTrialView) -> Int {
@@ -82,9 +66,6 @@ extension TapTaskTrialViewController: TouchTrackingViewDelegate {
     func touchTrackingViewDidEndTracking(_ touchTrackingView: TouchTrackingView) {
 
         endTrial()
-        
-        print(tapTrialView.targetView.frame)
-        print(tapTrialView.tracks)
         
         positions.removeFirst()
         
