@@ -9,15 +9,13 @@
 import UIKit
 
 class TapTaskTrialViewController: TaskTrialViewController {
-
-    var trialsLeft = 3
     
     let tapTrialView = TapTrialView()
-        
+    
+    var positions = positionGenerator(columns: 2, rows: 2, repeats: 2).shuffled()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        cancelButton.setTitle("Cancel", for: .normal)
         
         self.trialView = tapTrialView
         tapTrialView.delegate = self
@@ -32,10 +30,8 @@ class TapTaskTrialViewController: TaskTrialViewController {
     override func actionButtonDidSelect() {
         super.actionButtonDidSelect()
         
-        if trialsLeft == 0 {
+        if positions.count == 0 {
             dismiss(animated: true, completion: nil)
-//            let endViewController = TapTaskEndViewController()
-//            navigationController?.pushViewController(endViewController, animated: false)
         } else {
             startTrial(countdown: 3.0)
         }
@@ -61,19 +57,19 @@ class TapTaskTrialViewController: TaskTrialViewController {
 extension TapTaskTrialViewController: TapTrialViewDataSource {
     
     func numberOfColumn(_ tapTrialView: TapTrialView) -> Int {
-        return 5
+        return 2
     }
     
     func numberOfRow(_ tapTrialView: TapTrialView) -> Int {
-        return 5
+        return 2
     }
     
     func targetColumn(_ tapTrialView: TapTrialView) -> Int {
-        return Int(arc4random() % 5)
+        return positions.first!.0
     }
     
     func targetRow(_ tapTrialView: TapTrialView) -> Int {
-        return Int(arc4random() % 5)
+        return positions.first!.1
     }
     
     func targetSize(_ tapTrialView: TapTrialView) -> CGSize {
@@ -84,13 +80,22 @@ extension TapTaskTrialViewController: TapTrialViewDataSource {
 extension TapTaskTrialViewController: TouchTrackingViewDelegate {
     
     func touchTrackingViewDidEndTracking(_ touchTrackingView: TouchTrackingView) {
-        trialsLeft -= 1
+
         endTrial()
         
-        if trialsLeft > 0 {
-            actionButton.setTitle("Next (\(trialsLeft) left)", for: .normal)
+        print(tapTrialView.targetView.frame)
+        print(tapTrialView.tracks)
+        
+        positions.removeFirst()
+        
+        if positions.count > 0 {
+            actionButton.setTitle("Next (\(positions.count) left)", for: .normal)
         } else {
             actionButton.setTitle("Next Task", for: .normal)
         }
     }
+}
+
+func positionGenerator(columns: Int, rows: Int, repeats: Int) -> [(Int, Int)] {
+    return (0..<repeats).flatMap { _ in (0..<columns).flatMap { c in (0..<rows).map { r in (c, r) } } }
 }

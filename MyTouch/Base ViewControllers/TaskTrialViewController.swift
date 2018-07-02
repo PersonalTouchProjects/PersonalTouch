@@ -29,7 +29,7 @@ class TaskTrialViewController: UIViewController {
         actionButton.setBackgroundImage(UIImage.buttonBackgroundImage(color: view.tintColor), for: .normal)
         actionButton.addTarget(self, action: #selector(handleActionButton(_:)), for: .touchUpInside)
         
-        cancelButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
+        cancelButton.setTitle(NSLocalizedString("Withdraw Exam", comment: ""), for: .normal)
         cancelButton.addTarget(self, action: #selector(handleCancelButton(_:)), for: .touchUpInside)
         
         view.addSubview(actionButton)

@@ -16,7 +16,7 @@ class TapTaskPracticeViewController: TaskPracticeViewController {
         super.viewDidLoad()
 
         self.titleLabel.text = "Tap Task Practice"
-        self.descriptionLabel.text = "Please tap on the blue square in the screen."
+        self.descriptionLabel.text = "Please tap on the blue square on the screen."
         
         self.actionButton.setTitle("Start Task (30 trials)", for: .normal)
         self.cancelButton.setTitle("Try Again", for: .normal)
