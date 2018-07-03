@@ -64,7 +64,8 @@ class TapPracticeView: TouchTrackingView {
         print(sender.direction.rawValue)
     }
     
-    func reset() {
+    override func reset() {
+        super.reset()
         tapRecognized = false
     }
 }
