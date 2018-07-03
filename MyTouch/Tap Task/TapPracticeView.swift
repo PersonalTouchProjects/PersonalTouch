@@ -13,6 +13,7 @@ class TapPracticeView: TouchTrackingView {
     let targetView = UIView()
     let targetSize = CGSize(width: 80, height: 80)
     
+    let tzuChuan = TzuChuanGestureRecognizer()
     let tapGestureRecognizer = UITapGestureRecognizer()
     let touchUpInsideGestureRecognizer = TouchUpInsideGestureRecognizer()
     private(set) var tapRecognized = false
@@ -28,7 +29,13 @@ class TapPracticeView: TouchTrackingView {
         
         tapGestureRecognizer.addTarget(self, action: #selector(handleTap(_:)))
         tapGestureRecognizer.cancelsTouchesInView = false
+        tapGestureRecognizer.delegate = self
         addGestureRecognizer(tapGestureRecognizer)
+        
+        tzuChuan.addTarget(self, action: #selector(handleTzuChuan(_:)))
+        tzuChuan.cancelsTouchesInView = false
+        tzuChuan.delegate = self
+        addGestureRecognizer(tzuChuan)
     }
     
     override func layoutSubviews() {
@@ -53,8 +60,19 @@ class TapPracticeView: TouchTrackingView {
         }
     }
     
+    @objc func handleTzuChuan(_ sender: TzuChuanGestureRecognizer) {
+        print(sender.direction.rawValue)
+    }
+    
     func reset() {
         tapRecognized = false
+    }
+}
+
+extension TapPracticeView: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 

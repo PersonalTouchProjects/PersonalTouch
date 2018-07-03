@@ -56,7 +56,7 @@ class TouchTrackingView: UIView {
         
         guard isTrackEnabled else { return }
         
-        if event?.allTouches?.count == touches.count {
+        if tracks.filter({ $0.last!.phase != .ended }).count == 0 {
             tracks.removeAll()
             delegate?.touchTrackingViewDidBeginTracking(self)
             setNeedsLayout()

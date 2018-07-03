@@ -26,7 +26,7 @@ class TapTaskPracticeViewController: TaskPracticeViewController {
         
         self.practiceView = tapTaskPracticeView
         tapTaskPracticeView.delegate = self
-        tapTaskPracticeView.isVisualLogEnabled = true
+//        tapTaskPracticeView.isVisualLogEnabled = true
     }
     
     override func actionButtonDidSelect() {
@@ -51,6 +51,8 @@ class TapTaskPracticeViewController: TaskPracticeViewController {
 extension TapTaskPracticeViewController: TouchTrackingViewDelegate {
     
     func touchTrackingViewDidEndTracking(_ touchTrackingView: TouchTrackingView) {
+        
+//        titleLabel.text = self.tapTaskPracticeView.tzuChuan.direction.rawValue
         
         if tapTaskPracticeView.tapRecognized {
             feedbackLabel.text = "Good"
