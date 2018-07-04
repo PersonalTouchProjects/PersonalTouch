@@ -104,8 +104,7 @@
 				6548A9EB20E663E700B7C73F /* AppDelegate.swift */,
 				6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */,
 				6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */,
-				65721BEA20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift */,
-				65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */,
+				65F8BD4E20EB88FA002F7C69 /* Gesture Recognizers */,
 				6548AA1020E66DB200B7C73F /* Base ViewControllers */,
 				6548AA2720E769A300B7C73F /* Tap Task */,
 				65F9246420E8D33F00A32BB0 /* Views */,
@@ -154,6 +153,15 @@
 				65721BE820E9F4E900466E22 /* TapTrialView.swift */,
 			);
 			path = "Tap Task";
+			sourceTree = "<group>";
+		};
+		65F8BD4E20EB88FA002F7C69 /* Gesture Recognizers */ = {
+			isa = PBXGroup;
+			children = (
+				65721BEA20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift */,
+				65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */,
+			);
+			path = "Gesture Recognizers";
 			sourceTree = "<group>";
 		};
 		65F9246420E8D33F00A32BB0 /* Views */ = {

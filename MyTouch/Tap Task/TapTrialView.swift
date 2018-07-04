@@ -28,20 +28,19 @@ class TapTrialView: TouchTrackingView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+//        self.isVisualLogEnabled = true
+//        self.startTracking()
+        
         targetView.backgroundColor = tintColor
         targetView.layer.cornerRadius = 8.0
         
         addSubview(targetView)
         
-        tapGestureRecognizer.addTarget(self, action: #selector(handleTap(_:)))
-        tapGestureRecognizer.cancelsTouchesInView = false
-        tapGestureRecognizer.delegate = self
-        addGestureRecognizer(tapGestureRecognizer)
-        
         touchUpInsideGestureRecognizer.addTarget(self, action: #selector(handleGestureRecognizer(_:)))
         touchUpInsideGestureRecognizer.cancelsTouchesInView = false
         touchUpInsideGestureRecognizer.delegate = self
-        targetView.addGestureRecognizer(touchUpInsideGestureRecognizer)
+        touchUpInsideGestureRecognizer.targetView = targetView
+        addGestureRecognizer(touchUpInsideGestureRecognizer)
     }
     
     override func layoutSubviews() {
@@ -74,15 +73,16 @@ class TapTrialView: TouchTrackingView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        if sender.state == .ended {
-            print("TAPPPPPPPPPPPP")
-        }
-    }
-    
     @objc func handleGestureRecognizer(_ sender: TouchUpInsideGestureRecognizer) {
-        if sender.state == .ended {
-            print("YOOOOOOOOOOOOO")
+        switch sender.state {
+        case .began:
+            print("Touch began")
+        case .changed:
+            print("Touch moved")
+        case .recognized:
+            print("Touch up inside!!!")
+        default:
+            break
         }
     }
 }

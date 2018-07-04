@@ -31,12 +31,14 @@ class TouchTrackingView: UIView {
     
     var delegate: TouchTrackingViewDelegate?
     
+    private(set) var startTimestamp: TimeInterval = 0
     private(set) var tracks = [[UITouch]]()
     private var isTracking = false
     private var visualLogColors = [Int: UIColor]()
     
     func startTracking() {
         reset()
+        startTimestamp = ProcessInfo.processInfo.systemUptime
         isTracking = true
     }
     
@@ -69,6 +71,8 @@ class TouchTrackingView: UIView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+        
+        print(startTimestamp)
         
         guard isTracking else { return }
         
