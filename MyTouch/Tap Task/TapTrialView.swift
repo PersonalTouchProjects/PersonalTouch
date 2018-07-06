@@ -80,5 +80,8 @@ class TapTrialView: TrialView {
         
         assert(column >= 0 && column < columns, "Out of bounds")
         assert(row >= 0 && row < rows, "Out of bounds")
+        
+        setNeedsLayout()
+        layoutIfNeeded()
     }
 }

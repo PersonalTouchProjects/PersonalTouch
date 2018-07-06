@@ -13,14 +13,15 @@ private var previewScale: CGFloat = 0.5
 class TaskTrialViewController: UIViewController {
 
     let titleLabel = UILabel()
-    let descriptionLabel = UILabel()
     let actionButton = UIButton(type: .custom)
     let cancelButton = UIButton(type: .system)
     
     var trialView: TrialView = TrialView()
-    let maskView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    let previewBorderView = UIView()
-    let countDownView = CountdownView()
+    
+    private let maskView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    private let whiteView = UIView()
+    private let previewBorderView = UIView()
+    private let countDownView = CountdownView()
     
     private let previewLayoutGuide = UILayoutGuide()
     private var previewConstraints = [NSLayoutConstraint]()
@@ -29,16 +30,17 @@ class TaskTrialViewController: UIViewController {
     private(set) var trialStartDate = Date.distantPast
     private(set) var trialEndDate = Date.distantFuture
     
+    override var prefersStatusBarHidden: Bool {
+        return fullSizeConstraints.first?.isActive == true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         
-        titleLabel.text = NSLocalizedString("Tap Task Title", comment: "")
+        titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (30 之 1)"
         titleLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
-        
-        descriptionLabel.text = NSLocalizedString("Tap Task Description", comment: "")
-        descriptionLabel.font = UIFont.systemFont(ofSize: 28, weight: .light)
         
         actionButton.setTitle("Start Trial", for: .normal)
         actionButton.setTitleColor(.white, for: .normal)
@@ -54,24 +56,33 @@ class TaskTrialViewController: UIViewController {
         previewBorderView.layer.borderWidth = 2.0
         previewBorderView.layer.cornerRadius = 4.0
         
+        whiteView.backgroundColor = .white
+        whiteView.alpha = 0.0
+        
         maskView.alpha = 0.0
         
+        countDownView.backgroundColor = UIColor(white: 0.0, alpha: 0.2)
+        countDownView.alpha = 0.0
+        
         view.addSubview(titleLabel)
-        view.addSubview(descriptionLabel)
         view.addSubview(actionButton)
         view.addSubview(cancelButton)
         view.addSubview(previewBorderView)
+        view.addSubview(whiteView)
         view.addSubview(maskView)
         view.addSubview(trialView)
+        view.addSubview(countDownView)
+        
         view.addLayoutGuide(previewLayoutGuide)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         previewBorderView.translatesAutoresizingMaskIntoConstraints = false
+        whiteView.translatesAutoresizingMaskIntoConstraints = false
         maskView.translatesAutoresizingMaskIntoConstraints = false
         trialView.translatesAutoresizingMaskIntoConstraints = false
+        countDownView.translatesAutoresizingMaskIntoConstraints = false
         
         previewConstraints = [
             trialView.centerXAnchor.constraint(equalTo: previewLayoutGuide.centerXAnchor),
@@ -91,9 +102,6 @@ class TaskTrialViewController: UIViewController {
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            descriptionLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            
             cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             cancelButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
@@ -102,7 +110,7 @@ class TaskTrialViewController: UIViewController {
             actionButton.widthAnchor.constraint(equalToConstant: 343),
             actionButton.heightAnchor.constraint(equalToConstant: 50),
             
-            previewLayoutGuide.topAnchor.constraintEqualToSystemSpacingBelow(descriptionLabel.topAnchor, multiplier: 2.0),
+            previewLayoutGuide.topAnchor.constraintEqualToSystemSpacingBelow(titleLabel.topAnchor, multiplier: 2.0),
             previewLayoutGuide.leftAnchor.constraint(equalTo: view.leftAnchor),
             previewLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor),
             actionButton.topAnchor.constraintEqualToSystemSpacingBelow(previewLayoutGuide.bottomAnchor, multiplier: 1.0),
@@ -112,10 +120,20 @@ class TaskTrialViewController: UIViewController {
             previewBorderView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: previewScale + 0.05),
             previewBorderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: previewScale + 0.05),
             
+            whiteView.topAnchor.constraint(equalTo: view.topAnchor),
+            whiteView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            whiteView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            whiteView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             maskView.topAnchor.constraint(equalTo: view.topAnchor),
             maskView.leftAnchor.constraint(equalTo: view.leftAnchor),
             maskView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            maskView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            maskView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            countDownView.topAnchor.constraint(equalTo: view.topAnchor),
+            countDownView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            countDownView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            countDownView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
         NSLayoutConstraint.activate(previewConstraints)
@@ -131,17 +149,7 @@ class TaskTrialViewController: UIViewController {
     }
     
     func actionButtonDidSelect() {
-        
-        NSLayoutConstraint.deactivate(previewConstraints)
-        NSLayoutConstraint.activate(fullSizeConstraints)
-        
-        UIView.animate(withDuration: 0.325, delay: 0.0, options: [.curveEaseInOut], animations: {
-            self.trialView.transform = .identity
-            self.maskView.alpha = 1.0
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            self.trialView.startTracking()
-        })
+        startTrial()
     }
     
     func cancelButtonDidSelect() {
@@ -158,21 +166,80 @@ class TaskTrialViewController: UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    func willStartTrial() {
+        
+    }
+    
+    func startTrial() {
+        
+        willStartTrial()
+        
+        NSLayoutConstraint.deactivate(previewConstraints)
+        NSLayoutConstraint.activate(fullSizeConstraints)
+        
+        setNeedsStatusBarAppearanceUpdate()
+        
+        UIView.animate(withDuration: 0.325, delay: 0.0, options: [.curveEaseInOut], animations: {
+            
+            self.trialView.transform = .identity
+            self.maskView.alpha = 1.0
+            self.countDownView.alpha = 1.0
+            
+            self.view.layoutIfNeeded()
+            
+        }, completion: { _ in
+            
+            self.whiteView.alpha = 1.0
+            self.maskView.alpha = 0.0
+            
+            self.countDownView.fire {
+                self.countDownView.alpha = 0.0
+                self.didStartTrial()
+            }
+            
+        })
+    }
+    
+    func didStartTrial() {
+        self.trialView.startTracking()
+    }
+    
+    func willEndTrial() {
+        self.trialView.stopTracking()
+    }
+    
+    func endTrial() {
+        
+        willEndTrial()
+        
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut], animations: {
+            
+            self.trialView.alpha = 0.0
+            
+        }, completion: { _ in
+            
+            NSLayoutConstraint.deactivate(self.fullSizeConstraints)
+            NSLayoutConstraint.activate(self.previewConstraints)
+            
+            self.setNeedsStatusBarAppearanceUpdate()
+            
+            self.trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
+            self.trialView.alpha = 1.0
+            self.whiteView.alpha = 0.0
+            
+            self.didEndTrial()
+        })
+    }
+    
+    func didEndTrial() {
+        
+    }
 }
 
 extension TaskTrialViewController: TouchTrackingViewDelegate {
     
     func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingView) {
-        
-        self.trialView.stopTracking()
-        
-        NSLayoutConstraint.deactivate(fullSizeConstraints)
-        NSLayoutConstraint.activate(previewConstraints)
-
-        UIView.animate(withDuration: 0.325, delay: 0.0, options: [.curveEaseInOut], animations: {
-            self.trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
-            self.maskView.alpha = 0.0
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        endTrial()
     }
 }

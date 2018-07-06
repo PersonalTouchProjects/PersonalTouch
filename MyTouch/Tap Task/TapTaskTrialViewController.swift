@@ -29,6 +29,27 @@ class TapTaskTrialViewController: TaskTrialViewController {
     override func actionButtonDidSelect() {
         super.actionButtonDidSelect()
     }
+    
+    override func didEndTrial() {
+        super.didEndTrial()
+
+        positions.removeFirst()
+        
+        if positions.isEmpty {
+            
+            let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+            alertController.addAction(confirmAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        } else {
+            tapTrialView.reloadData()
+        }
+    }
 }
 
 extension TapTaskTrialViewController: TapTrialViewDataSource {
