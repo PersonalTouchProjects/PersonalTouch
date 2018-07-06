@@ -14,27 +14,20 @@ class TapTaskTrialViewController: TaskTrialViewController {
     
     var positions = positionGenerator(columns: 5, rows: 5, repeats: 1).shuffled()
     
+    override func loadView() {
+        super.loadView()
+        self.trialView = tapTrialView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.trialView = tapTrialView
         tapTrialView.delegate = self
         tapTrialView.dataSource = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.startTrial(countdown: 3)
-    }
-    
     override func actionButtonDidSelect() {
         super.actionButtonDidSelect()
-        
-        if positions.count == 0 {
-            dismiss(animated: true, completion: nil)
-        } else {
-            startTrial(countdown: 3.0)
-        }
     }
 }
 
@@ -58,22 +51,6 @@ extension TapTaskTrialViewController: TapTrialViewDataSource {
     
     func targetSize(_ tapTrialView: TapTrialView) -> CGSize {
         return CGSize(width: 80, height: 80)
-    }
-}
-
-extension TapTaskTrialViewController: TouchTrackingViewDelegate {
-    
-    func touchTrackingViewDidEndTracking(_ touchTrackingView: TouchTrackingView) {
-
-        endTrial()
-        
-        positions.removeFirst()
-        
-        if positions.count > 0 {
-            actionButton.setTitle("Next (\(positions.count) left)", for: .normal)
-        } else {
-            actionButton.setTitle("Next Task", for: .normal)
-        }
     }
 }
 

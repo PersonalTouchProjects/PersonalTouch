@@ -71,9 +71,7 @@ class TouchTrackingView: UIView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        
-        print(startTimestamp)
-        
+                
         guard isTracking else { return }
         
         let filteredTouches = touches
@@ -202,7 +200,7 @@ class TouchTrackingView: UIView {
     }
 }
 
-private class VisualLogView: UIView {
+private final class VisualLogView: UIView {
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let view = super.hitTest(point, with: event)
@@ -210,7 +208,7 @@ private class VisualLogView: UIView {
     }
 }
 
-extension UITouch {
+private extension UITouch {
     
     var isEndedOrCancelled: Bool {
         return self.phase == .ended || self.phase == .cancelled

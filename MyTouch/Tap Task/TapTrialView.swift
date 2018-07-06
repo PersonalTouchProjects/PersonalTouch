@@ -16,47 +16,44 @@ protocol TapTrialViewDataSource: NSObjectProtocol {
     func targetSize(_ tapTrialView: TapTrialView) -> CGSize
 }
 
-class TapTrialView: TouchTrackingView {
+class TapTrialView: TrialView {
 
-    var dataSource: TapTrialViewDataSource?
+    var dataSource: TapTrialViewDataSource? {
+        didSet { if superview != nil { reloadData() } }
+    }
     
     let targetView = UIView()
     
-    let tapGestureRecognizer = UITapGestureRecognizer()
-    let touchUpInsideGestureRecognizer = TouchUpInsideGestureRecognizer()
+    private var columns = 1
+    private var rows    = 1
+    private var column  = 0
+    private var row     = 0
+    private var size    = CGSize(width: 80, height: 80)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        self.isVisualLogEnabled = true
-//        self.startTracking()
-        
         targetView.backgroundColor = tintColor
         targetView.layer.cornerRadius = 8.0
         
-        addSubview(targetView)
+        contentView.addSubview(targetView)
+    }
+    
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         
-        touchUpInsideGestureRecognizer.addTarget(self, action: #selector(handleGestureRecognizer(_:)))
-        touchUpInsideGestureRecognizer.cancelsTouchesInView = false
-        touchUpInsideGestureRecognizer.delegate = self
-        touchUpInsideGestureRecognizer.targetView = targetView
-        addGestureRecognizer(touchUpInsideGestureRecognizer)
+        if superview == nil && newSuperview != nil {
+            self.reloadData()
+        }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+    
+        contentView.frame = bounds
         
-        let columns = dataSource?.numberOfColumn(self) ?? 1
-        let rows    = dataSource?.numberOfRow(self)    ?? 1
-        let column  = dataSource?.targetColumn(self)   ?? 1
-        let row     = dataSource?.targetRow(self)      ?? 1
-        let size    = dataSource?.targetSize(self)     ?? CGSize(width: 80, height: 80)
-        
-        assert(column >= 0 && column < columns, "Out of bounds")
-        assert(row >= 0 && row < rows, "Out of bounds")
-        
-        let width  = bounds.width  / CGFloat(columns)
-        let height = bounds.height / CGFloat(rows)
+        let width  = contentView.bounds.width  / CGFloat(columns)
+        let height = contentView.bounds.height / CGFloat(rows)
         
         let columnMidX = width  * (CGFloat(column) + 1/2)
         let rowMidY    = height * (CGFloat(row)    + 1/2)
@@ -73,23 +70,15 @@ class TapTrialView: TouchTrackingView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func handleGestureRecognizer(_ sender: TouchUpInsideGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            print("Touch began")
-        case .changed:
-            print("Touch moved")
-        case .recognized:
-            print("Touch up inside!!!")
-        default:
-            break
-        }
-    }
-}
-
-extension TapTrialView: UIGestureRecognizerDelegate {
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+    func reloadData() {
+        
+        columns = dataSource?.numberOfColumn(self) ?? 1
+        rows    = dataSource?.numberOfRow(self)    ?? 1
+        column  = dataSource?.targetColumn(self)   ?? 0
+        row     = dataSource?.targetRow(self)      ?? 0
+        size    = dataSource?.targetSize(self)     ?? CGSize(width: 80, height: 80)
+        
+        assert(column >= 0 && column < columns, "Out of bounds")
+        assert(row >= 0 && row < rows, "Out of bounds")
     }
 }

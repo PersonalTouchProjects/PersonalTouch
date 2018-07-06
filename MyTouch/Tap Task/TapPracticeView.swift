@@ -61,7 +61,7 @@ class TapPracticeView: TouchTrackingView {
     }
     
     @objc func handleTzuChuan(_ sender: TzuChuanGestureRecognizer) {
-        print(sender.direction.rawValue)
+//        print(sender.direction.rawValue)
     }
     
     override func reset() {

@@ -28,7 +28,9 @@
 		6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */; };
 		65721BE920E9F4E900466E22 /* TapTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65721BE820E9F4E900466E22 /* TapTrialView.swift */; };
 		65721BEB20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65721BEA20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift */; };
+		6582148220ECF6B50025A03B /* TrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6582148120ECF6B50025A03B /* TrialView.swift */; };
 		6592ACF920E90667006A1BCB /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6592ACF820E90667006A1BCB /* CountdownView.swift */; };
+		65EE0F0920EF42F200EB8929 /* UIView+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */; };
 		65F8BD4D20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */; };
 		65F9245F20E800C900A32BB0 /* TouchTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9245E20E800C900A32BB0 /* TouchTrackingView.swift */; };
 		65F9246120E8A81100A32BB0 /* TaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9246020E8A81100A32BB0 /* TaskTrialViewController.swift */; };
@@ -63,7 +65,9 @@
 		6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HCI.swift"; sourceTree = "<group>"; };
 		65721BE820E9F4E900466E22 /* TapTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTrialView.swift; sourceTree = "<group>"; };
 		65721BEA20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchUpInsideGestureRecognizer.swift; sourceTree = "<group>"; };
+		6582148120ECF6B50025A03B /* TrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialView.swift; sourceTree = "<group>"; };
 		6592ACF820E90667006A1BCB /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+		65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+HCI.swift"; sourceTree = "<group>"; };
 		65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TzuChuanGestureRecognizer.swift; sourceTree = "<group>"; };
 		65F9245E20E800C900A32BB0 /* TouchTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTrackingView.swift; sourceTree = "<group>"; };
 		65F9246020E8A81100A32BB0 /* TaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTrialViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				6548A9EB20E663E700B7C73F /* AppDelegate.swift */,
+				65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */,
 				6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */,
 				6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */,
 				65F8BD4E20EB88FA002F7C69 /* Gesture Recognizers */,
@@ -168,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				65F9245E20E800C900A32BB0 /* TouchTrackingView.swift */,
+				6582148120ECF6B50025A03B /* TrialView.swift */,
 				6592ACF820E90667006A1BCB /* CountdownView.swift */,
 			);
 			path = Views;
@@ -262,8 +268,10 @@
 				6548AA2D20E7A84000B7C73F /* RawTouchTrack.swift in Sources */,
 				6548AA0D20E6684400B7C73F /* Exam.swift in Sources */,
 				6548AA1F20E6770200B7C73F /* UIImage+HCI.swift in Sources */,
+				65EE0F0920EF42F200EB8929 /* UIView+HCI.swift in Sources */,
 				65721BEB20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift in Sources */,
 				6548AA0320E6664A00B7C73F /* TapTrial.swift in Sources */,
+				6582148220ECF6B50025A03B /* TrialView.swift in Sources */,
 				6548AA0720E666CF00B7C73F /* SwipeTrial.swift in Sources */,
 				65F9246120E8A81100A32BB0 /* TaskTrialViewController.swift in Sources */,
 				6548AA2620E75E0100B7C73F /* TaskPracticeViewController.swift in Sources */,

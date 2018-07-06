@@ -70,9 +70,7 @@ extension TapTaskPracticeViewController: TouchTrackingViewDelegate {
     }
     
     func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingView) {
-        
-        print(touchTrackingView.tracks.map({ $0.count }))
-        
+                
         if tapTaskPracticeView.tapRecognized {
             feedbackLabel.text = "Good"
         } else {
