@@ -15,10 +15,10 @@ class TapTaskInstructionViewController: TaskInstructionViewController {
         
     }
     
-    override func actionButtonDidSelect() {
-        super.actionButtonDidSelect()
+    override func primaryButtonDidSelect() {
+        super.primaryButtonDidSelect()
         
-        let taskViewController = TapTaskTrialViewController()
+        let taskViewController = TapTaskPracticeViewController()
         navigationController?.pushViewController(taskViewController, animated: true)
     }
 }

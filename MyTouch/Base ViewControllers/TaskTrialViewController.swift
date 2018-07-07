@@ -13,8 +13,18 @@ private var previewScale: CGFloat = 0.5
 class TaskTrialViewController: UIViewController {
 
     let titleLabel = UILabel()
-    let actionButton = UIButton(type: .custom)
+    let primaryButton = UIButton(type: .custom)
+    let secondaryButton = UIButton(type: .system)
     let cancelButton = UIButton(type: .system)
+    
+    private lazy var buttonStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [secondaryButton, primaryButton])
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        stack.spacing = 8.0
+        return stack
+    }()
     
     var trialView: TrialView = TrialView()
     
@@ -39,13 +49,18 @@ class TaskTrialViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (30 之 1)"
+        titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 1)"
         titleLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
         
-        actionButton.setTitle("Start Trial", for: .normal)
-        actionButton.setTitleColor(.white, for: .normal)
-        actionButton.setBackgroundImage(UIImage.buttonBackgroundImage(color: view.tintColor), for: .normal)
-        actionButton.addTarget(self, action: #selector(handleActionButton(_:)), for: .touchUpInside)
+        primaryButton.setTitle("Start Trial", for: .normal)
+        primaryButton.setTitleColor(.white, for: .normal)
+        primaryButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
+        primaryButton.addTarget(self, action: #selector(handlePrimaryButton(_:)), for: .touchUpInside)
+        
+        secondaryButton.setTitle("Try Again", for: .normal)
+//        secondaryButton.setTitleColor(.white, for: .normal)
+        secondaryButton.setBackgroundImage(UIImage.secondaryButtonBackgroundImage(color: view.tintColor), for: .normal)
+        secondaryButton.addTarget(self, action: #selector(handleSecondaryButton(_:)), for: .touchUpInside)
         
         cancelButton.setTitle(NSLocalizedString("Withdraw Exam", comment: ""), for: .normal)
         cancelButton.addTarget(self, action: #selector(handleCancelButton(_:)), for: .touchUpInside)
@@ -65,7 +80,7 @@ class TaskTrialViewController: UIViewController {
         countDownView.alpha = 0.0
         
         view.addSubview(titleLabel)
-        view.addSubview(actionButton)
+        view.addSubview(buttonStack)
         view.addSubview(cancelButton)
         view.addSubview(previewBorderView)
         view.addSubview(whiteView)
@@ -76,7 +91,7 @@ class TaskTrialViewController: UIViewController {
         view.addLayoutGuide(previewLayoutGuide)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonStack.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         previewBorderView.translatesAutoresizingMaskIntoConstraints = false
         whiteView.translatesAutoresizingMaskIntoConstraints = false
@@ -105,15 +120,15 @@ class TaskTrialViewController: UIViewController {
             cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             cancelButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            actionButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
-            actionButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            actionButton.widthAnchor.constraint(equalToConstant: 343),
-            actionButton.heightAnchor.constraint(equalToConstant: 50),
+            buttonStack.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
+            buttonStack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            buttonStack.widthAnchor.constraint(equalToConstant: 343),
+            buttonStack.heightAnchor.constraint(equalToConstant: 50),
             
             previewLayoutGuide.topAnchor.constraintEqualToSystemSpacingBelow(titleLabel.topAnchor, multiplier: 2.0),
             previewLayoutGuide.leftAnchor.constraint(equalTo: view.leftAnchor),
             previewLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor),
-            actionButton.topAnchor.constraintEqualToSystemSpacingBelow(previewLayoutGuide.bottomAnchor, multiplier: 1.0),
+            buttonStack.topAnchor.constraintEqualToSystemSpacingBelow(previewLayoutGuide.bottomAnchor, multiplier: 1.0),
             
             previewBorderView.centerXAnchor.constraint(equalTo: previewLayoutGuide.centerXAnchor),
             previewBorderView.centerYAnchor.constraint(equalTo: previewLayoutGuide.centerYAnchor),
@@ -140,16 +155,24 @@ class TaskTrialViewController: UIViewController {
         trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
     }
     
-    @objc private func handleActionButton(_ sender: UIButton) {
-        actionButtonDidSelect()
+    @objc private func handlePrimaryButton(_ sender: UIButton) {
+        primaryButtonDidSelect()
+    }
+    
+    @objc private func handleSecondaryButton(_ sender: UIButton) {
+        secondaryButtonDidSelect()
     }
     
     @objc private func handleCancelButton(_ sender: UIButton) {
         cancelButtonDidSelect()
     }
     
-    func actionButtonDidSelect() {
+    func primaryButtonDidSelect() {
         startTrial()
+    }
+    
+    func secondaryButtonDidSelect() {
+        // no-op
     }
     
     func cancelButtonDidSelect() {

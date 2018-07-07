@@ -15,7 +15,7 @@ class TaskInstructionViewController: UIViewController {
     
     let contentView = UIView()
     
-    let actionButton = UIButton(type: .custom)
+    let primaryButton = UIButton(type: .custom)
     let cancelButton = UIButton(type: .system)
     
     override func viewDidLoad() {
@@ -31,10 +31,10 @@ class TaskInstructionViewController: UIViewController {
         descriptionLabel.lineBreakMode = .byWordWrapping
         descriptionLabel.textAlignment = .center
         
-        actionButton.setTitle("Start Trial", for: .normal)
-        actionButton.setTitleColor(.white, for: .normal)
-        actionButton.setBackgroundImage(UIImage.buttonBackgroundImage(color: view.tintColor), for: .normal)
-        actionButton.addTarget(self, action: #selector(handleActionButton(_:)), for: .touchUpInside)
+        primaryButton.setTitle("Start Trial", for: .normal)
+        primaryButton.setTitleColor(.white, for: .normal)
+        primaryButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
+        primaryButton.addTarget(self, action: #selector(handlePrimaryButton(_:)), for: .touchUpInside)
         
         cancelButton.setTitle(NSLocalizedString("Withdraw Exam", comment: ""), for: .normal)
         cancelButton.addTarget(self, action: #selector(handleCancelButton(_:)), for: .touchUpInside)
@@ -42,13 +42,13 @@ class TaskInstructionViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(contentView)
-        view.addSubview(actionButton)
+        view.addSubview(primaryButton)
         view.addSubview(cancelButton)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        primaryButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -68,22 +68,22 @@ class TaskInstructionViewController: UIViewController {
             cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
             cancelButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            actionButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
-            actionButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            actionButton.widthAnchor.constraint(equalToConstant: 343),
-            actionButton.heightAnchor.constraint(equalToConstant: 50)
+            primaryButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
+            primaryButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            primaryButton.widthAnchor.constraint(equalToConstant: 343),
+            primaryButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
-    @objc private func handleActionButton(_ sender: UIButton) {
-        actionButtonDidSelect()
+    @objc private func handlePrimaryButton(_ sender: UIButton) {
+        primaryButtonDidSelect()
     }
     
     @objc private func handleCancelButton(_ sender: UIButton) {
         cancelButtonDidSelect()
     }
     
-    func actionButtonDidSelect() {
+    func primaryButtonDidSelect() {
         
     }
     

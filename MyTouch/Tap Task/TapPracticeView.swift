@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(*, deprecated)
 class TapPracticeView: TouchTrackingView {
 
     let targetView = UIView()

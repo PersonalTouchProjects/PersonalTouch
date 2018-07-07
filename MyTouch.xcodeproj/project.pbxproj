@@ -30,6 +30,7 @@
 		6592ACF920E90667006A1BCB /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6592ACF820E90667006A1BCB /* CountdownView.swift */; };
 		65A470CC20EF967A0055E46E /* TaskInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A470CB20EF967A0055E46E /* TaskInstructionViewController.swift */; };
 		65A470CE20EF9EF20055E46E /* TapTaskInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A470CD20EF9EF10055E46E /* TapTaskInstructionViewController.swift */; };
+		65DC072E20F141E70070A7A7 /* TapTaskPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DC072D20F141E70070A7A7 /* TapTaskPracticeViewController.swift */; };
 		65DE73BC20F0F04E009D5928 /* GestureRecognizerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DE73BB20F0F04E009D5928 /* GestureRecognizerEvent.swift */; };
 		65EE0F0920EF42F200EB8929 /* UIView+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */; };
 		65F8BD4D20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */; };
@@ -68,6 +69,7 @@
 		6592ACF820E90667006A1BCB /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
 		65A470CB20EF967A0055E46E /* TaskInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInstructionViewController.swift; sourceTree = "<group>"; };
 		65A470CD20EF9EF10055E46E /* TapTaskInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTaskInstructionViewController.swift; sourceTree = "<group>"; };
+		65DC072D20F141E70070A7A7 /* TapTaskPracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTaskPracticeViewController.swift; sourceTree = "<group>"; };
 		65DE73BB20F0F04E009D5928 /* GestureRecognizerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizerEvent.swift; sourceTree = "<group>"; };
 		65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+HCI.swift"; sourceTree = "<group>"; };
 		65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TzuChuanGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				65A470CD20EF9EF10055E46E /* TapTaskInstructionViewController.swift */,
+				65DC072D20F141E70070A7A7 /* TapTaskPracticeViewController.swift */,
 				65F9246520E8D39A00A32BB0 /* TapTaskTrialViewController.swift */,
 				6548AA2A20E769F600B7C73F /* TapPracticeView.swift */,
 				65721BE820E9F4E900466E22 /* TapTrialView.swift */,
@@ -284,6 +287,7 @@
 				65DE73BC20F0F04E009D5928 /* GestureRecognizerEvent.swift in Sources */,
 				65A470CE20EF9EF20055E46E /* TapTaskInstructionViewController.swift in Sources */,
 				65F9246120E8A81100A32BB0 /* TaskTrialViewController.swift in Sources */,
+				65DC072E20F141E70070A7A7 /* TapTaskPracticeViewController.swift in Sources */,
 				65F9245F20E800C900A32BB0 /* TouchTrackingView.swift in Sources */,
 				6548AA2B20E769F600B7C73F /* TapPracticeView.swift in Sources */,
 				6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */,

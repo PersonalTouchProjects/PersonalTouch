@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
         
         startExamButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
         startExamButton.setTitleColor(.white, for: .normal)
-        startExamButton.setBackgroundImage(UIImage.buttonBackgroundImage(color: view.tintColor), for: .normal)
+        startExamButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
         startExamButton.addTarget(self, action: #selector(handleButton(_:)), for: .touchUpInside)
         
         view.addSubview(descriptionLabel)

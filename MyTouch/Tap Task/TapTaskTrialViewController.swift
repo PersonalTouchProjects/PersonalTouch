@@ -24,10 +24,8 @@ class TapTaskTrialViewController: TaskTrialViewController {
         
         tapTrialView.delegate = self
         tapTrialView.dataSource = self
-    }
-    
-    override func actionButtonDidSelect() {
-        super.actionButtonDidSelect()
+        
+        secondaryButton.isHidden = true
     }
     
     override func didEndTrial() {
@@ -48,6 +46,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
             
         } else {
             tapTrialView.reloadData()
+            titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
         }
     }
 }

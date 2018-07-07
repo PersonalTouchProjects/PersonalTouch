@@ -29,7 +29,11 @@ extension UIImage {
         return newImage!
     }
     
-    static func buttonBackgroundImage(color: UIColor) -> UIImage? {
+    static func primaryButtonBackgroundImage(color: UIColor) -> UIImage? {
         return UIImage(named: "Button Shape")?.imageWithColor(color).resizableImage(withCapInsets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+    }
+    
+    static func secondaryButtonBackgroundImage(color: UIColor) -> UIImage? {
+        return UIImage(named: "Button Border")?.imageWithColor(color).resizableImage(withCapInsets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
     }
 }
