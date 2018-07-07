@@ -72,6 +72,8 @@ class TapTrialView: TrialView {
     
     func reloadData() {
         
+        reset()
+        
         columns = dataSource?.numberOfColumn(self) ?? 1
         rows    = dataSource?.numberOfRow(self)    ?? 1
         column  = dataSource?.targetColumn(self)   ?? 0

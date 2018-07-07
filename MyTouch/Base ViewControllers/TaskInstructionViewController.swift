@@ -84,8 +84,7 @@ class TaskInstructionViewController: UIViewController {
     }
     
     func actionButtonDidSelect() {
-        let taskViewController = TapTaskTrialViewController()
-        navigationController?.pushViewController(taskViewController, animated: true)
+        
     }
     
     func cancelButtonDidSelect() {

@@ -52,7 +52,7 @@ class HomeViewController: UIViewController {
     @objc func handleButton(_ sender: UIButton) {
         
 //        let taskViewController = TapTaskTrialViewController()
-        let taskViewController = TaskInstructionViewController()
+        let taskViewController = TapTaskInstructionViewController()
         let navController = UINavigationController(rootViewController: taskViewController)
         navController.setNavigationBarHidden(true, animated: false)
         navController.modalTransitionStyle = .flipHorizontal
