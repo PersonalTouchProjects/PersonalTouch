@@ -202,6 +202,23 @@ struct SwipeGestureRecognizerEvent: GestureRecognizerEvent {
         static var left  = Direction(rawValue: 1 << 1)
         static var up    = Direction(rawValue: 1 << 2)
         static var down  = Direction(rawValue: 1 << 3)
+        
+        static func convert(from: UISwipeGestureRecognizer.Direction) -> Direction {
+            var direction: Direction = []
+            if from.contains(.right) {
+                direction.insert(.right)
+            }
+            if from.contains(.left) {
+                direction.insert(.left)
+            }
+            if from.contains(.up) {
+                direction.insert(.up)
+            }
+            if from.contains(.down) {
+                direction.insert(.down)
+            }
+            return direction
+        }
     }
     
     var numberOfTouchesRequired: Int // default is 1. the number of fingers that must swipe
@@ -224,19 +241,7 @@ struct SwipeGestureRecognizerEvent: GestureRecognizerEvent {
     
     init(recognizer: UISwipeGestureRecognizer) {
         self.numberOfTouchesRequired = recognizer.numberOfTouchesRequired
-        self.direction = []
-        if recognizer.direction.contains(.right) {
-            self.direction.insert(.right)
-        }
-        if recognizer.direction.contains(.left) {
-            self.direction.insert(.left)
-        }
-        if recognizer.direction.contains(.up) {
-            self.direction.insert(.up)
-        }
-        if recognizer.direction.contains(.down) {
-            self.direction.insert(.down)
-        }
+        self.direction = Direction.convert(from: recognizer.direction)
         
         self.timestamp         = Date().timeIntervalSince1970
         self.state             = GestureRecognizerEventState(state: recognizer.state)

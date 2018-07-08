@@ -10,7 +10,8 @@ import UIKit
 
 class CountdownView: UIView {
 
-    var countdown: TimeInterval = 3.5
+    var count: Int = 3
+    var timeIntervalForEachCount: TimeInterval = 0.75
     
     let label = UILabel()
     
@@ -25,7 +26,7 @@ class CountdownView: UIView {
         
         backgroundColor = .white
         
-        label.text = "\(Int(countdown))"
+        label.text = "\(count)"
         label.font = UIFont.monospacedDigitSystemFont(ofSize: 144, weight: .medium)
         label.isHidden = true
         
@@ -53,7 +54,7 @@ class CountdownView: UIView {
         label.isHidden = false
         
         if remain == 0 {
-            remain = Int(countdown)
+            remain = count
         } else {
             remain -= 1
         }
@@ -66,7 +67,7 @@ class CountdownView: UIView {
             label.text = "\(remain)"
             label.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
             
-            UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: [.beginFromCurrentState],  animations: {
+            UIView.animate(withDuration: timeIntervalForEachCount, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: [.beginFromCurrentState],  animations: {
                 
                 self.label.transform = .identity
                 

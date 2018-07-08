@@ -10,7 +10,7 @@ import UIKit
 
 extension RawTouch {
     
-    enum Phase: Int, Codable {
+    enum Phase: String, Codable {
         case began
         case moved
         case stationary
@@ -18,7 +18,7 @@ extension RawTouch {
         case cancelled
     }
     
-    enum TouchType: Int, Codable {
+    enum TouchType: String, Codable {
         case direct // A direct touch from a finger (on a screen)
         case indirect // An indirect touch (not a screen)
         case pencil // Add pencil name variant
@@ -33,6 +33,7 @@ extension RawTouch {
         static var altitude = Properties(rawValue: 1 << 2)
         static var location = Properties(rawValue: 1 << 3) // For predicted Touches
     }
+    
 }
 
 struct RawTouch: Codable {

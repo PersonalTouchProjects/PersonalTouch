@@ -58,7 +58,7 @@ class TaskTrialViewController: UIViewController {
         primaryButton.addTarget(self, action: #selector(handlePrimaryButton(_:)), for: .touchUpInside)
         
         secondaryButton.setTitle("Try Again", for: .normal)
-//        secondaryButton.setTitleColor(.white, for: .normal)
+        secondaryButton.titleLabel?.font = primaryButton.titleLabel?.font
         secondaryButton.setBackgroundImage(UIImage.secondaryButtonBackgroundImage(color: view.tintColor), for: .normal)
         secondaryButton.addTarget(self, action: #selector(handleSecondaryButton(_:)), for: .touchUpInside)
         
