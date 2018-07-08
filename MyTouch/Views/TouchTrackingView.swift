@@ -31,14 +31,31 @@ class TouchTrackingView: UIView {
     
     var delegate: TouchTrackingViewDelegate?
     
-    private(set) var startTimestamp: TimeInterval = 0
+    private(set) var systemUptime: TimeInterval = 0
     private(set) var tracks = [[UITouch]]()
+    private var rawTracks: [RawTouchTrack] {
+
+        return tracks.compactMap { touches in
+            
+            if touches.isEmpty {
+                return nil
+            }
+            
+            var rawTrack = RawTouchTrack()
+            for index in 0..<touches.count {
+                rawTrack.addRawTouch(RawTouch(touch: touches[index], systemUptime: self.systemUptime))
+            }
+            
+            return rawTrack
+        }
+    }
     private var isTracking = false
     private var visualLogColors = [Int: UIColor]()
     
     func startTracking() {
         reset()
-        startTimestamp = ProcessInfo.processInfo.systemUptime
+        let uptime = ProcessInfo.processInfo.systemUptime
+        systemUptime = Date(timeIntervalSinceNow: -uptime).timeIntervalSince1970
         isTracking = true
     }
     
@@ -126,6 +143,8 @@ class TouchTrackingView: UIView {
                 }
             }
         }
+        
+        print(tracks)
         
         if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
             delegate?.touchTrackingViewDidCompleteNewTracks(self)

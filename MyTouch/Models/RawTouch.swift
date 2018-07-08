@@ -16,12 +16,30 @@ extension RawTouch {
         case stationary
         case ended
         case cancelled
+        
+        init(phase: UITouch.Phase) {
+            switch phase {
+            case .began:      self = .began
+            case .moved:      self = .moved
+            case .stationary: self = .stationary
+            case .ended:      self = .ended
+            case .cancelled:  self = .cancelled
+            }
+        }
     }
     
     enum TouchType: String, Codable {
         case direct // A direct touch from a finger (on a screen)
         case indirect // An indirect touch (not a screen)
         case pencil // Add pencil name variant
+        
+        init(touchType: UITouch.TouchType) {
+            switch touchType {
+            case .direct:   self = .direct
+            case .indirect: self = .indirect
+            case .pencil:   self = .pencil
+            }
+        }
     }
     
     struct Properties: OptionSet, Codable {
@@ -32,6 +50,23 @@ extension RawTouch {
         static var azimuth  = Properties(rawValue: 1 << 1)
         static var altitude = Properties(rawValue: 1 << 2)
         static var location = Properties(rawValue: 1 << 3) // For predicted Touches
+        
+        static func convert(from: UITouch.Properties) -> Properties {
+            var properties: Properties = []
+            if from.contains(.force) {
+                properties.insert(.force)
+            }
+            if from.contains(.azimuth) {
+                properties.insert(.azimuth)
+            }
+            if from.contains(.altitude) {
+                properties.insert(.altitude)
+            }
+            if from.contains(.location) {
+                properties.insert(.location)
+            }
+            return properties
+        }
     }
     
 }
@@ -84,17 +119,25 @@ struct RawTouch: Codable {
     // If no updates are expected for an estimated property the current value is our final estimate.
     // This happens e.g. for azimuth/altitude values when entering from the edges
     var estimatedPropertiesExpectingUpdates: RawTouch.Properties
+    
+    
+    init(touch: UITouch, systemUptime: TimeInterval) {
+        self.timestamp               = systemUptime + touch.timestamp
+        self.phase                   = Phase(phase: touch.phase)
+        self.tapCount                = touch.tapCount
+        self.type                    = TouchType(touchType: touch.type)
+        self.majorRadius             = touch.majorRadius
+        self.majorRadiusTolerance    = touch.majorRadiusTolerance
+        self.location                = touch.location(in: nil)
+        self.previousLocation        = touch.previousLocation(in: nil)
+        self.preciseLocation         = touch.preciseLocation(in: nil)
+        self.precisePreviousLocation = touch.precisePreviousLocation(in: nil)
+        self.force                   = touch.force
+        self.maximumPossibleForce    = touch.maximumPossibleForce
+        self.azimuthAngle            = touch.azimuthAngle(in: nil)
+        self.azimuthUnitVector       = touch.azimuthUnitVector(in: nil)
+        self.estimationUpdateIndex   = touch.estimationUpdateIndex.map { $0.doubleValue }
+        self.estimatedProperties     = Properties.convert(from: touch.estimatedProperties)
+        self.estimatedPropertiesExpectingUpdates = Properties.convert(from: touch.estimatedPropertiesExpectingUpdates)
+    }
 }
-
-//extension UITouch {
-//
-//    var rawTouch: RawTouch {
-//        return RawTouch(
-//            timestamp: self.timestamp,
-//            location: self.location(in: nil),
-//            previousLocation: self.previousLocation(in: nil),
-//            radius: self.majorRadius,
-//            radiusTolerance: self.majorRadiusTolerance
-//        )
-//    }
-//}
