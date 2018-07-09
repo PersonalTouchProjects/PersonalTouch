@@ -26,15 +26,10 @@ class HomeViewController: UIViewController, ORKTaskViewControllerDelegate {
         taskViewController.dismiss(animated: true, completion: nil)
 
         if (taskState == "ConsentTask") {
-            print (1)
             let taskViewController = ORKTaskViewController(task: SurveyTask, taskRun: nil)
-            print (2)
             taskViewController.delegate = self
-            print (3)
             taskState = "SurveyTask"
-            print (4)
             present(taskViewController, animated: true, completion: nil)
-            print (5)
         }
 //
         else if (taskState == "SurveyTask") {
