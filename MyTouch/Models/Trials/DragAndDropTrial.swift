@@ -24,6 +24,8 @@ struct DragAndDropTrial: Trial {
     
     var success: Bool = false
     
+    var gestureRecognizerEvents: [GestureRecognizerEvent] = []
+    
     init(initialFrame: CGRect, targetFrame: CGRect) {
         self.initialFrame = initialFrame
         self.targetFrame = targetFrame

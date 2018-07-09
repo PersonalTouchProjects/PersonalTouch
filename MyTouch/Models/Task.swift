@@ -8,14 +8,20 @@
 
 import Foundation
 
-struct TapTask {
+protocol Task {
+    associatedtype Trial: MyTouch.Trial
+    
+    var trials: [Trial] { get }
+}
+
+struct TapTask: Task {
     var trials: [TapTrial]
 }
 
-struct SwipeTask {
+struct SwipeTask: Task {
     var trials: [SwipeTrial]
 }
 
-struct DragAndDropTask {
+struct DragAndDropTask: Task {
     var trials: [DragAndDropTrial]
 }

@@ -29,6 +29,8 @@ struct SwipeTrial: Trial {
     
     var success: Bool = false
     
+    var gestureRecognizerEvents: [GestureRecognizerEvent] = []
+    
     init(areaFrame: CGRect, targetDirection: Direction) {
         self.areaFrame = areaFrame
         self.targetDirection = targetDirection

@@ -17,4 +17,6 @@ protocol Trial {
     var rawTouchTracks: [RawTouchTrack] { get }
     
     var success: Bool { get }
+    
+    var gestureRecognizerEvents: [GestureRecognizerEvent] { get }
 }

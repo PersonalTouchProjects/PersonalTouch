@@ -20,6 +20,8 @@ struct TapTrial: Trial {
     
     var success: Bool = false
     
+    var gestureRecognizerEvents: [GestureRecognizerEvent] = []
+    
     init(targetFrame: CGRect) {
         self.targetFrame = targetFrame
     }
