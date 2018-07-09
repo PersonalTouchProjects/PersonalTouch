@@ -12,7 +12,11 @@ class TapTaskTrialViewController: TaskTrialViewController {
     
     let tapTrialView = TapTrialView()
     
-    var positions = positionGenerator(columns: 5, rows: 5, repeats: 1).shuffled()
+    var numberOfColumns = 1
+    var numberOfRows = 1
+    var numberOfRepeats = 1
+    
+    var positions: [(Int, Int)] = []
     
     override func loadView() {
         super.loadView()
@@ -22,10 +26,10 @@ class TapTaskTrialViewController: TaskTrialViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        positions = positionGenerator(columns: numberOfColumns, rows: numberOfRows, repeats: numberOfRepeats).shuffled()
+        
         tapTrialView.delegate = self
         tapTrialView.dataSource = self
-        
-        secondaryButton.isHidden = true
     }
     
     override func didEndTrial() {
@@ -54,11 +58,11 @@ class TapTaskTrialViewController: TaskTrialViewController {
 extension TapTaskTrialViewController: TapTrialViewDataSource {
     
     func numberOfColumn(_ tapTrialView: TapTrialView) -> Int {
-        return 5
+        return numberOfColumns
     }
     
     func numberOfRow(_ tapTrialView: TapTrialView) -> Int {
-        return 5
+        return numberOfRows
     }
     
     func targetColumn(_ tapTrialView: TapTrialView) -> Int {

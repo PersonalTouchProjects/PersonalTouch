@@ -61,6 +61,7 @@ class TaskTrialViewController: UIViewController {
         secondaryButton.titleLabel?.font = primaryButton.titleLabel?.font
         secondaryButton.setBackgroundImage(UIImage.secondaryButtonBackgroundImage(color: view.tintColor), for: .normal)
         secondaryButton.addTarget(self, action: #selector(handleSecondaryButton(_:)), for: .touchUpInside)
+        secondaryButton.isHidden = true
         
         cancelButton.setTitle(NSLocalizedString("Withdraw Exam", comment: ""), for: .normal)
         cancelButton.addTarget(self, action: #selector(handleCancelButton(_:)), for: .touchUpInside)

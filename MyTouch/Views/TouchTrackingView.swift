@@ -123,6 +123,7 @@ class TouchTrackingView: UIView {
         setNeedsLayout()
     }
     
+    // TODO: check if work for pinch and rotation gesture
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
@@ -143,8 +144,6 @@ class TouchTrackingView: UIView {
                 }
             }
         }
-        
-        print(tracks)
         
         if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
             delegate?.touchTrackingViewDidCompleteNewTracks(self)

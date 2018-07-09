@@ -27,6 +27,8 @@ class TapTaskPracticeViewController: TaskTrialViewController {
         
         primaryButton.setTitle("Practice", for: .normal)
         secondaryButton.setTitle("Skip", for: .normal)
+        
+        secondaryButton.isHidden = false
     }
     
     override func didEndTrial() {
@@ -36,19 +38,20 @@ class TapTaskPracticeViewController: TaskTrialViewController {
         
         shouldStartTrial = true
         
-        primaryButton.setTitle("End Practice", for: .normal)
-        secondaryButton.setTitle("Try Again", for: .normal)
+        UIView.performWithoutAnimation {
+            self.primaryButton.setTitle("End Practice", for: .normal)
+            self.secondaryButton.setTitle("Try Again", for: .normal)
+        }
     }
     
     override func primaryButtonDidSelect() {
         
-        // do not call super to avoid start trial automatically.
+        // do not call super to avoid starting trial automatically.
         // super.primaryButtonDidSelect()
         //
         
         if shouldStartTrial {
-            let trialViewController = TapTaskTrialViewController()
-            navigationController?.pushViewController(trialViewController, animated: true)
+            presentStartTrialAlert()
         } else {
             startTrial()
         }
@@ -60,9 +63,24 @@ class TapTaskPracticeViewController: TaskTrialViewController {
         if shouldStartTrial {
             startTrial()
         } else {
-            let trialViewController = TapTaskTrialViewController()
-            navigationController?.pushViewController(trialViewController, animated: true)
+            presentStartTrialAlert()
         }
+    }
+    
+    private func presentStartTrialAlert() {
+        
+        let alertController = UIAlertController(title: "Start Trial", message: "Are you sure?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let confirmAction = UIAlertAction(title: "Go", style: .default) { (action) in
+            let trialViewController = TapTaskTrialViewController()
+            self.navigationController?.pushViewController(trialViewController, animated: true)
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        alertController.preferredAction = confirmAction
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 

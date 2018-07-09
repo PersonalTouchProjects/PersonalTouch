@@ -110,9 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				6548A9EB20E663E700B7C73F /* AppDelegate.swift */,
-				65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */,
-				6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */,
-				6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */,
+				65FC45A020F39BA200B2A7CF /* Extensions */,
 				65F8BD4E20EB88FA002F7C69 /* Gesture Recognizers */,
 				6548AA1020E66DB200B7C73F /* Base ViewControllers */,
 				6548AA2720E769A300B7C73F /* Tap Task */,
@@ -183,6 +181,16 @@
 				6592ACF820E90667006A1BCB /* CountdownView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		65FC45A020F39BA200B2A7CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */,
+				6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */,
+				6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
