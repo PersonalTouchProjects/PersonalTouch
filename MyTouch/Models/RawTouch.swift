@@ -28,10 +28,10 @@ extension RawTouch {
        
         var rawValue: Int
         
-        static var force    = UITouch.Properties(rawValue: 1 << 0)
-        static var azimuth  = UITouch.Properties(rawValue: 1 << 1)
-        static var altitude = UITouch.Properties(rawValue: 1 << 2)
-        static var location = UITouch.Properties(rawValue: 1 << 3) // For predicted Touches
+        static var force    = RawTouch.Properties(rawValue: 1 << 0)
+        static var azimuth  = RawTouch.Properties(rawValue: 1 << 1)
+        static var altitude = RawTouch.Properties(rawValue: 1 << 2)
+        static var location = RawTouch.Properties(rawValue: 1 << 3) // For predicted Touches
     }
 }
 
