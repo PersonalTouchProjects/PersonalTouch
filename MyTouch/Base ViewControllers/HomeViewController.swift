@@ -7,11 +7,61 @@
 //
 
 import UIKit
+import ResearchKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, ORKTaskViewControllerDelegate {
     
     let descriptionLabel = UILabel()
     let startExamButton = UIButton(type: .custom)
+    
+    var taskResult: ORKTaskResult!
+    var taskResults: [ORKTaskResult] = [] // need to initialize
+    var taskState: String!
+
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+
+        taskResult = taskViewController.result
+        taskResults.append(taskResult)
+        taskViewController.dismiss(animated: true, completion: nil)
+
+        if (taskState == "ConsentTask") {
+            print (1)
+            let taskViewController = ORKTaskViewController(task: SurveyTask, taskRun: nil)
+            print (2)
+            taskViewController.delegate = self
+            print (3)
+            taskState = "SurveyTask"
+            print (4)
+            present(taskViewController, animated: true, completion: nil)
+            print (5)
+        }
+//
+        else if (taskState == "SurveyTask") {
+            // things should be done after survey
+//            let taskViewController = ORKTaskViewController(task: ActiveTask, taskRun: nil)
+//            taskViewController.delegate = self
+//            taskState = "ActiveTask"
+//            present(taskViewController, animated: true, completion: nil)
+
+            let taskViewController = TaskInstructionViewController()
+            let navController = UINavigationController(rootViewController: taskViewController)
+            navController.setNavigationBarHidden(true, animated: false)
+            navController.modalTransitionStyle = .flipHorizontal
+
+            present(navController, animated: true, completion: nil)
+
+        }
+
+//                else if (taskState == "ActiveTask") {
+//                     // things should be done after survey
+//                      print (taskResults)
+//                }
+
+
+    }
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +100,25 @@ class HomeViewController: UIViewController {
     }
     
     @objc func handleButton(_ sender: UIButton) {
-        
-//        let taskViewController = TapTaskTrialViewController()
-        let taskViewController = TaskInstructionViewController()
-        let navController = UINavigationController(rootViewController: taskViewController)
-        navController.setNavigationBarHidden(true, animated: false)
-        navController.modalTransitionStyle = .flipHorizontal
-        
-        present(navController, animated: true, completion: nil)
+
+        let taskViewController = ORKTaskViewController(task: ConsentTask, taskRun: nil)
+        taskViewController.delegate = self
+        taskState = "ConsentTask"
+        present(taskViewController, animated: true, completion: nil)
+
     }
+    
+    
+//    @objc func handleButton(_ sender: UIButton) {
+//
+////        let taskViewController = TapTaskTrialViewController()
+//        let taskViewController = TaskInstructionViewController()
+//        let navController = UINavigationController(rootViewController: taskViewController)
+//        navController.setNavigationBarHidden(true, animated: false)
+//        navController.modalTransitionStyle = .flipHorizontal
+//
+//        present(navController, animated: true, completion: nil)
+//    }
+    
+    
 }
