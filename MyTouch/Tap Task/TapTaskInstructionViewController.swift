@@ -19,6 +19,7 @@ class TapTaskInstructionViewController: TaskInstructionViewController {
         super.primaryButtonDidSelect()
         
         let taskViewController = TapTaskPracticeViewController()
+        taskViewController.eventsManager = eventsManager
         navigationController?.pushViewController(taskViewController, animated: true)
     }
 }

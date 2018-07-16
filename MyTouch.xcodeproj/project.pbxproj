@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6514074820FC9770006BD17A /* EventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074720FC9770006BD17A /* EventsManager.swift */; };
 		6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548A9EB20E663E700B7C73F /* AppDelegate.swift */; };
 		6548A9F120E663E800B7C73F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548A9EF20E663E800B7C73F /* Main.storyboard */; };
 		6548A9F320E663E900B7C73F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6548A9F220E663E900B7C73F /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6514074720FC9770006BD17A /* EventsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsManager.swift; sourceTree = "<group>"; };
 		6548A9E820E663E700B7C73F /* MyTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6548A9EB20E663E700B7C73F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6548A9F020E663E800B7C73F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */,
 				65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */,
 				65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */,
+				6514074720FC9770006BD17A /* EventsManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				65DC072E20F141E70070A7A7 /* TapTaskPracticeViewController.swift in Sources */,
 				65F9245F20E800C900A32BB0 /* TouchTrackingView.swift in Sources */,
 				6548AA2B20E769F600B7C73F /* TapPracticeView.swift in Sources */,
+				6514074820FC9770006BD17A /* EventsManager.swift in Sources */,
 				6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

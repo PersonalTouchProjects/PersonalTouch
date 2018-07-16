@@ -40,6 +40,16 @@ class TaskTrialViewController: UIViewController {
     private(set) var trialStartDate = Date.distantPast
     private(set) var trialEndDate = Date.distantFuture
     
+    var eventsManager: EventsManager?
+    
+    var shouldHandleRecievedEvents: Bool {
+        return true
+    }
+    
+    var shouldStartTrialAutomaticallyOnPrimaryButtonTapped: Bool {
+        return true
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return fullSizeConstraints.first?.isActive == true
     }
@@ -169,7 +179,9 @@ class TaskTrialViewController: UIViewController {
     }
     
     func primaryButtonDidSelect() {
-        startTrial()
+        if shouldStartTrialAutomaticallyOnPrimaryButtonTapped {
+            startTrial()
+        }
     }
     
     func secondaryButtonDidSelect() {
@@ -258,6 +270,9 @@ class TaskTrialViewController: UIViewController {
     
     func didEndTrial() {
         
+        if shouldHandleRecievedEvents {
+            eventsManager?.addTracks(trialView.rawTracks, gestureRecognizerEvents: trialView.gestureRecognizerEvents)
+        }
     }
 }
 

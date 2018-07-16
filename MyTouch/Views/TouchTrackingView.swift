@@ -33,7 +33,7 @@ class TouchTrackingView: UIView {
     
     private(set) var systemUptime: TimeInterval = 0
     private(set) var tracks = [[UITouch]]()
-    private var rawTracks: [RawTouchTrack] {
+    var rawTracks: [RawTouchTrack] {
 
         return tracks.compactMap { touches in
             

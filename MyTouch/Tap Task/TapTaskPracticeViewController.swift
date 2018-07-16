@@ -14,6 +14,14 @@ class TapTaskPracticeViewController: TaskTrialViewController {
     
     var shouldStartTrial = false
     
+    override var shouldHandleRecievedEvents: Bool {
+        return false
+    }
+    
+    override var shouldStartTrialAutomaticallyOnPrimaryButtonTapped: Bool {
+        return false
+    }
+    
     override func loadView() {
         super.loadView()
         self.trialView = tapTrialView
@@ -45,10 +53,7 @@ class TapTaskPracticeViewController: TaskTrialViewController {
     }
     
     override func primaryButtonDidSelect() {
-        
-        // do not call super to avoid starting trial automatically.
-        // super.primaryButtonDidSelect()
-        //
+        super.primaryButtonDidSelect()
         
         if shouldStartTrial {
             presentStartTrialAlert()
@@ -73,6 +78,7 @@ class TapTaskPracticeViewController: TaskTrialViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         let confirmAction = UIAlertAction(title: "Go", style: .default) { (action) in
             let trialViewController = TapTaskTrialViewController()
+            trialViewController.eventsManager = self.eventsManager
             self.navigationController?.pushViewController(trialViewController, animated: true)
         }
         

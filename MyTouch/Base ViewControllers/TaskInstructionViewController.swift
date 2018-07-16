@@ -18,6 +18,8 @@ class TaskInstructionViewController: UIViewController {
     let primaryButton = UIButton(type: .custom)
     let cancelButton = UIButton(type: .system)
     
+    var eventsManager: EventsManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
