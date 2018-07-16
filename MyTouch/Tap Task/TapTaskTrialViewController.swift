@@ -12,8 +12,8 @@ class TapTaskTrialViewController: TaskTrialViewController {
     
     let tapTrialView = TapTrialView()
     
-    var numberOfColumns = 1
-    var numberOfRows = 1
+    var numberOfColumns = 2
+    var numberOfRows = 2
     var numberOfRepeats = 1
     
     var positions: [(Int, Int)] = []

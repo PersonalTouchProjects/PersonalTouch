@@ -22,7 +22,7 @@ class TapTrialView: TrialView {
         didSet { if superview != nil { reloadData() } }
     }
     
-    let targetView = UIView()
+    let targetView: UIView = TargetView()
     
     private var columns = 1
     private var rows    = 1
@@ -33,8 +33,8 @@ class TapTrialView: TrialView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        targetView.backgroundColor = tintColor
-        targetView.layer.cornerRadius = 8.0
+//        targetView.backgroundColor = tintColor
+//        targetView.layer.cornerRadius = 8.0
         
         contentView.addSubview(targetView)
     }
@@ -85,5 +85,44 @@ class TapTrialView: TrialView {
         
         setNeedsLayout()
         layoutIfNeeded()
+    }
+}
+
+private extension TapTrialView {
+    
+    class TargetView: UIView {
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            self.backgroundColor = .clear
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        override func draw(_ rect: CGRect) {
+            
+            self.tintColor.setFill()
+            
+            var frame = CGRect(
+                x: rect.midX - 15,
+                y: rect.midY - 2,
+                width: 30,
+                height: 4
+            )
+            var rectangle = UIBezierPath(rect: frame)
+            rectangle.fill()
+            
+            
+            frame = CGRect(
+                x: rect.midX - 2,
+                y: rect.midY - 15,
+                width: 4,
+                height: 30
+            )
+            rectangle = UIBezierPath(rect: frame)
+            rectangle.fill()
+        }
     }
 }
