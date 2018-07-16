@@ -17,7 +17,7 @@ extension RawTouch {
         case ended
         case cancelled
         
-        init(phase: UITouch.Phase) {
+        init(phase: UITouchPhase) {
             switch phase {
             case .began:      self = .began
             case .moved:      self = .moved
@@ -33,11 +33,11 @@ extension RawTouch {
         case indirect // An indirect touch (not a screen)
         case pencil // Add pencil name variant
         
-        init(touchType: UITouch.TouchType) {
+        init(touchType: UITouchType) {
             switch touchType {
             case .direct:   self = .direct
             case .indirect: self = .indirect
-            case .pencil:   self = .pencil
+            case .stylus:   self = .pencil
             }
         }
     }
@@ -51,7 +51,7 @@ extension RawTouch {
         static var altitude = Properties(rawValue: 1 << 2)
         static var location = Properties(rawValue: 1 << 3) // For predicted Touches
         
-        static func convert(from: UITouch.Properties) -> Properties {
+        static func convert(from: UITouchProperties) -> Properties {
             var properties: Properties = []
             if from.contains(.force) {
                 properties.insert(.force)
