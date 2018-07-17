@@ -23,6 +23,7 @@ class TapTrialView: TrialView {
     }
     
     let targetView: UIView = TargetView()
+    let tapGestureRecognizer = UITapGestureRecognizer()
     
     private var columns = 1
     private var rows    = 1
@@ -30,13 +31,15 @@ class TapTrialView: TrialView {
     private var row     = 0
     private var size    = CGSize(width: 80, height: 80)
     
+    private(set) var success: Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        targetView.backgroundColor = tintColor
-//        targetView.layer.cornerRadius = 8.0
-        
         contentView.addSubview(targetView)
+        
+        tapGestureRecognizer.addTarget(self, action: #selector(handleTap(_:)))
+        targetView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -70,9 +73,18 @@ class TapTrialView: TrialView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc private func handleTap(_ sender: UITapGestureRecognizer) {
+        
+        if targetView.bounds.contains(sender.location(in: targetView)) {
+            success = true
+        }
+    }
+    
     func reloadData() {
         
         reset()
+        
+        success = false
         
         columns = dataSource?.numberOfColumn(self) ?? 1
         rows    = dataSource?.numberOfRow(self)    ?? 1

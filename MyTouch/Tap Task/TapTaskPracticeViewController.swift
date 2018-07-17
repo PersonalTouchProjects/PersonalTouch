@@ -18,10 +18,6 @@ class TapTaskPracticeViewController: TaskTrialViewController {
         return TapTaskTrialViewController()
     }
     
-    override var shouldHandleRecievedEvents: Bool {
-        return false
-    }
-    
     override var shouldStartTrialAutomaticallyOnPrimaryButtonTapped: Bool {
         return false
     }

@@ -38,7 +38,20 @@ class TapTaskTrialViewController: TaskTrialViewController {
     
     override func didEndTrial() {
         super.didEndTrial()
-
+        
+        
+        // add new trial to events manager
+        var tapTrial = TapTrial(targetLocation: tapTrialView.targetView.center)
+        tapTrial.startTime = trialStartDate.timeIntervalSince1970
+        tapTrial.endTime = trialEndDate.timeIntervalSince1970
+        tapTrial.rawTouchTracks = tapTrialView.rawTracks
+        tapTrial.gestureRecognizerEvents = tapTrialView.gestureRecognizerEvents
+        tapTrial.success = tapTrialView.success
+        
+        eventsManager?.addTrial(tapTrial)
+        // end of add new trial
+        
+        
         positions.removeFirst()
         
         if positions.isEmpty {
@@ -50,7 +63,6 @@ class TapTaskTrialViewController: TaskTrialViewController {
                     taskViewController.eventsManager = self.eventsManager
                     self.navigationController?.pushViewController(taskViewController, animated: true)
                 }
-//                self.dismiss(animated: true, completion: nil)
             }
             
             alertController.addAction(confirmAction)

@@ -10,7 +10,7 @@ import UIKit
 
 struct TapTrial: Trial {
     
-    let targetFrame: CGRect
+    let targetLocation: CGPoint
     
     var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
     
@@ -22,7 +22,7 @@ struct TapTrial: Trial {
     
     var gestureRecognizerEvents: [GestureRecognizerEvent] = []
     
-    init(targetFrame: CGRect) {
-        self.targetFrame = targetFrame
+    init(targetLocation: CGPoint) {
+        self.targetLocation = targetLocation
     }
 }

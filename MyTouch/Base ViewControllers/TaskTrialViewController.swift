@@ -46,10 +46,6 @@ class TaskTrialViewController: UIViewController, EventsManagerViewController {
         return TaskTrialViewController()
     }
     
-    var shouldHandleRecievedEvents: Bool {
-        return true
-    }
-    
     var shouldStartTrialAutomaticallyOnPrimaryButtonTapped: Bool {
         return true
     }
@@ -235,6 +231,8 @@ class TaskTrialViewController: UIViewController, EventsManagerViewController {
             
             self.countDownView.fire {
                 self.countDownView.alpha = 0.0
+                
+                self.trialStartDate = Date()
                 self.didStartTrial()
             }
             
@@ -252,6 +250,7 @@ class TaskTrialViewController: UIViewController, EventsManagerViewController {
     func endTrial() {
         
         willEndTrial()
+        trialEndDate = Date()
         
         UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut], animations: {
             
@@ -274,9 +273,6 @@ class TaskTrialViewController: UIViewController, EventsManagerViewController {
     
     func didEndTrial() {
         
-        if shouldHandleRecievedEvents {
-            eventsManager?.addTapTrialTracks(trialView.rawTracks, gestureRecognizerEvents: trialView.gestureRecognizerEvents)
-        }
     }
     
     func presentNextViewController() {

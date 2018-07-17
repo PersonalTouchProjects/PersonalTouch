@@ -120,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				6548A9EB20E663E700B7C73F /* AppDelegate.swift */,
+				6514074720FC9770006BD17A /* EventsManager.swift */,
 				65FC45A020F39BA200B2A7CF /* Extensions */,
 				65F8BD4E20EB88FA002F7C69 /* Gesture Recognizers */,
 				6548AA1020E66DB200B7C73F /* Base ViewControllers */,
@@ -200,7 +201,6 @@
 				6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */,
 				65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */,
 				65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */,
-				6514074720FC9770006BD17A /* EventsManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
