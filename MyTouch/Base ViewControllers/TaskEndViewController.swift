@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskEndViewController: UIViewController {
+class TaskEndViewController: UIViewController, EventsManagerViewController {
 
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
@@ -17,6 +17,10 @@ class TaskEndViewController: UIViewController {
     let cancelButton = UIButton(type: .system)
     
     var eventsManager: EventsManager?
+    
+    func nextViewController() -> (UIViewController & EventsManagerViewController)? {
+        return nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +78,12 @@ class TaskEndViewController: UIViewController {
     
     func primaryButtonDidSelect() {
         
+        if let taskViewController = nextViewController() {
+            taskViewController.eventsManager = eventsManager
+            navigationController?.pushViewController(taskViewController, animated: true)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     func cancelButtonDidSelect() {

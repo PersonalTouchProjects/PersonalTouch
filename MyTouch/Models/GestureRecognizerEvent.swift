@@ -30,6 +30,8 @@ enum GestureRecognizerEventState: String, Codable {
 
 protocol GestureRecognizerEvent: Codable {
     
+    var type: String { get }
+    
     var timestamp: TimeInterval { get }
     
     var state: GestureRecognizerEventState { get } // the current state of the gesture recognizer
@@ -52,6 +54,8 @@ struct TapGestureRecognizerEvent: GestureRecognizerEvent {
     var numberOfTouchesRequired: Int // Default is 1. The number of fingers required to match
     
     
+    
+    var type: String = "Tap"
     
     var timestamp: TimeInterval
     
@@ -101,6 +105,8 @@ struct LongPressGestureRecognizerEvent: GestureRecognizerEvent {
     var allowableMovement: CGFloat // Default is 10. Maximum movement in pixels allowed before the gesture fails. Once recognized (after minimumPressDuration) there is no limit on finger movement for the remainder of the touch tracking
     
     
+    
+    var type: String = "Long Press"
     
     var timestamp: TimeInterval
     
@@ -152,6 +158,8 @@ struct PanGestureRecognizerEvent: GestureRecognizerEvent {
     var velocity: CGPoint // velocity of the pan in points/second in the coordinate system of the window
     
     
+    
+    var type: String = "Pan"
     
     var timestamp: TimeInterval
     
@@ -227,6 +235,8 @@ struct SwipeGestureRecognizerEvent: GestureRecognizerEvent {
     
     
     
+    var type: String = "Swipe"
+    
     var timestamp: TimeInterval
     
     var state: GestureRecognizerEventState
@@ -272,6 +282,8 @@ struct PinchGestureRecognizerEvent: GestureRecognizerEvent {
     
     
     
+    var type: String = "Pinch"
+    
     var timestamp: TimeInterval
     
     var state: GestureRecognizerEventState
@@ -316,6 +328,8 @@ struct RotationGestureRecognizerEvent: GestureRecognizerEvent {
     var velocity: CGFloat // velocity of the pinch in radians/second
     
     
+    
+    var type: String = "Rotation"
     
     var timestamp: TimeInterval
     

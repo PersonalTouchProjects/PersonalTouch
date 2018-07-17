@@ -10,7 +10,7 @@ import Foundation
 
 class EventsManager {
     
-    func addTracks(_ tracks: [RawTouchTrack], gestureRecognizerEvents: [GestureRecognizerEvent]) {
+    func addTapTrialTracks(_ tracks: [RawTouchTrack], gestureRecognizerEvents: [GestureRecognizerEvent]) {
         
         print(tracks.count)
         print(gestureRecognizerEvents.count)

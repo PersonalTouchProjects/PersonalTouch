@@ -14,6 +14,10 @@ class TapTaskPracticeViewController: TaskTrialViewController {
     
     var shouldStartTrial = false
     
+    override func nextViewController() -> (UIViewController & EventsManagerViewController) {
+        return TapTaskTrialViewController()
+    }
+    
     override var shouldHandleRecievedEvents: Bool {
         return false
     }
@@ -77,9 +81,7 @@ class TapTaskPracticeViewController: TaskTrialViewController {
         let alertController = UIAlertController(title: "Start Trial", message: "Are you sure?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         let confirmAction = UIAlertAction(title: "Go", style: .default) { (action) in
-            let trialViewController = TapTaskTrialViewController()
-            trialViewController.eventsManager = self.eventsManager
-            self.navigationController?.pushViewController(trialViewController, animated: true)
+            self.presentNextViewController()
         }
         
         alertController.addAction(cancelAction)

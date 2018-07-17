@@ -10,16 +10,8 @@ import UIKit
 
 class TapTaskInstructionViewController: TaskInstructionViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func nextViewController() -> (UIViewController & EventsManagerViewController) {
+        return TapTaskPracticeViewController()
     }
     
-    override func primaryButtonDidSelect() {
-        super.primaryButtonDidSelect()
-        
-        let taskViewController = TapTaskPracticeViewController()
-        taskViewController.eventsManager = eventsManager
-        navigationController?.pushViewController(taskViewController, animated: true)
-    }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 private var previewScale: CGFloat = 0.5
 
-class TaskTrialViewController: UIViewController {
+class TaskTrialViewController: UIViewController, EventsManagerViewController {
 
     let titleLabel = UILabel()
     let primaryButton = UIButton(type: .custom)
@@ -41,6 +41,10 @@ class TaskTrialViewController: UIViewController {
     private(set) var trialEndDate = Date.distantFuture
     
     var eventsManager: EventsManager?
+
+    func nextViewController() -> (UIViewController & EventsManagerViewController)? {
+        return TaskTrialViewController()
+    }
     
     var shouldHandleRecievedEvents: Bool {
         return true
@@ -271,7 +275,15 @@ class TaskTrialViewController: UIViewController {
     func didEndTrial() {
         
         if shouldHandleRecievedEvents {
-            eventsManager?.addTracks(trialView.rawTracks, gestureRecognizerEvents: trialView.gestureRecognizerEvents)
+            eventsManager?.addTapTrialTracks(trialView.rawTracks, gestureRecognizerEvents: trialView.gestureRecognizerEvents)
+        }
+    }
+    
+    func presentNextViewController() {
+        
+        if let taskViewController = nextViewController() {
+            taskViewController.eventsManager = eventsManager
+            navigationController?.pushViewController(taskViewController, animated: true)
         }
     }
 }

@@ -18,6 +18,10 @@ class TapTaskTrialViewController: TaskTrialViewController {
     
     var positions: [(Int, Int)] = []
     
+    override func nextViewController() -> (UIViewController & EventsManagerViewController)? {
+        return TaskEndViewController()
+    }
+    
     override func loadView() {
         super.loadView()
         self.trialView = tapTrialView
@@ -41,7 +45,12 @@ class TapTaskTrialViewController: TaskTrialViewController {
             
             let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
-                self.dismiss(animated: true, completion: nil)
+                
+                if let taskViewController = self.nextViewController() {
+                    taskViewController.eventsManager = self.eventsManager
+                    self.navigationController?.pushViewController(taskViewController, animated: true)
+                }
+//                self.dismiss(animated: true, completion: nil)
             }
             
             alertController.addAction(confirmAction)
