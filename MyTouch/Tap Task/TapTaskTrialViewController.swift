@@ -30,7 +30,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        positions = positionGenerator(columns: numberOfColumns, rows: numberOfRows, repeats: numberOfRepeats) //.shuffled()
+        positions = positionGenerator(columns: numberOfColumns, rows: numberOfRows, repeats: numberOfRepeats).shuffled()
         
         tapTrialView.delegate = self
         tapTrialView.dataSource = self
