@@ -10,10 +10,16 @@ import UIKit
 
 class EventsManager {
     
-    private(set) var trials: [Trial] = []
+    private(set) var tapTask = TapTask()
+    
+    private(set) var otherTrials: [Trial] = []
     
     func addTrial(_ newTrial: Trial) {
-        trials.append(newTrial)
+        if let tapTrial = newTrial as? TapTrial {
+            tapTask.trials.append(tapTrial)
+        } else {
+            otherTrials.append(newTrial)
+        }
     }
     
 }

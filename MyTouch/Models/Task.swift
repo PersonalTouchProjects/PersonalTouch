@@ -12,16 +12,29 @@ protocol Task {
     associatedtype Trial: MyTouch.Trial
     
     var trials: [Trial] { get }
+    var successRate: Float { get }
+}
+
+extension Task {
+    
+    var successRate: Float {
+        
+        if trials.count == 0 { return 0.0 }
+        
+        let success = trials.filter { $0.success }
+        
+        return Float(success.count) / Float(trials.count)
+    }
 }
 
 struct TapTask: Task {
-    var trials: [TapTrial]
+    var trials: [TapTrial] = []
 }
 
 struct SwipeTask: Task {
-    var trials: [SwipeTrial]
+    var trials: [SwipeTrial] = []
 }
 
 struct DragAndDropTask: Task {
-    var trials: [DragAndDropTrial]
+    var trials: [DragAndDropTrial] = []
 }
