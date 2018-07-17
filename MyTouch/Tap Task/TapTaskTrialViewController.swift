@@ -12,13 +12,13 @@ class TapTaskTrialViewController: TaskTrialViewController {
     
     let tapTrialView = TapTrialView()
     
-    var numberOfColumns = 2
-    var numberOfRows = 2
+    var numberOfColumns = 1
+    var numberOfRows = 1
     var numberOfRepeats = 1
     
     var positions: [(Int, Int)] = []
     
-    override func nextViewController() -> (UIViewController & EventsManagerViewController)? {
+    override func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
         return TaskEndViewController()
     }
     
@@ -48,7 +48,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
         tapTrial.success = tapTrialView.success
         tapTrial.addEvents(tapTrialView.gestureRecognizerEvents)
         
-        eventsManager?.addTrial(tapTrial)
+        taskResultManager?.addTrial(tapTrial)
         // end of add new trial
         
         
@@ -56,21 +56,11 @@ class TapTaskTrialViewController: TaskTrialViewController {
         
         if positions.isEmpty {
             
-            do {
-                let data = try JSONEncoder().encode(eventsManager?.tapTask)
-                let text = String(data: data, encoding: .utf8) ?? ""
-                
-                print(text)
-            } catch {
-                print("error: \(error)")
-            }
-            
-            
             let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
                 
                 if let taskViewController = self.nextViewController() {
-                    taskViewController.eventsManager = self.eventsManager
+                    taskViewController.taskResultManager = self.taskResultManager
                     self.navigationController?.pushViewController(taskViewController, animated: true)
                 }
             }

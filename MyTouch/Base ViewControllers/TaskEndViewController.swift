@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskEndViewController: UIViewController, EventsManagerViewController {
+class TaskEndViewController: UIViewController, TaskResultManagerViewController {
 
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
@@ -16,9 +16,9 @@ class TaskEndViewController: UIViewController, EventsManagerViewController {
     let primaryButton = UIButton(type: .custom)
     let cancelButton = UIButton(type: .system)
     
-    var eventsManager: EventsManager?
+    var taskResultManager: TaskResultManager?
     
-    func nextViewController() -> (UIViewController & EventsManagerViewController)? {
+    func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
         return nil
     }
     
@@ -78,8 +78,14 @@ class TaskEndViewController: UIViewController, EventsManagerViewController {
     
     func primaryButtonDidSelect() {
         
+        do {
+            try taskResultManager?.session.archive()
+        } catch {
+            print("archive error: \(error)")
+        }
+        
         if let taskViewController = nextViewController() {
-            taskViewController.eventsManager = eventsManager
+            taskViewController.taskResultManager = taskResultManager
             navigationController?.pushViewController(taskViewController, animated: true)
         } else {
             dismiss(animated: true, completion: nil)

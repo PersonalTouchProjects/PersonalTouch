@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct DeviceInfo {
+struct DeviceInfo: Codable {
     let model:         String // iPad5,1
     let manufacturer:  String // always Apple
     let platform:      String // iOS

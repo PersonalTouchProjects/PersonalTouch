@@ -14,7 +14,7 @@ class TapTaskPracticeViewController: TaskTrialViewController {
     
     var shouldStartTrial = false
     
-    override func nextViewController() -> (UIViewController & EventsManagerViewController) {
+    override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
         return TapTaskTrialViewController()
     }
     

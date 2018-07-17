@@ -10,7 +10,7 @@ import UIKit
 
 private var previewScale: CGFloat = 0.5
 
-class TaskTrialViewController: UIViewController, EventsManagerViewController {
+class TaskTrialViewController: UIViewController, TaskResultManagerViewController {
 
     let titleLabel = UILabel()
     let primaryButton = UIButton(type: .custom)
@@ -40,9 +40,9 @@ class TaskTrialViewController: UIViewController, EventsManagerViewController {
     private(set) var trialStartDate = Date.distantPast
     private(set) var trialEndDate = Date.distantFuture
     
-    var eventsManager: EventsManager?
+    var taskResultManager: TaskResultManager?
 
-    func nextViewController() -> (UIViewController & EventsManagerViewController)? {
+    func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
         return TaskTrialViewController()
     }
     
@@ -278,7 +278,7 @@ class TaskTrialViewController: UIViewController, EventsManagerViewController {
     func presentNextViewController() {
         
         if let taskViewController = nextViewController() {
-            taskViewController.eventsManager = eventsManager
+            taskViewController.taskResultManager = taskResultManager
             navigationController?.pushViewController(taskViewController, animated: true)
         }
     }

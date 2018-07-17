@@ -10,7 +10,7 @@ import UIKit
 
 class TapTaskInstructionViewController: TaskInstructionViewController {
 
-    override func nextViewController() -> (UIViewController & EventsManagerViewController) {
+    override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
         return TapTaskPracticeViewController()
     }
     

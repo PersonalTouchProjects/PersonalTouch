@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol EventsManagerViewController: NSObjectProtocol {
-    var eventsManager: EventsManager? { set get }
-    func nextViewController() -> (UIViewController & EventsManagerViewController)?
+protocol TaskResultManagerViewController: NSObjectProtocol {
+    var taskResultManager: TaskResultManager? { set get }
+    func nextViewController() -> (UIViewController & TaskResultManagerViewController)?
 }
 
-class TaskInstructionViewController: UIViewController, EventsManagerViewController {
+class TaskInstructionViewController: UIViewController, TaskResultManagerViewController {
 
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
@@ -23,9 +23,9 @@ class TaskInstructionViewController: UIViewController, EventsManagerViewControll
     let primaryButton = UIButton(type: .custom)
     let cancelButton = UIButton(type: .system)
     
-    var eventsManager: EventsManager?
+    var taskResultManager: TaskResultManager?
     
-    func nextViewController() -> (UIViewController & EventsManagerViewController)? {
+    func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
         return TaskTrialViewController()
     }
     
@@ -97,7 +97,7 @@ class TaskInstructionViewController: UIViewController, EventsManagerViewControll
     func primaryButtonDidSelect() {
         
         if let taskViewController = nextViewController() {
-            taskViewController.eventsManager = eventsManager
+            taskViewController.taskResultManager = taskResultManager
             navigationController?.pushViewController(taskViewController, animated: true)
         }
     }

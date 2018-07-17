@@ -53,7 +53,7 @@ class HomeViewController: UIViewController {
         
 //        let taskViewController = TapTaskTrialViewController()
         let taskViewController = TapTaskInstructionViewController()
-        taskViewController.eventsManager = EventsManager()
+        taskViewController.taskResultManager = TaskResultManager(session: Session())
         let navController = UINavigationController(rootViewController: taskViewController)
         navController.setNavigationBarHidden(true, animated: false)
         navController.modalTransitionStyle = .flipHorizontal

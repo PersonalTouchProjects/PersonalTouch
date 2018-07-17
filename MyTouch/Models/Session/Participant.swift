@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct Participant {
+struct Participant: Codable {
     
-    enum Gender: String {
+    enum Gender: String, Codable {
         case female, male, other
     }
 
-    enum DominantHand: String {
+    enum DominantHand: String, Codable {
         case left, right, both, none
     }
     
