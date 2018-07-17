@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum GestureRecognizerType: String, Codable {
+    case tap
+    case pan
+    case longPress
+    case swipe
+    case pinch
+    case rotation
+}
+
 enum GestureRecognizerEventState: String, Codable {
     case possible
     case began
@@ -30,7 +39,7 @@ enum GestureRecognizerEventState: String, Codable {
 
 protocol GestureRecognizerEvent: Codable {
     
-    var type: String { get }
+    var type: GestureRecognizerType { get }
     
     var timestamp: TimeInterval { get }
     
@@ -55,7 +64,7 @@ struct TapGestureRecognizerEvent: GestureRecognizerEvent {
     
     
     
-    var type: String = "Tap"
+    var type: GestureRecognizerType = .tap
     
     var timestamp: TimeInterval
     
@@ -106,7 +115,7 @@ struct LongPressGestureRecognizerEvent: GestureRecognizerEvent {
     
     
     
-    var type: String = "Long Press"
+    var type: GestureRecognizerType = .longPress
     
     var timestamp: TimeInterval
     
@@ -159,7 +168,7 @@ struct PanGestureRecognizerEvent: GestureRecognizerEvent {
     
     
     
-    var type: String = "Pan"
+    var type: GestureRecognizerType = .pan
     
     var timestamp: TimeInterval
     
@@ -235,7 +244,7 @@ struct SwipeGestureRecognizerEvent: GestureRecognizerEvent {
     
     
     
-    var type: String = "Swipe"
+    var type: GestureRecognizerType = .swipe
     
     var timestamp: TimeInterval
     
@@ -282,7 +291,7 @@ struct PinchGestureRecognizerEvent: GestureRecognizerEvent {
     
     
     
-    var type: String = "Pinch"
+    var type: GestureRecognizerType = .pinch
     
     var timestamp: TimeInterval
     
@@ -329,7 +338,7 @@ struct RotationGestureRecognizerEvent: GestureRecognizerEvent {
     
     
     
-    var type: String = "Rotation"
+    var type: GestureRecognizerType = .rotation
     
     var timestamp: TimeInterval
     

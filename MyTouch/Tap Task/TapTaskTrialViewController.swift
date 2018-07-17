@@ -45,8 +45,8 @@ class TapTaskTrialViewController: TaskTrialViewController {
         tapTrial.startTime = trialStartDate.timeIntervalSince1970
         tapTrial.endTime = trialEndDate.timeIntervalSince1970
         tapTrial.rawTouchTracks = tapTrialView.rawTracks
-        tapTrial.gestureRecognizerEvents = tapTrialView.gestureRecognizerEvents
         tapTrial.success = tapTrialView.success
+        tapTrial.addEvents(tapTrialView.gestureRecognizerEvents)
         
         eventsManager?.addTrial(tapTrial)
         // end of add new trial
@@ -55,6 +55,16 @@ class TapTaskTrialViewController: TaskTrialViewController {
         positions.removeFirst()
         
         if positions.isEmpty {
+            
+            do {
+                let data = try JSONEncoder().encode(eventsManager?.tapTask)
+                let text = String(data: data, encoding: .utf8) ?? ""
+                
+                print(text)
+            } catch {
+                print("error: \(error)")
+            }
+            
             
             let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in

@@ -10,7 +10,7 @@ import UIKit
 
 struct SwipeTrial: Trial {
     
-    enum Direction: String {
+    enum Direction: String, Codable {
         case up, left, right, down
         case none
     }
@@ -29,8 +29,17 @@ struct SwipeTrial: Trial {
     
     var success: Bool = false
     
-    var gestureRecognizerEvents: [GestureRecognizerEvent] = []
+    var tapEvents: [TapGestureRecognizerEvent] = []
     
+    var panEvents: [PanGestureRecognizerEvent] = []
+    
+    var longPressEvents: [LongPressGestureRecognizerEvent] = []
+    
+    var swipeEvents: [SwipeGestureRecognizerEvent] = []
+    
+    var pinchEvents: [PinchGestureRecognizerEvent] = []
+    
+    var rotationEvents: [RotationGestureRecognizerEvent] = []
     init(areaFrame: CGRect, targetDirection: Direction) {
         self.areaFrame = areaFrame
         self.targetDirection = targetDirection

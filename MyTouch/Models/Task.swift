@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Task {
+protocol Task: Codable {
     associatedtype Trial: MyTouch.Trial
     
     var trials: [Trial] { get }

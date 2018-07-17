@@ -24,7 +24,17 @@ struct DragAndDropTrial: Trial {
     
     var success: Bool = false
     
-    var gestureRecognizerEvents: [GestureRecognizerEvent] = []
+    var tapEvents: [TapGestureRecognizerEvent] = []
+    
+    var panEvents: [PanGestureRecognizerEvent] = []
+    
+    var longPressEvents: [LongPressGestureRecognizerEvent] = []
+    
+    var swipeEvents: [SwipeGestureRecognizerEvent] = []
+    
+    var pinchEvents: [PinchGestureRecognizerEvent] = []
+    
+    var rotationEvents: [RotationGestureRecognizerEvent] = []
     
     init(initialFrame: CGRect, targetFrame: CGRect) {
         self.initialFrame = initialFrame

@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct RawTouchTrack {
+struct RawTouchTrack: Codable {
     
     private(set) var rawTouches: [RawTouch]
     
