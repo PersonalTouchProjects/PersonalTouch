@@ -1,5 +1,5 @@
 //
-//  SwipeTaskPracticeViewController.swift
+//  DragAndDropTrialViewController.swift
 //  MyTouch
 //
 //  Created by Tommy Lin on 2018/7/18.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SwipeTaskPracticeViewController: TaskTrialViewController {
+class DragAndDropTaskPracticeViewController: TaskTrialViewController {
     
-    let swipeTrialView = SwipeTrialView()
+    let dragAndDropTrialView = DragAndDropTrialView()
     
     var shouldStartTrial = false
     
@@ -22,20 +22,16 @@ class SwipeTaskPracticeViewController: TaskTrialViewController {
         return false
     }
     
-    override var countdownColor: UIColor {
-        return .white
-    }
-    
     override func loadView() {
         super.loadView()
-        self.trialView = swipeTrialView
+        self.trialView = dragAndDropTrialView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        swipeTrialView.delegate = self
-        swipeTrialView.dataSource = self
+        dragAndDropTrialView.delegate = self
+        dragAndDropTrialView.dataSource = self
         
         primaryButton.setTitle("Practice", for: .normal)
         secondaryButton.setTitle("Skip", for: .normal)
@@ -46,7 +42,7 @@ class SwipeTaskPracticeViewController: TaskTrialViewController {
     override func didEndTrial() {
         super.didEndTrial()
         
-        swipeTrialView.reloadData()
+        dragAndDropTrialView.reloadData()
         
         shouldStartTrial = true
         
@@ -91,18 +87,14 @@ class SwipeTaskPracticeViewController: TaskTrialViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    private var lastPracticeDirection: SwipeTrial.Direction?
+    private var lastPracticeDirection: DragAndDropTrialView.Direction?
 }
 
-extension SwipeTaskPracticeViewController: SwipeTrialViewDataSource {
+extension DragAndDropTaskPracticeViewController: DragAndDropTrialViewDataSource {
     
-    func swipeArea(_ swipeTrialView: SwipeTrialView) -> SwipeTrialView.SwipeArea {
-        return [.left, .right].shuffled().first!
-    }
-    
-    func direction(_ swipeTrialView: SwipeTrialView) -> SwipeTrial.Direction {
+    func direction(_ dragAndDropTrialView: DragAndDropTrialView) -> DragAndDropTrialView.Direction {
         
-        var directions: Set<SwipeTrial.Direction> = [
+        var directions: Set<DragAndDropTrialView.Direction> = [
             .right, .upRight, .up, .upLeft,
             .left, .downLeft, .down, .downRight
         ]
@@ -114,4 +106,13 @@ extension SwipeTaskPracticeViewController: SwipeTrialViewDataSource {
         lastPracticeDirection = directions.shuffled().first!
         return lastPracticeDirection!
     }
+    
+    func distance(_ dragAndDropTrialView: DragAndDropTrialView) -> DragAndDropTrialView.Distance {
+        return [.short, .long].shuffled().first!
+    }
+    
+    func targetSize(_ dragAndDropTrialView: DragAndDropTrialView) -> CGSize {
+        return CGSize(width: 80, height: 80)
+    }
+    
 }
