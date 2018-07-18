@@ -16,6 +16,14 @@ protocol TapTrialViewDataSource: NSObjectProtocol {
     func targetSize(_ tapTrialView: TapTrialView) -> CGSize
 }
 
+extension TapTrialViewDataSource {
+    func targetSize(_ tapTrialView: TapTrialView) -> CGSize {
+        return frameSize
+    }
+}
+
+private let frameSize = CGSize(width: 44, height: 44)
+
 class TapTrialView: TrialView {
 
     var dataSource: TapTrialViewDataSource? {
@@ -29,7 +37,7 @@ class TapTrialView: TrialView {
     private var rows    = 1
     private var column  = 0
     private var row     = 0
-    private var size    = CGSize(width: 80, height: 80)
+    private var size    = frameSize
     
     private(set) var success: Bool = false
     
@@ -90,7 +98,7 @@ class TapTrialView: TrialView {
         rows    = dataSource?.numberOfRow(self)    ?? 1
         column  = dataSource?.targetColumn(self)   ?? 0
         row     = dataSource?.targetRow(self)      ?? 0
-        size    = dataSource?.targetSize(self)     ?? CGSize(width: 80, height: 80)
+        size    = dataSource?.targetSize(self)     ?? frameSize
         
         assert(column >= 0 && column < columns, "Out of bounds")
         assert(row >= 0 && row < rows, "Out of bounds")
@@ -100,9 +108,9 @@ class TapTrialView: TrialView {
     }
 }
 
-private extension TapTrialView {
+extension TapTrialView {
     
-    class TargetView: UIView {
+    final class TargetView: UIView {
         
         override init(frame: CGRect) {
             super.init(frame: frame)

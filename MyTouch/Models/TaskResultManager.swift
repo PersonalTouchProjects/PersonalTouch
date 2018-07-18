@@ -10,7 +10,7 @@ import UIKit
 
 class TaskResultManager {
     
-    var session: Session
+    private(set) var session: Session
     
     private(set) var otherTrials: [Trial] = []
     

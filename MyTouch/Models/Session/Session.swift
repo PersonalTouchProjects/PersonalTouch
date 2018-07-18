@@ -12,7 +12,7 @@ class Session: Codable {
     
     var startDate: Date = Date()
     
-    var endDate: Date = .distantFuture
+    var endDate: Date = Date.distantFuture
     
     var deviceInfo: DeviceInfo = DeviceInfo()
     
@@ -43,12 +43,12 @@ class Session: Codable {
         
         let jsonEncoder = JSONEncoder()
         jsonEncoder.nonConformingFloatEncodingStrategy = .convertToString(
-            positiveInfinity: "positiveInfinity",
-            negativeInfinity: "negativeInfinity",
+            positiveInfinity: "infinity",
+            negativeInfinity: "-infinity",
             nan: "nan"
         )
         jsonEncoder.outputFormatting = .prettyPrinted
-        
+        jsonEncoder.dateEncodingStrategy = .iso8601
         
         let data = try jsonEncoder.encode(self)
         

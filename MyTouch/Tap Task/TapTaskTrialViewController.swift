@@ -93,10 +93,6 @@ extension TapTaskTrialViewController: TapTrialViewDataSource {
     func targetRow(_ tapTrialView: TapTrialView) -> Int {
         return positions.first!.1
     }
-    
-    func targetSize(_ tapTrialView: TapTrialView) -> CGSize {
-        return CGSize(width: 80, height: 80)
-    }
 }
 
 func positionGenerator(columns: Int, rows: Int, repeats: Int) -> [(Int, Int)] {
