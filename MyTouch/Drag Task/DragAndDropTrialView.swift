@@ -36,6 +36,7 @@ class DragAndDropTrialView: TrialView {
     let destinationView = UIView()
     let panGestureRecognizer = UIPanGestureRecognizer()
     
+    private(set) var initialFrame = CGRect.zero
     private var targetOffset: CGPoint? {
         didSet { setNeedsLayout() }
     }
@@ -98,6 +99,7 @@ class DragAndDropTrialView: TrialView {
             targetView.frame.origin = offset
         } else {
             targetView.center = contentView.center
+            initialFrame = targetView.frame
         }
     }
     

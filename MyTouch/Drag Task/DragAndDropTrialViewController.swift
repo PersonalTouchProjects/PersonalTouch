@@ -8,18 +8,19 @@
 
 import UIKit
 
-class DragAndDropTaskPracticeViewController: TaskTrialViewController {
+class DragAndDropTaskTrialViewController: TaskTrialViewController {
     
     let dragAndDropTrialView = DragAndDropTrialView()
     
-    var shouldStartTrial = false
+    var numberOfRepeats = 1
+    var positions: [(DragAndDropTrialView.Distance, DragAndDropTrialView.Direction)] = []
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
-        return SwipeTaskTrialViewController()
+    override func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
+        return TaskEndViewController()
     }
     
-    override var shouldStartTrialAutomaticallyOnPrimaryButtonTapped: Bool {
-        return false
+    override var countdownColor: UIColor {
+        return .white
     }
     
     override func loadView() {
@@ -30,89 +31,71 @@ class DragAndDropTaskPracticeViewController: TaskTrialViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        positions = positionGenerator(repeats: 1).shuffled()
+        
         dragAndDropTrialView.delegate = self
         dragAndDropTrialView.dataSource = self
-        
-        primaryButton.setTitle("Practice", for: .normal)
-        secondaryButton.setTitle("Skip", for: .normal)
-        
-        secondaryButton.isHidden = false
     }
     
     override func didEndTrial() {
         super.didEndTrial()
         
-        dragAndDropTrialView.reloadData()
+        // handle trial result
+//        let areaFrame = dragAndDropTrialView.areaView.frame
+//        let targetDirection = directions.first!.1
+//
+//        var swipeTrial = SwipeTrial(areaFrame: areaFrame, targetDirection: targetDirection)
+//        swipeTrial.startTime = trialStartDate.timeIntervalSince1970
+//        swipeTrial.endTime = trialStartDate.timeIntervalSince1970
+//        swipeTrial.rawTouchTracks = dragAndDropTrialView.rawTracks
+//        swipeTrial.success = targetDirection == dragAndDropTrialView.recognizedDirection
+//        swipeTrial.addEvents(dragAndDropTrialView.gestureRecognizerEvents)
+//
+//
+//        taskResultManager?.addTrial(swipeTrial)
+        // end of add new trial
         
-        shouldStartTrial = true
+        positions.removeFirst()
         
-        UIView.performWithoutAnimation {
-            self.primaryButton.setTitle("End Practice", for: .normal)
-            self.secondaryButton.setTitle("Try Again", for: .normal)
-        }
-    }
-    
-    override func primaryButtonDidSelect() {
-        super.primaryButtonDidSelect()
-        
-        if shouldStartTrial {
-            presentStartTrialAlert()
+        if positions.isEmpty {
+            
+            let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
+                
+                if let taskViewController = self.nextViewController() {
+                    taskViewController.taskResultManager = self.taskResultManager
+                    self.navigationController?.pushViewController(taskViewController, animated: true)
+                }
+            }
+            
+            alertController.addAction(confirmAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
         } else {
-            startTrial()
+            dragAndDropTrialView.reloadData()
+            titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
         }
     }
-    
-    override func secondaryButtonDidSelect() {
-        super.secondaryButtonDidSelect()
-        
-        if shouldStartTrial {
-            startTrial()
-        } else {
-            presentStartTrialAlert()
-        }
-    }
-    
-    private func presentStartTrialAlert() {
-        
-        let alertController = UIAlertController(title: "Start Trial", message: "Are you sure?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        let confirmAction = UIAlertAction(title: "Go", style: .default) { (action) in
-            self.presentNextViewController()
-        }
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-        alertController.preferredAction = confirmAction
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    private var lastPracticeDirection: DragAndDropTrialView.Direction?
 }
 
-extension DragAndDropTaskPracticeViewController: DragAndDropTrialViewDataSource {
+extension DragAndDropTaskTrialViewController: DragAndDropTrialViewDataSource {
     
     func direction(_ dragAndDropTrialView: DragAndDropTrialView) -> DragAndDropTrialView.Direction {
-        
-        var directions: Set<DragAndDropTrialView.Direction> = [
-            .right, .upRight, .up, .upLeft,
-            .left, .downLeft, .down, .downRight
-        ]
-        
-        if let last = lastPracticeDirection {
-            directions.remove(last)
-        }
-        
-        lastPracticeDirection = directions.shuffled().first!
-        return lastPracticeDirection!
+        return positions.first!.1
     }
     
     func distance(_ dragAndDropTrialView: DragAndDropTrialView) -> DragAndDropTrialView.Distance {
-        return [.short, .long].shuffled().first!
+        return positions.first!.0
     }
     
     func targetSize(_ dragAndDropTrialView: DragAndDropTrialView) -> CGSize {
         return CGSize(width: 80, height: 80)
     }
-    
+}
+
+func positionGenerator(repeats: Int) -> [(DragAndDropTrialView.Distance, DragAndDropTrialView.Direction)] {
+    return [.short, .long].flatMap { distance in
+        return [.right, .upRight, .up, .upLeft, .left, .downLeft, .down, .downRight].map { direction in (distance, direction) }
+    }
 }

@@ -46,7 +46,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
         
         var swipeTrial = SwipeTrial(areaFrame: areaFrame, targetDirection: targetDirection)
         swipeTrial.startTime = trialStartDate.timeIntervalSince1970
-        swipeTrial.endTime = trialStartDate.timeIntervalSince1970
+        swipeTrial.endTime = trialEndDate.timeIntervalSince1970
         swipeTrial.rawTouchTracks = swipeTrialView.rawTracks
         swipeTrial.success = targetDirection == swipeTrialView.recognizedDirection
         swipeTrial.addEvents(swipeTrialView.gestureRecognizerEvents)
