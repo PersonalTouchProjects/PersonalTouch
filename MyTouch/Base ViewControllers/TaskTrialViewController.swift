@@ -58,6 +58,18 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         return fullSizeConstraints.first?.isActive == true
     }
     
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand(input: "\r", modifierFlags: [], action: #selector(handleKeyboardWhitespace(_:)), discoverabilityTitle: "Start Trial"),
+            UIKeyCommand(input: " ", modifierFlags: [], action: #selector(handleKeyboardWhitespace(_:)), discoverabilityTitle: "Start Trial"),
+            UIKeyCommand(input: UIKeyInputEscape, modifierFlags: [], action: #selector(handleKeyboardEscape(_:)), discoverabilityTitle: "End Trial")
+        ]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -181,6 +193,18 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     
     @objc private func handleCancelButton(_ sender: UIButton) {
         cancelButtonDidSelect()
+    }
+    
+    @objc private func handleKeyboardWhitespace(_ sender: UIKeyCommand) {
+        if previewConstraints.first?.isActive == true {
+            startTrial()
+        }
+    }
+    
+    @objc private func handleKeyboardEscape(_ sender: UIKeyCommand) {
+        if fullSizeConstraints.first?.isActive == true {
+            endTrial()
+        }
     }
     
     func primaryButtonDidSelect() {

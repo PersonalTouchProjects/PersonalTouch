@@ -42,8 +42,8 @@ class TapInstructionView: UIView {
         ]
         
         targetConstraints = [
-            fingerClickView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -85),
-            fingerClickView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -44)
+            fingerClickView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -90),
+            fingerClickView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -50)
         ]
         
         NSLayoutConstraint.activate(initialConstraints)

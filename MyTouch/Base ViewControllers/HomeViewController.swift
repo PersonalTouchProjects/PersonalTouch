@@ -51,8 +51,8 @@ class HomeViewController: UIViewController {
     
     @objc func handleButton(_ sender: UIButton) {
         
-//        let taskViewController = TapTaskTrialViewController()
-        let taskViewController = SwipeTaskInstructionViewController()
+        let taskViewController = TapTaskInstructionViewController()
+//        let taskViewController = SwipeTaskInstructionViewController()
         taskViewController.taskResultManager = TaskResultManager(session: Session())
         let navController = UINavigationController(rootViewController: taskViewController)
         navController.setNavigationBarHidden(true, animated: false)
