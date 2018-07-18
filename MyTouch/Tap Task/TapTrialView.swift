@@ -47,6 +47,7 @@ class TapTrialView: TrialView {
         contentView.addSubview(targetView)
         
         tapGestureRecognizer.addTarget(self, action: #selector(handleTap(_:)))
+        tapGestureRecognizer.cancelsTouchesInView = false
         targetView.addGestureRecognizer(tapGestureRecognizer)
     }
     

@@ -1,21 +1,21 @@
 //
-//  TapTaskPracticeViewController.swift
+//  SwipeTaskPracticeViewController.swift
 //  MyTouch
 //
-//  Created by Tommy Lin on 2018/7/8.
+//  Created by Tommy Lin on 2018/7/18.
 //  Copyright © 2018年 NTU HCI Lab. All rights reserved.
 //
 
 import UIKit
 
-class TapTaskPracticeViewController: TaskTrialViewController {
-
-    let tapTrialView = TapTrialView()
+class SwipeTaskPracticeViewController: TaskTrialViewController {
+    
+    let swipeTrialView = SwipeTrialView()
     
     var shouldStartTrial = false
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
-        return TapTaskTrialViewController()
+    override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
+        return SwipeTaskTrialViewController()
     }
     
     override var shouldStartTrialAutomaticallyOnPrimaryButtonTapped: Bool {
@@ -24,14 +24,14 @@ class TapTaskPracticeViewController: TaskTrialViewController {
     
     override func loadView() {
         super.loadView()
-        self.trialView = tapTrialView
+        self.trialView = swipeTrialView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tapTrialView.delegate = self
-        tapTrialView.dataSource = self
+        swipeTrialView.delegate = self
+        swipeTrialView.dataSource = self
         
         primaryButton.setTitle("Practice", for: .normal)
         secondaryButton.setTitle("Skip", for: .normal)
@@ -42,7 +42,7 @@ class TapTaskPracticeViewController: TaskTrialViewController {
     override func didEndTrial() {
         super.didEndTrial()
         
-        tapTrialView.reloadData()
+        swipeTrialView.reloadData()
         
         shouldStartTrial = true
         
@@ -86,27 +86,28 @@ class TapTaskPracticeViewController: TaskTrialViewController {
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    private var lastPracticeDirection: SwipeTrial.Direction?
 }
 
-extension TapTaskPracticeViewController: TapTrialViewDataSource {
+extension SwipeTaskPracticeViewController: SwipeTrialViewDataSource {
     
-    func numberOfColumn(_ tapTrialView: TapTrialView) -> Int {
-        return 5
+    func swipeArea(_ swipeTrialView: SwipeTrialView) -> SwipeTrialView.SwipeArea {
+        return Set([.left, .right]).shuffled().first!
     }
     
-    func numberOfRow(_ tapTrialView: TapTrialView) -> Int {
-        return 5
-    }
-    
-    func targetColumn(_ tapTrialView: TapTrialView) -> Int {
-        return Int(arc4random() % 5)
-    }
-    
-    func targetRow(_ tapTrialView: TapTrialView) -> Int {
-        return Int(arc4random() % 5)
-    }
-    
-    func targetSize(_ tapTrialView: TapTrialView) -> CGSize {
-        return CGSize(width: 80, height: 80)
+    func direction(_ swipeTrialView: SwipeTrialView) -> SwipeTrial.Direction {
+        
+        var directions: Set<SwipeTrial.Direction> = [
+            .right, .upRight, .up, .upLeft,
+            .left, .downLeft, .down, .downRight
+        ]
+        
+        if let last = lastPracticeDirection {
+            directions.remove(last)
+        }
+        
+        lastPracticeDirection = directions.shuffled().first!
+        return lastPracticeDirection!
     }
 }

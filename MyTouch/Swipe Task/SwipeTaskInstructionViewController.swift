@@ -1,19 +1,18 @@
 //
-//  TapTaskInstructionViewController.swift
+//  SwipeTaskInstructionViewController.swift
 //  MyTouch
 //
-//  Created by Tommy Lin on 2018/7/6.
+//  Created by Tommy Lin on 2018/7/18.
 //  Copyright © 2018年 NTU HCI Lab. All rights reserved.
 //
 
 import UIKit
 
-class TapTaskInstructionViewController: TaskInstructionViewController {
-
+class SwipeTaskInstructionViewController: TaskInstructionViewController {
+    
     let instructionView = TapInstructionView()
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
-//        return TapTaskPracticeViewController()
+    override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
         return SwipeTaskPracticeViewController()
     }
     
@@ -26,7 +25,7 @@ class TapTaskInstructionViewController: TaskInstructionViewController {
         NSLayoutConstraint.activate([
             instructionView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             instructionView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-        ])
+            ])
     }
     
     override func viewDidAppear(_ animated: Bool) {

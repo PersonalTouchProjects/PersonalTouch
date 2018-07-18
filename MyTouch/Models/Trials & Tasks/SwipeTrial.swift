@@ -12,6 +12,7 @@ struct SwipeTrial: Trial {
     
     enum Direction: String, Codable {
         case up, left, right, down
+        case upLeft, upRight, downLeft, downRight
         case none
     }
     
@@ -40,6 +41,7 @@ struct SwipeTrial: Trial {
     var pinchEvents: [PinchGestureRecognizerEvent] = []
     
     var rotationEvents: [RotationGestureRecognizerEvent] = []
+    
     init(areaFrame: CGRect, targetDirection: Direction) {
         self.areaFrame = areaFrame
         self.targetDirection = targetDirection
