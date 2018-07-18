@@ -36,9 +36,20 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
     override func didEndTrial() {
         super.didEndTrial()
         
-        // TODO: handle trial result
-        let success = directions.first!.1 == swipeTrialView.recognizedDirection
+        // handle trial result
+        let areaFrame = swipeTrialView.areaView.frame
+        let targetDirection = directions.first!.1
         
+        var swipeTrial = SwipeTrial(areaFrame: areaFrame, targetDirection: targetDirection)
+        swipeTrial.startTime = trialStartDate.timeIntervalSince1970
+        swipeTrial.endTime = trialStartDate.timeIntervalSince1970
+        swipeTrial.rawTouchTracks = swipeTrialView.rawTracks
+        swipeTrial.success = targetDirection == swipeTrialView.recognizedDirection
+        swipeTrial.addEvents(swipeTrialView.gestureRecognizerEvents)
+        
+        
+        taskResultManager?.addTrial(swipeTrial)
+        // end of add new trial
         
         directions.removeFirst()
         
@@ -76,6 +87,8 @@ extension SwipeTaskTrialViewController: SwipeTrialViewDataSource {
 }
 
 func directionGenerator(repeats: Int) -> [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] {
+    
+//    return [(.left, .left)]
     
     return (0..<repeats).flatMap { _ in
         return [.left, .right].flatMap { area in
