@@ -22,6 +22,10 @@ class SwipeTaskPracticeViewController: TaskTrialViewController {
         return false
     }
     
+    override var countdownColor: UIColor {
+        return .white
+    }
+    
     override func loadView() {
         super.loadView()
         self.trialView = swipeTrialView

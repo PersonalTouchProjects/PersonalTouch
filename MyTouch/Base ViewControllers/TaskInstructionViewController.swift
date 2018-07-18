@@ -74,9 +74,9 @@ class TaskInstructionViewController: UIViewController, TaskResultManagerViewCont
             contentView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
             contentView.leftAnchor.constraint(equalTo: view.readableContentGuide.leftAnchor),
             contentView.rightAnchor.constraint(equalTo: view.readableContentGuide.rightAnchor),
-            contentView.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -10),
+            contentView.bottomAnchor.constraint(equalTo: primaryButton.topAnchor, constant: -10),
             
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
+            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             cancelButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
             primaryButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),

@@ -10,7 +10,7 @@ import UIKit
 
 class SwipeTaskInstructionViewController: TaskInstructionViewController {
     
-    let instructionView = TapInstructionView()
+    let instructionView = SwipeInstructionView()
     
     override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
         return SwipeTaskPracticeViewController()
@@ -19,13 +19,17 @@ class SwipeTaskInstructionViewController: TaskInstructionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        descriptionLabel.text = "direction, gesture, next, right, swipe, touch icon"
+        
         contentView.addSubview(instructionView)
         instructionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             instructionView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            instructionView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-            ])
+            instructionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            instructionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            instructionView.widthAnchor.constraint(equalTo: contentView.readableContentGuide.widthAnchor, multiplier: 0.8, constant: 0.0)
+        ])
     }
     
     override func viewDidAppear(_ animated: Bool) {

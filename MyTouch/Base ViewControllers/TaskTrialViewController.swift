@@ -50,6 +50,10 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         return true
     }
     
+    var countdownColor: UIColor {
+        return .black
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return fullSizeConstraints.first?.isActive == true
     }
@@ -87,8 +91,9 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         
         maskView.alpha = 0.0
         
-        countDownView.backgroundColor = UIColor(white: 0.0, alpha: 0.2)
+        countDownView.backgroundColor = UIColor(white: 0.0, alpha: 0.3)
         countDownView.alpha = 0.0
+        countDownView.label.textColor = countdownColor
         
         view.addSubview(titleLabel)
         view.addSubview(buttonStack)
