@@ -106,9 +106,8 @@ class TouchTrackingView: UIView, TouchTrackingViewProtocol {
                 
                 guard let lastInTrack = track.last else { continue }
                 
-                if lastInTrack.phase != .ended && touch.previousLocation(in: self) == lastInTrack.location(in: self) {
-             
-                    let coalescedTouches = event?.coalescedTouches(for: touch) ?? [touch]
+                let coalescedTouches = event?.coalescedTouches(for: touch) ?? [touch]
+                if lastInTrack.phase != .ended && coalescedTouches.first!.previousLocation(in: self) == lastInTrack.location(in: self) {
                     tracks[index] += coalescedTouches
                 }
             }
@@ -130,15 +129,15 @@ class TouchTrackingView: UIView, TouchTrackingViewProtocol {
                 
                 guard let lastInTrack = track.last else { continue }
                 
-                if lastInTrack.phase != .ended && touch.previousLocation(in: self) == lastInTrack.location(in: self) {
-                    
-                    let coalescedTouches = event?.coalescedTouches(for: touch) ?? [touch]
+                let coalescedTouches = event?.coalescedTouches(for: touch) ?? [touch]
+                if lastInTrack.phase != .ended && coalescedTouches.first!.previousLocation(in: self) == lastInTrack.location(in: self) {
                     tracks[index] += coalescedTouches
                 }
             }
         }
         
-        if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
+        if (event?.allTouches?.count ?? 0) == touches.count {
+//        if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
             touchTrackingDelegate?.touchTrackingViewDidCompleteNewTracks(self)
         }
         setNeedsLayout()
@@ -157,15 +156,15 @@ class TouchTrackingView: UIView, TouchTrackingViewProtocol {
                 
                 guard let lastInTrack = track.last else { continue }
                 
-                if lastInTrack.phase != .ended && touch.previousLocation(in: self) == lastInTrack.location(in: self) {
-                    
-                    let coalescedTouches = event?.coalescedTouches(for: touch) ?? [touch]
+                let coalescedTouches = event?.coalescedTouches(for: touch) ?? [touch]
+                if lastInTrack.phase != .ended && coalescedTouches.first!.previousLocation(in: self) == lastInTrack.location(in: self) {
                     tracks[index] += coalescedTouches
                 }
             }
         }
         
-        if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
+        if (event?.allTouches?.count ?? 0) == touches.count {
+//        if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
             touchTrackingDelegate?.touchTrackingViewDidCompleteNewTracks(self)
         }
         setNeedsLayout()

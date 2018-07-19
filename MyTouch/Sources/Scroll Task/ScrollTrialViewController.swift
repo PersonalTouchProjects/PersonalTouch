@@ -12,8 +12,10 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
     
     let scrollTrialView = ScrollTrialView()
     
+    var rows = 5
+    var targetRow = 2
     var numberOfRepeats = 1
-    var positions: [(DragAndDropTrialView.Distance, DragAndDropTrialView.Direction)] = []
+    var positions: [Int] = []
     
     override func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
         return TaskEndViewController()
@@ -31,7 +33,8 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        positions = positionGenerator(repeats: 1).shuffled()
+        positions = positionGenerator(rows: rows, targetRow: targetRow, repeats: numberOfRepeats).shuffled()
+        
         scrollTrialView.scrollView.isScrollEnabled = false
         scrollTrialView.touchTrackingDelegate = self
         scrollTrialView.dataSource = self
@@ -59,7 +62,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
 //        taskResultManager?.addTrial(dragTrial)
         // end of add new trial
         
-//        positions.removeFirst()
+        positions.removeFirst()
         
         if positions.isEmpty {
             
@@ -86,15 +89,15 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
 extension ScrollTaskTrialViewController: ScrollTrialViewDataSource {
     
     func numberOfRows(_ scrollTrialView: ScrollTrialView) -> Int {
-        return 5
+        return rows
     }
     
     func targetRow(_ scrollTrialView: ScrollTrialView) -> Int {
-        return 0
+        return positions.first!
     }
     
     func destinationRow(_ scrollTrialView: ScrollTrialView) -> Int {
-        return 2
+        return targetRow
     }
     
     func axis(_ scrollTrialView: ScrollTrialView) -> ScrollTrial.Axis {
@@ -102,8 +105,6 @@ extension ScrollTaskTrialViewController: ScrollTrialViewDataSource {
     }
 }
 
-//private func rowGenerator(repeats: Int) -> [(DragAndDropTrialView.Distance, DragAndDropTrialView.Direction)] {
-//    return [.short, .long].flatMap { distance in
-//        return [.right, .upRight, .up, .upLeft, .left, .downLeft, .down, .downRight].map { direction in (distance, direction) }
-//    }
-//}
+private func positionGenerator(rows: Int, targetRow: Int, repeats: Int) -> [Int] {
+    return (0..<repeats).flatMap { _ in (0..<rows).compactMap { ($0 == targetRow) ? nil : $0 } }
+}

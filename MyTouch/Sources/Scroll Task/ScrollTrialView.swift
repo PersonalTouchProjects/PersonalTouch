@@ -27,8 +27,8 @@ class ScrollTrialView: TrialScrollView {
     }
     
     let scrollView = TouchTrackingScrollView()
-    let targetView = UIView()
-    let destinationView = UIView()
+    let targetView = TouchThroughView()
+    let destinationView = TouchThroughView()
     
     private var numberOfRows:   Int = 1
     private var targetRow:      Int = 0

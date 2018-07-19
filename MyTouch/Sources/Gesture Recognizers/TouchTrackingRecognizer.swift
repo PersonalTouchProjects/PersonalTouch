@@ -87,9 +87,8 @@ final class TouchTrackingRecognizer: UIGestureRecognizer {
                 
                 guard let lastInTrack = track.last else { continue }
                 
-                if lastInTrack.phase != .ended && touch.previousLocation(in: nil) == lastInTrack.location(in: nil) {
-                    
-                    let coalescedTouches = event.coalescedTouches(for: touch) ?? [touch]
+                let coalescedTouches = event.coalescedTouches(for: touch) ?? [touch]
+                if lastInTrack.phase != .ended && coalescedTouches.first!.previousLocation(in: nil) == lastInTrack.location(in: nil) {
                     tracks[index] += coalescedTouches
                 }
             }
@@ -110,15 +109,16 @@ final class TouchTrackingRecognizer: UIGestureRecognizer {
                 
                 guard let lastInTrack = track.last else { continue }
                 
-                if lastInTrack.phase != .ended && touch.previousLocation(in: nil) == lastInTrack.location(in: nil) {
+                let coalescedTouches = event.coalescedTouches(for: touch) ?? [touch]
+                if lastInTrack.phase != .ended && coalescedTouches.first!.previousLocation(in: nil) == lastInTrack.location(in: nil) {
                     
-                    let coalescedTouches = event.coalescedTouches(for: touch) ?? [touch]
                     tracks[index] += coalescedTouches
                 }
             }
         }
         
-        if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
+        if (event.allTouches?.count ?? 0) == touches.count {
+//        if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
              touchTrackingDelegate?.touchTrackingRecognizerDidCompleteNewTracks(self)
         }
     }
@@ -136,15 +136,15 @@ final class TouchTrackingRecognizer: UIGestureRecognizer {
                 
                 guard let lastInTrack = track.last else { continue }
                 
-                if lastInTrack.phase != .ended && touch.previousLocation(in: nil) == lastInTrack.location(in: nil) {
-                    
-                    let coalescedTouches = event.coalescedTouches(for: touch) ?? [touch]
+                let coalescedTouches = event.coalescedTouches(for: touch) ?? [touch]
+                if lastInTrack.phase != .ended && coalescedTouches.first!.previousLocation(in: nil) == lastInTrack.location(in: nil) {
                     tracks[index] += coalescedTouches
                 }
             }
         }
         
-        if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
+        if (event.allTouches?.count ?? 0) == touches.count {
+//        if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
              touchTrackingDelegate?.touchTrackingRecognizerDidCompleteNewTracks(self)
         }
     }

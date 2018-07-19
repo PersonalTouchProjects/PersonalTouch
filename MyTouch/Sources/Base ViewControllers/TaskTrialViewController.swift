@@ -304,7 +304,6 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     }
     
     func didEndTrial() {
-        print(self.trialView.tracks.count)
         self.trialView.stopTracking()
         self.trialView.isUserInteractionEnabled = false
     }

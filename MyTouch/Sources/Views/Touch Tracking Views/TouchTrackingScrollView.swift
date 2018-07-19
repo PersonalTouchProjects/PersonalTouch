@@ -44,6 +44,7 @@ class TouchTrackingScrollView: UIScrollView, TouchTrackingViewProtocol {
     }
     
     func reset() {
+        setContentOffset(contentOffset, animated: false)
         trackingRecognizer.resetTracks()
     }
     
