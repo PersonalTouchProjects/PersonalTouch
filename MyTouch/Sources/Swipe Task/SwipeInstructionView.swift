@@ -74,6 +74,7 @@ class SwipeInstructionView: UIView {
     func stopAnimating() {
         
         isAnimating = false
+        layer.removeAllAnimations()
         reset()
     }
     

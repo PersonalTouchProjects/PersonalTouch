@@ -62,6 +62,7 @@ class TapInstructionView: UIView {
     func stopAnimating() {
         
         isAnimating = false
+        layer.removeAllAnimations()
         reset()
     }
     

@@ -15,7 +15,7 @@ class DragAndDropTaskPracticeViewController: TaskTrialViewController {
     var shouldStartTrial = false
     
     override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
-        return SwipeTaskTrialViewController()
+        return DragAndDropTaskTrialViewController()
     }
     
     override var shouldStartTrialAutomaticallyOnPrimaryButtonTapped: Bool {

@@ -41,18 +41,14 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController {
         super.didEndTrial()
         
         // handle trial result
-//        let areaFrame = dragAndDropTrialView.areaView.frame
-//        let targetDirection = directions.first!.1
-//
-//        var swipeTrial = SwipeTrial(areaFrame: areaFrame, targetDirection: targetDirection)
-//        swipeTrial.startTime = trialStartDate.timeIntervalSince1970
-//        swipeTrial.endTime = trialStartDate.timeIntervalSince1970
-//        swipeTrial.rawTouchTracks = dragAndDropTrialView.rawTracks
-//        swipeTrial.success = targetDirection == dragAndDropTrialView.recognizedDirection
-//        swipeTrial.addEvents(dragAndDropTrialView.gestureRecognizerEvents)
-//
-//
-//        taskResultManager?.addTrial(swipeTrial)
+        var dragTrial = DragAndDropTrial(initialFrame: dragAndDropTrialView.initialFrame, targetFrame: dragAndDropTrialView.destinationView.frame)
+        dragTrial.startTime = trialStartDate.timeIntervalSince1970
+        dragTrial.endTime = trialEndDate.timeIntervalSince1970
+        dragTrial.rawTouchTracks = dragAndDropTrialView.rawTracks
+        dragTrial.success = dragAndDropTrialView.destinationView.frame.contains(dragAndDropTrialView.targetView.center) // TODO: define success
+        dragTrial.addEvents(dragAndDropTrialView.gestureRecognizerEvents)
+        
+        taskResultManager?.addTrial(dragTrial)
         // end of add new trial
         
         positions.removeFirst()
