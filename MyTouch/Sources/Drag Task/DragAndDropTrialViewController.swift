@@ -33,7 +33,7 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController {
         
         positions = positionGenerator(repeats: 1).shuffled()
         
-        dragAndDropTrialView.delegate = self
+        dragAndDropTrialView.touchTrackingDelegate = self
         dragAndDropTrialView.dataSource = self
     }
     

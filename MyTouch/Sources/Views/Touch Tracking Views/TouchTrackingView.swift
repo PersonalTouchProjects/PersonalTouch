@@ -8,15 +8,7 @@
 
 import UIKit
 
-protocol TouchTrackingViewDelegate: NSObjectProtocol {
-    func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingView)
-}
-
-extension TouchTrackingViewDelegate {
-    func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingView) {}
-}
-
-class TouchTrackingView: UIView {
+class TouchTrackingView: UIView, TouchTrackingViewProtocol {
 
     var isVisualLogEnabled = false {
         didSet {
@@ -28,7 +20,7 @@ class TouchTrackingView: UIView {
         }
     }
     
-    var delegate: TouchTrackingViewDelegate?
+    var touchTrackingDelegate: TouchTrackingViewDelegate?
     
     private(set) var systemUptime: TimeInterval = 0
     private(set) var tracks = [[UITouch]]()
@@ -145,7 +137,7 @@ class TouchTrackingView: UIView {
         }
         
         if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
-            delegate?.touchTrackingViewDidCompleteNewTracks(self)
+            touchTrackingDelegate?.touchTrackingViewDidCompleteNewTracks(self)
         }
         setNeedsLayout()
     }
@@ -172,7 +164,7 @@ class TouchTrackingView: UIView {
         }
         
         if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
-            delegate?.touchTrackingViewDidCompleteNewTracks(self)
+            touchTrackingDelegate?.touchTrackingViewDidCompleteNewTracks(self)
         }
         setNeedsLayout()
     }

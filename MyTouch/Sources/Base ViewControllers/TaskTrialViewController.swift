@@ -26,7 +26,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         return stack
     }()
     
-    var trialView: TrialView = TrialView()
+    var trialView: (UIView & TrialViewProtocol) = TrialView()
     
     private let maskView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private let whiteView = UIView()
@@ -92,7 +92,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         cancelButton.setTitle(NSLocalizedString("Withdraw Exam", comment: ""), for: .normal)
         cancelButton.addTarget(self, action: #selector(handleCancelButton(_:)), for: .touchUpInside)
         
-        trialView.delegate = self
+        trialView.touchTrackingDelegate = self
         
         previewBorderView.layer.borderColor = UIColor.black.cgColor
         previewBorderView.layer.borderWidth = 2.0
@@ -273,7 +273,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     }
     
     func willEndTrial() {
-        self.trialView.stopTracking()
+        
     }
     
     func endTrial() {
@@ -301,7 +301,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     }
     
     func didEndTrial() {
-        
+        self.trialView.stopTracking()
     }
     
     func presentNextViewController() {
@@ -315,7 +315,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
 
 extension TaskTrialViewController: TouchTrackingViewDelegate {
     
-    func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingView) {
+    func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingViewProtocol) {
         endTrial()
     }
 }

@@ -15,8 +15,8 @@ protocol ScrollTrialViewDataSource: NSObjectProtocol {
     func axis(_ scrollTrialView: ScrollTrialView) -> ScrollTrial.Axis
 }
 
-class ScrollTrialView: TrialView {
-    
+class ScrollTrialView: TrialScrollView {
+        
     enum Distance: String {
         case short, long
         case unknown
@@ -26,7 +26,7 @@ class ScrollTrialView: TrialView {
         didSet { if superview != nil { reloadData() } }
     }
     
-    let scrollView = UIScrollView()
+    let scrollView = TouchTrackingScrollView()
     let targetView = UIView()
     let destinationView = UIView()
     
@@ -37,11 +37,11 @@ class ScrollTrialView: TrialView {
     
     private(set) var success: Bool = false
     
-    private let touchTrackingRecognizer = TouchTrackingRecognizer()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        backgroundColor = .white
         
         scrollView.delaysContentTouches = false
         scrollView.alwaysBounceVertical = false
@@ -58,15 +58,10 @@ class ScrollTrialView: TrialView {
         destinationView.layer.borderWidth = 2.0
         destinationView.layer.borderColor = UIColor.black.cgColor
         
-        contentView.addSubview(scrollView)
-//        contentView.addSubview(destinationView)
-        
         scrollView.addSubview(targetView)
-        
-        
-        touchTrackingRecognizer.delegate = self
-        touchTrackingRecognizer.startTracking()
-        scrollView.addGestureRecognizer(touchTrackingRecognizer)
+
+        addSubview(scrollView)
+        addSubview(destinationView)
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -80,9 +75,7 @@ class ScrollTrialView: TrialView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        contentView.frame = bounds
-        
-        scrollView.frame = contentView.bounds
+        scrollView.frame = bounds
         scrollView.contentSize = scrollView.bounds.size
         
         if axis == .horizontal {
@@ -137,14 +130,9 @@ class ScrollTrialView: TrialView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func handlePan(_ sender: UIPanGestureRecognizer) {
-        
-        
-    }
-    
     func reloadData() {
         
-        reset()
+        scrollView.reset()
         
         success = false
         
@@ -160,20 +148,6 @@ class ScrollTrialView: TrialView {
 
 extension ScrollTrialView: UIScrollViewDelegate {
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        scrollView.panGestureRecognizer.cancelsTouchesInView = false
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        scrollView.isScrollEnabled = false
-        
-        print(touchTrackingRecognizer.rawTracks.last?.rawTouches.map({ $0.location }))
-    }
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        
-        touchTrackingRecognizer.resetTracks()
-    }
 }
 
 extension ScrollTrialView: UIGestureRecognizerDelegate {

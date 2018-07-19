@@ -32,19 +32,20 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
         super.viewDidLoad()
         
 //        positions = positionGenerator(repeats: 1).shuffled()
-        
-        scrollTrialView.delegate = self
+        scrollTrialView.scrollView.isScrollEnabled = false
+        scrollTrialView.touchTrackingDelegate = self
         scrollTrialView.dataSource = self
     }
     
-    override func willStartTrial() {
-        super.willStartTrial()
-        
-        print("幹")
+    override func didStartTrial() {
+        super.didStartTrial()
+        scrollTrialView.scrollView.isScrollEnabled = true
     }
     
     override func didEndTrial() {
         super.didEndTrial()
+        
+        scrollTrialView.scrollView.isScrollEnabled = false
         
         // handle trial result
 //        var dragTrial = DragAndDropTrial(initialFrame: scrollTrialView.initialFrame, targetFrame: scrollTrialView.destinationView.frame)

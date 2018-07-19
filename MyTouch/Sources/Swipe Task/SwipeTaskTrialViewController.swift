@@ -33,7 +33,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
         
         directions = directionGenerator(repeats: 1).shuffled()
         
-        swipeTrialView.delegate = self
+        swipeTrialView.touchTrackingDelegate = self
         swipeTrialView.dataSource = self
     }
     

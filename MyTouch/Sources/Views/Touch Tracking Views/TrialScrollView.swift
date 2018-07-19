@@ -1,16 +1,14 @@
 //
-//  TrialView.swift
+//  TrialScrollView.swift
 //  MyTouch
 //
-//  Created by Tommy Lin on 2018/7/4.
+//  Created by Tommy Lin on 2018/7/19.
 //  Copyright © 2018年 NTU HCI Lab. All rights reserved.
 //
 
 import UIKit
 
-class TrialView: TouchTrackingView {
-    
-    let contentView = TrialContentView()
+class TrialScrollView: TouchTrackingScrollView, TrialViewProtocol {
     
     private(set) var gestureRecognizerEvents = [GestureRecognizerEvent]()
     
@@ -32,7 +30,6 @@ class TrialView: TouchTrackingView {
     }
     
     private func setup() {
-        insertSubview(contentView, at: 0)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(_handleTap(_:)))
         tap.cancelsTouchesInView = false
@@ -68,11 +65,6 @@ class TrialView: TouchTrackingView {
         
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.frame = bounds
-    }
-    
     @objc private func _handleTap(_ sender: UITapGestureRecognizer) {
         self.gestureRecognizerEvents.append(TapGestureRecognizerEvent(recognizer: sender))
     }
@@ -95,28 +87,5 @@ class TrialView: TouchTrackingView {
     
     @objc private func _handleRotation(_ sender: UIRotationGestureRecognizer) {
         self.gestureRecognizerEvents.append(RotationGestureRecognizerEvent(recognizer: sender))
-    }
-}
-
-private final class TrialViewGestureRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-}
-
-final class TrialContentView: UIView {
-    
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let view = super.hitTest(point, with: event)
-        return view == self ? nil : view
     }
 }

@@ -30,7 +30,7 @@ class DragAndDropTaskPracticeViewController: TaskTrialViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dragAndDropTrialView.delegate = self
+        dragAndDropTrialView.touchTrackingDelegate = self
         dragAndDropTrialView.dataSource = self
         
         primaryButton.setTitle("Practice", for: .normal)

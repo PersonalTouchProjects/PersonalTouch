@@ -30,7 +30,7 @@ class TapTaskPracticeViewController: TaskTrialViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tapTrialView.delegate = self
+        tapTrialView.touchTrackingDelegate = self
         tapTrialView.dataSource = self
         
         primaryButton.setTitle("Practice", for: .normal)

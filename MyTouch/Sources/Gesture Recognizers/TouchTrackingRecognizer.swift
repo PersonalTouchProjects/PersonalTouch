@@ -9,9 +9,17 @@
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
+protocol TouchTrackingRecognizerDelegate: NSObjectProtocol {
+    func touchTrackingViewDidCompleteNewTracks(_ recognizer: TouchTrackingRecognizer)
+}
+
+extension TouchTrackingRecognizerDelegate {
+    func touchTrackingViewDidCompleteNewTracks(_ recognizer: TouchTrackingRecognizer) {}
+}
+
 class TouchTrackingRecognizer: UIGestureRecognizer {
     
-//    var delegate: TouchTrackingViewDelegate?
+    var touchTrackingDelegate: TouchTrackingRecognizerDelegate?
     
     private(set) var systemUptime: TimeInterval = 0
     private(set) var tracks = [[UITouch]]()
@@ -36,6 +44,7 @@ class TouchTrackingRecognizer: UIGestureRecognizer {
     override init(target: Any?, action: Selector?) {
         super.init(target: target, action: action)
         self.delegate = self
+        self.cancelsTouchesInView = false
     }
     
     func startTracking() {
@@ -111,7 +120,7 @@ class TouchTrackingRecognizer: UIGestureRecognizer {
         }
         
         if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
-            // delegate?.touchTrackingViewDidCompleteNewTracks(self)
+             touchTrackingDelegate?.touchTrackingViewDidCompleteNewTracks(self)
         }
     }
     
@@ -137,7 +146,7 @@ class TouchTrackingRecognizer: UIGestureRecognizer {
         }
         
         if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
-            // delegate?.touchTrackingViewDidCompleteNewTracks(self)
+             touchTrackingDelegate?.touchTrackingViewDidCompleteNewTracks(self)
         }
     }
 }

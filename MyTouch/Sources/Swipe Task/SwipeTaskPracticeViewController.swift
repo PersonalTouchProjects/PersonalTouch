@@ -34,7 +34,7 @@ class SwipeTaskPracticeViewController: TaskTrialViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        swipeTrialView.delegate = self
+        swipeTrialView.touchTrackingDelegate = self
         swipeTrialView.dataSource = self
         
         primaryButton.setTitle("Practice", for: .normal)

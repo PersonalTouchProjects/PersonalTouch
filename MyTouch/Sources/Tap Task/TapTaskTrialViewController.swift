@@ -32,7 +32,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
         
         positions = positionGenerator(columns: numberOfColumns, rows: numberOfRows, repeats: numberOfRepeats).shuffled()
         
-        tapTrialView.delegate = self
+        tapTrialView.touchTrackingDelegate = self
         tapTrialView.dataSource = self
     }
     
