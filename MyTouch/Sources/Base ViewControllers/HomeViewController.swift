@@ -51,7 +51,7 @@ class HomeViewController: UIViewController {
     
     @objc func handleButton(_ sender: UIButton) {
         
-        let taskViewController = DragAndDropTaskInstructionViewController()
+        let taskViewController = ScrollTaskInstructionViewController()
 //        let taskViewController = SwipeTaskInstructionViewController()
         taskViewController.taskResultManager = TaskResultManager(session: Session())
         let navController = UINavigationController(rootViewController: taskViewController)

@@ -1,5 +1,5 @@
 //
-//  DragAndDropInstructionViewController.swift
+//  ScrollInstructionViewController.swift
 //  MyTouch
 //
 //  Created by Tommy Lin on 2018/7/19.
@@ -8,18 +8,18 @@
 
 import UIKit
 
-class DragAndDropTaskInstructionViewController: TaskInstructionViewController {
+class ScrollTaskInstructionViewController: TaskInstructionViewController {
     
-    let instructionView = DragAndDropInstructionView()
+    let instructionView = ScrollInstructionView()
     
     override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
-        return DragAndDropTaskPracticeViewController()
+        return ScrollTaskPracticeViewController()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = "拖曳測驗"
+        titleLabel.text = "滾動測驗"
         descriptionLabel.text = "direction, gesture, next, right, swipe, touch icon"
         
         contentView.addSubview(instructionView)
