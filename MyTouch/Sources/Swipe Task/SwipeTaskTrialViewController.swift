@@ -90,7 +90,7 @@ extension SwipeTaskTrialViewController: SwipeTrialViewDataSource {
     }
 }
 
-func directionGenerator(repeats: Int) -> [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] {
+private func directionGenerator(repeats: Int) -> [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] {
     
 //    return [(.left, .left)]
     

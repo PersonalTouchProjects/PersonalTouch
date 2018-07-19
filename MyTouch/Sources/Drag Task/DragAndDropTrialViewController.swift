@@ -42,6 +42,7 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController {
         
         // handle trial result
         var dragTrial = DragAndDropTrial(initialFrame: dragAndDropTrialView.initialFrame, targetFrame: dragAndDropTrialView.destinationView.frame)
+        dragTrial.resultFrame = dragAndDropTrialView.targetView.frame
         dragTrial.startTime = trialStartDate.timeIntervalSince1970
         dragTrial.endTime = trialEndDate.timeIntervalSince1970
         dragTrial.rawTouchTracks = dragAndDropTrialView.rawTracks
@@ -90,7 +91,7 @@ extension DragAndDropTaskTrialViewController: DragAndDropTrialViewDataSource {
     }
 }
 
-func positionGenerator(repeats: Int) -> [(DragAndDropTrialView.Distance, DragAndDropTrialView.Direction)] {
+private func positionGenerator(repeats: Int) -> [(DragAndDropTrialView.Distance, DragAndDropTrialView.Direction)] {
     return [.short, .long].flatMap { distance in
         return [.right, .upRight, .up, .upLeft, .left, .downLeft, .down, .downRight].map { direction in (distance, direction) }
     }

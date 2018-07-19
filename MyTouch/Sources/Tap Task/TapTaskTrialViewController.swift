@@ -95,6 +95,6 @@ extension TapTaskTrialViewController: TapTrialViewDataSource {
     }
 }
 
-func positionGenerator(columns: Int, rows: Int, repeats: Int) -> [(Int, Int)] {
+private func positionGenerator(columns: Int, rows: Int, repeats: Int) -> [(Int, Int)] {
     return (0..<repeats).flatMap { _ in (0..<columns).flatMap { c in (0..<rows).map { r in (c, r) } } }
 }
