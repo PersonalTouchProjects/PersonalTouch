@@ -18,7 +18,6 @@ extension TouchTrackingViewDelegate {
 
 class TouchTrackingView: UIView {
 
-    var isTrackEnabled = true
     var isVisualLogEnabled = false {
         didSet {
             if isVisualLogEnabled == false {

@@ -37,11 +37,12 @@ class ScrollTrialView: TrialView {
     
     private(set) var success: Bool = false
     
+    private let touchTrackingRecognizer = TouchTrackingRecognizer()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        scrollView.panGestureRecognizer.cancelsTouchesInView = false
-//        scrollView.panGestureRecognizer.delegate = self
+        
         scrollView.delaysContentTouches = false
         scrollView.alwaysBounceVertical = false
         scrollView.alwaysBounceHorizontal = false
@@ -61,6 +62,11 @@ class ScrollTrialView: TrialView {
 //        contentView.addSubview(destinationView)
         
         scrollView.addSubview(targetView)
+        
+        
+        touchTrackingRecognizer.delegate = self
+        touchTrackingRecognizer.startTracking()
+        scrollView.addGestureRecognizer(touchTrackingRecognizer)
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -161,12 +167,18 @@ extension ScrollTrialView: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
 //        scrollView.isScrollEnabled = false
         
-        print(rawTracks.first?.rawTouches.map({ $0.location }))
+        print(touchTrackingRecognizer.rawTracks.last?.rawTouches.map({ $0.location }))
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         
-        
+        touchTrackingRecognizer.resetTracks()
     }
 }
 
+extension ScrollTrialView: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}

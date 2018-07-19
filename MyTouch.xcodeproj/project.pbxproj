@@ -11,6 +11,7 @@
 		65010AB0210069EB002EB953 /* ScrollTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AAF210069EB002EB953 /* ScrollTrialViewController.swift */; };
 		65010AB221006A77002EB953 /* ScrollTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AB121006A77002EB953 /* ScrollTrialView.swift */; };
 		65010AB421007A17002EB953 /* TouchTrackingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AB321007A17002EB953 /* TouchTrackingScrollView.swift */; };
+		65010AB621007D81002EB953 /* TouchTrackingRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AB521007D81002EB953 /* TouchTrackingRecognizer.swift */; };
 		6514074820FC9770006BD17A /* TaskResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074720FC9770006BD17A /* TaskResultManager.swift */; };
 		6514074A20FDB013006BD17A /* Collection+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074920FDB013006BD17A /* Collection+HCI.swift */; };
 		6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548A9EB20E663E700B7C73F /* AppDelegate.swift */; };
@@ -41,7 +42,6 @@
 		65CBE35220FF0CFD0093F663 /* SwipeTaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35120FF0CFD0093F663 /* SwipeTaskTrialViewController.swift */; };
 		65CBE35420FF0D220093F663 /* SwipeTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35320FF0D220093F663 /* SwipeTrialView.swift */; };
 		65CBE35620FF2E150093F663 /* SwipeInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35520FF2E150093F663 /* SwipeInstructionView.swift */; };
-		65CBE35820FF33BA0093F663 /* FingerActionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35720FF33BA0093F663 /* FingerActionIndicatorView.swift */; };
 		65CBE35B20FF3C5F0093F663 /* DragAndDropTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35A20FF3C5F0093F663 /* DragAndDropTrialView.swift */; };
 		65CBE35D20FF40060093F663 /* DragAndDropPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35C20FF40060093F663 /* DragAndDropPracticeViewController.swift */; };
 		65CBE35F20FF4C6D0093F663 /* DragAndDropTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35E20FF4C6D0093F663 /* DragAndDropTrialViewController.swift */; };
@@ -66,6 +66,7 @@
 		65010AAF210069EB002EB953 /* ScrollTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTrialViewController.swift; sourceTree = "<group>"; };
 		65010AB121006A77002EB953 /* ScrollTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTrialView.swift; sourceTree = "<group>"; };
 		65010AB321007A17002EB953 /* TouchTrackingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTrackingScrollView.swift; sourceTree = "<group>"; };
+		65010AB521007D81002EB953 /* TouchTrackingRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTrackingRecognizer.swift; sourceTree = "<group>"; };
 		6514074720FC9770006BD17A /* TaskResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResultManager.swift; sourceTree = "<group>"; };
 		6514074920FDB013006BD17A /* Collection+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+HCI.swift"; sourceTree = "<group>"; };
 		6548A9E820E663E700B7C73F /* MyTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +102,6 @@
 		65CBE35120FF0CFD0093F663 /* SwipeTaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTaskTrialViewController.swift; sourceTree = "<group>"; };
 		65CBE35320FF0D220093F663 /* SwipeTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTrialView.swift; sourceTree = "<group>"; };
 		65CBE35520FF2E150093F663 /* SwipeInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeInstructionView.swift; sourceTree = "<group>"; };
-		65CBE35720FF33BA0093F663 /* FingerActionIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerActionIndicatorView.swift; sourceTree = "<group>"; };
 		65CBE35A20FF3C5F0093F663 /* DragAndDropTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropTrialView.swift; sourceTree = "<group>"; };
 		65CBE35C20FF40060093F663 /* DragAndDropPracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropPracticeViewController.swift; sourceTree = "<group>"; };
 		65CBE35E20FF4C6D0093F663 /* DragAndDropTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropTrialViewController.swift; sourceTree = "<group>"; };
@@ -137,7 +137,6 @@
 			children = (
 				65010AAF210069EB002EB953 /* ScrollTrialViewController.swift */,
 				65010AB121006A77002EB953 /* ScrollTrialView.swift */,
-				65010AB321007A17002EB953 /* TouchTrackingScrollView.swift */,
 			);
 			path = "Scroll Task";
 			sourceTree = "<group>";
@@ -271,6 +270,7 @@
 			children = (
 				65721BEA20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift */,
 				65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */,
+				65010AB521007D81002EB953 /* TouchTrackingRecognizer.swift */,
 			);
 			path = "Gesture Recognizers";
 			sourceTree = "<group>";
@@ -278,10 +278,10 @@
 		65F9246420E8D33F00A32BB0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				65010AB321007A17002EB953 /* TouchTrackingScrollView.swift */,
 				65F9245E20E800C900A32BB0 /* TouchTrackingView.swift */,
 				6582148120ECF6B50025A03B /* TrialView.swift */,
 				6592ACF820E90667006A1BCB /* CountdownView.swift */,
-				65CBE35720FF33BA0093F663 /* FingerActionIndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -406,6 +406,7 @@
 				65FC45A520F3A00900B2A7CF /* UIDevice+HCI.swift in Sources */,
 				65FC45A320F39FAF00B2A7CF /* DeviceInfo.swift in Sources */,
 				65CBE35420FF0D220093F663 /* SwipeTrialView.swift in Sources */,
+				65010AB621007D81002EB953 /* TouchTrackingRecognizer.swift in Sources */,
 				65F9246620E8D39A00A32BB0 /* TapTaskTrialViewController.swift in Sources */,
 				6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */,
 				6548AA0120E665E800B7C73F /* Trial.swift in Sources */,
@@ -424,7 +425,6 @@
 				65CBE35620FF2E150093F663 /* SwipeInstructionView.swift in Sources */,
 				6548AA0720E666CF00B7C73F /* SwipeTrial.swift in Sources */,
 				65DE73BC20F0F04E009D5928 /* GestureRecognizerEvent.swift in Sources */,
-				65CBE35820FF33BA0093F663 /* FingerActionIndicatorView.swift in Sources */,
 				65A470CE20EF9EF20055E46E /* TapTaskInstructionViewController.swift in Sources */,
 				65F9246120E8A81100A32BB0 /* TaskTrialViewController.swift in Sources */,
 				65010AAD210068EC002EB953 /* ScrollTrial.swift in Sources */,
