@@ -9,7 +9,7 @@
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
-class TouchUpInsideGestureRecognizer: UIGestureRecognizer {
+final class TouchUpInsideGestureRecognizer: UIGestureRecognizer {
     
     /// `targetView` must be subview of `self.view`.
     var targetView: UIView?

@@ -9,7 +9,7 @@
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
-class TzuChuanGestureRecognizer: UIGestureRecognizer {
+final class TzuChuanGestureRecognizer: UIGestureRecognizer {
 
     var minimalDistance: CGFloat = 10.0
     

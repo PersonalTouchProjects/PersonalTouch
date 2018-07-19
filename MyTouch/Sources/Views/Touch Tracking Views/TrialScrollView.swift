@@ -62,7 +62,6 @@ class TrialScrollView: TouchTrackingScrollView, TrialViewProtocol {
         addGestureRecognizer(swipe)
         addGestureRecognizer(pinch)
         addGestureRecognizer(rotation)
-        
     }
     
     @objc private func _handleTap(_ sender: UITapGestureRecognizer) {

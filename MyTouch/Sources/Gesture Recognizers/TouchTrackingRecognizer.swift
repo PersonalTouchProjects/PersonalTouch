@@ -10,11 +10,11 @@ import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
 protocol TouchTrackingRecognizerDelegate: NSObjectProtocol {
-    func touchTrackingViewDidBeginNewTrack(_ recognizer: TouchTrackingRecognizer)
-    func touchTrackingViewDidCompleteNewTracks(_ recognizer: TouchTrackingRecognizer)
+    func touchTrackingRecognizerDidBeginNewTrack(_ recognizer: TouchTrackingRecognizer)
+    func touchTrackingRecognizerDidCompleteNewTracks(_ recognizer: TouchTrackingRecognizer)
 }
 
-class TouchTrackingRecognizer: UIGestureRecognizer {
+final class TouchTrackingRecognizer: UIGestureRecognizer {
     
     var touchTrackingDelegate: TouchTrackingRecognizerDelegate?
     
@@ -64,7 +64,7 @@ class TouchTrackingRecognizer: UIGestureRecognizer {
         
         guard isTracking else { return }
         
-        touchTrackingDelegate?.touchTrackingViewDidBeginNewTrack(self)
+        touchTrackingDelegate?.touchTrackingRecognizerDidBeginNewTrack(self)
         
         let filteredTouches = touches
         
@@ -119,7 +119,7 @@ class TouchTrackingRecognizer: UIGestureRecognizer {
         }
         
         if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
-             touchTrackingDelegate?.touchTrackingViewDidCompleteNewTracks(self)
+             touchTrackingDelegate?.touchTrackingRecognizerDidCompleteNewTracks(self)
         }
     }
     
@@ -145,7 +145,7 @@ class TouchTrackingRecognizer: UIGestureRecognizer {
         }
         
         if tracks.filter({ $0.last!.isEndedOrCancelled == false }).count == 0 {
-             touchTrackingDelegate?.touchTrackingViewDidCompleteNewTracks(self)
+             touchTrackingDelegate?.touchTrackingRecognizerDidCompleteNewTracks(self)
         }
     }
 }

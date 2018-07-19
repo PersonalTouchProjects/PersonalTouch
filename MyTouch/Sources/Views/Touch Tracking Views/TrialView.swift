@@ -32,7 +32,10 @@ class TrialView: TouchTrackingView, TrialViewProtocol {
     }
     
     private func setup() {
-        insertSubview(contentView, at: 0)
+        
+        addSubview(contentView)
+        contentView.frame = bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(_handleTap(_:)))
         tap.cancelsTouchesInView = false
@@ -65,12 +68,6 @@ class TrialView: TouchTrackingView, TrialViewProtocol {
         addGestureRecognizer(swipe)
         addGestureRecognizer(pinch)
         addGestureRecognizer(rotation)
-        
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.frame = bounds
     }
     
     @objc private func _handleTap(_ sender: UITapGestureRecognizer) {

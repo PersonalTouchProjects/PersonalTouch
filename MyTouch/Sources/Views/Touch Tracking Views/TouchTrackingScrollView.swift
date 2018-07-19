@@ -12,7 +12,7 @@ class TouchTrackingScrollView: UIScrollView, TouchTrackingViewProtocol {
     
     // MARK: - tracking recoginzer properties
     
-    private var trackingRecognizer = TouchTrackingRecognizer()
+    private let trackingRecognizer = TouchTrackingRecognizer()
 
     var systemUptime: TimeInterval {
         return trackingRecognizer.systemUptime
@@ -49,6 +49,9 @@ class TouchTrackingScrollView: UIScrollView, TouchTrackingViewProtocol {
     
     // end of tracking recognizer methods
     
+    
+    // MARK: - TouchTrackingViewProtocol
+    
     var touchTrackingDelegate: TouchTrackingViewDelegate?
     
     override init(frame: CGRect) {
@@ -63,13 +66,16 @@ class TouchTrackingScrollView: UIScrollView, TouchTrackingViewProtocol {
     }
 }
 
+
+// MARK: - TouchTrackingRecognizerDelegate
+
 extension TouchTrackingScrollView: TouchTrackingRecognizerDelegate {
     
-    func touchTrackingViewDidBeginNewTrack(_ recognizer: TouchTrackingRecognizer) {
+    func touchTrackingRecognizerDidBeginNewTrack(_ recognizer: TouchTrackingRecognizer) {
         touchTrackingDelegate?.touchTrackingViewDidBeginNewTrack(self)
     }
     
-    func touchTrackingViewDidCompleteNewTracks(_ recognizer: TouchTrackingRecognizer) {
+    func touchTrackingRecognizerDidCompleteNewTracks(_ recognizer: TouchTrackingRecognizer) {
         touchTrackingDelegate?.touchTrackingViewDidCompleteNewTracks(self)
     }
 }

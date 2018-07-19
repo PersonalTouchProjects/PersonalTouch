@@ -19,14 +19,11 @@ protocol TouchTrackingViewProtocol: NSObjectProtocol {
     func stopTracking()
 }
 
-protocol TrialViewProtocol: TouchTrackingViewProtocol {}
-
 protocol TouchTrackingViewDelegate: NSObjectProtocol {
     func touchTrackingViewDidBeginNewTrack(_ touchTrackingView: TouchTrackingViewProtocol)
     func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingViewProtocol)
 }
 
-extension TouchTrackingViewDelegate {
-    func touchTrackingViewDidBeginNewTrack(_ touchTrackingView: TouchTrackingViewProtocol) {}
-    func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingViewProtocol) {}
+protocol TrialViewProtocol: TouchTrackingViewProtocol {
+    var gestureRecognizerEvents: [GestureRecognizerEvent] { get }
 }
