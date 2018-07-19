@@ -65,6 +65,10 @@ class TouchTrackingScrollView: UIScrollView, TouchTrackingViewProtocol {
 
 extension TouchTrackingScrollView: TouchTrackingRecognizerDelegate {
     
+    func touchTrackingViewDidBeginNewTrack(_ recognizer: TouchTrackingRecognizer) {
+        touchTrackingDelegate?.touchTrackingViewDidBeginNewTrack(self)
+    }
+    
     func touchTrackingViewDidCompleteNewTracks(_ recognizer: TouchTrackingRecognizer) {
         touchTrackingDelegate?.touchTrackingViewDidCompleteNewTracks(self)
     }

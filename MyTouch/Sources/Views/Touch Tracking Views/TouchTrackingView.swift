@@ -82,6 +82,8 @@ class TouchTrackingView: UIView, TouchTrackingViewProtocol {
                 
         guard isTracking else { return }
         
+        touchTrackingDelegate?.touchTrackingViewDidBeginNewTrack(self)
+        
         let filteredTouches = touches
         
         for touch in filteredTouches {
@@ -209,13 +211,7 @@ class TouchTrackingView: UIView, TouchTrackingViewProtocol {
     }
 }
 
-private final class VisualLogView: UIView {
-    
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let view = super.hitTest(point, with: event)
-        return view == self ? nil : view
-    }
-}
+private final class VisualLogView: TouchThroughView {}
 
 private extension UITouch {
     

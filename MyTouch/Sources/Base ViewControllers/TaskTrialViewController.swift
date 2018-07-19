@@ -29,7 +29,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     var trialView: (UIView & TrialViewProtocol) = TrialView()
     
     private let maskView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    private let whiteView = UIView()
+    private let whiteView = TouchThroughView()
     private let previewBorderView = UIView()
     private let countDownView = CountdownView()
     
@@ -39,6 +39,8 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     
     private(set) var trialStartDate = Date.distantPast
     private(set) var trialEndDate = Date.distantFuture
+    
+    private(set) var lastTouchesUpDate: Date?
     
     var taskResultManager: TaskResultManager?
 
@@ -269,6 +271,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     }
     
     func didStartTrial() {
+        self.trialView.isUserInteractionEnabled = true
         self.trialView.startTracking()
     }
     
@@ -281,7 +284,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         willEndTrial()
         trialEndDate = Date()
         
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut], animations: {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
             
             self.trialView.alpha = 0.0
             
@@ -301,7 +304,9 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     }
     
     func didEndTrial() {
+        print(self.trialView.tracks.count)
         self.trialView.stopTracking()
+        self.trialView.isUserInteractionEnabled = false
     }
     
     func presentNextViewController() {
@@ -315,7 +320,20 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
 
 extension TaskTrialViewController: TouchTrackingViewDelegate {
     
+    func touchTrackingViewDidBeginNewTrack(_ touchTrackingView: TouchTrackingViewProtocol) {
+        
+        lastTouchesUpDate = nil
+    }
+    
     func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingViewProtocol) {
-        endTrial()
+        
+        self.lastTouchesUpDate = Date()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [lastTouchesUpDate = self.lastTouchesUpDate] in
+            
+            if lastTouchesUpDate == self.lastTouchesUpDate {
+                self.endTrial()
+            }
+        }
     }
 }

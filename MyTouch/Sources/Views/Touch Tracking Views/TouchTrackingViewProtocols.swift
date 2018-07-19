@@ -10,6 +10,9 @@ import UIKit
 
 protocol TouchTrackingViewProtocol: NSObjectProtocol {
     
+    var tracks: [[UITouch]] { get }
+    var rawTracks: [RawTouchTrack] { get }
+    
     var touchTrackingDelegate: TouchTrackingViewDelegate? { get set }
     
     func startTracking()
@@ -19,9 +22,11 @@ protocol TouchTrackingViewProtocol: NSObjectProtocol {
 protocol TrialViewProtocol: TouchTrackingViewProtocol {}
 
 protocol TouchTrackingViewDelegate: NSObjectProtocol {
+    func touchTrackingViewDidBeginNewTrack(_ touchTrackingView: TouchTrackingViewProtocol)
     func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingViewProtocol)
 }
 
 extension TouchTrackingViewDelegate {
+    func touchTrackingViewDidBeginNewTrack(_ touchTrackingView: TouchTrackingViewProtocol) {}
     func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingViewProtocol) {}
 }

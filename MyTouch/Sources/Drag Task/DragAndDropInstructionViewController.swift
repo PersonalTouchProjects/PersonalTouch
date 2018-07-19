@@ -13,8 +13,8 @@ class DragAndDropTaskInstructionViewController: TaskInstructionViewController {
     let instructionView = DragAndDropInstructionView()
     
     override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
-//        return DragAndDropTaskPracticeViewController()
-        return ScrollTaskTrialViewController()
+        return DragAndDropTaskPracticeViewController()
+//        return ScrollTaskTrialViewController()
     }
     
     override func viewDidLoad() {

@@ -123,8 +123,8 @@ class DragAndDropTrialView: TrialView {
         case .began:
             targetOffset = targetView.frame.origin
             
-        case .ended, .failed, .cancelled:
-            sender.isEnabled = false
+//        case .ended, .failed, .cancelled:
+//            sender.isEnabled = false
             
         default:
             break
@@ -142,7 +142,7 @@ class DragAndDropTrialView: TrialView {
         targetSize = dataSource?.targetSize(self) ?? .zero
         
         targetOffset = nil
-        panGestureRecognizer.isEnabled = true
+//        panGestureRecognizer.isEnabled = true
         
         setNeedsLayout()
         layoutIfNeeded()
