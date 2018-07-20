@@ -12,7 +12,7 @@ class ScrollInstructionView: UIView {
     
     private let targetView = UIView()
     private let destinationView = UIView()
-    private let fingerView = UIImageView(image: UIImage(named: "Finger"))
+    private let fingerView = UIImageView(image: UIImage(named: "finger"))
     
     private(set) var isAnimating = false
     

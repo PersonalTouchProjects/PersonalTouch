@@ -12,7 +12,7 @@ class SwipeInstructionView: UIView {
     
     private let areaView = UIView()
     private let arrowView = UIImageView(image: UIImage(named: "arrow"))
-    private let fingerView = UIImageView(image: UIImage(named: "Finger"))
+    private let fingerView = UIImageView(image: UIImage(named: "finger"))
     
     private(set) var isAnimating = false
     

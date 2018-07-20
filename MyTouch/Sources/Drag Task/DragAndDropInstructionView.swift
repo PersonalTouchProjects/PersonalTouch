@@ -12,7 +12,7 @@ class DragAndDropInstructionView: UIView {
     
     private let targetView = TapTrialView.TargetView()
     private let destinationView = UIView()
-    private let fingerView = UIImageView(image: UIImage(named: "Finger"))
+    private let fingerView = UIImageView(image: UIImage(named: "finger"))
     
     private(set) var isAnimating = false
     
