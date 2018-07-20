@@ -19,6 +19,7 @@ class RotationTrialView: TrialView {
         didSet { if superview != nil { reloadData() } }
     }
     
+    let dashedLineView = DashedLineView()
     let compassView = UIImageView(image: UIImage(named: "compass"))
     let rotationGestureRecognizer = UIRotationGestureRecognizer()
     
@@ -33,9 +34,22 @@ class RotationTrialView: TrialView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        dashedLineView.lineWidth = 10
+        dashedLineView.lineColor = .lightGray
+        dashedLineView.horizontal = false
+        
+        contentView.addSubview(dashedLineView)
         contentView.addSubview(compassView)
+        
+        dashedLineView.translatesAutoresizingMaskIntoConstraints = false
         compassView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
+            dashedLineView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            dashedLineView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            dashedLineView.bottomAnchor.constraint(equalTo: contentView.centerYAnchor),
+            dashedLineView.widthAnchor.constraint(equalToConstant: 4),
+            
             compassView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             compassView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             compassView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5, constant: 0.0),
