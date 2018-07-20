@@ -15,7 +15,7 @@ class RotationTaskPracticeViewController: TaskTrialViewController {
     var shouldStartTrial = false
     
     override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
-        return PinchTaskTrialViewController()
+        return RotationTaskTrialViewController()
     }
     
     override var countdownColor: UIColor {
@@ -95,6 +95,12 @@ class RotationTaskPracticeViewController: TaskTrialViewController {
 extension RotationTaskPracticeViewController: RotationTrialViewDataSource {
     
     func targetAngle(_ rotationTrialView: RotationTrialView) -> CGFloat {
-        return .pi / CGFloat(arc4random() % 4 + 1)
+        let angles: [CGFloat] = [
+            -.pi / 3,
+            -.pi / 6,
+            .pi / 6,
+            .pi / 3
+        ]
+        return angles.shuffled().first!
     }
 }

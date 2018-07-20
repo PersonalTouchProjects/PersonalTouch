@@ -10,11 +10,11 @@ import UIKit
 
 struct RotationTrial: Trial {
     
-    let initialRadian: CGFloat
+    let initialAngle: CGFloat
     
-    let targetRadian: CGFloat
+    let targetAngle: CGFloat
     
-    var resulsRadian: CGFloat = 0
+    var resultAngle: CGFloat = 0
     
     var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
     
@@ -36,8 +36,8 @@ struct RotationTrial: Trial {
     
     var rotationEvents: [RotationGestureRecognizerEvent] = []
     
-    init(initialRadian: CGFloat, targetRadian: CGFloat) {
-        self.initialRadian = initialRadian
-        self.targetRadian = targetRadian
+    init(initialAngle: CGFloat, targetAngle: CGFloat) {
+        self.initialAngle = initialAngle
+        self.targetAngle = targetAngle
     }
 }

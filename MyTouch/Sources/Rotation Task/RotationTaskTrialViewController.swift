@@ -1,5 +1,5 @@
 //
-//  PinchTaskTrialViewController.swift
+//  RotationTaskTrialViewController.swift
 //  MyTouch
 //
 //  Created by Tommy Lin on 2018/7/20.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class PinchTaskTrialViewController: TaskTrialViewController {
+class RotationTaskTrialViewController: TaskTrialViewController {
     
-    let pinchTrialView = PinchTrialView()
+    let rotationTrialView = RotationTrialView()
     
     var numberOfRepeats = 1
-    var scales: [CGFloat] = []
+    var angles: [CGFloat] = []
     
     override func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
         return TaskEndViewController()
@@ -21,16 +21,16 @@ class PinchTaskTrialViewController: TaskTrialViewController {
     
     override func loadView() {
         super.loadView()
-        self.trialView = pinchTrialView
+        self.trialView = rotationTrialView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scales = scaleGenerator(repeats: numberOfRepeats)
+        angles = angleGenerator(repeats: numberOfRepeats).shuffled()
         
-        pinchTrialView.touchTrackingDelegate = self
-        pinchTrialView.dataSource = self
+        rotationTrialView.touchTrackingDelegate = self
+        rotationTrialView.dataSource = self
     }
     
     override func didEndTrial() {
@@ -38,20 +38,20 @@ class PinchTaskTrialViewController: TaskTrialViewController {
         
         
         // handle trial result
-        var trial = PinchTrial(initialSize: pinchTrialView.initialFrame.size, targetSize: pinchTrialView.destinationView.frame.size)
-        trial.resultSize = pinchTrialView.targetView.frame.size
+        var trial = RotationTrial(initialAngle: rotationTrialView.initialAngle, targetAngle: 0)
+        trial.resultAngle = rotationTrialView.compassView.transform.rotation
         trial.startTime = trialStartDate.timeIntervalSince1970
         trial.endTime = trialEndDate.timeIntervalSince1970
-        trial.rawTouchTracks = pinchTrialView.rawTracks
-        trial.success = pinchTrialView.success
-        trial.addEvents(pinchTrialView.gestureRecognizerEvents)
+        trial.rawTouchTracks = rotationTrialView.rawTracks
+        trial.success = rotationTrialView.success
+        trial.addEvents(rotationTrialView.gestureRecognizerEvents)
         
         taskResultManager?.addTrial(trial)
         // end of add new trial
         
-        scales.removeFirst()
+        angles.removeFirst()
         
-        if scales.isEmpty {
+        if angles.isEmpty {
             
             let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
@@ -67,19 +67,25 @@ class PinchTaskTrialViewController: TaskTrialViewController {
             present(alertController, animated: true, completion: nil)
             
         } else {
-            pinchTrialView.reloadData()
-            titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - scales.count + 1))"
+            rotationTrialView.reloadData()
+            titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - angles.count + 1))"
         }
     }
 }
 
-extension PinchTaskTrialViewController: PinchTrialViewDataSource {
+extension RotationTaskTrialViewController: RotationTrialViewDataSource {
     
-    func targetScale(_ pinchTrialView: PinchTrialView) -> CGFloat {
-        return scales.first!
+    func targetAngle(_ rotationTrialView: RotationTrialView) -> CGFloat {
+        return angles.first!
     }
 }
 
-private func scaleGenerator(repeats: Int) -> [CGFloat] {
-    return (0..<repeats).flatMap { _ in [1.0/2.0, 2.0/3.0, 3.0/2.0, 2.0] }
+private func angleGenerator(repeats: Int) -> [CGFloat] {
+    let angles: [CGFloat] = [
+        -.pi / 3,
+        -.pi / 6,
+        .pi / 6,
+        .pi / 3
+    ]
+    return (0..<repeats).flatMap { _ in angles }
 }
