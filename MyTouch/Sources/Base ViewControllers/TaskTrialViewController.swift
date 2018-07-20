@@ -101,7 +101,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         previewBorderView.layer.cornerRadius = 4.0
         
         whiteView.backgroundColor = .white
-        whiteView.alpha = 0.0
+        whiteView.isHidden = true
         
         maskView.alpha = 0.0
         
@@ -113,10 +113,10 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         view.addSubview(buttonStack)
         view.addSubview(cancelButton)
         view.addSubview(previewBorderView)
-        view.addSubview(whiteView)
         view.addSubview(maskView)
         view.addSubview(trialView)
         view.addSubview(countDownView)
+        view.addSubview(whiteView)
         
         view.addLayoutGuide(previewLayoutGuide)
         
@@ -235,6 +235,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     }
     
     func willStartTrial() {
+        self.lastTouchesUpDate = nil
         // navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
@@ -257,7 +258,6 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
             
         }, completion: { _ in
             
-            self.whiteView.alpha = 1.0
             self.maskView.alpha = 0.0
             
             self.countDownView.fire {
@@ -284,23 +284,15 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         willEndTrial()
         trialEndDate = Date()
         
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
-            
-            self.trialView.alpha = 0.0
-            
-        }, completion: { _ in
-            
-            NSLayoutConstraint.deactivate(self.fullSizeConstraints)
-            NSLayoutConstraint.activate(self.previewConstraints)
-            
-            self.setNeedsStatusBarAppearanceUpdate()
-            
-            self.trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
-            self.trialView.alpha = 1.0
-            self.whiteView.alpha = 0.0
-            
-            self.didEndTrial()
-        })
+        NSLayoutConstraint.deactivate(self.fullSizeConstraints)
+        NSLayoutConstraint.activate(self.previewConstraints)
+        
+        self.setNeedsStatusBarAppearanceUpdate()
+        
+        self.trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
+        self.whiteView.isHidden = true
+        
+        self.didEndTrial()
     }
     
     func didEndTrial() {
@@ -322,13 +314,26 @@ extension TaskTrialViewController: TouchTrackingViewDelegate {
     
     func touchTrackingViewDidBeginNewTrack(_ touchTrackingView: TouchTrackingViewProtocol) {
         
-        lastTouchesUpDate = nil
+        // has complete new tracks, update touches up date
+        if self.lastTouchesUpDate != nil {
+            self.lastTouchesUpDate = Date()
+        }
     }
     
     func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingViewProtocol) {
         
-        self.lastTouchesUpDate = Date()
+        // dismiss content views by masking a white view
+        // only run the animation on first time
+        if self.lastTouchesUpDate == nil {
+            
+            self.whiteView.isHidden = false
+            self.whiteView.alpha = 0.0
+            UIView.animate(withDuration: 0.2) {
+                self.whiteView.alpha = 1.0
+            }
+        }
         
+        self.lastTouchesUpDate = Date()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [lastTouchesUpDate = self.lastTouchesUpDate] in
             
             if lastTouchesUpDate == self.lastTouchesUpDate {
