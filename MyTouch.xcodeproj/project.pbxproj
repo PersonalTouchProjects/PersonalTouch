@@ -31,6 +31,7 @@
 		65010ADC2101E6FE002EB953 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ADB2101E6FE002EB953 /* DashedLineView.swift */; };
 		65010ADE2101EF80002EB953 /* RotationTaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ADD2101EF7F002EB953 /* RotationTaskTrialViewController.swift */; };
 		65010AE021020B15002EB953 /* PinchInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ADF21020B15002EB953 /* PinchInstructionView.swift */; };
+		65010AE221021472002EB953 /* RotationInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AE121021472002EB953 /* RotationInstructionView.swift */; };
 		6514074820FC9770006BD17A /* TaskResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074720FC9770006BD17A /* TaskResultManager.swift */; };
 		6514074A20FDB013006BD17A /* Collection+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074920FDB013006BD17A /* Collection+HCI.swift */; };
 		6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548A9EB20E663E700B7C73F /* AppDelegate.swift */; };
@@ -105,6 +106,7 @@
 		65010ADB2101E6FE002EB953 /* DashedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineView.swift; sourceTree = "<group>"; };
 		65010ADD2101EF7F002EB953 /* RotationTaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTaskTrialViewController.swift; sourceTree = "<group>"; };
 		65010ADF21020B15002EB953 /* PinchInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchInstructionView.swift; sourceTree = "<group>"; };
+		65010AE121021472002EB953 /* RotationInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationInstructionView.swift; sourceTree = "<group>"; };
 		6514074720FC9770006BD17A /* TaskResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResultManager.swift; sourceTree = "<group>"; };
 		6514074920FDB013006BD17A /* Collection+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+HCI.swift"; sourceTree = "<group>"; };
 		6548A9E820E663E700B7C73F /* MyTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +215,7 @@
 				65010AD52101D594002EB953 /* RotationTaskPracticeViewController.swift */,
 				65010ADD2101EF7F002EB953 /* RotationTaskTrialViewController.swift */,
 				65010AD72101D5C8002EB953 /* RotationTrialView.swift */,
+				65010AE121021472002EB953 /* RotationInstructionView.swift */,
 			);
 			path = "Rotation Task";
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				65010AB0210069EB002EB953 /* ScrollTrialViewController.swift in Sources */,
 				65010AD32101D55C002EB953 /* RotationTaskInstructionViewController.swift in Sources */,
 				65010AD12101D160002EB953 /* PinchTaskTrialViewController.swift in Sources */,
+				65010AE221021472002EB953 /* RotationInstructionView.swift in Sources */,
 				65010AB221006A77002EB953 /* ScrollTrialView.swift in Sources */,
 				65CBE34E20FF0C850093F663 /* SwipeTaskInstructionViewController.swift in Sources */,
 			);

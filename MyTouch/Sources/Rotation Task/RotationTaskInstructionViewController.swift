@@ -10,7 +10,7 @@ import UIKit
 
 class RotationTaskInstructionViewController: TaskInstructionViewController {
     
-    let instructionView = ScrollInstructionView()
+    let instructionView = RotationInstructionView()
     
     override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
         return RotationTaskPracticeViewController()
