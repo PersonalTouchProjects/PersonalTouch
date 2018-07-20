@@ -47,6 +47,74 @@ class HomeViewController: UIViewController {
             startExamButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             startExamButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         ])
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "測驗", style: .plain, target: self, action: #selector(handleBarButton))
+    }
+    
+    @objc func handleBarButton() {
+        
+        let alert = UIAlertController(title: "測驗", message: nil, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "點擊", style: .default) { _ in
+            
+            let taskViewController = TapTaskInstructionViewController()
+            taskViewController.taskResultManager = TaskResultManager(session: Session())
+            
+            let navController = UINavigationController(rootViewController: taskViewController)
+            navController.setNavigationBarHidden(true, animated: false)
+            navController.modalTransitionStyle = .flipHorizontal
+            
+            self.present(navController, animated: true, completion: nil)
+        })
+        
+        alert.addAction(UIAlertAction(title: "掃動", style: .default) { _ in
+            
+            let taskViewController = SwipeTaskInstructionViewController()
+            taskViewController.taskResultManager = TaskResultManager(session: Session())
+            
+            let navController = UINavigationController(rootViewController: taskViewController)
+            navController.setNavigationBarHidden(true, animated: false)
+            navController.modalTransitionStyle = .flipHorizontal
+            
+            self.present(navController, animated: true, completion: nil)
+        })
+        alert.addAction(UIAlertAction(title: "拖拉放", style: .default) { _ in
+            
+            let taskViewController = DragAndDropTaskInstructionViewController()
+            taskViewController.taskResultManager = TaskResultManager(session: Session())
+            
+            let navController = UINavigationController(rootViewController: taskViewController)
+            navController.setNavigationBarHidden(true, animated: false)
+            navController.modalTransitionStyle = .flipHorizontal
+            
+            self.present(navController, animated: true, completion: nil)
+        })
+        alert.addAction(UIAlertAction(title: "滾動", style: .default) { _ in
+            
+            let taskViewController = ScrollTaskInstructionViewController()
+            taskViewController.taskResultManager = TaskResultManager(session: Session())
+            
+            let navController = UINavigationController(rootViewController: taskViewController)
+            navController.setNavigationBarHidden(true, animated: false)
+            navController.modalTransitionStyle = .flipHorizontal
+            
+            self.present(navController, animated: true, completion: nil)
+        })
+        alert.addAction(UIAlertAction(title: "縮放", style: .default) { _ in
+            
+            let taskViewController = PinchTaskInstructionViewController()
+            taskViewController.taskResultManager = TaskResultManager(session: Session())
+            
+            let navController = UINavigationController(rootViewController: taskViewController)
+            navController.setNavigationBarHidden(true, animated: false)
+            navController.modalTransitionStyle = .flipHorizontal
+            
+            self.present(navController, animated: true, completion: nil)
+        })
+        
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc func handleButton(_ sender: UIButton) {

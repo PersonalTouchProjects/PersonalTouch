@@ -20,6 +20,10 @@
 		65010AC42100C08A002EB953 /* ScrollInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC32100C08A002EB953 /* ScrollInstructionView.swift */; };
 		65010AC621018F1C002EB953 /* PinchTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC521018F1C002EB953 /* PinchTrial.swift */; };
 		65010AC821018FA1002EB953 /* RotationTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC721018FA1002EB953 /* RotationTrial.swift */; };
+		65010ACA2101C454002EB953 /* PinchTaskInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC92101C454002EB953 /* PinchTaskInstructionViewController.swift */; };
+		65010ACD2101C48E002EB953 /* PinchTaskPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ACC2101C48E002EB953 /* PinchTaskPracticeViewController.swift */; };
+		65010ACF2101C4CF002EB953 /* PinchTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ACE2101C4CF002EB953 /* PinchTrialView.swift */; };
+		65010AD12101D160002EB953 /* PinchTaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AD02101D160002EB953 /* PinchTaskTrialViewController.swift */; };
 		6514074820FC9770006BD17A /* TaskResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074720FC9770006BD17A /* TaskResultManager.swift */; };
 		6514074A20FDB013006BD17A /* Collection+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074920FDB013006BD17A /* Collection+HCI.swift */; };
 		6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548A9EB20E663E700B7C73F /* AppDelegate.swift */; };
@@ -83,6 +87,10 @@
 		65010AC32100C08A002EB953 /* ScrollInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollInstructionView.swift; sourceTree = "<group>"; };
 		65010AC521018F1C002EB953 /* PinchTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTrial.swift; sourceTree = "<group>"; };
 		65010AC721018FA1002EB953 /* RotationTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTrial.swift; sourceTree = "<group>"; };
+		65010AC92101C454002EB953 /* PinchTaskInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTaskInstructionViewController.swift; sourceTree = "<group>"; };
+		65010ACC2101C48E002EB953 /* PinchTaskPracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTaskPracticeViewController.swift; sourceTree = "<group>"; };
+		65010ACE2101C4CF002EB953 /* PinchTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTrialView.swift; sourceTree = "<group>"; };
+		65010AD02101D160002EB953 /* PinchTaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTaskTrialViewController.swift; sourceTree = "<group>"; };
 		6514074720FC9770006BD17A /* TaskResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResultManager.swift; sourceTree = "<group>"; };
 		6514074920FDB013006BD17A /* Collection+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+HCI.swift"; sourceTree = "<group>"; };
 		6548A9E820E663E700B7C73F /* MyTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +178,17 @@
 				65010AB721008A95002EB953 /* TrialScrollView.swift */,
 			);
 			path = "Touch Tracking Views";
+			sourceTree = "<group>";
+		};
+		65010ACB2101C45B002EB953 /* Pinch Task */ = {
+			isa = PBXGroup;
+			children = (
+				65010AC92101C454002EB953 /* PinchTaskInstructionViewController.swift */,
+				65010ACC2101C48E002EB953 /* PinchTaskPracticeViewController.swift */,
+				65010AD02101D160002EB953 /* PinchTaskTrialViewController.swift */,
+				65010ACE2101C4CF002EB953 /* PinchTrialView.swift */,
+			);
+			path = "Pinch Task";
 			sourceTree = "<group>";
 		};
 		6548A9DF20E663E700B7C73F = {
@@ -290,6 +309,7 @@
 				65CBE34C20FF0C660093F663 /* Swipe Task */,
 				65CBE35920FF3BA50093F663 /* Drag Task */,
 				65010AAE210069BF002EB953 /* Scroll Task */,
+				65010ACB2101C45B002EB953 /* Pinch Task */,
 				65F9246420E8D33F00A32BB0 /* Views */,
 				6548A9FD20E664C000B7C73F /* Models */,
 			);
@@ -437,6 +457,7 @@
 				65CBE35F20FF4C6D0093F663 /* DragAndDropTrialViewController.swift in Sources */,
 				65721BE920E9F4E900466E22 /* TapTrialView.swift in Sources */,
 				65010AB821008A95002EB953 /* TrialScrollView.swift in Sources */,
+				65010ACA2101C454002EB953 /* PinchTaskInstructionViewController.swift in Sources */,
 				65A470CC20EF967A0055E46E /* TaskInstructionViewController.swift in Sources */,
 				65FC45A520F3A00900B2A7CF /* UIDevice+HCI.swift in Sources */,
 				65010AC621018F1C002EB953 /* PinchTrial.swift in Sources */,
@@ -468,7 +489,9 @@
 				65A470CE20EF9EF20055E46E /* TapTaskInstructionViewController.swift in Sources */,
 				65F9246120E8A81100A32BB0 /* TaskTrialViewController.swift in Sources */,
 				65010AAD210068EC002EB953 /* ScrollTrial.swift in Sources */,
+				65010ACF2101C4CF002EB953 /* PinchTrialView.swift in Sources */,
 				65DC072E20F141E70070A7A7 /* TapTaskPracticeViewController.swift in Sources */,
+				65010ACD2101C48E002EB953 /* PinchTaskPracticeViewController.swift in Sources */,
 				65CBE34920FE11620093F663 /* TapInstructionView.swift in Sources */,
 				65CBE35B20FF3C5F0093F663 /* DragAndDropTrialView.swift in Sources */,
 				65F9245F20E800C900A32BB0 /* TouchTrackingView.swift in Sources */,
@@ -477,6 +500,7 @@
 				65CBE35020FF0CEC0093F663 /* SwipeTaskPracticeViewController.swift in Sources */,
 				6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */,
 				65010AB0210069EB002EB953 /* ScrollTrialViewController.swift in Sources */,
+				65010AD12101D160002EB953 /* PinchTaskTrialViewController.swift in Sources */,
 				65010AB221006A77002EB953 /* ScrollTrialView.swift in Sources */,
 				65CBE34E20FF0C850093F663 /* SwipeTaskInstructionViewController.swift in Sources */,
 			);

@@ -60,8 +60,8 @@ class DragAndDropTrialView: TrialView {
         destinationView.layer.borderWidth = 2.0
         destinationView.layer.borderColor = UIColor.black.cgColor
         
-        addSubview(destinationView)
-        addSubview(targetView)
+        contentView.addSubview(destinationView)
+        contentView.addSubview(targetView)
         
         panGestureRecognizer.addTarget(self, action: #selector(handlePan(_:)))
         panGestureRecognizer.cancelsTouchesInView = false
