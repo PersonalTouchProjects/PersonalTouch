@@ -30,6 +30,7 @@
 		65010ADA2101DF4B002EB953 /* CGAffineTransform+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */; };
 		65010ADC2101E6FE002EB953 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ADB2101E6FE002EB953 /* DashedLineView.swift */; };
 		65010ADE2101EF80002EB953 /* RotationTaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ADD2101EF7F002EB953 /* RotationTaskTrialViewController.swift */; };
+		65010AE021020B15002EB953 /* PinchInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ADF21020B15002EB953 /* PinchInstructionView.swift */; };
 		6514074820FC9770006BD17A /* TaskResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074720FC9770006BD17A /* TaskResultManager.swift */; };
 		6514074A20FDB013006BD17A /* Collection+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074920FDB013006BD17A /* Collection+HCI.swift */; };
 		6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548A9EB20E663E700B7C73F /* AppDelegate.swift */; };
@@ -103,6 +104,7 @@
 		65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+HCI.swift"; sourceTree = "<group>"; };
 		65010ADB2101E6FE002EB953 /* DashedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineView.swift; sourceTree = "<group>"; };
 		65010ADD2101EF7F002EB953 /* RotationTaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTaskTrialViewController.swift; sourceTree = "<group>"; };
+		65010ADF21020B15002EB953 /* PinchInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchInstructionView.swift; sourceTree = "<group>"; };
 		6514074720FC9770006BD17A /* TaskResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResultManager.swift; sourceTree = "<group>"; };
 		6514074920FDB013006BD17A /* Collection+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+HCI.swift"; sourceTree = "<group>"; };
 		6548A9E820E663E700B7C73F /* MyTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +201,7 @@
 				65010ACC2101C48E002EB953 /* PinchTaskPracticeViewController.swift */,
 				65010AD02101D160002EB953 /* PinchTaskTrialViewController.swift */,
 				65010ACE2101C4CF002EB953 /* PinchTrialView.swift */,
+				65010ADF21020B15002EB953 /* PinchInstructionView.swift */,
 			);
 			path = "Pinch Task";
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				6592ACF920E90667006A1BCB /* CountdownView.swift in Sources */,
 				6548AA0B20E667BB00B7C73F /* DragAndDropTrial.swift in Sources */,
 				65CBE35F20FF4C6D0093F663 /* DragAndDropTrialViewController.swift in Sources */,
+				65010AE021020B15002EB953 /* PinchInstructionView.swift in Sources */,
 				65721BE920E9F4E900466E22 /* TapTrialView.swift in Sources */,
 				65010AB821008A95002EB953 /* TrialScrollView.swift in Sources */,
 				65010ACA2101C454002EB953 /* PinchTaskInstructionViewController.swift in Sources */,

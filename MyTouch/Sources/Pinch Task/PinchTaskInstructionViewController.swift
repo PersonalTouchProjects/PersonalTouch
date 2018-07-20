@@ -10,7 +10,7 @@ import UIKit
 
 class PinchTaskInstructionViewController: TaskInstructionViewController {
     
-    let instructionView = ScrollInstructionView()
+    let instructionView = PinchInstructionView()
     
     override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
         return PinchTaskPracticeViewController()
