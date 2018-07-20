@@ -148,6 +148,7 @@ class ScrollTrialView: TrialScrollView {
 
 extension ScrollTrialView: UIScrollViewDelegate {
     
+    // TODO: success?
 }
 
 extension ScrollTrialView: UIGestureRecognizerDelegate {

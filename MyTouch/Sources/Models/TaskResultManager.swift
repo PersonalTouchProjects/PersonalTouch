@@ -33,6 +33,24 @@ class TaskResultManager {
             }
             session.dragAndDropTask?.trials.append(dragTrial)
         }
+        else if let scrollTrial = newTrial as? ScrollTrial {
+            if session.scrollTask == nil {
+                session.scrollTask = ScrollTask()
+            }
+            session.scrollTask?.trials.append(scrollTrial)
+        }
+        else if let pinchTrial = newTrial as? PinchTrial {
+            if session.pinchTask == nil {
+                session.pinchTask = PinchTask()
+            }
+            session.pinchTask?.trials.append(pinchTrial)
+        }
+        else if let rotationTrial = newTrial as? RotationTrial {
+            if session.rotationTask == nil {
+                session.rotationTask = RotationTask()
+            }
+            session.rotationTask?.trials.append(rotationTrial)
+        }
         else {
             otherTrials.append(newTrial)
         }

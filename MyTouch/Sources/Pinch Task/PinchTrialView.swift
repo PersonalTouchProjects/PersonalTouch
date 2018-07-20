@@ -112,6 +112,7 @@ class PinchTrialView: TrialView {
         switch sender.state {
         case .began:
             pinchBeganFrame = targetView.frame
+            success = true
         default:
             break
         }

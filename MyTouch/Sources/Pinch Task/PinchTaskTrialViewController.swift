@@ -38,15 +38,15 @@ class PinchTaskTrialViewController: TaskTrialViewController {
         
         
         // handle trial result
-        //        var dragTrial = DragAndDropTrial(initialFrame: scrollTrialView.initialFrame, targetFrame: scrollTrialView.destinationView.frame)
-        //        dragTrial.resultFrame = scrollTrialView.targetView.frame
-        //        dragTrial.startTime = trialStartDate.timeIntervalSince1970
-        //        dragTrial.endTime = trialEndDate.timeIntervalSince1970
-        //        dragTrial.rawTouchTracks = scrollTrialView.rawTracks
-        //        dragTrial.success = scrollTrialView.destinationView.frame.contains(scrollTrialView.targetView.center) // TODO: define success
-        //        dragTrial.addEvents(scrollTrialView.gestureRecognizerEvents)
-        //
-        //        taskResultManager?.addTrial(dragTrial)
+        var trial = PinchTrial(initialSize: pinchTrialView.initialFrame.size, targetSize: pinchTrialView.destinationView.frame.size)
+        trial.resultSize = pinchTrialView.targetView.frame.size
+        trial.startTime = trialStartDate.timeIntervalSince1970
+        trial.endTime = trialEndDate.timeIntervalSince1970
+        trial.rawTouchTracks = pinchTrialView.rawTracks
+        trial.success = pinchTrialView.success
+        trial.addEvents(pinchTrialView.gestureRecognizerEvents)
+        
+        taskResultManager?.addTrial(trial)
         // end of add new trial
         
         scales.removeFirst()

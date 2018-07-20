@@ -12,6 +12,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
     
     let scrollTrialView = ScrollTrialView()
     
+    var axis = ScrollTrial.Axis.horizontal
     var rows = 5
     var targetRow = 2
     var numberOfRepeats = 1
@@ -97,7 +98,7 @@ extension ScrollTaskTrialViewController: ScrollTrialViewDataSource {
     }
     
     func axis(_ scrollTrialView: ScrollTrialView) -> ScrollTrial.Axis {
-        return .horizontal
+        return axis
     }
 }
 

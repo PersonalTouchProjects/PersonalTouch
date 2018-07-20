@@ -24,6 +24,12 @@ class Session: Codable {
     
     var dragAndDropTask: DragAndDropTask?
     
+    var scrollTask: ScrollTask?
+    
+    var pinchTask: PinchTask?
+    
+    var rotationTask: RotationTask?
+    
     enum ArchiveError: Error {
         case noParticipant
         case incomplete
