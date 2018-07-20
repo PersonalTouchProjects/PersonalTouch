@@ -1,27 +1,20 @@
 //
-//  ScrollTrial.swift
+//  RotationTrial.swift
 //  MyTouch
 //
-//  Created by Tommy Lin on 2018/7/19.
+//  Created by Tommy Lin on 2018/7/20.
 //  Copyright © 2018年 NTU HCI Lab. All rights reserved.
 //
 
 import UIKit
 
-struct ScrollTrial: Trial {
+struct RotationTrial: Trial {
     
-    enum Axis: String, Codable {
-        case horizontal, vertical
-        case none
-    }
+    let initialRadian: CGFloat
     
-    let axis: Axis
+    let targetRadian: CGFloat
     
-    let initialOffset: CGPoint
-    
-    let targetOffset: CGPoint
-    
-    var resultOffset: CGPoint = .zero
+    var resulsRadian: CGFloat = 0
     
     var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
     
@@ -43,9 +36,8 @@ struct ScrollTrial: Trial {
     
     var rotationEvents: [RotationGestureRecognizerEvent] = []
     
-    init(axis: Axis, initialOffset: CGPoint, targetOffset: CGPoint) {
-        self.axis = axis
-        self.initialOffset = initialOffset
-        self.targetOffset = targetOffset
+    init(initialRadian: CGFloat, targetRadian: CGFloat) {
+        self.initialRadian = initialRadian
+        self.targetRadian = targetRadian
     }
 }

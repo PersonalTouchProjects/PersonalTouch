@@ -20,10 +20,7 @@ class ScrollInstructionView: UIView {
     private var targetFinalConstraints   = [NSLayoutConstraint]()
     
     private var fingerOnTargetConstraints = [NSLayoutConstraint]()
-//    private var fingerOnTargetFinalConstraints   = [NSLayoutConstraint]()
-    
     private var fingerOffTargetConstraints = [NSLayoutConstraint]()
-//    private var fingerOffFinalConstraints   = [NSLayoutConstraint]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

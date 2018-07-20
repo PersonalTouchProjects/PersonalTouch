@@ -1,27 +1,20 @@
 //
-//  ScrollTrial.swift
+//  PinchTrial.swift
 //  MyTouch
 //
-//  Created by Tommy Lin on 2018/7/19.
+//  Created by Tommy Lin on 2018/7/20.
 //  Copyright © 2018年 NTU HCI Lab. All rights reserved.
 //
 
 import UIKit
 
-struct ScrollTrial: Trial {
+struct PinchTrial: Trial {
     
-    enum Axis: String, Codable {
-        case horizontal, vertical
-        case none
-    }
+    let initialSize: CGSize
     
-    let axis: Axis
+    let targetSize: CGSize
     
-    let initialOffset: CGPoint
-    
-    let targetOffset: CGPoint
-    
-    var resultOffset: CGPoint = .zero
+    var resultSize: CGSize = .zero
     
     var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
     
@@ -43,9 +36,8 @@ struct ScrollTrial: Trial {
     
     var rotationEvents: [RotationGestureRecognizerEvent] = []
     
-    init(axis: Axis, initialOffset: CGPoint, targetOffset: CGPoint) {
-        self.axis = axis
-        self.initialOffset = initialOffset
-        self.targetOffset = targetOffset
+    init(initialSize: CGSize, targetSize: CGSize) {
+        self.initialSize = initialSize
+        self.targetSize = targetSize
     }
 }

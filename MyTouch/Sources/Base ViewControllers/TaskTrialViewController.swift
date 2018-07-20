@@ -235,7 +235,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     }
     
     func willStartTrial() {
-        
+        // navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func startTrial() {
@@ -306,6 +306,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     func didEndTrial() {
         self.trialView.stopTracking()
         self.trialView.isUserInteractionEnabled = false
+        // navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func presentNextViewController() {

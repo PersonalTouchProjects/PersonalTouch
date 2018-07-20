@@ -27,6 +27,8 @@ extension Task {
     }
 }
 
+// MARK: - Tap Task
+
 struct TapTask: Task {
     var trials: [TapTrial] = []
     
@@ -47,6 +49,8 @@ struct TapTask: Task {
     
     init() {}
 }
+
+// MARK: - Swipe Task
 
 struct SwipeTask: Task {
     var trials: [SwipeTrial] = []
@@ -69,6 +73,8 @@ struct SwipeTask: Task {
     init() {}
 }
 
+// MARK: - Drag And Drop Task
+
 struct DragAndDropTask: Task {
     var trials: [DragAndDropTrial] = []
     
@@ -85,6 +91,75 @@ struct DragAndDropTask: Task {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         trials = try container.decode([DragAndDropTrial].self, forKey: .trials)
+    }
+    
+    init() {}
+}
+
+// MARK: - Scroll Task
+
+struct ScrollTask: Task {
+    var trials: [ScrollTrial] = []
+    
+    enum CodingKeys: CodingKey {
+        case trials, successRate
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(trials, forKey: .trials)
+        try container.encode(successRate, forKey: .successRate)
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        trials = try container.decode([ScrollTrial].self, forKey: .trials)
+    }
+    
+    init() {}
+}
+
+// MARK: - Pinch Task
+
+struct PinchTask: Task {
+    var trials: [PinchTrial] = []
+    
+    enum CodingKeys: CodingKey {
+        case trials, successRate
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(trials, forKey: .trials)
+        try container.encode(successRate, forKey: .successRate)
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        trials = try container.decode([PinchTrial].self, forKey: .trials)
+    }
+    
+    init() {}
+}
+
+// MARK: - Rotation Task
+
+struct RotationTask: Task {
+    var trials: [RotationTrial] = []
+    
+    enum CodingKeys: CodingKey {
+        case trials, successRate
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(trials, forKey: .trials)
+        try container.encode(successRate, forKey: .successRate)
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        trials = try container.decode([RotationTrial].self, forKey: .trials)
     }
     
     init() {}
