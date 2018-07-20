@@ -23,7 +23,7 @@ class PinchTrialView: TrialView {
     let pinchGestureRecognizer = UIPinchGestureRecognizer()
     
     private var targetScale: CGFloat = 1.0
-    private var currentScale: CGFloat = 1.0 {
+    private var currentGestureScale: CGFloat = 1.0 {
         didSet { setNeedsLayout() }
     }
     private var pinchBeganFrame: CGRect?
@@ -88,8 +88,8 @@ class PinchTrialView: TrialView {
         let currentHeight: CGFloat
         
         if let pinchBeganFrame = pinchBeganFrame {
-            currentWidth = pinchBeganFrame.size.width * currentScale
-            currentHeight = pinchBeganFrame.size.height * currentScale
+            currentWidth = pinchBeganFrame.size.width * currentGestureScale
+            currentHeight = pinchBeganFrame.size.height * currentGestureScale
         } else {
             currentWidth = initialFrame.size.width
             currentHeight = initialFrame.size.height
@@ -117,7 +117,7 @@ class PinchTrialView: TrialView {
             break
         }
         
-        currentScale = sender.scale
+        currentGestureScale = sender.scale
     }
     
     func reloadData() {
@@ -125,7 +125,7 @@ class PinchTrialView: TrialView {
         reset()
         
         targetScale = dataSource?.targetScale(self) ?? 1.0
-        currentScale = 1.0
+        currentGestureScale = 1.0
         pinchBeganFrame = nil
         
         setNeedsLayout()

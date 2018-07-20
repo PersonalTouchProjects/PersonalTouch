@@ -111,6 +111,17 @@ class HomeViewController: UIViewController {
             
             self.present(navController, animated: true, completion: nil)
         })
+        alert.addAction(UIAlertAction(title: "旋轉", style: .default) { _ in
+            
+            let taskViewController = RotationTaskInstructionViewController()
+            taskViewController.taskResultManager = TaskResultManager(session: Session())
+            
+            let navController = UINavigationController(rootViewController: taskViewController)
+            navController.setNavigationBarHidden(true, animated: false)
+            navController.modalTransitionStyle = .flipHorizontal
+            
+            self.present(navController, animated: true, completion: nil)
+        })
         
         alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         
