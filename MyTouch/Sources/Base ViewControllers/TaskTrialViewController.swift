@@ -16,13 +16,11 @@ class TaskTrialViewController: TaskViewController {
     // MARK: - UI Properties
     
     lazy var cancelButton: UIBarButtonItem = {
-        return UIBarButtonItem(title: NSLocalizedString("CANCEL_TASK_BUTTON", comment: ""), style: .plain, target: self, action: #selector(dismissTaskWithConfimation))
+        return UIBarButtonItem(title: NSLocalizedString("CANCEL_TASK_BUTTON", comment: ""), style: .plain, target: self, action: #selector(TaskViewController.dismissTask))
     }()
     
     lazy var nextButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: NSLocalizedString("NEXT_BUTTON", comment: ""), style: .plain, target: self, action: #selector(presentNext))
-        button.isEnabled = self.prefersNextButtonEnabled()
-        return button
+        return UIBarButtonItem(title: NSLocalizedString("NEXT_BUTTON", comment: ""), style: .plain, target: self, action: #selector(TaskViewController.presentNext))
     }()
     
     let instructionLabel = UILabel()
@@ -171,6 +169,12 @@ class TaskTrialViewController: TaskViewController {
         _trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        nextButton.isEnabled = prefersNextButtonEnabled()
+    }
+    
     
     // MARK: - UI Event Handlers
     
@@ -260,8 +264,6 @@ class TaskTrialViewController: TaskViewController {
         if let isBarHidden = navigationController?.isNavigationBarHidden, isBarHidden {
             navigationController?.setNavigationBarHidden(false, animated: false)
         }
-        
-        nextButton.isEnabled = prefersNextButtonEnabled()
     }
     
     func trialView() -> (UIView & TrialViewProtocol) {
@@ -270,6 +272,10 @@ class TaskTrialViewController: TaskViewController {
     
     func prefersNextButtonEnabled() -> Bool {
         return true
+    }
+    
+    func setNeedsNextButtonUpdate() {
+        nextButton.isEnabled = prefersNextButtonEnabled()
     }
 }
 

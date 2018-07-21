@@ -13,7 +13,9 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
     let swipeTrialView = SwipeTrialView()
     
     var numberOfRepeats = 1
-    var directions: [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] = []
+    var directions: [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] = [] {
+        didSet { setNeedsNextButtonUpdate() }
+    }
     
     override func nextViewController() -> TaskViewController? {
         return TaskEndViewController()
@@ -21,6 +23,10 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
     
     override func trialView() -> (UIView & TrialViewProtocol) {
         return swipeTrialView
+    }
+    
+    override func prefersNextButtonEnabled() -> Bool {
+        return directions.isEmpty
     }
     
     override func viewDidLoad() {
@@ -52,22 +58,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
         
         directions.removeFirst()
         
-        if directions.isEmpty {
-            
-            let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
-                
-                if let taskViewController = self.nextViewController() {
-                    taskViewController.taskResultManager = self.taskResultManager
-                    self.navigationController?.pushViewController(taskViewController, animated: true)
-                }
-            }
-            
-            alertController.addAction(confirmAction)
-            
-            present(alertController, animated: true, completion: nil)
-            
-        } else {
+        if !directions.isEmpty {
             swipeTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - directions.count + 1))"
         }
@@ -86,8 +77,6 @@ extension SwipeTaskTrialViewController: SwipeTrialViewDataSource {
 }
 
 private func directionGenerator(repeats: Int) -> [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] {
-    
-//    return [(.left, .left)]
     
     return (0..<repeats).flatMap { _ in
         return [.left, .right].flatMap { area in

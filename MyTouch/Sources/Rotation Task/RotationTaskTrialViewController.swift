@@ -13,7 +13,9 @@ class RotationTaskTrialViewController: TaskTrialViewController {
     let rotationTrialView = RotationTrialView()
     
     var numberOfRepeats = 1
-    var angles: [CGFloat] = []
+    var angles: [CGFloat] = [] {
+        didSet { setNeedsNextButtonUpdate() }
+    }
     
     override func nextViewController() -> TaskViewController? {
         return TaskEndViewController()
@@ -21,6 +23,10 @@ class RotationTaskTrialViewController: TaskTrialViewController {
     
     override func trialView() -> (UIView & TrialViewProtocol) {
         return rotationTrialView
+    }
+    
+    override func prefersNextButtonEnabled() -> Bool {
+        return angles.isEmpty
     }
     
     override func viewDidLoad() {
@@ -49,22 +55,7 @@ class RotationTaskTrialViewController: TaskTrialViewController {
         
         angles.removeFirst()
         
-        if angles.isEmpty {
-            
-            let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
-                
-                if let taskViewController = self.nextViewController() {
-                    taskViewController.taskResultManager = self.taskResultManager
-                    self.navigationController?.pushViewController(taskViewController, animated: true)
-                }
-            }
-            
-            alertController.addAction(confirmAction)
-            
-            present(alertController, animated: true, completion: nil)
-            
-        } else {
+        if !angles.isEmpty {
             rotationTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - angles.count + 1))"
         }

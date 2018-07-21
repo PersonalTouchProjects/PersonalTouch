@@ -16,6 +16,10 @@ class ScrollTaskPracticeViewController: TaskTrialViewController {
         return ScrollTaskTrialViewController()
     }
     
+    override func presentNextConfirmTitle() -> String? {
+        return "Start Trials?"
+    }
+    
     override func trialView() -> (UIView & TrialViewProtocol) {
         return scrollTrialView
     }

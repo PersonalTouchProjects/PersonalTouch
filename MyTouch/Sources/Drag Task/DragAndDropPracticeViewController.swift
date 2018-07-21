@@ -16,6 +16,10 @@ class DragAndDropTaskPracticeViewController: TaskTrialViewController {
         return DragAndDropTaskTrialViewController()
     }
     
+    override func presentNextConfirmTitle() -> String? {
+        return "Start Trials?"
+    }
+    
     override func trialView() -> (UIView & TrialViewProtocol) {
         return dragAndDropTrialView
     }

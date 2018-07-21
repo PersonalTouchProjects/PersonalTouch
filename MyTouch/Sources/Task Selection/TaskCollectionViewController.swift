@@ -32,7 +32,7 @@ class TaskCollectionViewController: TaskViewController {
         title = "Tasks"
         
         view.backgroundColor = .white
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissTaskWithConfimation))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissTask))
         
         collectionView.backgroundColor = .clear
         collectionView.alwaysBounceVertical = true
@@ -49,6 +49,11 @@ class TaskCollectionViewController: TaskViewController {
         ])
         
         taskViewControllers = _taskViewControllers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {

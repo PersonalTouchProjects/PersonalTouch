@@ -16,14 +16,28 @@ class TapTaskTrialViewController: TaskTrialViewController {
     var numberOfRows = 1
     var numberOfRepeats = 1
     
-    var positions: [(Int, Int)] = []
+    var positions: [(Int, Int)] = [] {
+        didSet { setNeedsNextButtonUpdate() }
+    }
     
     override func nextViewController() -> TaskViewController? {
         return TaskEndViewController()
     }
     
+    override func dismissConfirmTitle() -> String? {
+        return "Are you sure?"
+    }
+    
+    override func dismissConfirmMessage() -> String? {
+        return "Data will be deleted."
+    }
+    
     override func trialView() -> (UIView & TrialViewProtocol) {
         return tapTrialView
+    }
+    
+    override func prefersNextButtonEnabled() -> Bool {
+        return positions.isEmpty
     }
     
     override func viewDidLoad() {
@@ -52,22 +66,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
         
         positions.removeFirst()
         
-        if positions.isEmpty {
-            
-            let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
-                
-                if let taskViewController = self.nextViewController() {
-                    taskViewController.taskResultManager = self.taskResultManager
-                    self.navigationController?.pushViewController(taskViewController, animated: true)
-                }
-            }
-            
-            alertController.addAction(confirmAction)
-            
-            present(alertController, animated: true, completion: nil)
-            
-        } else {
+        if !positions.isEmpty {
             tapTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
         }

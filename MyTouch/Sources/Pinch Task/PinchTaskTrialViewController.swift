@@ -13,7 +13,9 @@ class PinchTaskTrialViewController: TaskTrialViewController {
     let pinchTrialView = PinchTrialView()
     
     var numberOfRepeats = 1
-    var scales: [CGFloat] = []
+    var scales: [CGFloat] = [] {
+        didSet { setNeedsNextButtonUpdate() }
+    }
     
     override func nextViewController() -> TaskViewController? {
         return TaskEndViewController()
@@ -21,6 +23,10 @@ class PinchTaskTrialViewController: TaskTrialViewController {
     
     override func trialView() -> (UIView & TrialViewProtocol) {
         return pinchTrialView
+    }
+    
+    override func prefersNextButtonEnabled() -> Bool {
+        return scales.isEmpty
     }
     
     override func viewDidLoad() {
@@ -49,22 +55,7 @@ class PinchTaskTrialViewController: TaskTrialViewController {
         
         scales.removeFirst()
         
-        if scales.isEmpty {
-            
-            let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
-                
-                if let taskViewController = self.nextViewController() {
-                    taskViewController.taskResultManager = self.taskResultManager
-                    self.navigationController?.pushViewController(taskViewController, animated: true)
-                }
-            }
-            
-            alertController.addAction(confirmAction)
-            
-            present(alertController, animated: true, completion: nil)
-            
-        } else {
+        if !scales.isEmpty {
             pinchTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - scales.count + 1))"
         }

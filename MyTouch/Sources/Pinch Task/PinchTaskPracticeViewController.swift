@@ -16,6 +16,10 @@ class PinchTaskPracticeViewController: TaskTrialViewController {
         return PinchTaskTrialViewController()
     }
     
+    override func presentNextConfirmTitle() -> String? {
+        return "Start Trials?"
+    }
+    
     override func trialView() -> (UIView & TrialViewProtocol) {
         return pinchTrialView
     }

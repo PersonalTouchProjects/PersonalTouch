@@ -16,7 +16,9 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
     var rows = 5
     var targetRow = 2
     var numberOfRepeats = 1
-    var positions: [Int] = []
+    var positions: [Int] = [] {
+        didSet { setNeedsNextButtonUpdate() }
+    }
     
     override func nextViewController() -> TaskViewController? {
         return TaskEndViewController()
@@ -24,6 +26,10 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
     
     override func trialView() -> (UIView & TrialViewProtocol) {
         return scrollTrialView
+    }
+    
+    override func prefersNextButtonEnabled() -> Bool {
+        return positions.isEmpty
     }
     
     override func viewDidLoad() {
@@ -59,22 +65,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
         
         positions.removeFirst()
         
-        if positions.isEmpty {
-            
-            let alertController = UIAlertController(title: "You're done!", message: "Go away.", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
-                
-                if let taskViewController = self.nextViewController() {
-                    taskViewController.taskResultManager = self.taskResultManager
-                    self.navigationController?.pushViewController(taskViewController, animated: true)
-                }
-            }
-            
-            alertController.addAction(confirmAction)
-            
-            present(alertController, animated: true, completion: nil)
-            
-        } else {
+        if !positions.isEmpty  {
             scrollTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
         }
