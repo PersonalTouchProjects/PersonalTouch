@@ -41,7 +41,7 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController {
         dragTrial.endTime = trialEndDate.timeIntervalSince1970
         dragTrial.rawTouchTracks = dragAndDropTrialView.rawTracks
         dragTrial.success = dragAndDropTrialView.destinationView.frame.contains(dragAndDropTrialView.targetView.center) // TODO: define success
-        dragTrial.addEvents(dragAndDropTrialView.gestureRecognizerEvents)
+        dragTrial.allEvents = dragAndDropTrialView.gestureRecognizerEvents
         
         taskResultManager?.addTrial(dragTrial)
         // end of add new trial

@@ -21,7 +21,7 @@ class TaskTrialViewController: TaskViewController {
     
     lazy var nextButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: NSLocalizedString("NEXT_BUTTON", comment: ""), style: .plain, target: self, action: #selector(presentNext))
-        button.isEnabled = false
+        button.isEnabled = self.prefersNextButtonEnabled()
         return button
     }()
     
@@ -90,8 +90,6 @@ class TaskTrialViewController: TaskViewController {
         previewBorderView.layer.borderColor = UIColor.black.cgColor
         previewBorderView.layer.borderWidth = 2.0
         previewBorderView.layer.cornerRadius = 4.0
-        
-        _trialView.backgroundColor = .red
 
         view.addSubview(instructionLabel)
         view.addSubview(actionButton)
@@ -192,7 +190,7 @@ class TaskTrialViewController: TaskViewController {
         }
     }
     
-    func startTrial() {
+    final func startTrial() {
         
         guard shouldStartTrial() else { return }
         
@@ -235,7 +233,7 @@ class TaskTrialViewController: TaskViewController {
     
     func willEndTrial() {}
     
-    func endTrial() {
+    final func endTrial() {
         
         guard shouldEndTrial() else { return }
         
@@ -261,10 +259,16 @@ class TaskTrialViewController: TaskViewController {
         if let isBarHidden = navigationController?.isNavigationBarHidden, isBarHidden {
             navigationController?.setNavigationBarHidden(false, animated: false)
         }
+        
+        nextButton.isEnabled = prefersNextButtonEnabled()
     }
     
     func trialView() -> (UIView & TrialViewProtocol) {
         return TrialView()
+    }
+    
+    func prefersNextButtonEnabled() -> Bool {
+        return true
     }
 }
 

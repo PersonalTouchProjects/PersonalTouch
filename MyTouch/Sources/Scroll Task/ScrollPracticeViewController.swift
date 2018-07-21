@@ -12,6 +12,12 @@ class ScrollTaskPracticeViewController: TaskTrialViewController {
     
     let scrollTrialView = ScrollTrialView()
     
+    private var practiced = false
+    
+    override func prefersNextButtonEnabled() -> Bool {
+        return practiced
+    }
+    
     override func nextViewController() -> TaskViewController {
         return ScrollTaskTrialViewController()
     }
@@ -31,6 +37,12 @@ class ScrollTaskPracticeViewController: TaskTrialViewController {
         super.didStartTrial()
         
         scrollTrialView.scrollView.isScrollEnabled = true
+    }
+    
+    override func willEndTrial() {
+        super.willEndTrial()
+        
+        practiced = true
     }
     
     override func didEndTrial() {

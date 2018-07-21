@@ -44,7 +44,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
         tapTrial.endTime = trialEndDate.timeIntervalSince1970
         tapTrial.rawTouchTracks = tapTrialView.rawTracks
         tapTrial.success = tapTrialView.success
-        tapTrial.addEvents(tapTrialView.gestureRecognizerEvents)
+        tapTrial.allEvents = tapTrialView.gestureRecognizerEvents
         
         taskResultManager?.addTrial(tapTrial)
         // end of add new trial

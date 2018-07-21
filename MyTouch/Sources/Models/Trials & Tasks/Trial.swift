@@ -20,7 +20,7 @@ protocol Trial: Codable {
     
     
     
-    var allEvents: [GestureRecognizerEvent] { get }
+    var allEvents: [GestureRecognizerEvent] { set get }
     
     var tapEvents: [TapGestureRecognizerEvent] { get set }
     
@@ -34,30 +34,41 @@ protocol Trial: Codable {
     
     var rotationEvents: [RotationGestureRecognizerEvent] { get set }
     
-    mutating func addEvents(_ newEvents: [GestureRecognizerEvent])
+//    mutating func addEvents(_ newEvents: [GestureRecognizerEvent])
 }
 
 extension Trial {
     
     var allEvents: [GestureRecognizerEvent] {
         
-        var events = [GestureRecognizerEvent]()
-        events += tapEvents as [GestureRecognizerEvent]
-        events += panEvents as [GestureRecognizerEvent]
-        events += longPressEvents as [GestureRecognizerEvent]
-        events += swipeEvents as [GestureRecognizerEvent]
-        events += pinchEvents as [GestureRecognizerEvent]
-        events += rotationEvents as [GestureRecognizerEvent]
-        return events
+        get {
+            var events = [GestureRecognizerEvent]()
+            events += tapEvents       as [GestureRecognizerEvent]
+            events += panEvents       as [GestureRecognizerEvent]
+            events += longPressEvents as [GestureRecognizerEvent]
+            events += swipeEvents     as [GestureRecognizerEvent]
+            events += pinchEvents     as [GestureRecognizerEvent]
+            events += rotationEvents  as [GestureRecognizerEvent]
+            return events
+        }
+        
+        set {
+            tapEvents       += newValue.filter({ $0 is TapGestureRecognizerEvent })       as! [TapGestureRecognizerEvent]
+            panEvents       += newValue.filter({ $0 is PanGestureRecognizerEvent })       as! [PanGestureRecognizerEvent]
+            longPressEvents += newValue.filter({ $0 is LongPressGestureRecognizerEvent }) as! [LongPressGestureRecognizerEvent]
+            swipeEvents     += newValue.filter({ $0 is SwipeGestureRecognizerEvent })     as! [SwipeGestureRecognizerEvent]
+            pinchEvents     += newValue.filter({ $0 is PinchGestureRecognizerEvent })     as! [PinchGestureRecognizerEvent]
+            rotationEvents  += newValue.filter({ $0 is RotationGestureRecognizerEvent })  as! [RotationGestureRecognizerEvent]
+        }
     }
     
-    mutating func addEvents(_ newEvents: [GestureRecognizerEvent]) {
-        
-        tapEvents += newEvents.filter({ $0 is TapGestureRecognizerEvent }) as! [TapGestureRecognizerEvent]
-        panEvents += newEvents.filter({ $0 is PanGestureRecognizerEvent }) as! [PanGestureRecognizerEvent]
-        longPressEvents += newEvents.filter({ $0 is LongPressGestureRecognizerEvent }) as! [LongPressGestureRecognizerEvent]
-        swipeEvents += newEvents.filter({ $0 is SwipeGestureRecognizerEvent }) as! [SwipeGestureRecognizerEvent]
-        pinchEvents += newEvents.filter({ $0 is PinchGestureRecognizerEvent }) as! [PinchGestureRecognizerEvent]
-        rotationEvents += newEvents.filter({ $0 is RotationGestureRecognizerEvent }) as! [RotationGestureRecognizerEvent]
-    }
+//    mutating func addEvents(_ newEvents: [GestureRecognizerEvent]) {
+//        
+//        tapEvents += newEvents.filter({ $0 is TapGestureRecognizerEvent }) as! [TapGestureRecognizerEvent]
+//        panEvents += newEvents.filter({ $0 is PanGestureRecognizerEvent }) as! [PanGestureRecognizerEvent]
+//        longPressEvents += newEvents.filter({ $0 is LongPressGestureRecognizerEvent }) as! [LongPressGestureRecognizerEvent]
+//        swipeEvents += newEvents.filter({ $0 is SwipeGestureRecognizerEvent }) as! [SwipeGestureRecognizerEvent]
+//        pinchEvents += newEvents.filter({ $0 is PinchGestureRecognizerEvent }) as! [PinchGestureRecognizerEvent]
+//        rotationEvents += newEvents.filter({ $0 is RotationGestureRecognizerEvent }) as! [RotationGestureRecognizerEvent]
+//    }
 }

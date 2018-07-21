@@ -12,6 +12,12 @@ class RotationTaskPracticeViewController: TaskTrialViewController {
     
     let rotationTrialView = RotationTrialView()
     
+    private var practiced = false
+    
+    override func prefersNextButtonEnabled() -> Bool {
+        return practiced
+    }
+    
     override func nextViewController() -> TaskViewController {
         return RotationTaskTrialViewController()
     }
@@ -24,6 +30,12 @@ class RotationTaskPracticeViewController: TaskTrialViewController {
         super.viewDidLoad()
         
         rotationTrialView.dataSource = self
+    }
+    
+    override func willEndTrial() {
+        super.willEndTrial()
+        
+        practiced = true
     }
     
     override func didEndTrial() {

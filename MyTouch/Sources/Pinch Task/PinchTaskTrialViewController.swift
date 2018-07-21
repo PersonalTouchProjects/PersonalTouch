@@ -42,7 +42,7 @@ class PinchTaskTrialViewController: TaskTrialViewController {
         trial.endTime = trialEndDate.timeIntervalSince1970
         trial.rawTouchTracks = pinchTrialView.rawTracks
         trial.success = pinchTrialView.success
-        trial.addEvents(pinchTrialView.gestureRecognizerEvents)
+        trial.allEvents = pinchTrialView.gestureRecognizerEvents
         
         taskResultManager?.addTrial(trial)
         // end of add new trial

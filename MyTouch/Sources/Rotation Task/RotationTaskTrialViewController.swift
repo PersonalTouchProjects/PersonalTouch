@@ -42,7 +42,7 @@ class RotationTaskTrialViewController: TaskTrialViewController {
         trial.endTime = trialEndDate.timeIntervalSince1970
         trial.rawTouchTracks = rotationTrialView.rawTracks
         trial.success = rotationTrialView.success
-        trial.addEvents(rotationTrialView.gestureRecognizerEvents)
+        trial.allEvents = rotationTrialView.gestureRecognizerEvents
         
         taskResultManager?.addTrial(trial)
         // end of add new trial

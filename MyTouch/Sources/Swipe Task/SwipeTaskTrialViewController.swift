@@ -29,6 +29,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
         directions = directionGenerator(repeats: 1).shuffled()
         
         swipeTrialView.dataSource = self
+        countDownView.label.textColor = .white
     }
     
     override func didEndTrial() {
@@ -43,7 +44,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
         swipeTrial.endTime = trialEndDate.timeIntervalSince1970
         swipeTrial.rawTouchTracks = swipeTrialView.rawTracks
         swipeTrial.success = targetDirection == swipeTrialView.recognizedDirection
-        swipeTrial.addEvents(swipeTrialView.gestureRecognizerEvents)
+        swipeTrial.allEvents = swipeTrialView.gestureRecognizerEvents
         
         
         taskResultManager?.addTrial(swipeTrial)

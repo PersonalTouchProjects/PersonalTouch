@@ -12,6 +12,12 @@ class SwipeTaskPracticeViewController: TaskTrialViewController {
     
     let swipeTrialView = SwipeTrialView()
     
+    private var practiced = false
+    
+    override func prefersNextButtonEnabled() -> Bool {
+        return practiced
+    }
+    
     override func nextViewController() -> TaskViewController {
         return SwipeTaskTrialViewController()
     }
@@ -24,6 +30,13 @@ class SwipeTaskPracticeViewController: TaskTrialViewController {
         super.viewDidLoad()
         
         swipeTrialView.dataSource = self
+        countDownView.label.textColor = .white
+    }
+    
+    override func willEndTrial() {
+        super.willEndTrial()
+        
+        practiced = true
     }
     
     override func didEndTrial() {
