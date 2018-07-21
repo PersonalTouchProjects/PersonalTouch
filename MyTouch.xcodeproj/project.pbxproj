@@ -34,6 +34,9 @@
 		65010AE221021472002EB953 /* RotationInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AE121021472002EB953 /* RotationInstructionView.swift */; };
 		65083185210319FB00C8A012 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65083184210319FB00C8A012 /* TaskViewController.swift */; };
 		6508318921034B7800C8A012 /* DashedBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6508318821034B7800C8A012 /* DashedBorderView.swift */; };
+		6508318D210352F200C8A012 /* ActiveTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6508318A210352F200C8A012 /* ActiveTask.swift */; };
+		6508318E210352F200C8A012 /* ConsentTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6508318B210352F200C8A012 /* ConsentTask.swift */; };
+		6508318F210352F200C8A012 /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6508318C210352F200C8A012 /* SurveyTask.swift */; };
 		6514074820FC9770006BD17A /* TaskResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074720FC9770006BD17A /* TaskResultManager.swift */; };
 		6514074A20FDB013006BD17A /* Collection+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074920FDB013006BD17A /* Collection+HCI.swift */; };
 		6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548A9EB20E663E700B7C73F /* AppDelegate.swift */; };
@@ -81,6 +84,7 @@
 		65FC45A520F3A00900B2A7CF /* UIDevice+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */; };
 		65FC45A720F3A04C00B2A7CF /* UIApplication+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */; };
 		65FC45A920F3A13300B2A7CF /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A820F3A13300B2A7CF /* Participant.swift */; };
+		9CCF570D62C6E4015845B0EF /* Pods_MyTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +115,9 @@
 		65010AE121021472002EB953 /* RotationInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationInstructionView.swift; sourceTree = "<group>"; };
 		65083184210319FB00C8A012 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		6508318821034B7800C8A012 /* DashedBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedBorderView.swift; sourceTree = "<group>"; };
+		6508318A210352F200C8A012 /* ActiveTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveTask.swift; sourceTree = "<group>"; };
+		6508318B210352F200C8A012 /* ConsentTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentTask.swift; sourceTree = "<group>"; };
+		6508318C210352F200C8A012 /* SurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
 		6514074720FC9770006BD17A /* TaskResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResultManager.swift; sourceTree = "<group>"; };
 		6514074920FDB013006BD17A /* Collection+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+HCI.swift"; sourceTree = "<group>"; };
 		6548A9E820E663E700B7C73F /* MyTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +170,9 @@
 		65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+HCI.swift"; sourceTree = "<group>"; };
 		65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+HCI.swift"; sourceTree = "<group>"; };
 		65FC45A820F3A13300B2A7CF /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
+		84D8FC000E54AB0CD2054783 /* Pods-MyTouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch.debug.xcconfig"; sourceTree = "<group>"; };
+		85F9F8729020785E6D9076D8 /* Pods-MyTouch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouch.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch.release.xcconfig"; sourceTree = "<group>"; };
+		A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,12 +180,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CCF570D62C6E4015845B0EF /* Pods_MyTouch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1133DC3DDE1A2C6D4C98338E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				84D8FC000E54AB0CD2054783 /* Pods-MyTouch.debug.xcconfig */,
+				85F9F8729020785E6D9076D8 /* Pods-MyTouch.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3E5F53BE95ED62A7358E4082 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		65010AAE210069BF002EB953 /* Scroll Task */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,11 +252,23 @@
 			path = "Rotation Task";
 			sourceTree = "<group>";
 		};
+		65083190210352F600C8A012 /* Pre Task */ = {
+			isa = PBXGroup;
+			children = (
+				6508318A210352F200C8A012 /* ActiveTask.swift */,
+				6508318B210352F200C8A012 /* ConsentTask.swift */,
+				6508318C210352F200C8A012 /* SurveyTask.swift */,
+			);
+			path = "Pre Task";
+			sourceTree = "<group>";
+		};
 		6548A9DF20E663E700B7C73F = {
 			isa = PBXGroup;
 			children = (
 				6548A9EA20E663E700B7C73F /* MyTouch */,
 				6548A9E920E663E700B7C73F /* Products */,
+				1133DC3DDE1A2C6D4C98338E /* Pods */,
+				3E5F53BE95ED62A7358E4082 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -336,6 +376,7 @@
 		65CBE3642100606B0093F663 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				65083190210352F600C8A012 /* Pre Task */,
 				65FC45A020F39BA200B2A7CF /* Extensions */,
 				65F8BD4E20EB88FA002F7C69 /* Gesture Recognizers */,
 				6548AA1020E66DB200B7C73F /* Base ViewControllers */,
@@ -409,9 +450,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6548A9FA20E663E900B7C73F /* Build configuration list for PBXNativeTarget "MyTouch" */;
 			buildPhases = (
+				282E5B196E03F020EDCFB3AF /* [CP] Check Pods Manifest.lock */,
 				6548A9E420E663E700B7C73F /* Sources */,
 				6548A9E520E663E700B7C73F /* Frameworks */,
 				6548A9E620E663E700B7C73F /* Resources */,
+				336144C81A3FD580218B33F7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -476,6 +519,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		282E5B196E03F020EDCFB3AF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyTouch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		336144C81A3FD580218B33F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ResearchKit/ResearchKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ResearchKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6548A9E420E663E700B7C73F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -493,6 +575,7 @@
 				65010ADC2101E6FE002EB953 /* DashedLineView.swift in Sources */,
 				65010ABD2100957A002EB953 /* TouchThroughView.swift in Sources */,
 				65FC45A720F3A04C00B2A7CF /* UIApplication+HCI.swift in Sources */,
+				6508318F210352F200C8A012 /* SurveyTask.swift in Sources */,
 				6592ACF920E90667006A1BCB /* CountdownView.swift in Sources */,
 				6548AA0B20E667BB00B7C73F /* DragAndDropTrial.swift in Sources */,
 				65CBE35F20FF4C6D0093F663 /* DragAndDropTrialViewController.swift in Sources */,
@@ -506,6 +589,7 @@
 				65FC45A320F39FAF00B2A7CF /* DeviceInfo.swift in Sources */,
 				65010AC42100C08A002EB953 /* ScrollInstructionView.swift in Sources */,
 				65CBE35420FF0D220093F663 /* SwipeTrialView.swift in Sources */,
+				6508318D210352F200C8A012 /* ActiveTask.swift in Sources */,
 				65010ABA21008E70002EB953 /* TouchTrackingViewProtocols.swift in Sources */,
 				65010AB621007D81002EB953 /* TouchTrackingRecognizer.swift in Sources */,
 				65F9246620E8D39A00A32BB0 /* TapTaskTrialViewController.swift in Sources */,
@@ -537,6 +621,7 @@
 				65010AD82101D5C8002EB953 /* RotationTrialView.swift in Sources */,
 				65010ACD2101C48E002EB953 /* PinchTaskPracticeViewController.swift in Sources */,
 				65CBE34920FE11620093F663 /* TapInstructionView.swift in Sources */,
+				6508318E210352F200C8A012 /* ConsentTask.swift in Sources */,
 				65CBE35B20FF3C5F0093F663 /* DragAndDropTrialView.swift in Sources */,
 				65F9245F20E800C900A32BB0 /* TouchTrackingView.swift in Sources */,
 				65010AD62101D594002EB953 /* RotationTaskPracticeViewController.swift in Sources */,
@@ -705,6 +790,7 @@
 		};
 		6548A9FB20E663E900B7C73F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84D8FC000E54AB0CD2054783 /* Pods-MyTouch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -723,6 +809,7 @@
 		};
 		6548A9FC20E663E900B7C73F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85F9F8729020785E6D9076D8 /* Pods-MyTouch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,0 +1,16 @@
+PODS:
+  - ResearchKit (1.5.2)
+
+DEPENDENCIES:
+  - ResearchKit
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ResearchKit
+
+SPEC CHECKSUMS:
+  ResearchKit: a5770681dd61afddd3d1f24d232b9abf00cba454
+
+PODFILE CHECKSUM: 7f57fc4bd42851db3e5007e0820e04ad655dbce3
+
+COCOAPODS: 1.5.3
