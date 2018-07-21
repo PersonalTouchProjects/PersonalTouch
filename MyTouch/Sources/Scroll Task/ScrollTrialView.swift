@@ -28,7 +28,7 @@ class ScrollTrialView: TrialScrollView {
     
     let scrollView = TouchTrackingScrollView()
     let targetView = TouchThroughView()
-    let destinationView = TouchThroughView()
+    let destinationView = DashedBorderView()
     
     private var numberOfRows:   Int = 1
     private var targetRow:      Int = 0
@@ -48,15 +48,7 @@ class ScrollTrialView: TrialScrollView {
         scrollView.alwaysBounceHorizontal = false
         scrollView.delegate = self
         
-        targetView.tintColor = .white
         targetView.backgroundColor = tintColor
-        targetView.layer.cornerRadius = 8.0
-        targetView.layer.masksToBounds = true
-        
-        destinationView.layer.masksToBounds = true
-        destinationView.layer.cornerRadius = 8.0
-        destinationView.layer.borderWidth = 2.0
-        destinationView.layer.borderColor = UIColor.black.cgColor
         
         scrollView.addSubview(targetView)
 

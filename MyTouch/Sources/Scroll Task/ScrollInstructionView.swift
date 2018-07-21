@@ -11,7 +11,7 @@ import UIKit
 class ScrollInstructionView: UIView {
     
     private let targetView = UIView()
-    private let destinationView = UIView()
+    private let destinationView = DashedBorderView()
     private let fingerView = UIImageView(image: UIImage(named: "finger"))
     
     private(set) var isAnimating = false
@@ -26,13 +26,6 @@ class ScrollInstructionView: UIView {
         super.init(frame: frame)
         
         targetView.backgroundColor = tintColor
-        targetView.layer.cornerRadius = 8.0
-        targetView.layer.masksToBounds = true
-        
-        destinationView.layer.masksToBounds = true
-        destinationView.layer.cornerRadius = 8.0
-        destinationView.layer.borderWidth = 2.0
-        destinationView.layer.borderColor = UIColor.black.cgColor
         
         addSubview(targetView)
         addSubview(destinationView)

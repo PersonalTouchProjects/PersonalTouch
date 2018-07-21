@@ -31,6 +31,7 @@ class TaskTrialViewController: TaskViewController {
     
     lazy private(set) var _trialView: (UIView & TrialViewProtocol) = {
         let view = self.trialView()
+        view.isUserInteractionEnabled = false
         view.touchTrackingDelegate = self
         return view
     }()
@@ -87,7 +88,7 @@ class TaskTrialViewController: TaskViewController {
         actionButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
         actionButton.addTarget(self, action: #selector(handleButton(_:)), for: .touchUpInside)
         
-        previewBorderView.layer.borderColor = UIColor.black.cgColor
+        previewBorderView.layer.borderColor = UIColor.lightGray.cgColor
         previewBorderView.layer.borderWidth = 2.0
         previewBorderView.layer.cornerRadius = 4.0
 

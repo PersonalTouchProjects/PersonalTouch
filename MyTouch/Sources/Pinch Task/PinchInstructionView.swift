@@ -11,7 +11,7 @@ import UIKit
 class PinchInstructionView: UIView {
     
     private let targetView = UIView()
-    private let destinationView = UIView()
+    private let destinationView = DashedBorderView()
     private let handView = UIImageView(image: UIImage(named: "finger_and_thumb"))
     private let thumbArrowView = UIImageView(image: UIImage(named: "rounded_arrow"))
     private let fingerArrowView = UIImageView(image: UIImage(named: "rounded_arrow"))
@@ -59,13 +59,6 @@ class PinchInstructionView: UIView {
         NSLayoutConstraint.activate(arrowInitialConstraints)
         
         targetView.backgroundColor = tintColor
-        targetView.layer.cornerRadius = 8.0
-        targetView.layer.masksToBounds = true
-        
-        destinationView.layer.masksToBounds = true
-        destinationView.layer.cornerRadius = 8.0
-        destinationView.layer.borderWidth = 2.0
-        destinationView.layer.borderColor = UIColor.black.cgColor
         
         arrowsView.transform = CGAffineTransform(rotationAngle: 22.5 * .pi / 180).scaledBy(x: 2/3, y: 2/3)
         

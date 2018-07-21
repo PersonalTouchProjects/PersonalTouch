@@ -19,7 +19,7 @@ class PinchTrialView: TrialView {
     }
     
     let targetView = TouchThroughView()
-    let destinationView = TouchThroughView()
+    let destinationView = DashedBorderView()
     let pinchGestureRecognizer = UIPinchGestureRecognizer()
     
     private var targetScale: CGFloat = 1.0
@@ -35,12 +35,6 @@ class PinchTrialView: TrialView {
         super.init(frame: frame)
         
         targetView.backgroundColor = tintColor
-        targetView.layer.cornerRadius = 8.0
-        
-        destinationView.layer.masksToBounds = true
-        destinationView.layer.cornerRadius = 8.0
-        destinationView.layer.borderWidth = 2.0
-        destinationView.layer.borderColor = UIColor.black.cgColor
         
         contentView.addSubview(targetView)
         contentView.addSubview(destinationView)

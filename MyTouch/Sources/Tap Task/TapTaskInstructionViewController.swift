@@ -23,8 +23,10 @@ class TapTaskInstructionViewController: TaskInstructionViewController {
         instructionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            instructionView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            instructionView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            instructionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            instructionView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            instructionView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            instructionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
     
