@@ -12,12 +12,6 @@ class PinchTaskPracticeViewController: TaskTrialViewController {
     
     let pinchTrialView = PinchTrialView()
     
-    private var practiced = false
-    
-    override func prefersNextButtonEnabled() -> Bool {
-        return practiced
-    }
-    
     override func nextViewController() -> TaskViewController {
         return PinchTaskTrialViewController()
     }
@@ -30,12 +24,6 @@ class PinchTaskPracticeViewController: TaskTrialViewController {
         super.viewDidLoad()
         
         pinchTrialView.dataSource = self
-    }
-    
-    override func willEndTrial() {
-        super.willEndTrial()
-        
-        practiced = true
     }
     
     override func didEndTrial() {

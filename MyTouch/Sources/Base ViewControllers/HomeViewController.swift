@@ -29,6 +29,10 @@ class HomeViewController: UIViewController {
         
         view.backgroundColor = .white
         
+        navigationController?.navigationBar.barTintColor = .clear
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
         descriptionLabel.text = NSLocalizedString("Exam Description", comment: "")
         descriptionLabel.numberOfLines = 0
         descriptionLabel.lineBreakMode = .byWordWrapping
@@ -67,6 +71,8 @@ class HomeViewController: UIViewController {
     
     private func presentTaskColleciton() {
         let taskCollectionViewController = TaskCollectionViewController()
+        taskCollectionViewController.taskResultManager = TaskResultManager(session: Session())
+        
         let navController = UINavigationController(rootViewController: taskCollectionViewController)
         
         present(navController, animated: true) {}

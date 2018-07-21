@@ -12,12 +12,6 @@ class DragAndDropTaskPracticeViewController: TaskTrialViewController {
     
     let dragAndDropTrialView = DragAndDropTrialView()
     
-    private var practiced = false
-    
-    override func prefersNextButtonEnabled() -> Bool {
-        return practiced
-    }
-    
     override func nextViewController() -> TaskViewController {
         return DragAndDropTaskTrialViewController()
     }
@@ -30,12 +24,6 @@ class DragAndDropTaskPracticeViewController: TaskTrialViewController {
         super.viewDidLoad()
         
         dragAndDropTrialView.dataSource = self
-    }
-    
-    override func willEndTrial() {
-        super.willEndTrial()
-        
-        practiced = true
     }
     
     override func didEndTrial() {

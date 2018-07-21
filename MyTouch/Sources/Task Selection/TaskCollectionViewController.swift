@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskCollectionViewController: UIViewController {
+class TaskCollectionViewController: TaskViewController {
 
     lazy var flowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -24,7 +24,7 @@ class TaskCollectionViewController: UIViewController {
         return collectionView
     }()
     
-    private var taskViewControllers = [(String, () -> TaskViewController)]()
+    private var taskViewControllers = [(title: String, subtitle: String, vc: () -> TaskViewController)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +32,7 @@ class TaskCollectionViewController: UIViewController {
         title = "Tasks"
         
         view.backgroundColor = .white
-        
-        navigationController?.navigationBar.isTranslucent = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissTaskWithConfimation))
         
         collectionView.backgroundColor = .clear
         collectionView.alwaysBounceVertical = true
@@ -60,12 +59,16 @@ class TaskCollectionViewController: UIViewController {
         let inset = UIEdgeInsets(top: gutter*2, left: gutter, bottom: gutter*2, right: gutter)
         
         let width = max((collectionView.bounds.width - inset.left - inset.right) / CGFloat(numberOfColumns) - gutter, 0)
-        let height = width * 2/3
+        let height = width * 1/3
         
         flowLayout.itemSize = CGSize(width: width, height: height)
         flowLayout.minimumLineSpacing = gutter
         flowLayout.minimumInteritemSpacing = gutter
         flowLayout.sectionInset = inset
+    }
+    
+    @objc private func handleCancelButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -78,8 +81,21 @@ extension TaskCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TaskCollectionViewCell
         
-        let taskViewControllerData = taskViewControllers[indexPath.item]
-        cell.taskTitleLabel.text = taskViewControllerData.0
+        let data = taskViewControllers[indexPath.item]
+        cell.taskTitleLabel.text = data.title
+        cell.subtitleLabel.text = data.subtitle
+        
+        if let session = taskResultManager?.session {
+            switch indexPath.item {
+            case 0: cell.indicatorColor = session.tapTask         == nil ? .red : .green
+            case 1: cell.indicatorColor = session.swipeTask       == nil ? .red : .green
+            case 2: cell.indicatorColor = session.dragAndDropTask == nil ? .red : .green
+            case 3: cell.indicatorColor = session.scrollTask      == nil ? .red : .green
+            case 4: cell.indicatorColor = session.pinchTask       == nil ? .red : .green
+            case 5: cell.indicatorColor = session.rotationTask    == nil ? .red : .green
+            default: cell.indicatorColor = .clear
+            }
+        }
         
         return cell
     }
@@ -89,10 +105,8 @@ extension TaskCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let taskViewControllerData = taskViewControllers[indexPath.item]
-        let viewController = taskViewControllerData.1()
-        
-        viewController.taskResultManager = TaskResultManager(session: Session())
+        let viewController = taskViewControllers[indexPath.item].vc()
+        viewController.taskResultManager = taskResultManager
         
         let navController = UINavigationController(rootViewController: viewController)
         navController.modalTransitionStyle = .flipHorizontal
@@ -101,15 +115,15 @@ extension TaskCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-private func _taskViewControllers() -> [(String, () -> TaskViewController)] {
+private func _taskViewControllers() -> [(String, String, () -> TaskViewController)] {
     
-    let array: [(String, () -> TaskViewController)] = [
-        ("Tap", { TapTaskInstructionViewController() }),
-        ("Swipe", { SwipeTaskInstructionViewController() }),
-        ("Darg And Drop", { DragAndDropTaskInstructionViewController() }),
-        ("Scroll", { ScrollTaskInstructionViewController() }),
-        ("Pinch", { PinchTaskInstructionViewController() }),
-        ("Rotation", { RotationTaskInstructionViewController() })
+    let array: [(String, String, () -> TaskViewController)] = [
+        ("Tap", "Tap on the target", { TapTaskInstructionViewController() }),
+        ("Swipe", "Swipe on target direction", { SwipeTaskInstructionViewController() }),
+        ("Darg And Drop", "Drag the rectangle and drop it into target area", { DragAndDropTaskInstructionViewController() }),
+        ("Scroll", "Scroll to target offset", { ScrollTaskInstructionViewController() }),
+        ("Pinch", "Zoom in or zoom out", { PinchTaskInstructionViewController() }),
+        ("Rotation", "Turn the compass to the north", { RotationTaskInstructionViewController() })
     ]
     
     return array

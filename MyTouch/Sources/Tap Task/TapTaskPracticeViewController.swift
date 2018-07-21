@@ -12,12 +12,6 @@ class TapTaskPracticeViewController: TaskTrialViewController {
 
     let tapTrialView = TapTrialView()
     
-    private var practiced = false
-    
-    override func prefersNextButtonEnabled() -> Bool {
-        return practiced
-    }
-    
     override func nextViewController() -> TaskViewController? {
         return TapTaskTrialViewController()
     }
@@ -30,12 +24,6 @@ class TapTaskPracticeViewController: TaskTrialViewController {
         super.viewDidLoad()
         
         tapTrialView.dataSource = self
-    }
-    
-    override func willEndTrial() {
-        super.willEndTrial()
-        
-        practiced = true
     }
     
     override func didEndTrial() {
