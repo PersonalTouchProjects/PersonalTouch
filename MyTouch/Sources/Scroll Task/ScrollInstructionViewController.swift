@@ -19,8 +19,8 @@ class ScrollTaskInstructionViewController: TaskInstructionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = "滾動測驗"
-        descriptionLabel.text = "direction, gesture, next, right, swipe, touch icon"
+//        titleLabel.text = "滾動測驗"
+        instructionLabel.text = "direction, gesture, next, right, swipe, touch icon"
         
         contentView.addSubview(instructionView)
         instructionView.translatesAutoresizingMaskIntoConstraints = false

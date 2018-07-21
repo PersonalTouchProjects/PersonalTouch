@@ -19,8 +19,8 @@ class PinchTaskInstructionViewController: TaskInstructionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = "縮放測驗"
-        descriptionLabel.text = "direction, gesture, next, right, swipe, touch icon"
+//        titleLabel.text = "縮放測驗"
+        instructionLabel.text = "direction, gesture, next, right, swipe, touch icon"
         
         contentView.addSubview(instructionView)
         instructionView.translatesAutoresizingMaskIntoConstraints = false

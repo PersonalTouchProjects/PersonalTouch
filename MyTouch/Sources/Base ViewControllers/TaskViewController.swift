@@ -16,4 +16,12 @@ class TaskViewController: UIViewController {
         return nil
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationController?.navigationBar.barTintColor = .clear
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    }
+    
 }

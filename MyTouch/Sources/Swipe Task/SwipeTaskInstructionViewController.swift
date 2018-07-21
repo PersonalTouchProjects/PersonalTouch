@@ -19,7 +19,7 @@ class SwipeTaskInstructionViewController: TaskInstructionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        descriptionLabel.text = "direction, gesture, next, right, swipe, touch icon"
+        instructionLabel.text = "direction, gesture, next, right, swipe, touch icon"
         
         contentView.addSubview(instructionView)
         instructionView.translatesAutoresizingMaskIntoConstraints = false

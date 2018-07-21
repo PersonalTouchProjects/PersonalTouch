@@ -19,8 +19,8 @@ class DragAndDropTaskInstructionViewController: TaskInstructionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = "拖曳測驗"
-        descriptionLabel.text = "direction, gesture, next, right, swipe, touch icon"
+//        titleLabel.text = "拖曳測驗"
+        instructionLabel.text = "direction, gesture, next, right, swipe, touch icon"
         
         contentView.addSubview(instructionView)
         instructionView.translatesAutoresizingMaskIntoConstraints = false

@@ -15,3 +15,7 @@
 "Very Good" = "Verry Good!";
 "Next Trial" = "Next";
 "Tap Task End Title" = "Tap Task Finished";
+
+"TASK_INSTRUCTION_TITLE" = "Instruction";
+"TASK_INSTRUCTION" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+"NEXT_BUTTON" = "Next";
