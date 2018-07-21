@@ -7,11 +7,20 @@
 //
 
 import UIKit
+import ResearchKit
 
 class HomeViewController: UIViewController {
     
     let descriptionLabel = UILabel()
     let startExamButton = UIButton(type: .custom)
+    
+    enum State {
+        case home
+        case consent
+        case survey
+    }
+    
+    private var state = State.home
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +60,48 @@ class HomeViewController: UIViewController {
     
     @objc func handleButton(_ sender: UIButton) {
         
+        presentTaskColleciton()
+        
+//        presentConsent()
+    }
+    
+    private func presentTaskColleciton() {
+        let taskCollectionViewController = TaskCollectionViewController()
+        let navController = UINavigationController(rootViewController: taskCollectionViewController)
+        
+        present(navController, animated: true) {}
+    }
+    
+    private func presentConsent() {
+        
+        let taskViewController = ORKTaskViewController(task: ConsentTask, taskRun: nil)
+        taskViewController.delegate = self
+        present(taskViewController, animated: true) {
+            self.state = .consent
+        }
+    }
+    
+    private func presentSurvey() {
+        
+        let taskViewController = ORKTaskViewController(task: Research.survey, taskRun: nil)
+        taskViewController.delegate = self
+        present(taskViewController, animated: true) {
+            self.state = .survey
+        }
+    }
+    
+    private func presentTasks() {
+        
         func presentTaskViewController(_ vc: TaskViewController) {
             
             vc.taskResultManager = TaskResultManager(session: Session())
             
             let navController = UINavigationController(rootViewController: vc)
-//            navController.setNavigationBarHidden(true, animated: false)
             navController.modalTransitionStyle = .flipHorizontal
             
-            self.present(navController, animated: true, completion: nil)
+            self.present(navController, animated: true) {
+                self.state = .home
+            }
         }
         
         // present alert controller
@@ -89,9 +131,27 @@ class HomeViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         
         alert.popoverPresentationController?.sourceView = view
-        alert.popoverPresentationController?.sourceRect = sender.frame
+        alert.popoverPresentationController?.sourceRect = startExamButton.frame
         
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension HomeViewController: ORKTaskViewControllerDelegate {
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        // print(taskViewController.result.results)
+        
+        taskViewController.dismiss(animated: true) {
+            
+            switch self.state {
+            case .consent: self.presentSurvey()
+            case .survey:  self.presentTasks()
+            default: break
+            }
+        }
+        
     }
     
 }
