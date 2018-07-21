@@ -22,9 +22,8 @@ class TapTaskTrialViewController: TaskTrialViewController {
         return TaskEndViewController()
     }
     
-    override func loadView() {
-        super.loadView()
-        self.trialView = tapTrialView
+    override func trialView() -> (UIView & TrialViewProtocol) {
+        return tapTrialView
     }
     
     override func viewDidLoad() {
@@ -32,7 +31,6 @@ class TapTaskTrialViewController: TaskTrialViewController {
         
         positions = positionGenerator(columns: numberOfColumns, rows: numberOfRows, repeats: numberOfRepeats).shuffled()
         
-        tapTrialView.touchTrackingDelegate = self
         tapTrialView.dataSource = self
     }
     
@@ -71,7 +69,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
             
         } else {
             tapTrialView.reloadData()
-            titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
+            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
         }
     }
 }

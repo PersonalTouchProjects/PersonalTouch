@@ -28,8 +28,8 @@ class TaskInstructionViewController: TaskViewController {
         
         title = NSLocalizedString( "TASK_INSTRUCTION_TITLE", comment: "")
         
-        navigationItem.leftBarButtonItem  = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelButton(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("NEXT_BUTTON", comment: ""), style: .plain, target: self, action: #selector(handleNextButton(_:)))
+        navigationItem.leftBarButtonItem  = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissTask))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("NEXT_BUTTON", comment: ""), style: .plain, target: self, action: #selector(presentNext))
         
         instructionLabel.text = NSLocalizedString("TASK_INSTRUCTION", comment: "")
         instructionLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
@@ -60,22 +60,19 @@ class TaskInstructionViewController: TaskViewController {
     
     // MARK: - UI Event Handlers
     
-    @objc private func handleCancelButton(_ sender: UIBarButtonItem) {
-        cancelButtonDidSelect()
-    }
-    
-    @objc private func handleNextButton(_ sender: UIBarButtonItem) {
-        nextButtonDidSelect()
-    }
-    
-    func cancelButtonDidSelect() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func nextButtonDidSelect() {
-        if let taskViewController = nextViewController() {
-            taskViewController.taskResultManager = taskResultManager
-            navigationController?.pushViewController(taskViewController, animated: true)
-        }
-    }
+//    @objc private func handleCancelButton(_ sender: UIBarButtonItem) {
+//        dismissTask()
+//    }
+//
+//    @objc private func handleNextButton(_ sender: UIBarButtonItem) {
+//        presentNext()
+//    }
+//
+//    func cancelButtonDidSelect() {
+//        dismissTask()
+//    }
+//    
+//    func nextButtonDidSelect() {
+//        presentNext()
+//    }
 }

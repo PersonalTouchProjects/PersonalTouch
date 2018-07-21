@@ -12,63 +12,58 @@ private var previewScale: CGFloat = 0.5
 
 class TaskTrialViewController: TaskViewController {
 
-    let titleLabel = UILabel()
-    let primaryButton = UIButton(type: .custom)
-    let secondaryButton = UIButton(type: .system)
-    let cancelButton = UIButton(type: .system)
     
-    private lazy var buttonStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [secondaryButton, primaryButton])
-        stack.axis = .horizontal
-        stack.alignment = .fill
-        stack.distribution = .fillEqually
-        stack.spacing = 8.0
-        return stack
+    // MARK: - UI Properties
+    
+    lazy var cancelButton: UIBarButtonItem = {
+        return UIBarButtonItem(title: NSLocalizedString("CANCEL_TASK_BUTTON", comment: ""), style: .plain, target: self, action: #selector(dismissTaskWithConfimation))
     }()
     
-    var trialView: (UIView & TrialViewProtocol) = TrialView()
+    lazy var nextButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: NSLocalizedString("NEXT_BUTTON", comment: ""), style: .plain, target: self, action: #selector(presentNext))
+        button.isEnabled = false
+        return button
+    }()
     
-    private let maskView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    private let trialDidEndView = UIView()
+    let instructionLabel = UILabel()
+    let actionButton     = UIButton(type: .custom)
+    let countDownView    = CountdownView()
+    
+    lazy private(set) var _trialView: (UIView & TrialViewProtocol) = {
+        let view = self.trialView()
+        view.touchTrackingDelegate = self
+        return view
+    }()
+    
+    private let trialDidEndView   = UIView()
     private let previewBorderView = UIView()
-    private let countDownView = CountdownView()
     
-    private let previewLayoutGuide = UILayoutGuide()
-    private var previewConstraints = [NSLayoutConstraint]()
+    // layout assists
+    private let previewLayoutGuide  = UILayoutGuide()
+    private var previewConstraints  = [NSLayoutConstraint]()
     private var fullSizeConstraints = [NSLayoutConstraint]()
     
-    private(set) var trialStartDate = Date.distantPast
-    private(set) var trialEndDate = Date.distantFuture
-    
+    // trial times
+    private(set) var trialStartDate:    Date = .distantPast
+    private(set) var trialEndDate:      Date = .distantFuture
     private(set) var lastTouchesUpDate: Date?
     
-
+    
+    // MARK: - TaskViewController
+    
     override func nextViewController() -> TaskViewController? {
-        return TaskTrialViewController()
+        return TaskEndViewController()
     }
     
-    var shouldStartTrialAutomaticallyOnPrimaryButtonTapped: Bool {
-        return true
-    }
     
-    var countdownColor: UIColor {
-        return .black
-    }
+    // MARK: - UIViewController
     
     override var prefersStatusBarHidden: Bool {
-        return fullSizeConstraints.first?.isActive == true
-    }
-    
-    override var canBecomeFirstResponder: Bool {
-        return true
-    }
-    
-    override var keyCommands: [UIKeyCommand]? {
-        return [
-            UIKeyCommand(input: "\r", modifierFlags: [], action: #selector(handleKeyboardWhitespace(_:)), discoverabilityTitle: "Start Trial"),
-            UIKeyCommand(input: " ", modifierFlags: [], action: #selector(handleKeyboardWhitespace(_:)), discoverabilityTitle: "Start Trial"),
-            UIKeyCommand(input: UIKeyInputEscape, modifierFlags: [], action: #selector(handleKeyboardEscape(_:)), discoverabilityTitle: "End Trial")
-        ]
+        if let constraint = fullSizeConstraints.first {
+            return constraint.isActive
+        } else {
+            return false
+        }
     }
     
     override func viewDidLoad() {
@@ -76,174 +71,130 @@ class TaskTrialViewController: TaskViewController {
         
         view.backgroundColor = .white
         
-        titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 1)"
-        titleLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
+        title = NSLocalizedString("Tap Task Title", comment: "") + " (1/25)"
         
-        primaryButton.setTitle("Start Trial", for: .normal)
-        primaryButton.setTitleColor(.white, for: .normal)
-        primaryButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
-        primaryButton.addTarget(self, action: #selector(handlePrimaryButton(_:)), for: .touchUpInside)
+        navigationItem.leftBarButtonItem  = cancelButton
+        navigationItem.rightBarButtonItem = nextButton
         
-        secondaryButton.setTitle("Try Again", for: .normal)
-        secondaryButton.titleLabel?.font = primaryButton.titleLabel?.font
-        secondaryButton.setBackgroundImage(UIImage.secondaryButtonBackgroundImage(color: view.tintColor), for: .normal)
-        secondaryButton.addTarget(self, action: #selector(handleSecondaryButton(_:)), for: .touchUpInside)
-        secondaryButton.isHidden = true
+        instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "")
+        instructionLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
+        instructionLabel.numberOfLines = 0
+        instructionLabel.lineBreakMode = .byWordWrapping
+        instructionLabel.textAlignment = .center
         
-        cancelButton.setTitle(NSLocalizedString("Withdraw Exam", comment: ""), for: .normal)
-        cancelButton.addTarget(self, action: #selector(handleCancelButton(_:)), for: .touchUpInside)
-        
-        trialView.touchTrackingDelegate = self
+        actionButton.setTitle("Start Trial", for: .normal)
+        actionButton.setTitleColor(.white, for: .normal)
+        actionButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
+        actionButton.addTarget(self, action: #selector(handleButton(_:)), for: .touchUpInside)
         
         previewBorderView.layer.borderColor = UIColor.black.cgColor
         previewBorderView.layer.borderWidth = 2.0
         previewBorderView.layer.cornerRadius = 4.0
         
-        trialDidEndView.backgroundColor = .white
-        trialDidEndView.isHidden = true
-        
-        maskView.alpha = 0.0
-        
-        countDownView.backgroundColor = UIColor(white: 0.0, alpha: 0.3)
-        countDownView.alpha = 0.0
-        countDownView.label.textColor = countdownColor
-        
-        view.addSubview(titleLabel)
-        view.addSubview(buttonStack)
-        view.addSubview(cancelButton)
+        _trialView.backgroundColor = .red
+
+        view.addSubview(instructionLabel)
+        view.addSubview(actionButton)
         view.addSubview(previewBorderView)
-        view.addSubview(maskView)
-        view.addSubview(trialView)
-        view.addSubview(countDownView)
-        view.addSubview(trialDidEndView)
-        
+        view.addSubview(_trialView)
         view.addLayoutGuide(previewLayoutGuide)
         
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        buttonStack.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        instructionLabel.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
         previewBorderView.translatesAutoresizingMaskIntoConstraints = false
-        trialDidEndView.translatesAutoresizingMaskIntoConstraints = false
-        maskView.translatesAutoresizingMaskIntoConstraints = false
-        trialView.translatesAutoresizingMaskIntoConstraints = false
-        countDownView.translatesAutoresizingMaskIntoConstraints = false
+        _trialView.translatesAutoresizingMaskIntoConstraints = false
         
         previewConstraints = [
-            trialView.centerXAnchor.constraint(equalTo: previewLayoutGuide.centerXAnchor),
-            trialView.centerYAnchor.constraint(equalTo: previewLayoutGuide.centerYAnchor),
-            trialView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            trialView.heightAnchor.constraint(equalTo: view.heightAnchor)
+            _trialView.centerXAnchor.constraint(equalTo: previewLayoutGuide.centerXAnchor),
+            _trialView.centerYAnchor.constraint(equalTo: previewLayoutGuide.centerYAnchor),
+            _trialView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            _trialView.heightAnchor.constraint(equalTo: view.heightAnchor)
         ]
         
         fullSizeConstraints = [
-            trialView.topAnchor.constraint(equalTo: view.topAnchor),
-            trialView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            trialView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            trialView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            _trialView.topAnchor.constraint(equalTo: view.topAnchor),
+            _trialView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            _trialView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            _trialView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            cancelButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            instructionLabel.topAnchor.constraintEqualToSystemSpacingBelow(view.safeAreaLayoutGuide.topAnchor, multiplier: 5.0),
+            instructionLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            instructionLabel.leftAnchor.constraint(equalTo: view.readableContentGuide.leftAnchor),
+            instructionLabel.rightAnchor.constraint(equalTo: view.readableContentGuide.rightAnchor),
             
-            buttonStack.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
-            buttonStack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            buttonStack.widthAnchor.constraint(equalToConstant: 343),
-            buttonStack.heightAnchor.constraint(equalToConstant: 50),
-            
-            previewLayoutGuide.topAnchor.constraintEqualToSystemSpacingBelow(titleLabel.topAnchor, multiplier: 2.0),
+            previewLayoutGuide.topAnchor.constraintEqualToSystemSpacingBelow(instructionLabel.topAnchor, multiplier: 5.0),
             previewLayoutGuide.leftAnchor.constraint(equalTo: view.leftAnchor),
             previewLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor),
-            buttonStack.topAnchor.constraintEqualToSystemSpacingBelow(previewLayoutGuide.bottomAnchor, multiplier: 1.0),
             
             previewBorderView.centerXAnchor.constraint(equalTo: previewLayoutGuide.centerXAnchor),
             previewBorderView.centerYAnchor.constraint(equalTo: previewLayoutGuide.centerYAnchor),
-            previewBorderView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: previewScale + 0.05),
-            previewBorderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: previewScale + 0.05),
+            previewBorderView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: previewScale + 0.01),
+            previewBorderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: previewScale + 0.01),
             
-            trialDidEndView.topAnchor.constraint(equalTo: view.topAnchor),
-            trialDidEndView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            trialDidEndView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            trialDidEndView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            actionButton.topAnchor.constraintEqualToSystemSpacingBelow(previewLayoutGuide.bottomAnchor, multiplier: 5.0),
+            actionButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            actionButton.widthAnchor.constraint(equalToConstant: 343),
+            actionButton.heightAnchor.constraint(equalToConstant: 50),
             
-            maskView.topAnchor.constraint(equalTo: view.topAnchor),
-            maskView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            maskView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            maskView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            view.bottomAnchor.constraintEqualToSystemSpacingBelow(actionButton.bottomAnchor, multiplier: 5.0)
+        ])
+        
+        countDownView.backgroundColor = UIColor(white: 0.0, alpha: 0.3)
+        countDownView.label.textColor = .black
+        countDownView.isHidden = true
+
+        trialDidEndView.backgroundColor = .white
+        trialDidEndView.isHidden = true
+        
+        view.addSubview(countDownView)
+        view.addSubview(trialDidEndView)
+        
+        countDownView.translatesAutoresizingMaskIntoConstraints = false
+        trialDidEndView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
             
             countDownView.topAnchor.constraint(equalTo: view.topAnchor),
             countDownView.leftAnchor.constraint(equalTo: view.leftAnchor),
             countDownView.rightAnchor.constraint(equalTo: view.rightAnchor),
             countDownView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            trialDidEndView.topAnchor.constraint(equalTo: view.topAnchor),
+            trialDidEndView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            trialDidEndView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            trialDidEndView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
         NSLayoutConstraint.activate(previewConstraints)
-        trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
+        _trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
     }
+    
     
     // MARK: - UI Event Handlers
     
-    @objc private func handlePrimaryButton(_ sender: UIButton) {
-        primaryButtonDidSelect()
-    }
-    
-    @objc private func handleSecondaryButton(_ sender: UIButton) {
-        secondaryButtonDidSelect()
-    }
-    
-    @objc private func handleCancelButton(_ sender: UIButton) {
-        cancelButtonDidSelect()
-    }
-    
-    @objc private func handleKeyboardWhitespace(_ sender: UIKeyCommand) {
-        if previewConstraints.first?.isActive == true {
-            startTrial()
-        }
-    }
-    
-    @objc private func handleKeyboardEscape(_ sender: UIKeyCommand) {
-        if fullSizeConstraints.first?.isActive == true {
-            endTrial()
-        }
-    }
-    
-    func primaryButtonDidSelect() {
-        if shouldStartTrialAutomaticallyOnPrimaryButtonTapped {
-            startTrial()
-        }
-    }
-    
-    func secondaryButtonDidSelect() {
-        // no-op
-    }
-    
-    func cancelButtonDidSelect() {
-        
-        let alertController = UIAlertController(title: "Are You Sure?", message: "All data will be discarded.", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Leave", style: .destructive) { (action) in
-            self.dismiss(animated: true, completion: nil)
-        }
-        let cancelAction = UIAlertAction(title: "Stay", style: .default, handler: nil)
-        
-        alertController.addAction(confirmAction)
-        alertController.addAction(cancelAction)
-        alertController.preferredAction = cancelAction
-        
-        present(alertController, animated: true, completion: nil)
+    @objc private func handleButton(_ sender: UIButton) {
+        startTrial()
     }
     
     
-    // MARK: - Trial Life Cycle
+    // MARK: - Methods
+    
+    func shouldStartTrial() -> Bool { return true }
     
     func willStartTrial() {
-        self.lastTouchesUpDate = nil
-        // navigationController?.setNavigationBarHidden(true, animated: true)
+        lastTouchesUpDate = nil
+        
+        if let isBarHidden = navigationController?.isNavigationBarHidden, !isBarHidden {
+            navigationController?.setNavigationBarHidden(true, animated: false)
+        }
     }
     
     func startTrial() {
+        
+        guard shouldStartTrial() else { return }
         
         willStartTrial()
         
@@ -252,65 +203,68 @@ class TaskTrialViewController: TaskViewController {
         
         setNeedsStatusBarAppearanceUpdate()
         
+        countDownView.isHidden = false
+        countDownView.alpha = 0.0
+        
         UIView.animate(withDuration: 0.325, delay: 0.0, options: [.curveEaseInOut], animations: {
             
-            self.trialView.transform = .identity
-            self.maskView.alpha = 1.0
+            self._trialView.transform = .identity
             self.countDownView.alpha = 1.0
             
             self.view.layoutIfNeeded()
             
         }, completion: { _ in
             
-            self.maskView.alpha = 0.0
-            
             self.countDownView.fire {
-                self.countDownView.alpha = 0.0
                 
-                self.trialStartDate = Date()
+                self.countDownView.alpha = 0.0
+                self.countDownView.isHidden = true
+                
                 self.didStartTrial()
             }
-            
         })
     }
     
     func didStartTrial() {
-        self.trialView.isUserInteractionEnabled = true
-        self.trialView.startTracking()
+        _trialView.isUserInteractionEnabled = true
+        trialStartDate = Date()
+        _trialView.startTracking()
     }
     
-    func willEndTrial() {
-        
-    }
+    func shouldEndTrial() -> Bool { return true }
+    
+    func willEndTrial() {}
     
     func endTrial() {
         
+        guard shouldEndTrial() else { return }
+        
         willEndTrial()
-        trialEndDate = Date()
         
-        NSLayoutConstraint.deactivate(self.fullSizeConstraints)
-        NSLayoutConstraint.activate(self.previewConstraints)
+        NSLayoutConstraint.deactivate(fullSizeConstraints)
+        NSLayoutConstraint.activate(previewConstraints)
         
-        self.setNeedsStatusBarAppearanceUpdate()
+        setNeedsStatusBarAppearanceUpdate()
         
-        self.trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
-        self.trialDidEndView.isHidden = true
+        _trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
+        trialDidEndView.isHidden = true
         
-        self.didEndTrial()
+        didEndTrial()
     }
     
     func didEndTrial() {
-        self.trialView.stopTracking()
-        self.trialView.isUserInteractionEnabled = false
-        // navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        trialEndDate = Date()
+        _trialView.stopTracking()
+        _trialView.isUserInteractionEnabled = false
+        
+        if let isBarHidden = navigationController?.isNavigationBarHidden, isBarHidden {
+            navigationController?.setNavigationBarHidden(false, animated: false)
+        }
     }
     
-    func presentNextViewController() {
-        
-        if let taskViewController = nextViewController() {
-            taskViewController.taskResultManager = taskResultManager
-            navigationController?.pushViewController(taskViewController, animated: true)
-        }
+    func trialView() -> (UIView & TrialViewProtocol) {
+        return TrialView()
     }
 }
 
@@ -320,8 +274,8 @@ extension TaskTrialViewController: TouchTrackingViewDelegate {
     func touchTrackingViewDidBeginNewTrack(_ touchTrackingView: TouchTrackingViewProtocol) {
         
         // has complete new tracks, update touches up date
-        if self.lastTouchesUpDate != nil {
-            self.lastTouchesUpDate = Date()
+        if lastTouchesUpDate != nil {
+            lastTouchesUpDate = Date()
         }
     }
     
@@ -329,16 +283,18 @@ extension TaskTrialViewController: TouchTrackingViewDelegate {
         
         // dismiss content views by masking a white view
         // only run the animation on first time
-        if self.lastTouchesUpDate == nil {
+        if lastTouchesUpDate == nil {
             
-            self.trialDidEndView.isHidden = false
-            self.trialDidEndView.alpha = 0.0
+            trialDidEndView.isHidden = false
+            trialDidEndView.alpha = 0.0
+            
             UIView.animate(withDuration: 0.2) {
                 self.trialDidEndView.alpha = 1.0
             }
         }
         
-        self.lastTouchesUpDate = Date()
+        lastTouchesUpDate = Date()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [lastTouchesUpDate = self.lastTouchesUpDate] in
             
             if lastTouchesUpDate == self.lastTouchesUpDate {

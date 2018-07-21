@@ -19,9 +19,8 @@ class PinchTaskTrialViewController: TaskTrialViewController {
         return TaskEndViewController()
     }
     
-    override func loadView() {
-        super.loadView()
-        self.trialView = pinchTrialView
+    override func trialView() -> (UIView & TrialViewProtocol) {
+        return pinchTrialView
     }
     
     override func viewDidLoad() {
@@ -29,7 +28,6 @@ class PinchTaskTrialViewController: TaskTrialViewController {
         
         scales = scaleGenerator(repeats: numberOfRepeats)
         
-        pinchTrialView.touchTrackingDelegate = self
         pinchTrialView.dataSource = self
     }
     
@@ -68,7 +66,7 @@ class PinchTaskTrialViewController: TaskTrialViewController {
             
         } else {
             pinchTrialView.reloadData()
-            titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - scales.count + 1))"
+            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - scales.count + 1))"
         }
     }
 }

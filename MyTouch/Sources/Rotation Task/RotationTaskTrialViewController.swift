@@ -19,9 +19,8 @@ class RotationTaskTrialViewController: TaskTrialViewController {
         return TaskEndViewController()
     }
     
-    override func loadView() {
-        super.loadView()
-        self.trialView = rotationTrialView
+    override func trialView() -> (UIView & TrialViewProtocol) {
+        return rotationTrialView
     }
     
     override func viewDidLoad() {
@@ -29,7 +28,6 @@ class RotationTaskTrialViewController: TaskTrialViewController {
         
         angles = angleGenerator(repeats: numberOfRepeats).shuffled()
         
-        rotationTrialView.touchTrackingDelegate = self
         rotationTrialView.dataSource = self
     }
     
@@ -68,7 +66,7 @@ class RotationTaskTrialViewController: TaskTrialViewController {
             
         } else {
             rotationTrialView.reloadData()
-            titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - angles.count + 1))"
+            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - angles.count + 1))"
         }
     }
 }

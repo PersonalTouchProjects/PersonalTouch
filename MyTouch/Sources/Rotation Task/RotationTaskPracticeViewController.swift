@@ -18,29 +18,17 @@ class RotationTaskPracticeViewController: TaskTrialViewController {
         return RotationTaskTrialViewController()
     }
     
-    override var countdownColor: UIColor {
-        return .white
-    }
-    
-    override var shouldStartTrialAutomaticallyOnPrimaryButtonTapped: Bool {
-        return false
-    }
-    
-    override func loadView() {
-        super.loadView()
-        self.trialView = rotationTrialView
+    override func trialView() -> (UIView & TrialViewProtocol) {
+        return rotationTrialView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rotationTrialView.touchTrackingDelegate = self
         rotationTrialView.dataSource = self
         
-        primaryButton.setTitle("Practice", for: .normal)
-        secondaryButton.setTitle("Skip", for: .normal)
-        
-        secondaryButton.isHidden = false
+        actionButton.setTitle("Practice", for: .normal)
+
     }
     
     override func didEndTrial() {
@@ -51,45 +39,44 @@ class RotationTaskPracticeViewController: TaskTrialViewController {
         shouldStartTrial = true
         
         UIView.performWithoutAnimation {
-            self.primaryButton.setTitle("End Practice", for: .normal)
-            self.secondaryButton.setTitle("Try Again", for: .normal)
+            self.actionButton.setTitle("End Practice", for: .normal)
         }
     }
     
-    override func primaryButtonDidSelect() {
-        super.primaryButtonDidSelect()
-        
-        if shouldStartTrial {
-            presentStartTrialAlert()
-        } else {
-            startTrial()
-        }
-    }
+//    override func primaryButtonDidSelect() {
+//        super.primaryButtonDidSelect()
+//        
+//        if shouldStartTrial {
+////            presentStartTrialAlert()
+//        } else {
+//            startTrial()
+//        }
+//    }
     
-    override func secondaryButtonDidSelect() {
-        super.secondaryButtonDidSelect()
-        
-        if shouldStartTrial {
-            startTrial()
-        } else {
-            presentStartTrialAlert()
-        }
-    }
+//    override func secondaryButtonDidSelect() {
+//        super.secondaryButtonDidSelect()
+//        
+//        if shouldStartTrial {
+//            startTrial()
+//        } else {
+//            presentStartTrialAlert()
+//        }
+//    }
     
-    private func presentStartTrialAlert() {
-        
-        let alertController = UIAlertController(title: "Start Trial", message: "Are you sure?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        let confirmAction = UIAlertAction(title: "Go", style: .default) { (action) in
-            self.presentNextViewController()
-        }
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-        alertController.preferredAction = confirmAction
-        
-        present(alertController, animated: true, completion: nil)
-    }
+//    private func presentStartTrialAlert() {
+//
+//        let alertController = UIAlertController(title: "Start Trial", message: "Are you sure?", preferredStyle: .alert)
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+//        let confirmAction = UIAlertAction(title: "Go", style: .default) { (action) in
+//            self.presentNextViewController()
+//        }
+//
+//        alertController.addAction(cancelAction)
+//        alertController.addAction(confirmAction)
+//        alertController.preferredAction = confirmAction
+//
+//        present(alertController, animated: true, completion: nil)
+//    }
 }
 
 extension RotationTaskPracticeViewController: RotationTrialViewDataSource {

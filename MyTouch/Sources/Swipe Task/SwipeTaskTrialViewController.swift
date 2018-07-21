@@ -19,13 +19,8 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
         return TaskEndViewController()
     }
     
-    override var countdownColor: UIColor {
-        return .white
-    }
-    
-    override func loadView() {
-        super.loadView()
-        self.trialView = swipeTrialView
+    override func trialView() -> (UIView & TrialViewProtocol) {
+        return swipeTrialView
     }
     
     override func viewDidLoad() {
@@ -33,7 +28,6 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
         
         directions = directionGenerator(repeats: 1).shuffled()
         
-        swipeTrialView.touchTrackingDelegate = self
         swipeTrialView.dataSource = self
     }
     
@@ -74,7 +68,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
             
         } else {
             swipeTrialView.reloadData()
-            titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - directions.count + 1))"
+            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - directions.count + 1))"
         }
     }
 }

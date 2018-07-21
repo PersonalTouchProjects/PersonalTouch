@@ -22,9 +22,8 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
         return TaskEndViewController()
     }
     
-    override func loadView() {
-        super.loadView()
-        self.trialView = scrollTrialView
+    override func trialView() -> (UIView & TrialViewProtocol) {
+        return scrollTrialView
     }
     
     override func viewDidLoad() {
@@ -33,7 +32,6 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
         positions = positionGenerator(rows: rows, targetRow: targetRow, repeats: numberOfRepeats).shuffled()
         
         scrollTrialView.scrollView.isScrollEnabled = false
-        scrollTrialView.touchTrackingDelegate = self
         scrollTrialView.dataSource = self
     }
     
@@ -78,7 +76,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
             
         } else {
             scrollTrialView.reloadData()
-            titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
+            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
         }
     }
 }

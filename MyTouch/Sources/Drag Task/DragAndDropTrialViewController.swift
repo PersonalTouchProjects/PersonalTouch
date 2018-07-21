@@ -19,13 +19,8 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController {
         return TaskEndViewController()
     }
     
-    override var countdownColor: UIColor {
-        return .white
-    }
-    
-    override func loadView() {
-        super.loadView()
-        self.trialView = dragAndDropTrialView
+    override func trialView() -> (UIView & TrialViewProtocol) {
+        return dragAndDropTrialView
     }
     
     override func viewDidLoad() {
@@ -33,7 +28,6 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController {
         
         positions = positionGenerator(repeats: 1).shuffled()
         
-        dragAndDropTrialView.touchTrackingDelegate = self
         dragAndDropTrialView.dataSource = self
     }
     
@@ -71,7 +65,7 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController {
             
         } else {
             dragAndDropTrialView.reloadData()
-            titleLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
+            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
         }
     }
 }
