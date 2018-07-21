@@ -12,7 +12,7 @@ class RotationTaskInstructionViewController: TaskInstructionViewController {
     
     let instructionView = RotationInstructionView()
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
+    override func nextViewController() -> TaskViewController {
         return RotationTaskPracticeViewController()
     }
     

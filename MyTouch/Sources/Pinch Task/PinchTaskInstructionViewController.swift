@@ -12,7 +12,7 @@ class PinchTaskInstructionViewController: TaskInstructionViewController {
     
     let instructionView = PinchInstructionView()
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
+    override func nextViewController() -> TaskViewController {
         return PinchTaskPracticeViewController()
     }
     

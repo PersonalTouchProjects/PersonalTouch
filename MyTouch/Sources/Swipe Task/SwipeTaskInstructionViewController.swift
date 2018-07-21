@@ -12,7 +12,7 @@ class SwipeTaskInstructionViewController: TaskInstructionViewController {
     
     let instructionView = SwipeInstructionView()
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
+    override func nextViewController() -> TaskViewController {
         return SwipeTaskPracticeViewController()
     }
     

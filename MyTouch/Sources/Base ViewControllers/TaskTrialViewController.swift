@@ -10,7 +10,7 @@ import UIKit
 
 private var previewScale: CGFloat = 0.5
 
-class TaskTrialViewController: UIViewController, TaskResultManagerViewController {
+class TaskTrialViewController: TaskViewController {
 
     let titleLabel = UILabel()
     let primaryButton = UIButton(type: .custom)
@@ -29,7 +29,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     var trialView: (UIView & TrialViewProtocol) = TrialView()
     
     private let maskView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    private let whiteView = TouchThroughView()
+    private let trialDidEndView = UIView()
     private let previewBorderView = UIView()
     private let countDownView = CountdownView()
     
@@ -42,9 +42,8 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     
     private(set) var lastTouchesUpDate: Date?
     
-    var taskResultManager: TaskResultManager?
 
-    func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
+    override func nextViewController() -> TaskViewController? {
         return TaskTrialViewController()
     }
     
@@ -100,8 +99,8 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         previewBorderView.layer.borderWidth = 2.0
         previewBorderView.layer.cornerRadius = 4.0
         
-        whiteView.backgroundColor = .white
-        whiteView.isHidden = true
+        trialDidEndView.backgroundColor = .white
+        trialDidEndView.isHidden = true
         
         maskView.alpha = 0.0
         
@@ -116,7 +115,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         view.addSubview(maskView)
         view.addSubview(trialView)
         view.addSubview(countDownView)
-        view.addSubview(whiteView)
+        view.addSubview(trialDidEndView)
         
         view.addLayoutGuide(previewLayoutGuide)
         
@@ -124,7 +123,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         previewBorderView.translatesAutoresizingMaskIntoConstraints = false
-        whiteView.translatesAutoresizingMaskIntoConstraints = false
+        trialDidEndView.translatesAutoresizingMaskIntoConstraints = false
         maskView.translatesAutoresizingMaskIntoConstraints = false
         trialView.translatesAutoresizingMaskIntoConstraints = false
         countDownView.translatesAutoresizingMaskIntoConstraints = false
@@ -165,10 +164,10 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
             previewBorderView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: previewScale + 0.05),
             previewBorderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: previewScale + 0.05),
             
-            whiteView.topAnchor.constraint(equalTo: view.topAnchor),
-            whiteView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            whiteView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            whiteView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            trialDidEndView.topAnchor.constraint(equalTo: view.topAnchor),
+            trialDidEndView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            trialDidEndView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            trialDidEndView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             maskView.topAnchor.constraint(equalTo: view.topAnchor),
             maskView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -184,6 +183,8 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         NSLayoutConstraint.activate(previewConstraints)
         trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
     }
+    
+    // MARK: - UI Event Handlers
     
     @objc private func handlePrimaryButton(_ sender: UIButton) {
         primaryButtonDidSelect()
@@ -233,6 +234,9 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    
+    // MARK: - Trial Life Cycle
     
     func willStartTrial() {
         self.lastTouchesUpDate = nil
@@ -290,7 +294,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
         self.setNeedsStatusBarAppearanceUpdate()
         
         self.trialView.transform = CGAffineTransform(scaleX: previewScale, y: previewScale)
-        self.whiteView.isHidden = true
+        self.trialDidEndView.isHidden = true
         
         self.didEndTrial()
     }
@@ -310,6 +314,7 @@ class TaskTrialViewController: UIViewController, TaskResultManagerViewController
     }
 }
 
+// MARK: - TouchTrackingViewDelegate
 extension TaskTrialViewController: TouchTrackingViewDelegate {
     
     func touchTrackingViewDidBeginNewTrack(_ touchTrackingView: TouchTrackingViewProtocol) {
@@ -326,10 +331,10 @@ extension TaskTrialViewController: TouchTrackingViewDelegate {
         // only run the animation on first time
         if self.lastTouchesUpDate == nil {
             
-            self.whiteView.isHidden = false
-            self.whiteView.alpha = 0.0
+            self.trialDidEndView.isHidden = false
+            self.trialDidEndView.alpha = 0.0
             UIView.animate(withDuration: 0.2) {
-                self.whiteView.alpha = 1.0
+                self.trialDidEndView.alpha = 1.0
             }
         }
         

@@ -15,7 +15,7 @@ class PinchTaskTrialViewController: TaskTrialViewController {
     var numberOfRepeats = 1
     var scales: [CGFloat] = []
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
+    override func nextViewController() -> TaskViewController? {
         return TaskEndViewController()
     }
     

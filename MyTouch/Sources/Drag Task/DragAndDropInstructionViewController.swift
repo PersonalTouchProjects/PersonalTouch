@@ -12,7 +12,7 @@ class DragAndDropTaskInstructionViewController: TaskInstructionViewController {
     
     let instructionView = DragAndDropInstructionView()
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
+    override func nextViewController() -> TaskViewController {
         return DragAndDropTaskPracticeViewController()
     }
     

@@ -15,7 +15,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
     var numberOfRepeats = 1
     var directions: [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] = []
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
+    override func nextViewController() -> TaskViewController? {
         return TaskEndViewController()
     }
     

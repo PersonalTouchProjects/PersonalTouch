@@ -14,7 +14,7 @@ class PinchTaskPracticeViewController: TaskTrialViewController {
     
     var shouldStartTrial = false
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController) {
+    override func nextViewController() -> TaskViewController {
         return PinchTaskTrialViewController()
     }
     

@@ -8,12 +8,7 @@
 
 import UIKit
 
-protocol TaskResultManagerViewController: NSObjectProtocol {
-    var taskResultManager: TaskResultManager? { set get }
-    func nextViewController() -> (UIViewController & TaskResultManagerViewController)?
-}
-
-class TaskInstructionViewController: UIViewController, TaskResultManagerViewController {
+class TaskInstructionViewController: TaskViewController {
 
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
@@ -23,9 +18,7 @@ class TaskInstructionViewController: UIViewController, TaskResultManagerViewCont
     let primaryButton = UIButton(type: .custom)
     let cancelButton = UIButton(type: .system)
     
-    var taskResultManager: TaskResultManager?
-    
-    func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
+    override func nextViewController() -> TaskViewController? {
         return TaskTrialViewController()
     }
     

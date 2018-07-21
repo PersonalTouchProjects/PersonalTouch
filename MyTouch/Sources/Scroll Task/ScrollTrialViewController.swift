@@ -18,7 +18,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
     var numberOfRepeats = 1
     var positions: [Int] = []
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
+    override func nextViewController() -> TaskViewController? {
         return TaskEndViewController()
     }
     

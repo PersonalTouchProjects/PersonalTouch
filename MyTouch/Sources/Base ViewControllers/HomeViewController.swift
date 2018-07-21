@@ -47,13 +47,11 @@ class HomeViewController: UIViewController {
             startExamButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             startExamButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         ])
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "測驗", style: .plain, target: self, action: #selector(handleBarButton))
     }
     
-    @objc func handleBarButton() {
+    @objc func handleButton(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "測驗", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "測驗", message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "點擊", style: .default) { _ in
             
@@ -125,20 +123,9 @@ class HomeViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         
+        alert.popoverPresentationController?.sourceView = view
+        alert.popoverPresentationController?.sourceRect = sender.frame
         self.present(alert, animated: true, completion: nil)
     }
     
-    @objc func handleButton(_ sender: UIButton) {
-        
-//        let taskViewController = ScrollTaskInstructionViewController()
-//        let taskViewController = SwipeTaskInstructionViewController()
-        let taskViewController = TapTaskInstructionViewController()
-        taskViewController.taskResultManager = TaskResultManager(session: Session())
-        
-        let navController = UINavigationController(rootViewController: taskViewController)
-        navController.setNavigationBarHidden(true, animated: false)
-        navController.modalTransitionStyle = .flipHorizontal
-        
-        present(navController, animated: true, completion: nil)
-    }
 }

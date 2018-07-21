@@ -18,7 +18,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
     
     var positions: [(Int, Int)] = []
     
-    override func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
+    override func nextViewController() -> TaskViewController? {
         return TaskEndViewController()
     }
     

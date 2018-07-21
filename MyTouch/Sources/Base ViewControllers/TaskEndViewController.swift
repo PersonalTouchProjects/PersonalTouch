@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskEndViewController: UIViewController, TaskResultManagerViewController {
+class TaskEndViewController: TaskViewController {
 
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
@@ -16,9 +16,7 @@ class TaskEndViewController: UIViewController, TaskResultManagerViewController {
     let primaryButton = UIButton(type: .custom)
     let cancelButton = UIButton(type: .system)
     
-    var taskResultManager: TaskResultManager?
-    
-    func nextViewController() -> (UIViewController & TaskResultManagerViewController)? {
+    override func nextViewController() -> TaskViewController? {
         return nil
     }
     
