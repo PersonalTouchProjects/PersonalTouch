@@ -12,8 +12,6 @@ class ScrollTaskPracticeViewController: TaskTrialViewController {
     
     let scrollTrialView = ScrollTrialView()
     
-    var shouldStartTrial = false
-    
     override func nextViewController() -> TaskViewController {
         return ScrollTaskTrialViewController()
     }
@@ -27,12 +25,11 @@ class ScrollTaskPracticeViewController: TaskTrialViewController {
         
         scrollTrialView.scrollView.isScrollEnabled = false
         scrollTrialView.dataSource = self
-        
-        actionButton.setTitle("Practice", for: .normal)
     }
     
     override func didStartTrial() {
         super.didStartTrial()
+        
         scrollTrialView.scrollView.isScrollEnabled = true
     }
     
@@ -41,48 +38,7 @@ class ScrollTaskPracticeViewController: TaskTrialViewController {
         
         scrollTrialView.scrollView.isScrollEnabled = false
         scrollTrialView.reloadData()
-        
-        shouldStartTrial = true
-        
-        UIView.performWithoutAnimation {
-            self.actionButton.setTitle("End Practice", for: .normal)
-        }
     }
-    
-//    override func primaryButtonDidSelect() {
-//        super.primaryButtonDidSelect()
-//        
-//        if shouldStartTrial {
-////            presentStartTrialAlert()
-//        } else {
-//            startTrial()
-//        }
-//    }
-    
-//    override func secondaryButtonDidSelect() {
-//        super.secondaryButtonDidSelect()
-//        
-//        if shouldStartTrial {
-//            startTrial()
-//        } else {
-//            presentStartTrialAlert()
-//        }
-//    }
-    
-//    private func presentStartTrialAlert() {
-//        
-//        let alertController = UIAlertController(title: "Start Trial", message: "Are you sure?", preferredStyle: .alert)
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-//        let confirmAction = UIAlertAction(title: "Go", style: .default) { (action) in
-//            self.presentNextViewController()
-//        }
-//        
-//        alertController.addAction(cancelAction)
-//        alertController.addAction(confirmAction)
-//        alertController.preferredAction = confirmAction
-//        
-//        present(alertController, animated: true, completion: nil)
-//    }
 }
 
 extension ScrollTaskPracticeViewController: ScrollTrialViewDataSource {

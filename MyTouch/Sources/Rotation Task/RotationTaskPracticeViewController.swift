@@ -12,8 +12,6 @@ class RotationTaskPracticeViewController: TaskTrialViewController {
     
     let rotationTrialView = RotationTrialView()
     
-    var shouldStartTrial = false
-    
     override func nextViewController() -> TaskViewController {
         return RotationTaskTrialViewController()
     }
@@ -26,57 +24,13 @@ class RotationTaskPracticeViewController: TaskTrialViewController {
         super.viewDidLoad()
         
         rotationTrialView.dataSource = self
-        
-        actionButton.setTitle("Practice", for: .normal)
-
     }
     
     override func didEndTrial() {
         super.didEndTrial()
         
         rotationTrialView.reloadData()
-        
-        shouldStartTrial = true
-        
-        UIView.performWithoutAnimation {
-            self.actionButton.setTitle("End Practice", for: .normal)
-        }
     }
-    
-//    override func primaryButtonDidSelect() {
-//        super.primaryButtonDidSelect()
-//        
-//        if shouldStartTrial {
-////            presentStartTrialAlert()
-//        } else {
-//            startTrial()
-//        }
-//    }
-    
-//    override func secondaryButtonDidSelect() {
-//        super.secondaryButtonDidSelect()
-//        
-//        if shouldStartTrial {
-//            startTrial()
-//        } else {
-//            presentStartTrialAlert()
-//        }
-//    }
-    
-//    private func presentStartTrialAlert() {
-//
-//        let alertController = UIAlertController(title: "Start Trial", message: "Are you sure?", preferredStyle: .alert)
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-//        let confirmAction = UIAlertAction(title: "Go", style: .default) { (action) in
-//            self.presentNextViewController()
-//        }
-//
-//        alertController.addAction(cancelAction)
-//        alertController.addAction(confirmAction)
-//        alertController.preferredAction = confirmAction
-//
-//        present(alertController, animated: true, completion: nil)
-//    }
 }
 
 extension RotationTaskPracticeViewController: RotationTrialViewDataSource {
