@@ -25,8 +25,8 @@ class SwipeTrialView: TrialView {
     }
     
     let arrowView = UIImageView(image: UIImage(named: "arrow"))
-    let areaView = UIView()
-    let backgroundView = UIView()
+    let areaView = TouchThroughView()
+    let backgroundView = TouchThroughView()
     let tzuchuanRecognizer = TzuChuanGestureRecognizer()
     
     private var swipeArea = SwipeArea.none
