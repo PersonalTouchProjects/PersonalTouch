@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = NSLocalizedString("Exam", comment: "")
+        title = "MyTouch 觸控螢幕實驗"
         
         view.backgroundColor = .white
         
@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         descriptionLabel.lineBreakMode = .byWordWrapping
         descriptionLabel.textAlignment = .center
         
-        startExamButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
+        startExamButton.setTitle("新增測驗", for: .normal)
         startExamButton.setTitleColor(.white, for: .normal)
         startExamButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
         startExamButton.addTarget(self, action: #selector(handleButton(_:)), for: .touchUpInside)
@@ -112,11 +112,20 @@ extension HomeViewController: ORKTaskViewControllerDelegate {
                     self.presentSurvey()
                     
                 case .survey:
-                    let session = Session()
-                    session.participant = Participant(id: 1234, name: "Tommy Lin", birthYear: 1991, gender: .male, dominantHand: .left, note: "")
                     
-                    SessionManager.shared.currentSession = session
-                    self.presentTaskColleciton()
+                    let results = taskViewController.result.results
+                    
+                    if let first = results?.first as? ORKStepResult, first.identifier == "myTouch.survey.participantID" {
+                        if let answer = first.results?.first as? ORKNumericQuestionResult, let id = answer.answer as? Int {
+                            
+                            let session = Session()
+                            session.participantId = id
+    
+                            SessionManager.shared.currentSession = session
+                            self.presentTaskColleciton()
+                        }
+                    }
+                    
                 default: break
                 }
             }

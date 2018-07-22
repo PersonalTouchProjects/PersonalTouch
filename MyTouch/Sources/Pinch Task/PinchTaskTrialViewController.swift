@@ -12,7 +12,7 @@ class PinchTaskTrialViewController: TaskTrialViewController<PinchTrial> {
     
     let pinchTrialView = PinchTrialView()
     
-    var numberOfRepeats = 1
+    var numberOfRepeats = 2
     var scales: [CGFloat] = [] {
         didSet { updateNextButton() }
     }

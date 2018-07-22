@@ -16,7 +16,9 @@ class Session: Codable {
     
     var deviceInfo: DeviceInfo = DeviceInfo()
     
-    var participant: Participant?
+    // var participant: Participant?
+    
+    var participantId: Int?
     
     var tapTask: Task<TapTrial>? {
         didSet { try? archive() }

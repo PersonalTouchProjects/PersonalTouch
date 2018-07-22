@@ -15,7 +15,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
     var axis = ScrollTrial.Axis.vertical
     var rows = 5
     var targetRow = 2
-    var numberOfRepeats = 1
+    var numberOfRepeats = 2
     var positions: [Int] = [] {
         didSet { updateNextButton() }
     }
@@ -104,6 +104,5 @@ extension ScrollTaskTrialViewController: ScrollTrialViewDataSource {
 }
 
 private func positionGenerator(rows: Int, targetRow: Int, repeats: Int) -> [Int] {
-    return [1]
     return (0..<repeats).flatMap { _ in (0..<rows).compactMap { ($0 == targetRow) ? nil : $0 } }
 }

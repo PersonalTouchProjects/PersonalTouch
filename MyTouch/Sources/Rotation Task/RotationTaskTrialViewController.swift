@@ -12,7 +12,7 @@ class RotationTaskTrialViewController: TaskTrialViewController<RotationTrial> {
     
     let rotationTrialView = RotationTrialView()
     
-    var numberOfRepeats = 1
+    var numberOfRepeats = 2
     var angles: [CGFloat] = [] {
         didSet { updateNextButton() }
     }
