@@ -71,8 +71,6 @@ class HomeViewController: UIViewController {
     
     private func presentTaskColleciton() {
         let taskCollectionViewController = TaskCollectionViewController()
-//        taskCollectionViewController.taskResultManager = TaskResultManager(session: Session())
-        
         let navController = UINavigationController(rootViewController: taskCollectionViewController)
         
         present(navController, animated: true) {
@@ -110,8 +108,15 @@ extension HomeViewController: ORKTaskViewControllerDelegate {
             
             if reason == .completed {
                 switch self.state {
-                case .consent: self.presentSurvey()
-                case .survey:  self.presentTaskColleciton()
+                case .consent:
+                    self.presentSurvey()
+                    
+                case .survey:
+                    let session = Session()
+                    session.participant = Participant(id: 1234, name: "Tommy Lin", birthYear: 1991, gender: .male, dominantHand: .left, note: "")
+                    
+                    SessionManager.shared.currentSession = session
+                    self.presentTaskColleciton()
                 default: break
                 }
             }

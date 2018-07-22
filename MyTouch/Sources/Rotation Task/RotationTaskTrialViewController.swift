@@ -59,6 +59,8 @@ class RotationTaskTrialViewController: TaskTrialViewController<RotationTrial> {
         if !angles.isEmpty {
             rotationTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - angles.count + 1))"
+        } else {
+            presentNext()
         }
     }
 }

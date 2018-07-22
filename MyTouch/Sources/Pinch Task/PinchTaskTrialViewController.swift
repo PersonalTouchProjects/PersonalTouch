@@ -60,6 +60,8 @@ class PinchTaskTrialViewController: TaskTrialViewController<PinchTrial> {
         if !scales.isEmpty {
             pinchTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - scales.count + 1))"
+        } else {
+            presentNext()
         }
     }
 }

@@ -61,6 +61,8 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
         if !directions.isEmpty {
             swipeTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - directions.count + 1))"
+        } else {
+            presentNext()
         }
     }
 }
@@ -77,6 +79,8 @@ extension SwipeTaskTrialViewController: SwipeTrialViewDataSource {
 }
 
 private func directionGenerator(repeats: Int) -> [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] {
+    
+    return [(.right, .right)]
     
     return (0..<repeats).flatMap { _ in
         return [.left, .right].flatMap { area in

@@ -18,17 +18,29 @@ class Session: Codable {
     
     var participant: Participant?
     
-//    var tapTask: Task<TapTrial>?
-//
-//    var swipeTask: SwipeTask?
-//
-//    var dragAndDropTask: DragAndDropTask?
-//
-//    var scrollTask: ScrollTask?
-//
-//    var pinchTask: PinchTask?
-//
-//    var rotationTask: RotationTask?
+    var tapTask: Task<TapTrial>? {
+        didSet { try? archive() }
+    }
+
+    var swipeTask: Task<SwipeTrial>? {
+        didSet { try? archive() }
+    }
+
+    var dragAndDropTask: Task<DragAndDropTrial>? {
+        didSet { try? archive() }
+    }
+
+    var scrollTask: Task<ScrollTrial>?{
+        didSet { try? archive() }
+    }
+
+    var pinchTask: Task<PinchTrial>?{
+        didSet { try? archive() }
+    }
+
+    var rotationTask: Task<RotationTrial>?{
+        didSet { try? archive() }
+    }
     
     enum ArchiveError: Error {
         case noParticipant
@@ -58,7 +70,7 @@ class Session: Codable {
         
         let data = try jsonEncoder.encode(self)
         
-        let dataPath = path(with: Date())
+        let dataPath = path(with: startDate)
         print(dataPath)
         
         try data.write(to: dataPath, options: .atomic)

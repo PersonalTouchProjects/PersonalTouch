@@ -53,24 +53,26 @@ class TaskEndViewController<T: Trial>: TaskViewController<T> {
     }
     
     @objc private func handleButton(_ sender: UIButton) {
-        primaryButtonDidSelect()
-    }
-    
-    func primaryButtonDidSelect() {
         
-//        do {
-//            try taskResultManager?.session.archive()
-//        } catch {
-//            print("archive error: \(error)")
-//        }
-        
-        if let taskViewController = nextViewController() {
-            taskViewController.task = task
-//            taskViewController.taskResultManager = taskResultManager
-            navigationController?.pushViewController(taskViewController, animated: true)
-        } else {
-            dismiss(animated: true, completion: nil)
+        if let task = task as? Task<TapTrial> {
+            SessionManager.shared.currentSession?.tapTask = task
         }
+        if let task = task as? Task<SwipeTrial> {
+            SessionManager.shared.currentSession?.swipeTask = task
+        }
+        if let task = task as? Task<DragAndDropTrial> {
+            SessionManager.shared.currentSession?.dragAndDropTask = task
+        }
+        if let task = task as? Task<ScrollTrial> {
+            SessionManager.shared.currentSession?.scrollTask = task
+        }
+        if let task = task as? Task<PinchTrial> {
+            SessionManager.shared.currentSession?.pinchTask = task
+        }
+        if let task = task as? Task<RotationTrial> {
+            SessionManager.shared.currentSession?.rotationTask = task
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
-    
 }

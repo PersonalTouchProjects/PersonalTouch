@@ -58,6 +58,8 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController<DragAndDropTri
         if !positions.isEmpty {
             dragAndDropTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
+        } else {
+            presentNext()
         }
     }
 }

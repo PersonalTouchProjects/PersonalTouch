@@ -68,6 +68,8 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
         if !positions.isEmpty  {
             scrollTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
+        } else {
+            presentNext()
         }
     }
 }

@@ -121,5 +121,19 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
             viewController.present(navController, animated: true, completion: nil)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        
+        switch indexPath.item {
+        case 0: return tapTask.trials.isEmpty
+        case 1: return swipeTask.trials.isEmpty
+        case 2: return dragAndDropTask.trials.isEmpty
+        case 3: return scrollTask.trials.isEmpty
+        case 4: return pinchTask.trials.isEmpty
+        case 5: return rotationTask.trials.isEmpty
+        default:
+            return true
+        }
+    }
 }
 
