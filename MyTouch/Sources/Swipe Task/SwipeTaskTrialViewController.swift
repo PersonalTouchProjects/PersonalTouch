@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SwipeTaskTrialViewController: TaskTrialViewController {
+class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
     
     let swipeTrialView = SwipeTrialView()
     
@@ -17,7 +17,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
         didSet { updateNextButton() }
     }
     
-    override func nextViewController() -> TaskViewController? {
+    override func nextViewController() -> TaskViewController<SwipeTrial>? {
         return TaskEndViewController()
     }
     
@@ -52,8 +52,8 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
         swipeTrial.success = targetDirection == swipeTrialView.recognizedDirection
         swipeTrial.allEvents = swipeTrialView.gestureRecognizerEvents
         
-        
-        taskResultManager?.addTrial(swipeTrial)
+        task?.trials.append(swipeTrial)
+//        taskResultManager?.addTrial(swipeTrial)
         // end of add new trial
         
         directions.removeFirst()

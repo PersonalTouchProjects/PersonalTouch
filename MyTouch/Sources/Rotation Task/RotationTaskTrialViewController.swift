@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RotationTaskTrialViewController: TaskTrialViewController {
+class RotationTaskTrialViewController: TaskTrialViewController<RotationTrial> {
     
     let rotationTrialView = RotationTrialView()
     
@@ -17,7 +17,7 @@ class RotationTaskTrialViewController: TaskTrialViewController {
         didSet { updateNextButton() }
     }
     
-    override func nextViewController() -> TaskViewController? {
+    override func nextViewController() -> TaskViewController<RotationTrial>? {
         return TaskEndViewController()
     }
     
@@ -50,7 +50,8 @@ class RotationTaskTrialViewController: TaskTrialViewController {
         trial.success = rotationTrialView.success
         trial.allEvents = rotationTrialView.gestureRecognizerEvents
         
-        taskResultManager?.addTrial(trial)
+        task?.trials.append(trial)
+//        taskResultManager?.addTrial(trial)
         // end of add new trial
         
         angles.removeFirst()

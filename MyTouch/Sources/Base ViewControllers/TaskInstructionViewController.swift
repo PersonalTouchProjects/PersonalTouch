@@ -8,15 +8,15 @@
 
 import UIKit
 
-class TaskInstructionViewController: TaskViewController {
+class TaskInstructionViewController<T: Trial>: TaskViewController<T> {
 
     let instructionLabel = UILabel()
     let contentView      = UIView()
     
     // MARK: - TaskViewController
     
-    override func nextViewController() -> TaskViewController? {
-        return TaskTrialViewController()
+    override func nextViewController() -> TaskViewController<T>? {
+        return TaskTrialViewController<T>()
     }
     
     // MARK: - UIViewController

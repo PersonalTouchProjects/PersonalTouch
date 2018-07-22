@@ -71,7 +71,7 @@ class HomeViewController: UIViewController {
     
     private func presentTaskColleciton() {
         let taskCollectionViewController = TaskCollectionViewController()
-        taskCollectionViewController.taskResultManager = TaskResultManager(session: Session())
+//        taskCollectionViewController.taskResultManager = TaskResultManager(session: Session())
         
         let navController = UINavigationController(rootViewController: taskCollectionViewController)
         

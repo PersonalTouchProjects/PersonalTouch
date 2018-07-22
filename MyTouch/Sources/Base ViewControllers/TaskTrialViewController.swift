@@ -10,17 +10,17 @@ import UIKit
 
 private var previewScale: CGFloat = 0.5
 
-class TaskTrialViewController: TaskViewController {
+class TaskTrialViewController<T: Trial>: TaskViewController<T> {
 
     
     // MARK: - UI Properties
     
     lazy var cancelButton: UIBarButtonItem = {
-        return UIBarButtonItem(title: NSLocalizedString("CANCEL_TASK_BUTTON", comment: ""), style: .plain, target: self, action: #selector(TaskViewController.dismissTask))
+        return UIBarButtonItem(title: NSLocalizedString("CANCEL_TASK_BUTTON", comment: ""), style: .plain, target: self, action: #selector(TaskViewController<T>.dismissTask))
     }()
     
     lazy var nextButton: UIBarButtonItem = {
-        return UIBarButtonItem(title: NSLocalizedString("NEXT_BUTTON", comment: ""), style: .plain, target: self, action: #selector(TaskViewController.presentNext))
+        return UIBarButtonItem(title: NSLocalizedString("NEXT_BUTTON", comment: ""), style: .plain, target: self, action: #selector(TaskViewController<T>.presentNext))
     }()
     
     let instructionLabel = UILabel()
@@ -50,8 +50,8 @@ class TaskTrialViewController: TaskViewController {
     
     // MARK: - TaskViewController
     
-    override func nextViewController() -> TaskViewController? {
-        return TaskEndViewController()
+    override func nextViewController() -> TaskViewController<T>? {
+        return TaskEndViewController<T>()
     }
     
     

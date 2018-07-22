@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ScrollTaskPracticeViewController: TaskTrialViewController {
+class ScrollTaskPracticeViewController: TaskTrialViewController<ScrollTrial> {
     
     let scrollTrialView = ScrollTrialView()
     
-    override func nextViewController() -> TaskViewController {
+    override func nextViewController() -> TaskViewController<ScrollTrial>? {
         return ScrollTaskTrialViewController()
     }
     

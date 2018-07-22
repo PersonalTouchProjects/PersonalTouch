@@ -8,11 +8,11 @@
 
 import UIKit
 
-class PinchTaskPracticeViewController: TaskTrialViewController {
+class PinchTaskPracticeViewController: TaskTrialViewController<PinchTrial> {
     
     let pinchTrialView = PinchTrialView()
     
-    override func nextViewController() -> TaskViewController {
+    override func nextViewController() -> TaskViewController<PinchTrial>? {
         return PinchTaskTrialViewController()
     }
     

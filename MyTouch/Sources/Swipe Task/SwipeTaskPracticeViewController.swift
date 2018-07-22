@@ -8,11 +8,11 @@
 
 import UIKit
 
-class SwipeTaskPracticeViewController: TaskTrialViewController {
+class SwipeTaskPracticeViewController: TaskTrialViewController<SwipeTrial> {
     
     let swipeTrialView = SwipeTrialView()
     
-    override func nextViewController() -> TaskViewController {
+    override func nextViewController() -> TaskViewController<SwipeTrial>? {
         return SwipeTaskTrialViewController()
     }
     

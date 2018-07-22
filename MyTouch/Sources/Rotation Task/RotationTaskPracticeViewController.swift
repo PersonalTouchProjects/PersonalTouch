@@ -8,11 +8,11 @@
 
 import UIKit
 
-class RotationTaskPracticeViewController: TaskTrialViewController {
+class RotationTaskPracticeViewController: TaskTrialViewController<RotationTrial> {
     
     let rotationTrialView = RotationTrialView()
     
-    override func nextViewController() -> TaskViewController {
+    override func nextViewController() -> TaskViewController<RotationTrial>? {
         return RotationTaskTrialViewController()
     }
     

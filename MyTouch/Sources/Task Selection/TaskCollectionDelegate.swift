@@ -77,15 +77,38 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        var taskViewController: TaskViewController?
+        var taskViewController: UIViewController?
         
         switch indexPath.item {
-        case 0: taskViewController = TapTaskInstructionViewController()
-        case 1: taskViewController = SwipeTaskInstructionViewController()
-        case 2: taskViewController = DragAndDropTaskInstructionViewController()
-        case 3: taskViewController = ScrollTaskInstructionViewController()
-        case 4: taskViewController = PinchTaskInstructionViewController()
-        case 5: taskViewController = RotationTaskInstructionViewController()
+        case 0:
+            let vc = TapTaskInstructionViewController()
+            vc.task = tapTask
+            taskViewController = vc
+            
+        case 1:
+            let vc = SwipeTaskInstructionViewController()
+            vc.task = swipeTask
+            taskViewController = vc
+            
+        case 2:
+            let vc = DragAndDropTaskInstructionViewController()
+            vc.task = dragAndDropTask
+            taskViewController = vc
+            
+        case 3:
+            let vc = ScrollTaskInstructionViewController()
+            vc.task = scrollTask
+            taskViewController = vc
+            
+        case 4:
+            let vc = PinchTaskInstructionViewController()
+            vc.task = pinchTask
+            taskViewController = vc
+            
+        case 5:
+            let vc = RotationTaskInstructionViewController()
+            vc.task = rotationTask
+            taskViewController = vc
             
         default:
             break

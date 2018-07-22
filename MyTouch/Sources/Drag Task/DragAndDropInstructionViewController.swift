@@ -8,11 +8,11 @@
 
 import UIKit
 
-class DragAndDropTaskInstructionViewController: TaskInstructionViewController {
+class DragAndDropTaskInstructionViewController: TaskInstructionViewController<DragAndDropTrial> {
     
     let instructionView = DragAndDropInstructionView()
     
-    override func nextViewController() -> TaskViewController {
+    override func nextViewController() -> TaskViewController<DragAndDropTrial>? {
         return DragAndDropTaskPracticeViewController()
     }
     

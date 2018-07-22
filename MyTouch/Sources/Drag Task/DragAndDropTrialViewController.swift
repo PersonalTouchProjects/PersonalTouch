@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DragAndDropTaskTrialViewController: TaskTrialViewController {
+class DragAndDropTaskTrialViewController: TaskTrialViewController<DragAndDropTrial> {
     
     let dragAndDropTrialView = DragAndDropTrialView()
     
@@ -17,7 +17,7 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController {
         didSet { updateNextButton() }
     }
     
-    override func nextViewController() -> TaskViewController? {
+    override func nextViewController() -> TaskViewController<DragAndDropTrial>? {
         return TaskEndViewController()
     }
     
@@ -49,7 +49,8 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController {
         dragTrial.success = dragAndDropTrialView.destinationView.frame.contains(dragAndDropTrialView.targetView.center) // TODO: define success
         dragTrial.allEvents = dragAndDropTrialView.gestureRecognizerEvents
         
-        taskResultManager?.addTrial(dragTrial)
+        task?.trials.append(dragTrial)
+//        taskResultManager?.addTrial(dragTrial)
         // end of add new trial
         
         positions.removeFirst()

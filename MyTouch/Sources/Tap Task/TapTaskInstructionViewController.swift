@@ -8,11 +8,11 @@
 
 import UIKit
 
-class TapTaskInstructionViewController: TaskInstructionViewController {
+class TapTaskInstructionViewController: TaskInstructionViewController<TapTrial> {
 
     let instructionView = TapInstructionView()
     
-    override func nextViewController() -> TaskViewController? {
+    override func nextViewController() -> TaskViewController<TapTrial>? {
         return TapTaskPracticeViewController()
     }
     

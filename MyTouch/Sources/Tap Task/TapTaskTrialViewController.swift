@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TapTaskTrialViewController: TaskTrialViewController {
+class TapTaskTrialViewController: TaskTrialViewController<TapTrial> {
     
     let tapTrialView = TapTrialView()
     
@@ -20,7 +20,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
         didSet { updateNextButton() }
     }
     
-    override func nextViewController() -> TaskViewController? {
+    override func nextViewController() -> TaskViewController<TapTrial>? {
         return TaskEndViewController()
     }
     
@@ -60,7 +60,8 @@ class TapTaskTrialViewController: TaskTrialViewController {
         tapTrial.success = tapTrialView.success
         tapTrial.allEvents = tapTrialView.gestureRecognizerEvents
         
-        taskResultManager?.addTrial(tapTrial)
+        task?.trials.append(tapTrial)
+//        taskResultManager?.addTrial(tapTrial)
         // end of add new trial
         
         

@@ -8,12 +8,12 @@
 
 import UIKit
 
-class TaskEndViewController: TaskViewController {
+class TaskEndViewController<T: Trial>: TaskViewController<T> {
 
     let titleLabel    = UILabel()
     let actionButton = UIButton(type: .custom)
     
-    override func nextViewController() -> TaskViewController? {
+    override func nextViewController() -> TaskViewController<T>? {
         return nil
     }
     
@@ -58,14 +58,15 @@ class TaskEndViewController: TaskViewController {
     
     func primaryButtonDidSelect() {
         
-        do {
-            try taskResultManager?.session.archive()
-        } catch {
-            print("archive error: \(error)")
-        }
+//        do {
+//            try taskResultManager?.session.archive()
+//        } catch {
+//            print("archive error: \(error)")
+//        }
         
         if let taskViewController = nextViewController() {
-            taskViewController.taskResultManager = taskResultManager
+            taskViewController.task = task
+//            taskViewController.taskResultManager = taskResultManager
             navigationController?.pushViewController(taskViewController, animated: true)
         } else {
             dismiss(animated: true, completion: nil)

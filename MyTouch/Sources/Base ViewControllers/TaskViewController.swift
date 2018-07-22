@@ -8,9 +8,11 @@
 
 import UIKit
 
-class TaskViewController: UIViewController {
+class TaskViewController<T: Trial>: UIViewController {
 
-    var taskResultManager: TaskResultManager?
+    var task: Task<T>?
+    
+//    var taskResultManager: TaskResultManager?
     
     func nextViewController() -> TaskViewController? { return nil }
     
@@ -34,7 +36,8 @@ class TaskViewController: UIViewController {
         
         if let taskViewController = nextViewController() {
             
-            taskViewController.taskResultManager = taskResultManager
+            taskViewController.task = task
+//            taskViewController.taskResultManager = taskResultManager
             
             let animated = false
             
@@ -74,6 +77,8 @@ class TaskViewController: UIViewController {
             
             let alertController = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "Leave", style: .destructive) { (action) in
+                
+                self.task?.trials.removeAll()
                 self.dismiss(animated: animated, completion: nil)
             }
             let cancelAction = UIAlertAction(title: "Stay", style: .default, handler: nil)
@@ -84,6 +89,8 @@ class TaskViewController: UIViewController {
             
             present(alertController, animated: true, completion: nil)
         } else {
+            
+            task?.trials.removeAll()
             dismiss(animated: animated, completion: nil)
         }
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PinchTaskTrialViewController: TaskTrialViewController {
+class PinchTaskTrialViewController: TaskTrialViewController<PinchTrial> {
     
     let pinchTrialView = PinchTrialView()
     
@@ -17,7 +17,7 @@ class PinchTaskTrialViewController: TaskTrialViewController {
         didSet { updateNextButton() }
     }
     
-    override func nextViewController() -> TaskViewController? {
+    override func nextViewController() -> TaskViewController<PinchTrial>? {
         return TaskEndViewController()
     }
     
@@ -50,7 +50,9 @@ class PinchTaskTrialViewController: TaskTrialViewController {
         trial.success = pinchTrialView.success
         trial.allEvents = pinchTrialView.gestureRecognizerEvents
         
-        taskResultManager?.addTrial(trial)
+        task?.trials.append(trial)
+        
+//        taskResultManager?.addTrial(trial)
         // end of add new trial
         
         scales.removeFirst()

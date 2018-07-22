@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskCollectionViewController: TaskViewController {
+class TaskCollectionViewController: UIViewController {
     
     lazy var flowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -30,17 +30,12 @@ class TaskCollectionViewController: TaskViewController {
         return TaskCollectionDelegate(viewController: self)
     }()
     
-    override func dismissConfirmTitle() -> String? {
-        // TODO: confimation
-        return nil
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Tasks"
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissTask))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelButton(_:)))
         
         view.backgroundColor = .white
         view.addSubview(collectionView)

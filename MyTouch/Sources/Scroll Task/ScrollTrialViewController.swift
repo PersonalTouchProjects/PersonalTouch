@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ScrollTaskTrialViewController: TaskTrialViewController {
+class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
     
     let scrollTrialView = ScrollTrialView()
     
@@ -20,7 +20,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
         didSet { updateNextButton() }
     }
     
-    override func nextViewController() -> TaskViewController? {
+    override func nextViewController() -> TaskViewController<ScrollTrial>? {
         return TaskEndViewController()
     }
     
