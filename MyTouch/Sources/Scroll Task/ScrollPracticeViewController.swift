@@ -26,10 +26,23 @@ class ScrollTaskPracticeViewController: TaskTrialViewController<ScrollTrial> {
         return scrollTrialView
     }
     
+    override func instructionText() -> String {
+        return """
+        按下練習按鈕開始練習，請將藍色矩形滾動至目標區域。
+        按下下一步正式開始測驗。
+        """
+    }
+    
+    override func actionTitle() -> String {
+        return "練習"
+    }
+    
     var axis = ScrollTrial.Axis.vertical
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "滾動測驗練習"
         
         scrollTrialView.scrollView.isScrollEnabled = false
         scrollTrialView.dataSource = self
@@ -38,15 +51,11 @@ class ScrollTaskPracticeViewController: TaskTrialViewController<ScrollTrial> {
     override func didStartTrial() {
         super.didStartTrial()
         
-//        print(scrollTrialView.initialPosition)
-        
         scrollTrialView.scrollView.isScrollEnabled = true
     }
     
     override func didEndTrial() {
         super.didEndTrial()
-        
-        print(scrollTrialView.initialPosition)
         
         scrollTrialView.scrollView.isScrollEnabled = false
         scrollTrialView.reloadData()

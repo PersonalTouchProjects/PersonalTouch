@@ -16,6 +16,13 @@ class TapTaskInstructionViewController: TaskInstructionViewController<TapTrial> 
         return TapTaskPracticeViewController()
     }
     
+    override func instructionText() -> String {
+        return """
+        點擊測驗
+        本測驗共有 25 次嘗試，每次嘗試會有一個十字出現在空白畫面中的任意位置，請用一隻手指點擊一次十字。
+        """
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

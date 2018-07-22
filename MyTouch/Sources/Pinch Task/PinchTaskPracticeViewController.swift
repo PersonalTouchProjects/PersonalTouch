@@ -20,12 +20,25 @@ class PinchTaskPracticeViewController: TaskTrialViewController<PinchTrial> {
         return "Start Trials?"
     }
     
+    override func instructionText() -> String {
+        return """
+        按下練習按鈕開始練習，請將矩形放大或縮小至目標大小。
+        按下下一步正式開始測驗。
+        """
+    }
+    
+    override func actionTitle() -> String {
+        return "練習"
+    }
+    
     override func trialView() -> (UIView & TrialViewProtocol) {
         return pinchTrialView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "縮放測驗練習"
         
         pinchTrialView.dataSource = self
     }

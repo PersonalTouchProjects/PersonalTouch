@@ -24,11 +24,21 @@ class TapTaskPracticeViewController: TaskTrialViewController<TapTrial> {
         return tapTrialView
     }
     
+    override func instructionText() -> String {
+        return """
+        按下練習按鈕開始練習，十字會出現在空白畫面中的任意位置，請用一隻手指點擊一次十字。
+        按下下一步正式開始測驗。
+        """
+    }
+    
+    override func actionTitle() -> String {
+        return "練習"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Tap Practice"
-        instructionLabel.text = "Practice"
+        title = "點擊測驗練習"
         
         tapTrialView.dataSource = self
     }

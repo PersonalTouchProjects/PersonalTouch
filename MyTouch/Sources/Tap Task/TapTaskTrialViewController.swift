@@ -42,14 +42,23 @@ class TapTaskTrialViewController: TaskTrialViewController<TapTrial> {
         return positions.isEmpty
     }
     
+    override func instructionText() -> String {
+        return "按下開始按鈕開始測驗，十字會出現在空白畫面中的任意位置，請用一隻手指點擊一次十字。"
+    }
+    
+    override func actionTitle() -> String {
+        return "開始"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         positions = positionGenerator(columns: numberOfColumns, rows: numberOfRows, repeats: numberOfRepeats).shuffled()
         totalTrialsCount = positions.count
         
-        title = "點擊測驗"
-        instructionLabel.text = "1/\(totalTrialsCount)"
+        title = "點擊測驗 1/\(totalTrialsCount)"
+        
+        navigationItem.rightBarButtonItem?.title = "1/\(totalTrialsCount)"
         
         tapTrialView.dataSource = self
     }
@@ -74,7 +83,8 @@ class TapTaskTrialViewController: TaskTrialViewController<TapTrial> {
         
         if !positions.isEmpty {
             tapTrialView.reloadData()
-            instructionLabel.text = "(\(totalTrialsCount - positions.count + 1)/\(totalTrialsCount))"
+            title = "點擊測驗 \(totalTrialsCount - positions.count + 1)/\(totalTrialsCount)"
+            navigationItem.rightBarButtonItem?.title = "\(totalTrialsCount - positions.count + 1)/\(totalTrialsCount)"
         } else {
             presentNext()
         }

@@ -25,7 +25,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "MyTouch 觸控螢幕實驗"
+        title = "實驗"
+        navigationItem.title = "MyTouch 觸控螢幕實驗"
         
         view.backgroundColor = .white
         
@@ -33,12 +34,29 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         
-        descriptionLabel.text = NSLocalizedString("Exam Description", comment: "")
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.lineBreakMode = .byWordWrapping
-        descriptionLabel.textAlignment = .center
+        let description = """
+        以下我們會進行幾項測驗
+        每項測驗中有10-30個必須完成的任務
+        每個任務間可自由調配時間休息
+        如果沒有問題
+        請點擊開始測驗
+        我們的測驗便會正式開始
+        """
         
-        startExamButton.setTitle("新增測驗", for: .normal)
+        let style = NSMutableParagraphStyle()
+        style.lineHeightMultiple = 1.2
+        style.lineBreakMode = .byWordWrapping
+        style.alignment = .center
+        
+        let attrs = [
+            NSAttributedStringKey.paragraphStyle: style,
+            NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: .largeTitle)
+        ]
+        
+        descriptionLabel.attributedText = NSAttributedString(string: description, attributes: attrs)
+        descriptionLabel.numberOfLines = 0
+        
+        startExamButton.setTitle("開始測驗", for: .normal)
         startExamButton.setTitleColor(.white, for: .normal)
         startExamButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
         startExamButton.addTarget(self, action: #selector(handleButton(_:)), for: .touchUpInside)
@@ -50,23 +68,26 @@ class HomeViewController: UIViewController {
         startExamButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            descriptionLabel.topAnchor.constraintEqualToSystemSpacingBelow(view.safeAreaLayoutGuide.topAnchor, multiplier: 1.0),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             descriptionLabel.leftAnchor.constraint(equalTo: view.readableContentGuide.leftAnchor),
             descriptionLabel.rightAnchor.constraint(equalTo: view.readableContentGuide.rightAnchor),
             
+            startExamButton.topAnchor.constraintEqualToSystemSpacingBelow(descriptionLabel.bottomAnchor, multiplier: 1.0),
             startExamButton.widthAnchor.constraint(equalToConstant: 343),
             startExamButton.heightAnchor.constraint(equalToConstant: 50),
             startExamButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             startExamButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         ])
+        
+        startExamButton.setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
     
     @objc func handleButton(_ sender: UIButton) {
         
-//        presentTaskColleciton()
+        presentTaskColleciton()
 //        presentConsent()
-        presentSurvey()
+//        presentSurvey()
     }
     
     private func presentTaskColleciton() {
@@ -101,8 +122,6 @@ class HomeViewController: UIViewController {
 extension HomeViewController: ORKTaskViewControllerDelegate {
     
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        
-        // print(taskViewController.result.results)
         
         taskViewController.dismiss(animated: true) {
             

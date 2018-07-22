@@ -37,38 +37,38 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
         
         switch indexPath.item {
         case 0:
-            cell.taskTitleLabel.text = "Tap"
-            cell.subtitleLabel.text  = "Tap on the target"
+            cell.taskTitleLabel.text = "點擊"
+            cell.subtitleLabel.text  = "點擊螢幕上的十字"
             cell.isCompleted         = !tapTask.trials.isEmpty
             
         case 1:
-            cell.taskTitleLabel.text = "Swipe"
-            cell.subtitleLabel.text  = "Swipe on target direction"
+            cell.taskTitleLabel.text = "掃動"
+            cell.subtitleLabel.text  = "順著指定方向掃動"
             cell.isCompleted         = !swipeTask.trials.isEmpty
             
         case 2:
-            cell.taskTitleLabel.text = "Darg And Drop"
-            cell.subtitleLabel.text  = "Drag the rectangle and drop it into target area"
+            cell.taskTitleLabel.text = "拖曳"
+            cell.subtitleLabel.text  = "將矩形拖曳至目標區域"
             cell.isCompleted         = !dragAndDropTask.trials.isEmpty
             
         case 3:
-            cell.taskTitleLabel.text = "Horizontal Scroll"
-            cell.subtitleLabel.text  = "Scroll to target offset"
+            cell.taskTitleLabel.text = "水平滾動"
+            cell.subtitleLabel.text  = "將矩形滾動至目標區域"
             cell.isCompleted         = !horizontalScrollTask.trials.isEmpty
             
         case 4:
-            cell.taskTitleLabel.text = "Vertical Scroll"
-            cell.subtitleLabel.text  = "Scroll to target offset"
+            cell.taskTitleLabel.text = "垂直滾動"
+            cell.subtitleLabel.text  = "將矩形滾動至目標區域"
             cell.isCompleted         = !verticalScrollTask.trials.isEmpty
             
         case 5:
-            cell.taskTitleLabel.text = "Pinch"
-            cell.subtitleLabel.text  = "Zoom in or zoom out"
+            cell.taskTitleLabel.text = "雙指縮放"
+            cell.subtitleLabel.text  = "將矩形放大或縮小至目標大小"
             cell.isCompleted         = !pinchTask.trials.isEmpty
             
         case 6:
-            cell.taskTitleLabel.text = "Rotation"
-            cell.subtitleLabel.text  = "Turn the compass to the north"
+            cell.taskTitleLabel.text = "雙指旋轉"
+            cell.subtitleLabel.text  = "將指北針旋轉至正北"
             cell.isCompleted         = !rotationTask.trials.isEmpty
             
         default:

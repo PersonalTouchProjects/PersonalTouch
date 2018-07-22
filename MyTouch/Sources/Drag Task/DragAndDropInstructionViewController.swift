@@ -16,11 +16,15 @@ class DragAndDropTaskInstructionViewController: TaskInstructionViewController<Dr
         return DragAndDropTaskPracticeViewController()
     }
     
+    override func instructionText() -> String {
+        return """
+        拖曳測驗
+        本測驗共有 16 次嘗試，請將藍色矩形拖曳至指定範圍內。
+        """
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        titleLabel.text = "拖曳測驗"
-        instructionLabel.text = "direction, gesture, next, right, swipe, touch icon"
         
         contentView.addSubview(instructionView)
         instructionView.translatesAutoresizingMaskIntoConstraints = false

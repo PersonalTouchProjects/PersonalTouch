@@ -16,6 +16,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
     var directions: [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] = [] {
         didSet { updateNextButton() }
     }
+    private var totalTrialsCount: Int = 0
     
     override func nextViewController() -> TaskViewController<SwipeTrial>? {
         return TaskEndViewController()
@@ -37,10 +38,24 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
         return "Data will be deleted."
     }
     
+    override func instructionText() -> String {
+        return """
+        按下開始按鈕開始測驗，請在畫面的左邊或右邊順著箭頭方向快速掃動。
+        """
+    }
+    
+    override func actionTitle() -> String {
+        return "開始"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         directions = directionGenerator(repeats: numberOfRepeats).shuffled()
+        totalTrialsCount = directions.count
+        
+        title = "掃動測驗 1/\(totalTrialsCount)"
+        navigationItem.rightBarButtonItem?.title = "1/\(totalTrialsCount)"
         
         swipeTrialView.dataSource = self
         countDownView.label.textColor = .white
@@ -67,7 +82,8 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
         
         if !directions.isEmpty {
             swipeTrialView.reloadData()
-            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - directions.count + 1))"
+            title = "掃動測驗 \(totalTrialsCount - directions.count + 1)/\(totalTrialsCount)"
+            navigationItem.rightBarButtonItem?.title = "\(totalTrialsCount - directions.count + 1)/\(totalTrialsCount)"
         } else {
             presentNext()
         }

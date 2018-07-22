@@ -48,7 +48,7 @@ class SwipeTrialView: TrialView {
         
         tzuchuanRecognizer.addTarget(self, action: #selector(handleSwipe(_:)))
         tzuchuanRecognizer.cancelsTouchesInView = false
-        contentView.addGestureRecognizer(tzuchuanRecognizer)
+        addGestureRecognizer(tzuchuanRecognizer)
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {

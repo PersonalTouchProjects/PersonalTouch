@@ -16,10 +16,15 @@ class SwipeTaskInstructionViewController: TaskInstructionViewController<SwipeTri
         return SwipeTaskPracticeViewController()
     }
     
+    override func instructionText() -> String {
+        return """
+        掃動測驗
+        本測驗共有 16 次嘗試，每次嘗試會需要在畫面的左邊或右邊順著箭頭方向快速掃動。
+        """
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        instructionLabel.text = "direction, gesture, next, right, swipe, touch icon"
         
         contentView.addSubview(instructionView)
         instructionView.translatesAutoresizingMaskIntoConstraints = false

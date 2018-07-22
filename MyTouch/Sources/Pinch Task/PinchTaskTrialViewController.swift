@@ -17,6 +17,8 @@ class PinchTaskTrialViewController: TaskTrialViewController<PinchTrial> {
         didSet { updateNextButton() }
     }
     
+    private var totalTrialsCount: Int = 0
+    
     override func nextViewController() -> TaskViewController<PinchTrial>? {
         return TaskEndViewController()
     }
@@ -37,10 +39,24 @@ class PinchTaskTrialViewController: TaskTrialViewController<PinchTrial> {
         return "Data will be deleted."
     }
     
+    override func instructionText() -> String {
+        return """
+        按下開始按鈕開始測驗，請將矩形放大或縮小至目標大小。
+        """
+    }
+    
+    override func actionTitle() -> String {
+        return "開始"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         scales = scaleGenerator(repeats: numberOfRepeats)
+        totalTrialsCount = scales.count
+        
+        title = "縮放測驗 1/\(totalTrialsCount)"
+        navigationItem.rightBarButtonItem?.title = "1/\(totalTrialsCount)"
         
         pinchTrialView.dataSource = self
     }
@@ -65,7 +81,8 @@ class PinchTaskTrialViewController: TaskTrialViewController<PinchTrial> {
         
         if !scales.isEmpty {
             pinchTrialView.reloadData()
-            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - scales.count + 1))"
+            title = "縮放測驗 \(totalTrialsCount - scales.count + 1)/\(totalTrialsCount)"
+            navigationItem.rightBarButtonItem?.title = "\(totalTrialsCount - scales.count + 1)/\(totalTrialsCount)"
         } else {
             presentNext()
         }

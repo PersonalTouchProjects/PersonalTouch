@@ -16,11 +16,11 @@ struct Research {
         
         // ID
         let idFormat = ORKNumericAnswerFormat(style: .integer)
-        idFormat.minimum = 1000
+        idFormat.minimum = 0000
         idFormat.maximum = 9999
-        let idStepTitle = "Participant ID"
+        let idStepTitle = "受測者編號"
         let idStep = ORKQuestionStep(identifier: "myTouch.survey.participantID", title: idStepTitle, answer: idFormat)
-//        idStep.isOptional = false
+        idStep.isOptional = false
         steps += [idStep]
 //
 //        // name

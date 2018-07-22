@@ -33,7 +33,7 @@ class TaskCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Tasks"
+        title = "測試項目"
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelButton(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleActionButton(_:)))

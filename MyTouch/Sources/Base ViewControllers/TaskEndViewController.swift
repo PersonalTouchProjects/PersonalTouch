@@ -25,10 +25,10 @@ class TaskEndViewController<T: Trial>: TaskViewController<T> {
         
         navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)]
         
-        titleLabel.text = NSLocalizedString("Tap Task End Title", comment: "")
+        titleLabel.text = "測驗結束"
         titleLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
         
-        actionButton.setTitle(NSLocalizedString("Back to tasks", comment: ""), for: .normal)
+        actionButton.setTitle("好", for: .normal)
         actionButton.setTitleColor(.white, for: .normal)
         actionButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
         actionButton.addTarget(self, action: #selector(handleButton(_:)), for: .touchUpInside)

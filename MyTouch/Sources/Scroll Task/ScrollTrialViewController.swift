@@ -20,6 +20,8 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
         didSet { updateNextButton() }
     }
     
+    private var totalTrialsCount: Int = 0
+    
     override func nextViewController() -> TaskViewController<ScrollTrial>? {
         return TaskEndViewController()
     }
@@ -40,10 +42,23 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
         return "Data will be deleted."
     }
     
+    override func instructionText() -> String {
+        return """
+        按下開始按鈕開始測驗，請將藍色矩形滾動至目標區域。
+        """
+    }
+    
+    override func actionTitle() -> String {
+        return "開始"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         positions = positionGenerator(rows: rows, targetRow: targetRow, repeats: numberOfRepeats).shuffled()
+        
+        title = "滾動測驗 1/\(totalTrialsCount)"
+        navigationItem.rightBarButtonItem?.title = "1/\(totalTrialsCount)"
         
         scrollTrialView.scrollView.isScrollEnabled = false
         scrollTrialView.dataSource = self
@@ -77,7 +92,8 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
         
         if !positions.isEmpty  {
             scrollTrialView.reloadData()
-            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
+            title = "滾動測驗 \(totalTrialsCount - positions.count + 1)/\(totalTrialsCount)"
+            navigationItem.rightBarButtonItem?.title = "\(totalTrialsCount - positions.count + 1)/\(totalTrialsCount)"
         } else {
             presentNext()
         }

@@ -54,6 +54,13 @@ class TaskTrialViewController<T: Trial>: TaskViewController<T> {
         return TaskEndViewController<T>()
     }
     
+    func instructionText() -> String {
+        return "Instructions"
+    }
+    
+    func actionTitle() -> String {
+        return "Action"
+    }
     
     // MARK: - UIViewController
     
@@ -75,13 +82,20 @@ class TaskTrialViewController<T: Trial>: TaskViewController<T> {
         navigationItem.leftBarButtonItem  = cancelButton
         navigationItem.rightBarButtonItem = nextButton
         
-        instructionLabel.text = "Instructions"
-        instructionLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
-        instructionLabel.numberOfLines = 0
-        instructionLabel.lineBreakMode = .byWordWrapping
-        instructionLabel.textAlignment = .center
+        let style = NSMutableParagraphStyle()
+        style.lineHeightMultiple = 1.2
+        style.lineBreakMode = .byWordWrapping
+        style.alignment = .center
         
-        actionButton.setTitle("Start Trial", for: .normal)
+        let attrs = [
+            NSAttributedStringKey.paragraphStyle: style,
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 25, weight: .regular)
+        ]
+        
+        instructionLabel.attributedText = NSAttributedString(string: instructionText(), attributes: attrs)
+        instructionLabel.numberOfLines = 0
+        
+        actionButton.setTitle(actionTitle(), for: .normal)
         actionButton.setTitleColor(.white, for: .normal)
         actionButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
         actionButton.addTarget(self, action: #selector(handleButton(_:)), for: .touchUpInside)

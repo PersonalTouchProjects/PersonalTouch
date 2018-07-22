@@ -19,6 +19,10 @@ class TaskInstructionViewController<T: Trial>: TaskViewController<T> {
         return TaskTrialViewController<T>()
     }
     
+    func instructionText() -> String {
+        return NSLocalizedString("TASK_INSTRUCTION", comment: "")
+    }
+    
     // MARK: - UIViewController
     
     override func viewDidLoad() {
@@ -31,11 +35,18 @@ class TaskInstructionViewController<T: Trial>: TaskViewController<T> {
         navigationItem.leftBarButtonItem  = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissTask))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("NEXT_BUTTON", comment: ""), style: .plain, target: self, action: #selector(presentNext))
         
-        instructionLabel.text = NSLocalizedString("TASK_INSTRUCTION", comment: "")
-        instructionLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
+        let style = NSMutableParagraphStyle()
+        style.lineHeightMultiple =  1.2
+        style.lineBreakMode = .byWordWrapping
+        style.alignment = .center
+        
+        let attrs = [
+            NSAttributedStringKey.paragraphStyle: style,
+            NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: .largeTitle)
+        ]
+        
+        instructionLabel.attributedText = NSAttributedString(string: instructionText(), attributes: attrs)
         instructionLabel.numberOfLines = 0
-        instructionLabel.lineBreakMode = .byWordWrapping
-        instructionLabel.textAlignment = .center
         
         view.addSubview(instructionLabel)
         view.addSubview(contentView)

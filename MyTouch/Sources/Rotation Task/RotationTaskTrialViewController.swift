@@ -17,6 +17,8 @@ class RotationTaskTrialViewController: TaskTrialViewController<RotationTrial> {
         didSet { updateNextButton() }
     }
     
+    private var totalTrialsCount: Int = 0
+    
     override func nextViewController() -> TaskViewController<RotationTrial>? {
         return TaskEndViewController()
     }
@@ -37,11 +39,26 @@ class RotationTaskTrialViewController: TaskTrialViewController<RotationTrial> {
         return "Data will be deleted."
     }
     
+    override func instructionText() -> String {
+        return """
+        按下開始按鈕開始測驗，請將指北針旋轉至指向正北。
+        """
+    }
+    
+    override func actionTitle() -> String {
+        return "開始"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         angles = angleGenerator(repeats: numberOfRepeats).shuffled()
+        totalTrialsCount = angles.count
         
+        title = "旋轉測驗 1/\(totalTrialsCount)"
+        navigationItem.rightBarButtonItem?.title = "1/\(totalTrialsCount)"
+        
+        countDownView.label.textColor = UIColor(red:0.28, green:0.54, blue:0.95, alpha:1.00)
         rotationTrialView.dataSource = self
     }
     
@@ -66,7 +83,8 @@ class RotationTaskTrialViewController: TaskTrialViewController<RotationTrial> {
         
         if !angles.isEmpty {
             rotationTrialView.reloadData()
-            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - angles.count + 1))"
+            title = "旋轉測驗 \(totalTrialsCount - angles.count + 1)/\(totalTrialsCount)"
+            navigationItem.rightBarButtonItem?.title = "\(totalTrialsCount - angles.count + 1)/\(totalTrialsCount)"
         } else {
             presentNext()
         }

@@ -17,6 +17,8 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController<DragAndDropTri
         didSet { updateNextButton() }
     }
     
+    private var totalTrialsCount: Int = 0
+    
     override func nextViewController() -> TaskViewController<DragAndDropTrial>? {
         return TaskEndViewController()
     }
@@ -37,10 +39,24 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController<DragAndDropTri
         return "Data will be deleted."
     }
     
+    override func instructionText() -> String {
+        return """
+        按下開始按鈕開始測驗，請將藍色矩形拖曳至指定範圍內。
+        """
+    }
+    
+    override func actionTitle() -> String {
+        return "開始"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         positions = positionGenerator(repeats: numberOfRepeats).shuffled()
+        totalTrialsCount = positions.count
+        
+        title = "拖曳測驗 1/\(totalTrialsCount)"
+        navigationItem.rightBarButtonItem?.title = "1/\(totalTrialsCount)"
         
         dragAndDropTrialView.dataSource = self
     }
@@ -64,7 +80,8 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController<DragAndDropTri
         
         if !positions.isEmpty {
             dragAndDropTrialView.reloadData()
-            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
+            title = "拖曳測驗 \(totalTrialsCount - positions.count + 1)/\(totalTrialsCount)"
+            navigationItem.rightBarButtonItem?.title = "\(totalTrialsCount - positions.count + 1)/\(totalTrialsCount)"
         } else {
             presentNext()
         }

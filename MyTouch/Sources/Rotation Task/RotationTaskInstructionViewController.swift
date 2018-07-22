@@ -16,11 +16,15 @@ class RotationTaskInstructionViewController: TaskInstructionViewController<Rotat
         return RotationTaskPracticeViewController()
     }
     
+    override func instructionText() -> String {
+        return """
+        旋轉測驗
+        本測驗共有 8 次嘗試，請將指北針旋轉至指向正北。
+        """
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        titleLabel.text = "縮放測驗"
-        instructionLabel.text = "direction, gesture, next, right, swipe, touch icon"
         
         contentView.addSubview(instructionView)
         instructionView.translatesAutoresizingMaskIntoConstraints = false

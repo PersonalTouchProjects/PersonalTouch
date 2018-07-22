@@ -20,6 +20,17 @@ class RotationTaskPracticeViewController: TaskTrialViewController<RotationTrial>
         return "Start Trials?"
     }
     
+    override func instructionText() -> String {
+        return """
+        按下練習按鈕開始練習，請將指北針旋轉至指向正北。
+        按下下一步正式開始測驗。
+        """
+    }
+    
+    override func actionTitle() -> String {
+        return "練習"
+    }
+    
     override func trialView() -> (UIView & TrialViewProtocol) {
         return rotationTrialView
     }
@@ -27,6 +38,9 @@ class RotationTaskPracticeViewController: TaskTrialViewController<RotationTrial>
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "旋轉測驗練習"
+        
+        countDownView.label.textColor = UIColor(red:0.28, green:0.54, blue:0.95, alpha:1.00)
         rotationTrialView.dataSource = self
     }
     

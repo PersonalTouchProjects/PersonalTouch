@@ -20,11 +20,15 @@ class ScrollTaskInstructionViewController: TaskInstructionViewController<ScrollT
         return vc
     }
     
+    override func instructionText() -> String {
+        return """
+        \(self.axis == .horizontal ? "水平" : "垂直")測驗
+        本測驗共有 8 次嘗試，請將藍色矩形滾動至目標區域。
+        """
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        titleLabel.text = "滾動測驗"
-        instructionLabel.text = "direction, gesture, next, right, swipe, touch icon"
         
         contentView.addSubview(instructionView)
         instructionView.translatesAutoresizingMaskIntoConstraints = false

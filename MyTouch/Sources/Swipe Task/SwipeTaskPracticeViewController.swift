@@ -24,8 +24,21 @@ class SwipeTaskPracticeViewController: TaskTrialViewController<SwipeTrial> {
         return swipeTrialView
     }
     
+    override func instructionText() -> String {
+        return """
+        按下練習按鈕開始練習，請在畫面的左邊或右邊順著箭頭方向快速掃動。
+        按下下一步正式開始測驗。
+        """
+    }
+    
+    override func actionTitle() -> String {
+        return "練習"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "掃動測驗練習"
         
         swipeTrialView.dataSource = self
         countDownView.label.textColor = .white

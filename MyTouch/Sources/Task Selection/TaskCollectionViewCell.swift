@@ -56,7 +56,7 @@ class TaskCollectionViewCell: UICollectionViewCell {
         
         taskTitleLabel.font = UIFont.systemFont(ofSize: 21, weight: .medium)
         
-        subtitleLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        subtitleLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         subtitleLabel.numberOfLines = 0
         
         let labelStack = UIStackView(arrangedSubviews: [taskTitleLabel, subtitleLabel])
