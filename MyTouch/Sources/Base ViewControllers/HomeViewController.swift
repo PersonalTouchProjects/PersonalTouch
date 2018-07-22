@@ -64,9 +64,9 @@ class HomeViewController: UIViewController {
     
     @objc func handleButton(_ sender: UIButton) {
         
-        presentTaskColleciton()
-        
+//        presentTaskColleciton()
 //        presentConsent()
+        presentSurvey()
     }
     
     private func presentTaskColleciton() {
@@ -75,7 +75,9 @@ class HomeViewController: UIViewController {
         
         let navController = UINavigationController(rootViewController: taskCollectionViewController)
         
-        present(navController, animated: true) {}
+        present(navController, animated: true) {
+            self.state = .home
+        }
     }
     
     private func presentConsent() {
@@ -96,51 +98,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func presentTasks() {
-        
-        func presentTaskViewController(_ vc: TaskViewController) {
-            
-            vc.taskResultManager = TaskResultManager(session: Session())
-            
-            let navController = UINavigationController(rootViewController: vc)
-            navController.modalTransitionStyle = .flipHorizontal
-            
-            self.present(navController, animated: true) {
-                self.state = .home
-            }
-        }
-        
-        // present alert controller
-        let alert = UIAlertController(title: "測驗", message: nil, preferredStyle: .actionSheet)
-        
-        alert.addAction(UIAlertAction(title: "點擊", style: .default) { _ in
-            presentTaskViewController(TapTaskInstructionViewController())
-        })
-        alert.addAction(UIAlertAction(title: "掃動", style: .default) { _ in
-            presentTaskViewController(SwipeTaskInstructionViewController())
-        })
-        alert.addAction(UIAlertAction(title: "拖拉放", style: .default) { _ in
-            presentTaskViewController(DragAndDropTaskInstructionViewController())
-        })
-        alert.addAction(UIAlertAction(title: "滾動", style: .default) { _ in
-            presentTaskViewController(ScrollTaskInstructionViewController())
-        })
-        alert.addAction(UIAlertAction(title: "縮放", style: .default) { _ in
-            presentTaskViewController(PinchTaskInstructionViewController())
-        })
-        alert.addAction(UIAlertAction(title: "旋轉", style: .default) { _ in
-            presentTaskViewController(RotationTaskInstructionViewController())
-        })
-        alert.addAction(UIAlertAction(title: "測試", style: .default) { _ in
-            presentTaskViewController(TaskInstructionViewController())
-        })
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        
-        alert.popoverPresentationController?.sourceView = view
-        alert.popoverPresentationController?.sourceRect = startExamButton.frame
-        
-        self.present(alert, animated: true, completion: nil)
-    }
 }
 
 extension HomeViewController: ORKTaskViewControllerDelegate {
@@ -151,13 +108,14 @@ extension HomeViewController: ORKTaskViewControllerDelegate {
         
         taskViewController.dismiss(animated: true) {
             
-            switch self.state {
-            case .consent: self.presentSurvey()
-            case .survey:  self.presentTasks()
-            default: break
+            if reason == .completed {
+                switch self.state {
+                case .consent: self.presentSurvey()
+                case .survey:  self.presentTaskColleciton()
+                default: break
+                }
             }
         }
-        
     }
     
 }

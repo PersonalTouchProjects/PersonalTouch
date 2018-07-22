@@ -37,6 +37,8 @@ class Task<T: MyTouch.Trial>: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         trials = try container.decode([T].self, forKey: .trials)
     }
+    
+    init() {}
 }
 
 
