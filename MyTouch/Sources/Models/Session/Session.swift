@@ -18,17 +18,17 @@ class Session: Codable {
     
     var participant: Participant?
     
-    var tapTask: TapTask?
-    
-    var swipeTask: SwipeTask?
-    
-    var dragAndDropTask: DragAndDropTask?
-    
-    var scrollTask: ScrollTask?
-    
-    var pinchTask: PinchTask?
-    
-    var rotationTask: RotationTask?
+//    var tapTask: Task<TapTrial>?
+//
+//    var swipeTask: SwipeTask?
+//
+//    var dragAndDropTask: DragAndDropTask?
+//
+//    var scrollTask: ScrollTask?
+//
+//    var pinchTask: PinchTask?
+//
+//    var rotationTask: RotationTask?
     
     enum ArchiveError: Error {
         case noParticipant

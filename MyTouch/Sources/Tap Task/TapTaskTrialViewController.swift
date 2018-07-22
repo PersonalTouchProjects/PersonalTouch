@@ -70,7 +70,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
             tapTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
         } else {
-            presentNext(animated: false)
+            presentNext()
         }
     }
 }

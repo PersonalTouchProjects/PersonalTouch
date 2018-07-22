@@ -8,14 +8,9 @@
 
 import Foundation
 
-protocol Task: Codable {
-    associatedtype Trial: MyTouch.Trial
+class Task<T: MyTouch.Trial>: Codable {
     
-    var trials: [Trial] { get }
-    var successRate: Float { get }
-}
-
-extension Task {
+    var trials: [T] = []
     
     var successRate: Float {
         
@@ -25,8 +20,27 @@ extension Task {
         
         return Float(success.count) / Float(trials.count)
     }
+    
+    // MARK: - Codable
+    
+    enum CodingKeys: CodingKey {
+        case trials, successRate
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(trials, forKey: .trials)
+        try container.encode(successRate, forKey: .successRate)
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        trials = try container.decode([T].self, forKey: .trials)
+    }
 }
 
+
+/*
 // MARK: - Tap Task
 
 struct TapTask: Task {
@@ -164,3 +178,4 @@ struct RotationTask: Task {
     
     init() {}
 }
+*/

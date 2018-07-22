@@ -10,11 +10,8 @@ import UIKit
 
 class TaskEndViewController: TaskViewController {
 
-    let titleLabel = UILabel()
-    let descriptionLabel = UILabel()
-    
-    let primaryButton = UIButton(type: .custom)
-    let cancelButton = UIButton(type: .system)
+    let titleLabel    = UILabel()
+    let actionButton = UIButton(type: .custom)
     
     override func nextViewController() -> TaskViewController? {
         return nil
@@ -25,55 +22,38 @@ class TaskEndViewController: TaskViewController {
         
         view.backgroundColor = .white
         
+        
         navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)]
         
         titleLabel.text = NSLocalizedString("Tap Task End Title", comment: "")
         titleLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
         
-        descriptionLabel.text = NSLocalizedString("Tap Task Description", comment: "")
-        descriptionLabel.font = UIFont.systemFont(ofSize: 28, weight: .light)
-        
-        primaryButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
-        primaryButton.setTitleColor(.white, for: .normal)
-        primaryButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
-        primaryButton.addTarget(self, action: #selector(handlePrimaryButton(_:)), for: .touchUpInside)
-        
-        cancelButton.setTitle(NSLocalizedString("Start Exam", comment: ""), for: .normal)
-        cancelButton.addTarget(self, action: #selector(handleCancelButton(_:)), for: .touchUpInside)
+        actionButton.setTitle(NSLocalizedString("Back to tasks", comment: ""), for: .normal)
+        actionButton.setTitleColor(.white, for: .normal)
+        actionButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: view.tintColor), for: .normal)
+        actionButton.addTarget(self, action: #selector(handleButton(_:)), for: .touchUpInside)
         
         view.addSubview(titleLabel)
-        view.addSubview(descriptionLabel)
-        view.addSubview(primaryButton)
-        view.addSubview(cancelButton)
+        view.addSubview(actionButton)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        primaryButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            
             titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            titleLabel.topAnchor.constraintEqualToSystemSpacingBelow(view.safeAreaLayoutGuide.topAnchor, multiplier: 10),
             
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            descriptionLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            actionButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            actionButton.widthAnchor.constraint(equalToConstant: 343),
+            actionButton.heightAnchor.constraint(equalToConstant: 50),
             
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
-            cancelButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            
-            primaryButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
-            primaryButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            primaryButton.widthAnchor.constraint(equalToConstant: 343),
-            primaryButton.heightAnchor.constraint(equalToConstant: 50)
+            view.bottomAnchor.constraintEqualToSystemSpacingBelow(actionButton.bottomAnchor, multiplier: 5.0)
         ])
     }
     
-    @objc private func handlePrimaryButton(_ sender: UIButton) {
+    @objc private func handleButton(_ sender: UIButton) {
         primaryButtonDidSelect()
-    }
-    
-    @objc private func handleCancelButton(_ sender: UIButton) {
-        cancelButtonDidSelect()
     }
     
     func primaryButtonDidSelect() {
@@ -92,8 +72,4 @@ class TaskEndViewController: TaskViewController {
         }
     }
     
-    func cancelButtonDidSelect() {
-        
-    }
-
 }

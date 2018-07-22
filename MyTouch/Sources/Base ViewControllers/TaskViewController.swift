@@ -30,11 +30,13 @@ class TaskViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
     
-    @objc final func presentNext(animated: Bool = true) {
+    @objc final func presentNext() {
         
         if let taskViewController = nextViewController() {
             
             taskViewController.taskResultManager = taskResultManager
+            
+            let animated = false
             
             let alertTitle = presentNextConfirmTitle()
             let message    = presentNextConfirmMessage()
@@ -61,7 +63,9 @@ class TaskViewController: UIViewController {
         }
     }
     
-    @objc final func dismissTask(animated: Bool = true) {
+    @objc final func dismissTask() {
+        
+        let animated = false
         
         let alertTitle = dismissConfirmTitle()
         let message    = dismissConfirmMessage()
