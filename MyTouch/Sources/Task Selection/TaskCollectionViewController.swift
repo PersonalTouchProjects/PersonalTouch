@@ -92,13 +92,13 @@ extension TaskCollectionViewController: UICollectionViewDataSource {
         
         if let session = taskResultManager?.session {
             switch indexPath.item {
-            case 0: cell.indicatorColor = session.tapTask         == nil ? .red : .green
-            case 1: cell.indicatorColor = session.swipeTask       == nil ? .red : .green
-            case 2: cell.indicatorColor = session.dragAndDropTask == nil ? .red : .green
-            case 3: cell.indicatorColor = session.scrollTask      == nil ? .red : .green
-            case 4: cell.indicatorColor = session.pinchTask       == nil ? .red : .green
-            case 5: cell.indicatorColor = session.rotationTask    == nil ? .red : .green
-            default: cell.indicatorColor = .clear
+            case 0: cell.isCompleted = session.tapTask         != nil //cell.indicatorColor = session.tapTask         == nil ? .red : .green
+            case 1: cell.isCompleted = session.swipeTask       != nil
+            case 2: cell.isCompleted = session.dragAndDropTask != nil
+            case 3: cell.isCompleted = session.scrollTask      != nil
+            case 4: cell.isCompleted = session.pinchTask       != nil
+            case 5: cell.isCompleted = session.rotationTask    != nil
+            default: cell.isCompleted = false
             }
         }
         
@@ -118,6 +118,22 @@ extension TaskCollectionViewController: UICollectionViewDelegateFlowLayout {
         
         self.present(navController, animated: true, completion: nil)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        
+        if let session = taskResultManager?.session {
+            switch indexPath.item {
+            case 0: return session.tapTask         == nil
+            case 1: return session.swipeTask       == nil
+            case 2: return session.dragAndDropTask == nil
+            case 3: return session.scrollTask      == nil
+            case 4: return session.pinchTask       == nil
+            case 5: return session.rotationTask    == nil
+            default: return true
+            }
+        }
+        return true
+    }
 }
 
 private func _taskViewControllers() -> [(String, String, () -> TaskViewController)] {
@@ -133,3 +149,4 @@ private func _taskViewControllers() -> [(String, String, () -> TaskViewControlle
     
     return array
 }
+

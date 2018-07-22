@@ -14,7 +14,7 @@ class RotationTaskTrialViewController: TaskTrialViewController {
     
     var numberOfRepeats = 1
     var angles: [CGFloat] = [] {
-        didSet { setNeedsNextButtonUpdate() }
+        didSet { updateNextButton() }
     }
     
     override func nextViewController() -> TaskViewController? {

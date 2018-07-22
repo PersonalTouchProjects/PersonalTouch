@@ -26,6 +26,12 @@ class TaskCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    var isCompleted = false {
+        didSet {
+            contentView.alpha = isCompleted ? 0.5 : 1.0
+        }
+    }
+    
     let taskTitleLabel = UILabel()
     let subtitleLabel  = UILabel()
     

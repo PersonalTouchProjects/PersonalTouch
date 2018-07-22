@@ -14,7 +14,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController {
     
     var numberOfRepeats = 1
     var directions: [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] = [] {
-        didSet { setNeedsNextButtonUpdate() }
+        didSet { updateNextButton() }
     }
     
     override func nextViewController() -> TaskViewController? {

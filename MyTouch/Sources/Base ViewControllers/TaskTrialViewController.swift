@@ -274,7 +274,7 @@ class TaskTrialViewController: TaskViewController {
         return true
     }
     
-    func setNeedsNextButtonUpdate() {
+    func updateNextButton() {
         nextButton.isEnabled = prefersNextButtonEnabled()
     }
 }

@@ -17,7 +17,7 @@ class TapTaskTrialViewController: TaskTrialViewController {
     var numberOfRepeats = 1
     
     var positions: [(Int, Int)] = [] {
-        didSet { setNeedsNextButtonUpdate() }
+        didSet { updateNextButton() }
     }
     
     override func nextViewController() -> TaskViewController? {
@@ -69,6 +69,8 @@ class TapTaskTrialViewController: TaskTrialViewController {
         if !positions.isEmpty {
             tapTrialView.reloadData()
             instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
+        } else {
+            presentNext(animated: false)
         }
     }
 }

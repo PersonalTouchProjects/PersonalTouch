@@ -17,7 +17,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController {
     var targetRow = 2
     var numberOfRepeats = 1
     var positions: [Int] = [] {
-        didSet { setNeedsNextButtonUpdate() }
+        didSet { updateNextButton() }
     }
     
     override func nextViewController() -> TaskViewController? {

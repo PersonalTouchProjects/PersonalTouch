@@ -25,6 +25,8 @@ class TaskEndViewController: TaskViewController {
         
         view.backgroundColor = .white
         
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)]
+        
         titleLabel.text = NSLocalizedString("Tap Task End Title", comment: "")
         titleLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
         

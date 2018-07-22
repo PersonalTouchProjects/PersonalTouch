@@ -14,7 +14,7 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController {
     
     var numberOfRepeats = 1
     var positions: [(DragAndDropTrialView.Distance, DragAndDropTrialView.Direction)] = [] {
-        didSet { setNeedsNextButtonUpdate() }
+        didSet { updateNextButton() }
     }
     
     override func nextViewController() -> TaskViewController? {

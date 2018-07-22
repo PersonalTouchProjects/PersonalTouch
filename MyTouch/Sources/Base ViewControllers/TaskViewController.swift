@@ -30,7 +30,7 @@ class TaskViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
     
-    @objc final func presentNext() {
+    @objc final func presentNext(animated: Bool = true) {
         
         if let taskViewController = nextViewController() {
             
@@ -44,7 +44,7 @@ class TaskViewController: UIViewController {
                 let alertController = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
                 let confirmAction = UIAlertAction(title: "Go", style: .default) { (action) in
-                    self.navigationController?.pushViewController(taskViewController, animated: true)
+                    self.navigationController?.pushViewController(taskViewController, animated: animated)
                 }
                 
                 alertController.addAction(cancelAction)
@@ -53,7 +53,7 @@ class TaskViewController: UIViewController {
                 
                 present(alertController, animated: true, completion: nil)
             } else {
-                navigationController?.pushViewController(taskViewController, animated: true)
+                navigationController?.pushViewController(taskViewController, animated: animated)
             }
             
         } else {
@@ -61,7 +61,7 @@ class TaskViewController: UIViewController {
         }
     }
     
-    @objc final func dismissTask() {
+    @objc final func dismissTask(animated: Bool = true) {
         
         let alertTitle = dismissConfirmTitle()
         let message    = dismissConfirmMessage()
@@ -70,7 +70,7 @@ class TaskViewController: UIViewController {
             
             let alertController = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "Leave", style: .destructive) { (action) in
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: animated, completion: nil)
             }
             let cancelAction = UIAlertAction(title: "Stay", style: .default, handler: nil)
             
@@ -80,7 +80,7 @@ class TaskViewController: UIViewController {
             
             present(alertController, animated: true, completion: nil)
         } else {
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: animated, completion: nil)
         }
     }
 }

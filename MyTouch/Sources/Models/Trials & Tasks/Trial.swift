@@ -34,7 +34,6 @@ protocol Trial: Codable {
     
     var rotationEvents: [RotationGestureRecognizerEvent] { get set }
     
-//    mutating func addEvents(_ newEvents: [GestureRecognizerEvent])
 }
 
 extension Trial {
@@ -62,13 +61,4 @@ extension Trial {
         }
     }
     
-//    mutating func addEvents(_ newEvents: [GestureRecognizerEvent]) {
-//        
-//        tapEvents += newEvents.filter({ $0 is TapGestureRecognizerEvent }) as! [TapGestureRecognizerEvent]
-//        panEvents += newEvents.filter({ $0 is PanGestureRecognizerEvent }) as! [PanGestureRecognizerEvent]
-//        longPressEvents += newEvents.filter({ $0 is LongPressGestureRecognizerEvent }) as! [LongPressGestureRecognizerEvent]
-//        swipeEvents += newEvents.filter({ $0 is SwipeGestureRecognizerEvent }) as! [SwipeGestureRecognizerEvent]
-//        pinchEvents += newEvents.filter({ $0 is PinchGestureRecognizerEvent }) as! [PinchGestureRecognizerEvent]
-//        rotationEvents += newEvents.filter({ $0 is RotationGestureRecognizerEvent }) as! [RotationGestureRecognizerEvent]
-//    }
 }
