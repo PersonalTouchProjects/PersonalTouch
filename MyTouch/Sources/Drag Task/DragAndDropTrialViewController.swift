@@ -29,6 +29,14 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController<DragAndDropTri
         return positions.isEmpty
     }
     
+    override func dismissConfirmTitle() -> String? {
+        return "Are you sure?"
+    }
+    
+    override func dismissConfirmMessage() -> String? {
+        return "Data will be deleted."
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +58,6 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController<DragAndDropTri
         dragTrial.allEvents = dragAndDropTrialView.gestureRecognizerEvents
         
         task?.trials.append(dragTrial)
-//        taskResultManager?.addTrial(dragTrial)
         // end of add new trial
         
         positions.removeFirst()

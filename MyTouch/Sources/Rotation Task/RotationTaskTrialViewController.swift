@@ -29,6 +29,14 @@ class RotationTaskTrialViewController: TaskTrialViewController<RotationTrial> {
         return angles.isEmpty
     }
     
+    override func dismissConfirmTitle() -> String? {
+        return "Are you sure?"
+    }
+    
+    override func dismissConfirmMessage() -> String? {
+        return "Data will be deleted."
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

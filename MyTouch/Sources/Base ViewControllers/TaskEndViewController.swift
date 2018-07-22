@@ -63,8 +63,12 @@ class TaskEndViewController<T: Trial>: TaskViewController<T> {
         if let task = task as? Task<DragAndDropTrial> {
             SessionManager.shared.currentSession?.dragAndDropTask = task
         }
-        if let task = task as? Task<ScrollTrial> {
-            SessionManager.shared.currentSession?.scrollTask = task
+        if let task = task as? ScrollTask {
+            if task.isHorizontal {
+                SessionManager.shared.currentSession?.horizontalScrollTask = task
+            } else {
+                SessionManager.shared.currentSession?.verticalScrollTask = task
+            }
         }
         if let task = task as? Task<PinchTrial> {
             SessionManager.shared.currentSession?.pinchTask = task

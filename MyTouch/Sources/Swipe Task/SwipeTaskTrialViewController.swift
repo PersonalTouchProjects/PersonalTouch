@@ -29,6 +29,14 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
         return directions.isEmpty
     }
     
+    override func dismissConfirmTitle() -> String? {
+        return "Are you sure?"
+    }
+    
+    override func dismissConfirmMessage() -> String? {
+        return "Data will be deleted."
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,7 +61,6 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
         swipeTrial.allEvents = swipeTrialView.gestureRecognizerEvents
         
         task?.trials.append(swipeTrial)
-//        taskResultManager?.addTrial(swipeTrial)
         // end of add new trial
         
         directions.removeFirst()

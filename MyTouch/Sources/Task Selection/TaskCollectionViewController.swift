@@ -36,6 +36,12 @@ class TaskCollectionViewController: UIViewController {
         title = "Tasks"
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelButton(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleActionButton(_:)))
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        navigationController?.navigationBar.barTintColor = .clear
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         
         view.backgroundColor = .white
         view.addSubview(collectionView)
@@ -53,6 +59,8 @@ class TaskCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
+        
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -73,9 +81,18 @@ class TaskCollectionViewController: UIViewController {
     
     @objc private func handleCancelButton(_ sender: UIBarButtonItem) {
         
+        let alertController = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Leave", style: .destructive) { (action) in
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+        let cancelAction = UIAlertAction(title: "Stay", style: .default, handler: nil)
         
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        alertController.preferredAction = cancelAction
         
-        dismiss(animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc private func handleActionButton(_ sender: UIButton) {

@@ -12,7 +12,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
     
     let scrollTrialView = ScrollTrialView()
     
-    var axis = ScrollTrial.Axis.horizontal
+    var axis = ScrollTrial.Axis.vertical
     var rows = 5
     var targetRow = 2
     var numberOfRepeats = 1
@@ -30,6 +30,14 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
     
     override func prefersNextButtonEnabled() -> Bool {
         return positions.isEmpty
+    }
+    
+    override func dismissConfirmTitle() -> String? {
+        return "Are you sure?"
+    }
+    
+    override func dismissConfirmMessage() -> String? {
+        return "Data will be deleted."
     }
     
     override func viewDidLoad() {
@@ -60,7 +68,6 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
 //        dragTrial.success = scrollTrialView.destinationView.frame.contains(scrollTrialView.targetView.center) // TODO: define success
 //        dragTrial.addEvents(scrollTrialView.gestureRecognizerEvents)
 //
-//        taskResultManager?.addTrial(dragTrial)
         // end of add new trial
         
         positions.removeFirst()

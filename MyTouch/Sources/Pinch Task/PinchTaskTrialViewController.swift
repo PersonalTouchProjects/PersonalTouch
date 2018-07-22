@@ -29,6 +29,14 @@ class PinchTaskTrialViewController: TaskTrialViewController<PinchTrial> {
         return scales.isEmpty
     }
     
+    override func dismissConfirmTitle() -> String? {
+        return "Are you sure?"
+    }
+    
+    override func dismissConfirmMessage() -> String? {
+        return "Data will be deleted."
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,8 +59,6 @@ class PinchTaskTrialViewController: TaskTrialViewController<PinchTrial> {
         trial.allEvents = pinchTrialView.gestureRecognizerEvents
         
         task?.trials.append(trial)
-        
-//        taskResultManager?.addTrial(trial)
         // end of add new trial
         
         scales.removeFirst()

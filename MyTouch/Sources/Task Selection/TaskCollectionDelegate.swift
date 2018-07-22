@@ -10,12 +10,13 @@ import UIKit
 
 final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    let tapTask         = Task<TapTrial>()
-    let swipeTask       = Task<SwipeTrial>()
-    let dragAndDropTask = Task<DragAndDropTrial>()
-    let scrollTask      = Task<ScrollTrial>()
-    let pinchTask       = Task<PinchTrial>()
-    let rotationTask    = Task<RotationTrial>()
+    let tapTask              = Task<TapTrial>()
+    let swipeTask            = Task<SwipeTrial>()
+    let dragAndDropTask      = Task<DragAndDropTrial>()
+    let horizontalScrollTask = ScrollTask(horizontal: true)
+    let verticalScrollTask   = ScrollTask(horizontal: false)
+    let pinchTask            = Task<PinchTrial>()
+    let rotationTask         = Task<RotationTrial>()
     
     weak var viewController: TaskCollectionViewController?
     
@@ -27,7 +28,7 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -51,16 +52,21 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
             cell.isCompleted         = !dragAndDropTask.trials.isEmpty
             
         case 3:
-            cell.taskTitleLabel.text = "Scroll"
+            cell.taskTitleLabel.text = "Horizontal Scroll"
             cell.subtitleLabel.text  = "Scroll to target offset"
-            cell.isCompleted         = !scrollTask.trials.isEmpty
+            cell.isCompleted         = !horizontalScrollTask.trials.isEmpty
             
         case 4:
+            cell.taskTitleLabel.text = "Vertical Scroll"
+            cell.subtitleLabel.text  = "Scroll to target offset"
+            cell.isCompleted         = !verticalScrollTask.trials.isEmpty
+            
+        case 5:
             cell.taskTitleLabel.text = "Pinch"
             cell.subtitleLabel.text  = "Zoom in or zoom out"
             cell.isCompleted         = !pinchTask.trials.isEmpty
             
-        case 5:
+        case 6:
             cell.taskTitleLabel.text = "Rotation"
             cell.subtitleLabel.text  = "Turn the compass to the north"
             cell.isCompleted         = !rotationTask.trials.isEmpty
@@ -97,15 +103,22 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
             
         case 3:
             let vc = ScrollTaskInstructionViewController()
-            vc.task = scrollTask
+            vc.axis = .horizontal
+            vc.task = horizontalScrollTask
             taskViewController = vc
             
         case 4:
+            let vc = ScrollTaskInstructionViewController()
+            vc.axis = .vertical
+            vc.task = verticalScrollTask
+            taskViewController = vc
+            
+        case 5:
             let vc = PinchTaskInstructionViewController()
             vc.task = pinchTask
             taskViewController = vc
             
-        case 5:
+        case 6:
             let vc = RotationTaskInstructionViewController()
             vc.task = rotationTask
             taskViewController = vc
@@ -128,9 +141,10 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
         case 0: return tapTask.trials.isEmpty
         case 1: return swipeTask.trials.isEmpty
         case 2: return dragAndDropTask.trials.isEmpty
-        case 3: return scrollTask.trials.isEmpty
-        case 4: return pinchTask.trials.isEmpty
-        case 5: return rotationTask.trials.isEmpty
+        case 3: return horizontalScrollTask.trials.isEmpty
+        case 4: return verticalScrollTask.trials.isEmpty
+        case 5: return pinchTask.trials.isEmpty
+        case 6: return rotationTask.trials.isEmpty
         default:
             return true
         }

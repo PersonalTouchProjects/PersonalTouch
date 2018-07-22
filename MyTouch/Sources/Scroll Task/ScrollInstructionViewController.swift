@@ -12,8 +12,12 @@ class ScrollTaskInstructionViewController: TaskInstructionViewController<ScrollT
     
     let instructionView = ScrollInstructionView()
     
+    var axis = ScrollTrial.Axis.vertical
+    
     override func nextViewController() -> TaskViewController<ScrollTrial>? {
-        return ScrollTaskPracticeViewController()
+        let vc = ScrollTaskPracticeViewController()
+        vc.axis = axis
+        return vc
     }
     
     override func viewDidLoad() {

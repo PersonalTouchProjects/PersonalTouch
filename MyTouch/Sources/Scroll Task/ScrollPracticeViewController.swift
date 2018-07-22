@@ -13,7 +13,9 @@ class ScrollTaskPracticeViewController: TaskTrialViewController<ScrollTrial> {
     let scrollTrialView = ScrollTrialView()
     
     override func nextViewController() -> TaskViewController<ScrollTrial>? {
-        return ScrollTaskTrialViewController()
+        let vc = ScrollTaskTrialViewController()
+        vc.axis = axis
+        return vc
     }
     
     override func presentNextConfirmTitle() -> String? {
@@ -23,6 +25,8 @@ class ScrollTaskPracticeViewController: TaskTrialViewController<ScrollTrial> {
     override func trialView() -> (UIView & TrialViewProtocol) {
         return scrollTrialView
     }
+    
+    var axis = ScrollTrial.Axis.vertical
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +64,6 @@ extension ScrollTaskPracticeViewController: ScrollTrialViewDataSource {
     }
     
     func axis(_ scrollTrialView: ScrollTrialView) -> ScrollTrial.Axis {
-        return .horizontal
+        return axis
     }
 }

@@ -30,15 +30,19 @@ class Session: Codable {
         didSet { try? archive() }
     }
 
-    var scrollTask: Task<ScrollTrial>?{
+    var horizontalScrollTask: Task<ScrollTrial>? {
+        didSet { try? archive() }
+    }
+    
+    var verticalScrollTask: Task<ScrollTrial>? {
         didSet { try? archive() }
     }
 
-    var pinchTask: Task<PinchTrial>?{
+    var pinchTask: Task<PinchTrial>? {
         didSet { try? archive() }
     }
 
-    var rotationTask: Task<RotationTrial>?{
+    var rotationTask: Task<RotationTrial>? {
         didSet { try? archive() }
     }
     
