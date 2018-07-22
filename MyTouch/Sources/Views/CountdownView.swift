@@ -11,7 +11,7 @@ import UIKit
 class CountdownView: UIView {
 
     var count: Int = 3
-    var timeIntervalForEachCount: TimeInterval = 0.75
+    var timeIntervalForEachCount: TimeInterval = 0.5
     
     let label = UILabel()
     

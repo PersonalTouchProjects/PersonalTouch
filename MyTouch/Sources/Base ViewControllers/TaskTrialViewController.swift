@@ -34,7 +34,7 @@ class TaskTrialViewController<T: Trial>: TaskViewController<T> {
         return view
     }()
     
-    private let trialDidEndView   = UIView()
+    private let trialDidEndView   = NoTouchLabel()
     private let previewBorderView = UIView()
     
     // layout assists
@@ -157,7 +157,11 @@ class TaskTrialViewController<T: Trial>: TaskViewController<T> {
         countDownView.label.textColor = .black
         countDownView.isHidden = true
 
-        trialDidEndView.backgroundColor = .white
+        trialDidEndView.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
+        trialDidEndView.textColor = .white
+        trialDidEndView.text = "停"
+        trialDidEndView.textAlignment = .center
+        trialDidEndView.font = UIFont.systemFont(ofSize: 500, weight: .heavy)
         trialDidEndView.isHidden = true
         
         view.addSubview(countDownView)
@@ -308,23 +312,35 @@ extension TaskTrialViewController: TouchTrackingViewDelegate {
         
         // dismiss content views by masking a white view
         // only run the animation on first time
-        if lastTouchesUpDate == nil {
-            
-            trialDidEndView.isHidden = false
-            trialDidEndView.alpha = 0.0
-            
-            UIView.animate(withDuration: 0.2) {
-                self.trialDidEndView.alpha = 1.0
-            }
-        }
+//        if lastTouchesUpDate == nil {
+//
+//            trialDidEndView.isHidden = false
+//            trialDidEndView.alpha = 0.0
+//
+//            UIView.animate(withDuration: 0.2) {
+//                self.trialDidEndView.alpha = 1.0
+//            }
+//        }
         
         lastTouchesUpDate = Date()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [lastTouchesUpDate = self.lastTouchesUpDate] in
             
             if lastTouchesUpDate == self.lastTouchesUpDate {
-                self.endTrial()
+                
+                self.trialDidEndView.isHidden = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.endTrial()
+                }
             }
         }
+    }
+}
+
+class NoTouchLabel: UILabel {
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        return nil
     }
 }
