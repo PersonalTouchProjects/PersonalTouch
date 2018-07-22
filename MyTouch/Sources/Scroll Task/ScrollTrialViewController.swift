@@ -60,14 +60,17 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
         scrollTrialView.scrollView.isScrollEnabled = false
         
         // handle trial result
-//        var dragTrial = DragAndDropTrial(initialFrame: scrollTrialView.initialFrame, targetFrame: scrollTrialView.destinationView.frame)
-//        dragTrial.resultFrame = scrollTrialView.targetView.frame
-//        dragTrial.startTime = trialStartDate.timeIntervalSince1970
-//        dragTrial.endTime = trialEndDate.timeIntervalSince1970
-//        dragTrial.rawTouchTracks = scrollTrialView.rawTracks
-//        dragTrial.success = scrollTrialView.destinationView.frame.contains(scrollTrialView.targetView.center) // TODO: define success
-//        dragTrial.addEvents(scrollTrialView.gestureRecognizerEvents)
-//
+        var trial = ScrollTrial(axis: axis, initialPosition: scrollTrialView.initialPosition, targetPosition: scrollTrialView.destinationPosition)
+        trial.endDraggingPosition = scrollTrialView.touchUpPosition
+        trial.predictedPosition = scrollTrialView.predictedPosition
+        
+        trial.startTime = trialStartDate.timeIntervalSince1970
+        trial.endTime = trialEndDate.timeIntervalSince1970
+        trial.rawTouchTracks = scrollTrialView.rawTracks
+        trial.success = scrollTrialView.success
+        trial.allEvents = scrollTrialView.gestureRecognizerEvents
+        
+        task?.trials.append(trial)
         // end of add new trial
         
         positions.removeFirst()
@@ -101,5 +104,6 @@ extension ScrollTaskTrialViewController: ScrollTrialViewDataSource {
 }
 
 private func positionGenerator(rows: Int, targetRow: Int, repeats: Int) -> [Int] {
+    return [1]
     return (0..<repeats).flatMap { _ in (0..<rows).compactMap { ($0 == targetRow) ? nil : $0 } }
 }

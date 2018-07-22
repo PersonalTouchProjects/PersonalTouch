@@ -12,11 +12,13 @@ class TapTaskTrialViewController: TaskTrialViewController<TapTrial> {
     
     let tapTrialView = TapTrialView()
     
-    var numberOfColumns = 1
-    var numberOfRows = 1
+    var numberOfColumns = 5
+    var numberOfRows = 5
     var numberOfRepeats = 1
     
-    var positions: [(Int, Int)] = [] {
+    private var totalTrialsCount: Int = 0
+    
+    private var positions: [(Int, Int)] = [] {
         didSet { updateNextButton() }
     }
     
@@ -44,6 +46,10 @@ class TapTaskTrialViewController: TaskTrialViewController<TapTrial> {
         super.viewDidLoad()
         
         positions = positionGenerator(columns: numberOfColumns, rows: numberOfRows, repeats: numberOfRepeats).shuffled()
+        totalTrialsCount = positions.count
+        
+        title = "點擊測驗"
+        instructionLabel.text = "1/\(totalTrialsCount)"
         
         tapTrialView.dataSource = self
     }
@@ -61,7 +67,6 @@ class TapTaskTrialViewController: TaskTrialViewController<TapTrial> {
         tapTrial.allEvents = tapTrialView.gestureRecognizerEvents
         
         task?.trials.append(tapTrial)
-//        taskResultManager?.addTrial(tapTrial)
         // end of add new trial
         
         
@@ -69,7 +74,7 @@ class TapTaskTrialViewController: TaskTrialViewController<TapTrial> {
         
         if !positions.isEmpty {
             tapTrialView.reloadData()
-            instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "") + " (25 之 \(25 - positions.count + 1))"
+            instructionLabel.text = "(\(totalTrialsCount - positions.count + 1)/\(totalTrialsCount))"
         } else {
             presentNext()
         }

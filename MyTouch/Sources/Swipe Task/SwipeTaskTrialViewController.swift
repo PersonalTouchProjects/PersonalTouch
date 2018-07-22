@@ -40,7 +40,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        directions = directionGenerator(repeats: 1).shuffled()
+        directions = directionGenerator(repeats: numberOfRepeats).shuffled()
         
         swipeTrialView.dataSource = self
         countDownView.label.textColor = .white
@@ -87,7 +87,7 @@ extension SwipeTaskTrialViewController: SwipeTrialViewDataSource {
 
 private func directionGenerator(repeats: Int) -> [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] {
     
-    return [(.right, .right)]
+//    return [(.right, .right)]
     
     return (0..<repeats).flatMap { _ in
         return [.left, .right].flatMap { area in

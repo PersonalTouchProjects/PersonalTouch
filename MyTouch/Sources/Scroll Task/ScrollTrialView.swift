@@ -37,6 +37,14 @@ class ScrollTrialView: TrialScrollView {
     
     private(set) var success: Bool = false
     
+    var initialPosition: CGPoint {
+        return targetView.frame.origin
+    }
+    var destinationPosition: CGPoint {
+        return destinationView.frame.origin
+    }
+    private(set) var touchUpPosition:     CGPoint?
+    private(set) var predictedPosition:   CGPoint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -116,6 +124,8 @@ class ScrollTrialView: TrialScrollView {
                 height: height
             )
         }
+        
+//        initialPosition = targetView.frame.origin
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -133,6 +143,9 @@ class ScrollTrialView: TrialScrollView {
         destinationRow = dataSource?.destinationRow(self) ?? 0
         axis           = dataSource?.axis(self)           ?? .none
         
+        touchUpPosition   = nil
+        predictedPosition = nil
+        
         setNeedsLayout()
         layoutIfNeeded()
     }
@@ -140,7 +153,30 @@ class ScrollTrialView: TrialScrollView {
 
 extension ScrollTrialView: UIScrollViewDelegate {
     
-    // TODO: success?
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        success = true
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        if touchUpPosition == nil {
+            
+            let contentOffset = scrollView.contentOffset
+            let prediction = targetContentOffset.pointee
+            
+            touchUpPosition = CGPoint(
+                x: targetView.frame.origin.x - contentOffset.x,
+                y: targetView.frame.origin.y - contentOffset.y
+            )
+            
+            predictedPosition = CGPoint(
+                x: targetView.frame.origin.x - prediction.x,
+                y: targetView.frame.origin.y - prediction.y
+            )
+        }
+    }
+    
 }
 
 extension ScrollTrialView: UIGestureRecognizerDelegate {

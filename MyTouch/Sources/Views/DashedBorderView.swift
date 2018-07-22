@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DashedBorderView: TouchTrackingView {
+class DashedBorderView: TouchThroughView {
 
     var lineColor: UIColor = UIColor.black
     

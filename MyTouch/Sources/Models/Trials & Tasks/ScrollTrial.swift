@@ -17,11 +17,13 @@ struct ScrollTrial: Trial {
     
     let axis: Axis
     
-    let initialOffset: CGPoint
+    let initialPosition: CGPoint
     
-    let targetOffset: CGPoint
+    let targetPosition: CGPoint
     
-    var resultOffset: CGPoint = .zero
+    var endDraggingPosition: CGPoint?
+    
+    var predictedPosition: CGPoint?
     
     var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
     
@@ -43,9 +45,9 @@ struct ScrollTrial: Trial {
     
     var rotationEvents: [RotationGestureRecognizerEvent] = []
     
-    init(axis: Axis, initialOffset: CGPoint, targetOffset: CGPoint) {
+    init(axis: Axis, initialPosition: CGPoint, targetPosition: CGPoint) {
         self.axis = axis
-        self.initialOffset = initialOffset
-        self.targetOffset = targetOffset
+        self.initialPosition = initialPosition
+        self.targetPosition = targetPosition
     }
 }

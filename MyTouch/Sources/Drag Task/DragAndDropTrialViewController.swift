@@ -40,7 +40,7 @@ class DragAndDropTaskTrialViewController: TaskTrialViewController<DragAndDropTri
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        positions = positionGenerator(repeats: 1).shuffled()
+        positions = positionGenerator(repeats: numberOfRepeats).shuffled()
         
         dragAndDropTrialView.dataSource = self
     }

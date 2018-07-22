@@ -38,11 +38,15 @@ class ScrollTaskPracticeViewController: TaskTrialViewController<ScrollTrial> {
     override func didStartTrial() {
         super.didStartTrial()
         
+//        print(scrollTrialView.initialPosition)
+        
         scrollTrialView.scrollView.isScrollEnabled = true
     }
     
     override func didEndTrial() {
         super.didEndTrial()
+        
+        print(scrollTrialView.initialPosition)
         
         scrollTrialView.scrollView.isScrollEnabled = false
         scrollTrialView.reloadData()

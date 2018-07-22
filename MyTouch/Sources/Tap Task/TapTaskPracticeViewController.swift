@@ -27,6 +27,9 @@ class TapTaskPracticeViewController: TaskTrialViewController<TapTrial> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Tap Practice"
+        instructionLabel.text = "Practice"
+        
         tapTrialView.dataSource = self
     }
     

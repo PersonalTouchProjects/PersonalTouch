@@ -60,7 +60,7 @@ class TaskCollectionViewController: UIViewController {
         super.viewWillAppear(animated)
         collectionView.reloadData()
         
-        
+        navigationItem.rightBarButtonItem?.isEnabled = SessionManager.shared.isCompleted
     }
     
     override func viewDidLayoutSubviews() {

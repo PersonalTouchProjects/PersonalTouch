@@ -70,12 +70,12 @@ class TaskTrialViewController<T: Trial>: TaskViewController<T> {
         
         view.backgroundColor = .white
         
-        title = NSLocalizedString("Tap Task Title", comment: "") + " (1/25)"
+        title = NSLocalizedString("Task Title", comment: "")
         
         navigationItem.leftBarButtonItem  = cancelButton
         navigationItem.rightBarButtonItem = nextButton
         
-        instructionLabel.text = NSLocalizedString("Tap Task Title", comment: "")
+        instructionLabel.text = "Instructions"
         instructionLabel.font = UIFont.systemFont(ofSize: 34, weight: .medium)
         instructionLabel.numberOfLines = 0
         instructionLabel.lineBreakMode = .byWordWrapping
