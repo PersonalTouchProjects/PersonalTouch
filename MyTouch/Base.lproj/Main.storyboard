@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="61N-l0-DqA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="61N-l0-DqA">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,7 +26,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="NeZ-py-N5F"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Wfd-8B-2yh">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
+                        <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -41,6 +41,22 @@
             </objects>
             <point key="canvasLocation" x="792.7734375" y="685.9375"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="sVj-Cd-WiV">
+            <objects>
+                <viewController id="Eby-mi-c3M" customClass="TracksVisualizationViewController" customModule="MyTouch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3ns-Gv-xpw">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4OU-5Y-cVm"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="QIE-B9-t7e"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ffw-Y2-yXG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="588" y="1930"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ism-uk-UQg">
             <objects>
@@ -53,6 +69,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="K51-LG-cgL" kind="relationship" relationship="viewControllers" id="Ubv-AL-8q4"/>
+                        <segue destination="Eby-mi-c3M" kind="relationship" relationship="viewControllers" id="tZk-Cn-Jyj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Gy-zP-hds" userLabel="First Responder" sceneMemberID="firstResponder"/>

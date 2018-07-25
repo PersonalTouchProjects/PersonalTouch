@@ -71,7 +71,6 @@ class Session: Codable {
             negativeInfinity: "-infinity",
             nan: "nan"
         )
-        jsonEncoder.outputFormatting = .prettyPrinted
         jsonEncoder.dateEncodingStrategy = .iso8601
         
         let data = try jsonEncoder.encode(self)

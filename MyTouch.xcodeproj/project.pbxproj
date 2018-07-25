@@ -89,6 +89,9 @@
 		65FC45A520F3A00900B2A7CF /* UIDevice+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */; };
 		65FC45A720F3A04C00B2A7CF /* UIApplication+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */; };
 		65FC45A920F3A13300B2A7CF /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A820F3A13300B2A7CF /* Participant.swift */; };
+		65FD2C3821070790002B0A05 /* TracksVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FD2C3721070790002B0A05 /* TracksVisualizationView.swift */; };
+		65FD2C3A210708B3002B0A05 /* TracksVisualizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FD2C39210708B3002B0A05 /* TracksVisualizationViewController.swift */; };
+		65FD2C3C21070E36002B0A05 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 65FD2C3B21070E36002B0A05 /* test.json */; };
 		9CCF570D62C6E4015845B0EF /* Pods_MyTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */; };
 /* End PBXBuildFile section */
 
@@ -180,6 +183,9 @@
 		65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+HCI.swift"; sourceTree = "<group>"; };
 		65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+HCI.swift"; sourceTree = "<group>"; };
 		65FC45A820F3A13300B2A7CF /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
+		65FD2C3721070790002B0A05 /* TracksVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksVisualizationView.swift; sourceTree = "<group>"; };
+		65FD2C39210708B3002B0A05 /* TracksVisualizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksVisualizationViewController.swift; sourceTree = "<group>"; };
+		65FD2C3B21070E36002B0A05 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		84D8FC000E54AB0CD2054783 /* Pods-MyTouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch.debug.xcconfig"; sourceTree = "<group>"; };
 		85F9F8729020785E6D9076D8 /* Pods-MyTouch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouch.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch.release.xcconfig"; sourceTree = "<group>"; };
 		A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -234,6 +240,7 @@
 				6582148120ECF6B50025A03B /* TrialView.swift */,
 				65010AB321007A17002EB953 /* TouchTrackingScrollView.swift */,
 				65010AB721008A95002EB953 /* TrialScrollView.swift */,
+				65FD2C3721070790002B0A05 /* TracksVisualizationView.swift */,
 			);
 			path = "Touch Tracking Views";
 			sourceTree = "<group>";
@@ -295,6 +302,7 @@
 			children = (
 				6548A9EB20E663E700B7C73F /* AppDelegate.swift */,
 				65CBE3642100606B0093F663 /* Sources */,
+				65FD2C3B21070E36002B0A05 /* test.json */,
 				6548A9EF20E663E800B7C73F /* Main.storyboard */,
 				6548A9F220E663E900B7C73F /* Assets.xcassets */,
 				6548A9F420E663E900B7C73F /* LaunchScreen.storyboard */,
@@ -325,6 +333,7 @@
 				65A470CB20EF967A0055E46E /* TaskInstructionViewController.swift */,
 				65F9246020E8A81100A32BB0 /* TaskTrialViewController.swift */,
 				65F9246220E8D24000A32BB0 /* TaskEndViewController.swift */,
+				65FD2C39210708B3002B0A05 /* TracksVisualizationViewController.swift */,
 			);
 			path = "Base ViewControllers";
 			sourceTree = "<group>";
@@ -398,17 +407,10 @@
 		65CBE3642100606B0093F663 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				65083190210352F600C8A012 /* Pre Task */,
 				65FC45A020F39BA200B2A7CF /* Extensions */,
+				65FD2C362107071F002B0A05 /* Tasks */,
 				65F8BD4E20EB88FA002F7C69 /* Gesture Recognizers */,
 				6548AA1020E66DB200B7C73F /* Base ViewControllers */,
-				65835924210365C40072AECF /* Task Selection */,
-				6548AA2720E769A300B7C73F /* Tap Task */,
-				65CBE34C20FF0C660093F663 /* Swipe Task */,
-				65CBE35920FF3BA50093F663 /* Drag Task */,
-				65010AAE210069BF002EB953 /* Scroll Task */,
-				65010ACB2101C45B002EB953 /* Pinch Task */,
-				65010AD42101D563002EB953 /* Rotation Task */,
 				65F9246420E8D33F00A32BB0 /* Views */,
 				6548A9FD20E664C000B7C73F /* Models */,
 			);
@@ -464,6 +466,21 @@
 				65010AC721018FA1002EB953 /* RotationTrial.swift */,
 			);
 			path = "Trials & Tasks";
+			sourceTree = "<group>";
+		};
+		65FD2C362107071F002B0A05 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				65083190210352F600C8A012 /* Pre Task */,
+				65835924210365C40072AECF /* Task Selection */,
+				6548AA2720E769A300B7C73F /* Tap Task */,
+				65CBE34C20FF0C660093F663 /* Swipe Task */,
+				65CBE35920FF3BA50093F663 /* Drag Task */,
+				65010AAE210069BF002EB953 /* Scroll Task */,
+				65010ACB2101C45B002EB953 /* Pinch Task */,
+				65010AD42101D563002EB953 /* Rotation Task */,
+			);
+			path = Tasks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -535,6 +552,7 @@
 			files = (
 				6548A9F620E663E900B7C73F /* LaunchScreen.storyboard in Resources */,
 				6548AA1820E6717000B7C73F /* Localizable.strings in Resources */,
+				65FD2C3C21070E36002B0A05 /* test.json in Resources */,
 				6548A9F320E663E900B7C73F /* Assets.xcassets in Resources */,
 				6548A9F120E663E800B7C73F /* Main.storyboard in Resources */,
 			);
@@ -620,6 +638,7 @@
 				65F9246620E8D39A00A32BB0 /* TapTaskTrialViewController.swift in Sources */,
 				6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */,
 				6548AA0120E665E800B7C73F /* Trial.swift in Sources */,
+				65FD2C3821070790002B0A05 /* TracksVisualizationView.swift in Sources */,
 				65CBE35220FF0CFD0093F663 /* SwipeTaskTrialViewController.swift in Sources */,
 				6548AA0F20E66DAD00B7C73F /* HomeViewController.swift in Sources */,
 				65F8BD4D20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift in Sources */,
@@ -660,6 +679,7 @@
 				65010AB0210069EB002EB953 /* ScrollTrialViewController.swift in Sources */,
 				65010AD32101D55C002EB953 /* RotationTaskInstructionViewController.swift in Sources */,
 				65010AD12101D160002EB953 /* PinchTaskTrialViewController.swift in Sources */,
+				65FD2C3A210708B3002B0A05 /* TracksVisualizationViewController.swift in Sources */,
 				65083185210319FB00C8A012 /* TaskViewController.swift in Sources */,
 				65010AE221021472002EB953 /* RotationInstructionView.swift in Sources */,
 				65010AB221006A77002EB953 /* ScrollTrialView.swift in Sources */,
