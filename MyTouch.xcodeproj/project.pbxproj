@@ -40,6 +40,8 @@
 		65083192210357D400C8A012 /* Research.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65083191210357D400C8A012 /* Research.swift */; };
 		6514074820FC9770006BD17A /* TaskResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074720FC9770006BD17A /* TaskResultManager.swift */; };
 		6514074A20FDB013006BD17A /* Collection+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074920FDB013006BD17A /* Collection+HCI.swift */; };
+		65221BFF210DA50500EF9C6D /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65221BFE210DA50500EF9C6D /* SessionListViewController.swift */; };
+		65221C01210DA6AE00EF9C6D /* SessionContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65221C00210DA6AE00EF9C6D /* SessionContentsViewController.swift */; };
 		6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548A9EB20E663E700B7C73F /* AppDelegate.swift */; };
 		6548A9F120E663E800B7C73F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548A9EF20E663E800B7C73F /* Main.storyboard */; };
 		6548A9F320E663E900B7C73F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6548A9F220E663E900B7C73F /* Assets.xcassets */; };
@@ -131,6 +133,8 @@
 		65083191210357D400C8A012 /* Research.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Research.swift; sourceTree = "<group>"; };
 		6514074720FC9770006BD17A /* TaskResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResultManager.swift; sourceTree = "<group>"; };
 		6514074920FDB013006BD17A /* Collection+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+HCI.swift"; sourceTree = "<group>"; };
+		65221BFE210DA50500EF9C6D /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
+		65221C00210DA6AE00EF9C6D /* SessionContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionContentsViewController.swift; sourceTree = "<group>"; };
 		6548A9E820E663E700B7C73F /* MyTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6548A9EB20E663E700B7C73F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6548A9F020E663E800B7C73F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -333,10 +337,8 @@
 			isa = PBXGroup;
 			children = (
 				6548AA0E20E66DAD00B7C73F /* HomeViewController.swift */,
-				65083184210319FB00C8A012 /* TaskViewController.swift */,
-				65A470CB20EF967A0055E46E /* TaskInstructionViewController.swift */,
-				65F9246020E8A81100A32BB0 /* TaskTrialViewController.swift */,
-				65F9246220E8D24000A32BB0 /* TaskEndViewController.swift */,
+				65221BFE210DA50500EF9C6D /* SessionListViewController.swift */,
+				65221C00210DA6AE00EF9C6D /* SessionContentsViewController.swift */,
 				65FD2C39210708B3002B0A05 /* TracksVisualizationViewController.swift */,
 			);
 			path = "Base ViewControllers";
@@ -477,6 +479,10 @@
 		65FD2C362107071F002B0A05 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				65083184210319FB00C8A012 /* TaskViewController.swift */,
+				65A470CB20EF967A0055E46E /* TaskInstructionViewController.swift */,
+				65F9246020E8A81100A32BB0 /* TaskTrialViewController.swift */,
+				65F9246220E8D24000A32BB0 /* TaskEndViewController.swift */,
 				65083190210352F600C8A012 /* Pre Task */,
 				65835924210365C40072AECF /* Task Selection */,
 				6548AA2720E769A300B7C73F /* Tap Task */,
@@ -685,6 +691,8 @@
 				65CBE35020FF0CEC0093F663 /* SwipeTaskPracticeViewController.swift in Sources */,
 				6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */,
 				65010AB0210069EB002EB953 /* ScrollTrialViewController.swift in Sources */,
+				65221C01210DA6AE00EF9C6D /* SessionContentsViewController.swift in Sources */,
+				65221BFF210DA50500EF9C6D /* SessionListViewController.swift in Sources */,
 				65010AD32101D55C002EB953 /* RotationTaskInstructionViewController.swift in Sources */,
 				65010AD12101D160002EB953 /* PinchTaskTrialViewController.swift in Sources */,
 				65FD2C3A210708B3002B0A05 /* TracksVisualizationViewController.swift in Sources */,

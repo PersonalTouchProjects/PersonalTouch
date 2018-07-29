@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -41,21 +40,15 @@
             </objects>
             <point key="canvasLocation" x="792.7734375" y="685.9375"/>
         </scene>
-        <!--Item-->
+        <!--Session List View Controller-->
         <scene sceneID="sVj-Cd-WiV">
             <objects>
-                <viewController id="Eby-mi-c3M" customClass="TracksVisualizationViewController" customModule="MyTouch" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3ns-Gv-xpw">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="4OU-5Y-cVm"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="QIE-B9-t7e"/>
+                <viewController id="Eby-mi-c3M" customClass="SessionListViewController" customModule="MyTouch" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="dYf-tS-wHi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ffw-Y2-yXG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="588" y="1930"/>
+            <point key="canvasLocation" x="1523" y="1551"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ism-uk-UQg">
@@ -69,12 +62,31 @@
                     </tabBar>
                     <connections>
                         <segue destination="K51-LG-cgL" kind="relationship" relationship="viewControllers" id="Ubv-AL-8q4"/>
-                        <segue destination="Eby-mi-c3M" kind="relationship" relationship="viewControllers" id="tZk-Cn-Jyj"/>
+                        <segue destination="zbB-KI-80z" kind="relationship" relationship="viewControllers" id="tZk-Cn-Jyj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Gy-zP-hds" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="68.5546875" y="685.9375"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="kbi-uF-Pim">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zbB-KI-80z" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="QIE-B9-t7e"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="u8B-ge-HG9">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Eby-mi-c3M" kind="relationship" relationship="rootViewController" id="HRG-oD-dKM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SQe-A4-Ufi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="793" y="1551"/>
         </scene>
     </scenes>
 </document>
