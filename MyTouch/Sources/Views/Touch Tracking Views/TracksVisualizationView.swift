@@ -68,10 +68,16 @@ class TracksVisualizationView: UIView {
             let path = UIBezierPath()
             path.move(to: touches.removeFirst().location)
             
-            for touch in touches {
-                path.addLine(to: touch.location)
+            if touches.isEmpty {
+                path.close()
+            } else {
+                for touch in touches {
+                    path.addLine(to: touch.location)
+                }
             }
             
+            path.lineCapStyle = .round
+            path.lineJoinStyle = .round
             path.lineWidth = 4
             path.stroke()
         }

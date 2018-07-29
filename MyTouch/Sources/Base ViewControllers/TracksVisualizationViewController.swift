@@ -11,20 +11,31 @@ import UIKit
 class TracksVisualizationViewController: UIViewController {
 
     let tracksView = TracksVisualizationView()
+    let fingerCompassView = FingerCompassView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.addSubview(tracksView)
-        
         tracksView.backgroundColor = .white
+        
+        fingerCompassView.currentAngle = fingerCompassView.expectedAngle
+
+        view.addSubview(tracksView)
+        view.addSubview(fingerCompassView)
+        
         tracksView.translatesAutoresizingMaskIntoConstraints = false
+        fingerCompassView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             tracksView.topAnchor.constraint(equalTo: view.topAnchor),
             tracksView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tracksView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tracksView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            fingerCompassView.topAnchor.constraint(equalTo: view.topAnchor),
+            fingerCompassView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            fingerCompassView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            fingerCompassView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
         do {
@@ -44,7 +55,7 @@ class TracksVisualizationViewController: UIViewController {
             
             let json = try jsonDecoder.decode(Session.self, from: data)
             
-            if let tracks = json.rotationTask?.trials[4].rawTouchTracks {
+            if let tracks = json.swipeTask?.trials[1].rawTouchTracks {
                 tracksView.tracks = tracks
             }
             
