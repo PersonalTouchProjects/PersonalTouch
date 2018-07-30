@@ -81,6 +81,15 @@ class HomeViewController: UIViewController {
         ])
         
         startExamButton.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
+        let recognizer = DelayablePanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
+        recognizer.holdDuration = 1.0
+        view.addGestureRecognizer(recognizer)
+    }
+    
+    @objc func handleGesture(_ sender: UIGestureRecognizer) {
+        print(sender.state.rawValue)
+        print(sender.location(in: nil))
     }
     
     @objc func handleButton(_ sender: UIButton) {

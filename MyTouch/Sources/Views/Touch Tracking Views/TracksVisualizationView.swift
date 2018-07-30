@@ -39,8 +39,6 @@ class TracksVisualizationView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        let start = Date()
-        
         for (index, track) in _tracksToDraw.enumerated() {
             var touches = track.rawTouches
             
@@ -81,8 +79,6 @@ class TracksVisualizationView: UIView {
             path.lineWidth = 4
             path.stroke()
         }
-        
-        print(Date().timeIntervalSince(start))
     }
     
     @objc func handleDisplayLink(_ sender: CADisplayLink) {

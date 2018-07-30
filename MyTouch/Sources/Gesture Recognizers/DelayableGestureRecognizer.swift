@@ -9,28 +9,58 @@
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
-class MikePanGestureRecognizer: UIPanGestureRecognizer {
+class DelayablePanGestureRecognizer: UIPanGestureRecognizer {
 
-
-    var nextState: UIGestureRecognizerState?
-    var stateDidSet: Bool = false
+    // MARK: - Touch Accommodations
+    
+    var holdDuration: TimeInterval? = nil
+    
+    var ignoreRepeat: TimeInterval? = nil
+    
+    enum TapAssistance {
+        case useInitialLocation(delay: TimeInterval)
+        case useFinalLocation(delay: TimeInterval)
+        case off
+    }
+    
+    var tapAssistance: TapAssistance = .off
+    
+    
+    private var firstTouchBeganDate: Date?
     
     override var state: UIGestureRecognizerState {
         set {
-            switch newValue {
-            case .began, .changed:
-                if stateDidSet { super.state = newValue }
-                else { super.state = .began }
-                
-            default:
-                break
+            
+            guard let holdDuration = holdDuration, let beganDate = firstTouchBeganDate else {
+                super.state = newValue
+                return
             }
             
+            if Date().timeIntervalSince(beganDate) >= holdDuration {
+                firstTouchBeganDate = nil
+                super.state = newValue
+            }
         }
         get {
             return super.state
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesBegan(touches, with: event)
+        
+        if holdDuration != nil, firstTouchBeganDate == nil {
+            firstTouchBeganDate = Date(timeIntervalSinceNow: -ProcessInfo.processInfo.systemUptime).addingTimeInterval(event.timestamp)
+        }
+    }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesEnded(touches, with: event)
+        firstTouchBeganDate = nil
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesCancelled(touches, with: event)
+        firstTouchBeganDate = nil
+    }
 }
