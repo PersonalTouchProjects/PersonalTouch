@@ -11,6 +11,7 @@ import UIKit.UIGestureRecognizerSubclass
 
 class AccommodatedTapGestureRecognizer: UITapGestureRecognizer, AccommodatedRecognizer {
     
+    
     // MARK: - Touch Accommodations
     
     var holdDuration: TimeInterval? = nil
@@ -18,20 +19,34 @@ class AccommodatedTapGestureRecognizer: UITapGestureRecognizer, AccommodatedReco
     var ignoreRepeat: TimeInterval? = nil
     
     var tapAssistance: AccommodatedRecognizerTapAssistance = .off
-        
-    private var firstTouchBeganDate: Date?
+    
+    
+    // MARK: - Supporting Touch Accommodation
+    
+    private var firstTouchBeganDate: Date? = nil
+    
+    private var lastRecognizedDate: Date? = nil
+    
+    // MARK: - UIGestureRecognizer
     
     override var state: UIGestureRecognizerState {
         set {
             
-            guard let holdDuration = holdDuration, let beganDate = firstTouchBeganDate else {
+            let setNewValue = {
                 super.state = newValue
+                if self.ignoreRepeat != nil, newValue == .ended {
+                    self.lastRecognizedDate = Date()
+                }
+            }
+            
+            guard let holdDuration = holdDuration, let beganDate = firstTouchBeganDate else {
+                setNewValue()
                 return
             }
             
             if Date().timeIntervalSince(beganDate) >= holdDuration {
                 firstTouchBeganDate = nil
-                super.state = newValue
+                setNewValue()
             }
         }
         get {
@@ -41,7 +56,20 @@ class AccommodatedTapGestureRecognizer: UITapGestureRecognizer, AccommodatedReco
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         
+        // Ignore Repeat
+        if let ignoreRepeat = ignoreRepeat, let recognizedDate = lastRecognizedDate {
+            
+            guard Date().timeIntervalSince(recognizedDate) >= ignoreRepeat else {
+                return
+            }
+            
+            lastRecognizedDate = nil
+        }
+        
+        // Hold Duration
+        
         if holdDuration != nil, firstTouchBeganDate == nil {
+            
             firstTouchBeganDate = Date(timeIntervalSinceNow: -ProcessInfo.processInfo.systemUptime).addingTimeInterval(event.timestamp)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + holdDuration!) { [beganDate = self.firstTouchBeganDate] in
