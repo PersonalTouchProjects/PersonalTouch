@@ -9,7 +9,7 @@
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
-class DelayablePanGestureRecognizer: UIPanGestureRecognizer {
+class AccommodatedPanGestureRecognizer: UIPanGestureRecognizer, AccommodatedRecognizer {
 
     // MARK: - Touch Accommodations
     
@@ -17,15 +17,8 @@ class DelayablePanGestureRecognizer: UIPanGestureRecognizer {
     
     var ignoreRepeat: TimeInterval? = nil
     
-    enum TapAssistance {
-        case useInitialLocation(delay: TimeInterval)
-        case useFinalLocation(delay: TimeInterval)
-        case off
-    }
-    
-    var tapAssistance: TapAssistance = .off
-    
-    
+    var tapAssistance: AccommodatedRecognizerTapAssistance = .off
+        
     private var firstTouchBeganDate: Date?
     
     override var state: UIGestureRecognizerState {
@@ -61,6 +54,11 @@ class DelayablePanGestureRecognizer: UIPanGestureRecognizer {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesCancelled(touches, with: event)
+        firstTouchBeganDate = nil
+    }
+    
+    override func reset() {
+        super.reset()
         firstTouchBeganDate = nil
     }
 }
