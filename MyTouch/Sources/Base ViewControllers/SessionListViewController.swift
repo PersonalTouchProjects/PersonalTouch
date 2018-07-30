@@ -13,6 +13,7 @@ class SessionListViewController: UIViewController {
     let tableView = UITableView(frame: .zero, style: .plain)
     
     private var sessions = [URL]()
+    private var cache = NSCache<NSString, Session>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,7 @@ class SessionListViewController: UIViewController {
         
         do {
             sessions = try FileManager.default.contentsOfDirectory(at: defaultDirectoryPath(), includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+            sessions.sort { $0.absoluteString < $1.absoluteString }
             tableView.reloadData()
             
         } catch {
@@ -69,25 +71,62 @@ extension SessionListViewController: UITableViewDataSource, UITableViewDelegate 
         let url = sessions[indexPath.row]
         
         do {
-            let data = try Data(contentsOf: url)
+            var session = cache.object(forKey: url.absoluteString as NSString)
             
-            let jsonDecoder = JSONDecoder()
-            jsonDecoder.dateDecodingStrategy = .iso8601
-            jsonDecoder.nonConformingFloatDecodingStrategy = .convertFromString(
-                positiveInfinity: "infinity",
-                negativeInfinity: "-infinity",
-                nan: "nan"
-            )
-            
-            let session = try jsonDecoder.decode(Session.self, from: data)
+            if session == nil {
+                let data = try Data(contentsOf: url)
+                
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.dateDecodingStrategy = .iso8601
+                jsonDecoder.nonConformingFloatDecodingStrategy = .convertFromString(
+                    positiveInfinity: "infinity",
+                    negativeInfinity: "-infinity",
+                    nan: "nan"
+                )
+                
+                let decoded = try jsonDecoder.decode(Session.self, from: data)
+                
+                cache.setObject(decoded, forKey: url.absoluteString as NSString)
+                
+                session = decoded
+            }
             
             let viewController = SessionContentsViewController()
             viewController.session = session
+            viewController.hidesBottomBarWhenPushed = true
             
             show(viewController, sender: nil)
             
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "刪除") { (action, indexPath) in
+            
+            let alertController = UIAlertController(title: "刪除", message: "確定要刪除這筆紀錄嗎？", preferredStyle: .alert)
+            let confirm = UIAlertAction(title: "刪除", style: .destructive) { (action) in
+                let url = self.sessions[indexPath.row]
+                do {
+                    try FileManager.default.removeItem(at: url)
+                    self.sessions.remove(at: indexPath.row)
+                    self.tableView.beginUpdates()
+                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.tableView.endUpdates()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            
+            alertController.addAction(confirm)
+            alertController.addAction(cancel)
+            alertController.preferredAction = cancel
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        return [deleteAction]
     }
 }
