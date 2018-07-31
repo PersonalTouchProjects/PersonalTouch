@@ -110,7 +110,7 @@ final class RecognizerAccommodator {
     
     // MARK: - Handle Touch Event
     
-    func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent, handler: @escaping () -> Void) {
+    func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent, handler: @escaping (Set<UITouch>, UIEvent) -> Void) {
         
         // Ignore Repeat
         
@@ -125,32 +125,32 @@ final class RecognizerAccommodator {
         
         // Hold Duration
         
-        if let duration = holdDuration, firstTouchBeganDate == nil {
-            
+        let duration = holdDuration ?? 0
+        
+        if firstTouchBeganDate == nil {
             firstTouchBeganDate = Date(timeIntervalSinceNow: -ProcessInfo.processInfo.systemUptime).addingTimeInterval(event.timestamp)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [beganDate = self.firstTouchBeganDate] in
-                if beganDate == self.firstTouchBeganDate {
-                    handler()
-                }
-            }
-        } else {
-            handler()
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [beganDate = self.firstTouchBeganDate] in
+            if beganDate == self.firstTouchBeganDate {
+                handler(touches, event)
+            }
+        }
+        
     }
 
-    func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent, handler: @escaping () -> Void) {
-        handler()
+    func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent, handler: @escaping (Set<UITouch>, UIEvent) -> Void) {
+        handler(touches, event)
     }
     
-    func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent, handler: @escaping () -> Void) {
+    func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent, handler: @escaping (Set<UITouch>, UIEvent) -> Void) {
         firstTouchBeganDate = nil
-        handler()
+        handler(touches, event)
     }
     
-    func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent, handler: @escaping () -> Void) {
+    func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent, handler: @escaping (Set<UITouch>, UIEvent) -> Void) {
         firstTouchBeganDate = nil
-        handler()
+        handler(touches, event)
     }
     
     

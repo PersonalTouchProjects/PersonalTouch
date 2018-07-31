@@ -32,25 +32,25 @@ class AccommodatedPanGestureRecognizer: UIPanGestureRecognizer {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         accommodator.touchesBegan(touches, with: event) {
-            super.touchesBegan(touches, with: event)
+            super.touchesBegan($0, with: $1)
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         accommodator.touchesMoved(touches, with: event) {
-            super.touchesMoved(touches, with: event)
+            super.touchesMoved($0, with: $1)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
         accommodator.touchesEnded(touches, with: event) {
-            super.touchesEnded(touches, with: event)
+            super.touchesEnded($0, with: $1)
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
         accommodator.touchesCancelled(touches, with: event) {
-            super.touchesCancelled(touches, with: event)
+            super.touchesCancelled($0, with: $1)
         }
     }
 }
