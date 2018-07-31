@@ -17,17 +17,17 @@ class AccommodatedViewController: UIViewController {
         
         view.backgroundColor = .white
 
-//        RecognizerAccommodator.default.holdDuration = 1.0
+        RecognizerAccommodator.default.holdDuration = 1.0
         RecognizerAccommodator.default.ignoreRepeat = 1.0
         
         let recognizer = AccommodatedTapGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
         recognizer.delegate = self
         view.addGestureRecognizer(recognizer)
         
-//        let pan = AccommodatedPanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
-//        pan.delegate = self
+        let pan = AccommodatedPanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
+        pan.delegate = self
 //        pan.ignoreRepeat = 1.0
-////        view.addGestureRecognizer(pan)
+//        view.addGestureRecognizer(pan)
     }
 
     @objc private func handleGesture(_ sender: UIGestureRecognizer) {

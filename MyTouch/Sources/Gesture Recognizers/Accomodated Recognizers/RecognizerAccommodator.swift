@@ -156,10 +156,6 @@ final class RecognizerAccommodator {
     
     // MARK: - Methods
     
-    func resetStatus() {
-        firstTouchBeganDate = nil
-    }
-    
     func challengeHoldDuration(newState: UIGestureRecognizerState, pass: @escaping () -> Void) {
         
         let ignoreIfNeeded = {

@@ -10,27 +10,18 @@ import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
 class AccommodatedPanGestureRecognizer: UIPanGestureRecognizer {
-
-    // MARK: - Touch Accommodations
     
-    var holdDuration: TimeInterval? = nil
     
-    var ignoreRepeat: TimeInterval? = nil
+    // MARK: - Touch Accommodator
     
-//    var tapAssistance: AccommodatedRecognizerTapAssistance = .off
+    private let accommodator = RecognizerAccommodator.default
     
-    private var firstTouchBeganDate: Date?
+    
+    // MARK: - UIGestureRecognizer
     
     override var state: UIGestureRecognizerState {
         set {
-            
-            guard let holdDuration = holdDuration, let beganDate = firstTouchBeganDate else {
-                super.state = newValue
-                return
-            }
-            
-            if Date().timeIntervalSince(beganDate) >= holdDuration {
-                firstTouchBeganDate = nil
+            accommodator.challengeHoldDuration(newState: newValue) {
                 super.state = newValue
             }
         }
@@ -40,25 +31,26 @@ class AccommodatedPanGestureRecognizer: UIPanGestureRecognizer {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesBegan(touches, with: event)
-        
-        if holdDuration != nil, firstTouchBeganDate == nil {
-            firstTouchBeganDate = Date(timeIntervalSinceNow: -ProcessInfo.processInfo.systemUptime).addingTimeInterval(event.timestamp)
+        accommodator.touchesBegan(touches, with: event) {
+            super.touchesBegan(touches, with: event)
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        accommodator.touchesMoved(touches, with: event) {
+            super.touchesMoved(touches, with: event)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesEnded(touches, with: event)
-        firstTouchBeganDate = nil
+        accommodator.touchesEnded(touches, with: event) {
+            super.touchesEnded(touches, with: event)
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesCancelled(touches, with: event)
-        firstTouchBeganDate = nil
-    }
-    
-    override func reset() {
-        super.reset()
-        firstTouchBeganDate = nil
+        accommodator.touchesCancelled(touches, with: event) {
+            super.touchesCancelled(touches, with: event)
+        }
     }
 }

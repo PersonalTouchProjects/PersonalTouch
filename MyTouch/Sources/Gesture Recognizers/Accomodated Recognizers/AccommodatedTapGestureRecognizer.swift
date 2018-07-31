@@ -36,6 +36,12 @@ class AccommodatedTapGestureRecognizer: UITapGestureRecognizer {
         }
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        accommodator.touchesMoved(touches, with: event) {
+            super.touchesMoved(touches, with: event)
+        }
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
         accommodator.touchesEnded(touches, with: event) {
             super.touchesEnded(touches, with: event)
@@ -46,10 +52,5 @@ class AccommodatedTapGestureRecognizer: UITapGestureRecognizer {
         accommodator.touchesCancelled(touches, with: event) {
             super.touchesCancelled(touches, with: event)
         }
-    }
-    
-    override func reset() {
-        super.reset()
-        accommodator.resetStatus()
     }
 }
