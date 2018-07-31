@@ -9,7 +9,7 @@
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
-class AccommodatedPanGestureRecognizer: UIPanGestureRecognizer, AccommodatedRecognizer {
+class AccommodatedPanGestureRecognizer: UIPanGestureRecognizer {
 
     // MARK: - Touch Accommodations
     
@@ -17,8 +17,8 @@ class AccommodatedPanGestureRecognizer: UIPanGestureRecognizer, AccommodatedReco
     
     var ignoreRepeat: TimeInterval? = nil
     
-    var tapAssistance: AccommodatedRecognizerTapAssistance = .off
-        
+//    var tapAssistance: AccommodatedRecognizerTapAssistance = .off
+    
     private var firstTouchBeganDate: Date?
     
     override var state: UIGestureRecognizerState {

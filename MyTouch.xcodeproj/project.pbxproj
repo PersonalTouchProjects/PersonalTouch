@@ -83,7 +83,7 @@
 		65CF17DB2109CDD000E4B877 /* FingerCompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CF17DA2109CDD000E4B877 /* FingerCompassView.swift */; };
 		65DC072E20F141E70070A7A7 /* TapTaskPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DC072D20F141E70070A7A7 /* TapTaskPracticeViewController.swift */; };
 		65DE73BC20F0F04E009D5928 /* GestureRecognizerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DE73BB20F0F04E009D5928 /* GestureRecognizerEvent.swift */; };
-		65E4103D210F3583007353DF /* AccommodatedRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4103C210F3583007353DF /* AccommodatedRecognizer.swift */; };
+		65E4103D210F3583007353DF /* RecognizerAccommodator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4103C210F3583007353DF /* RecognizerAccommodator.swift */; };
 		65E4103F210F3666007353DF /* AccommodatedTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4103E210F3666007353DF /* AccommodatedTapGestureRecognizer.swift */; };
 		65E41041210F3694007353DF /* AccommodatedPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF1A492109FE3800294765 /* AccommodatedPanGestureRecognizer.swift */; };
 		65EE0F0920EF42F200EB8929 /* UIView+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */; };
@@ -186,7 +186,7 @@
 		65DE73BB20F0F04E009D5928 /* GestureRecognizerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizerEvent.swift; sourceTree = "<group>"; };
 		65DF1A492109FE3800294765 /* AccommodatedPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodatedPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		65E41035210F0FD3007353DF /* UIGestureRecognizer+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+HCI.swift"; sourceTree = "<group>"; };
-		65E4103C210F3583007353DF /* AccommodatedRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodatedRecognizer.swift; sourceTree = "<group>"; };
+		65E4103C210F3583007353DF /* RecognizerAccommodator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizerAccommodator.swift; sourceTree = "<group>"; };
 		65E4103E210F3666007353DF /* AccommodatedTapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodatedTapGestureRecognizer.swift; sourceTree = "<group>"; };
 		65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+HCI.swift"; sourceTree = "<group>"; };
 		65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TzuChuanGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -434,7 +434,7 @@
 		65E4103B210F354E007353DF /* Accomodated Recognizers */ = {
 			isa = PBXGroup;
 			children = (
-				65E4103C210F3583007353DF /* AccommodatedRecognizer.swift */,
+				65E4103C210F3583007353DF /* RecognizerAccommodator.swift */,
 				65DF1A492109FE3800294765 /* AccommodatedPanGestureRecognizer.swift */,
 				65E4103E210F3666007353DF /* AccommodatedTapGestureRecognizer.swift */,
 			);
@@ -714,7 +714,7 @@
 				65010AB0210069EB002EB953 /* ScrollTrialViewController.swift in Sources */,
 				65221C01210DA6AE00EF9C6D /* SessionContentsViewController.swift in Sources */,
 				65221BFF210DA50500EF9C6D /* SessionListViewController.swift in Sources */,
-				65E4103D210F3583007353DF /* AccommodatedRecognizer.swift in Sources */,
+				65E4103D210F3583007353DF /* RecognizerAccommodator.swift in Sources */,
 				65010AD32101D55C002EB953 /* RotationTaskInstructionViewController.swift in Sources */,
 				65010AD12101D160002EB953 /* PinchTaskTrialViewController.swift in Sources */,
 				65FD2C3A210708B3002B0A05 /* TracksVisualizationViewController.swift in Sources */,
