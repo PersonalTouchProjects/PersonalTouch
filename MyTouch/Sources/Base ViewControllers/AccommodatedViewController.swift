@@ -17,7 +17,7 @@ class AccommodatedViewController: UIViewController {
         
         view.backgroundColor = .white
 
-//        RecognizerAccommodator.default.holdDuration = 1.0
+        RecognizerAccommodator.default.holdDuration = 1.0
 //        RecognizerAccommodator.default.ignoreRepeat = 1.0
         
         let recognizer = AccommodatedTapGestureRecognizer(target: self, action: #selector(handleGesture(_:)))

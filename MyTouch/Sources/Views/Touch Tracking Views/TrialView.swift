@@ -49,10 +49,25 @@ class TrialView: TouchTrackingView, TrialViewProtocol {
         pan.cancelsTouchesInView = false
         pan.delegate = _delegate
         
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(_handleSwipe(_:)))
-        swipe.direction = [.right, .left, .up, .down]
-        swipe.cancelsTouchesInView = false
-        swipe.delegate = _delegate
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(_handleSwipe(_:)))
+        swipeUp.direction = .up
+        swipeUp.cancelsTouchesInView = false
+        swipeUp.delegate = _delegate
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(_handleSwipe(_:)))
+        swipeLeft.direction = .left
+        swipeLeft.cancelsTouchesInView = false
+        swipeLeft.delegate = _delegate
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(_handleSwipe(_:)))
+        swipeRight.direction = .right
+        swipeRight.cancelsTouchesInView = false
+        swipeRight.delegate = _delegate
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(_handleSwipe(_:)))
+        swipeDown.direction = .down
+        swipeDown.cancelsTouchesInView = false
+        swipeDown.delegate = _delegate
         
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(_handlePinch(_:)))
         pinch.cancelsTouchesInView = false
@@ -65,7 +80,10 @@ class TrialView: TouchTrackingView, TrialViewProtocol {
         addGestureRecognizer(tap)
         addGestureRecognizer(longPress)
         addGestureRecognizer(pan)
-        addGestureRecognizer(swipe)
+        addGestureRecognizer(swipeUp)
+        addGestureRecognizer(swipeLeft)
+        addGestureRecognizer(swipeRight)
+        addGestureRecognizer(swipeDown)
         addGestureRecognizer(pinch)
         addGestureRecognizer(rotation)
     }

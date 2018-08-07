@@ -98,7 +98,6 @@
 		65FC45A920F3A13300B2A7CF /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A820F3A13300B2A7CF /* Participant.swift */; };
 		65FD2C3821070790002B0A05 /* TracksVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FD2C3721070790002B0A05 /* TracksVisualizationView.swift */; };
 		65FD2C3A210708B3002B0A05 /* TracksVisualizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FD2C39210708B3002B0A05 /* TracksVisualizationViewController.swift */; };
-		65FD2C3C21070E36002B0A05 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 65FD2C3B21070E36002B0A05 /* test.json */; };
 		9CCF570D62C6E4015845B0EF /* Pods_MyTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */; };
 /* End PBXBuildFile section */
 
@@ -200,7 +199,6 @@
 		65FC45A820F3A13300B2A7CF /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		65FD2C3721070790002B0A05 /* TracksVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksVisualizationView.swift; sourceTree = "<group>"; };
 		65FD2C39210708B3002B0A05 /* TracksVisualizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksVisualizationViewController.swift; sourceTree = "<group>"; };
-		65FD2C3B21070E36002B0A05 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		84D8FC000E54AB0CD2054783 /* Pods-MyTouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch.debug.xcconfig"; sourceTree = "<group>"; };
 		85F9F8729020785E6D9076D8 /* Pods-MyTouch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouch.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch.release.xcconfig"; sourceTree = "<group>"; };
 		A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -317,7 +315,6 @@
 			children = (
 				6548A9EB20E663E700B7C73F /* AppDelegate.swift */,
 				65CBE3642100606B0093F663 /* Sources */,
-				65FD2C3B21070E36002B0A05 /* test.json */,
 				6548A9EF20E663E800B7C73F /* Main.storyboard */,
 				6548A9F220E663E900B7C73F /* Assets.xcassets */,
 				6548A9F420E663E900B7C73F /* LaunchScreen.storyboard */,
@@ -583,7 +580,6 @@
 			files = (
 				6548A9F620E663E900B7C73F /* LaunchScreen.storyboard in Resources */,
 				6548AA1820E6717000B7C73F /* Localizable.strings in Resources */,
-				65FD2C3C21070E36002B0A05 /* test.json in Resources */,
 				6548A9F320E663E900B7C73F /* Assets.xcassets in Resources */,
 				6548A9F120E663E800B7C73F /* Main.storyboard in Resources */,
 			);
