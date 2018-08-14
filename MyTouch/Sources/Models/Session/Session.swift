@@ -23,6 +23,10 @@ class Session: Codable {
     var tapTask: Task<TapTrial>? {
         didSet { try? archive() }
     }
+    
+    var longPressTask: Task<LongPressTrial>? {
+        didSet { try? archive() }
+    }
 
     var swipeTask: Task<SwipeTrial>? {
         didSet { try? archive() }

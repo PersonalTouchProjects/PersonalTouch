@@ -17,6 +17,7 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
     let verticalScrollTask   = ScrollTask(horizontal: false)
     let pinchTask            = Task<PinchTrial>()
     let rotationTask         = Task<RotationTrial>()
+    let longPressTask        = Task<LongPressTrial>()
     
     weak var viewController: TaskCollectionViewController?
     
@@ -28,7 +29,7 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -70,6 +71,11 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
             cell.taskTitleLabel.text = "雙指旋轉"
             cell.subtitleLabel.text  = "將指北針旋轉至正北"
             cell.isCompleted         = !rotationTask.trials.isEmpty
+            
+        case 7:
+            cell.taskTitleLabel.text = "長按"
+            cell.subtitleLabel.text  = "長按目標方塊"
+            cell.isCompleted         = !longPressTask.trials.isEmpty
             
         default:
             break
@@ -123,6 +129,11 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
             vc.task = rotationTask
             taskViewController = vc
             
+        case 7:
+            let vc = LongPressTaskInstructionViewController()
+            vc.task = longPressTask
+            taskViewController = vc
+            
         default:
             break
         }
@@ -145,6 +156,7 @@ final class TaskCollectionDelegate: NSObject, UICollectionViewDataSource, UIColl
         case 4: return verticalScrollTask.trials.isEmpty
         case 5: return pinchTask.trials.isEmpty
         case 6: return rotationTask.trials.isEmpty
+        case 7: return longPressTask.trials.isEmpty
         default:
             return true
         }
