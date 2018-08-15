@@ -10,10 +10,10 @@ import UIKit
 
 class LongPressTaskTrialViewController: TaskTrialViewController<LongPressTrial> {
     
-    let tapTrialView = TapTrialView()
+    let longPressTrialView = LongPressTrialView()
     
-    var numberOfColumns = 5
-    var numberOfRows = 5
+    var numberOfColumns = 3
+    var numberOfRows = 3
     var numberOfRepeats = 1
     
     private var totalTrialsCount: Int = 0
@@ -35,7 +35,7 @@ class LongPressTaskTrialViewController: TaskTrialViewController<LongPressTrial> 
     }
     
     override func trialView() -> (UIView & TrialViewProtocol) {
-        return tapTrialView
+        return longPressTrialView
     }
     
     override func prefersNextButtonEnabled() -> Bool {
@@ -60,7 +60,7 @@ class LongPressTaskTrialViewController: TaskTrialViewController<LongPressTrial> 
         
         navigationItem.rightBarButtonItem?.title = "1/\(totalTrialsCount)"
         
-        //tapTrialView.dataSource = self
+        longPressTrialView.dataSource = self
     }
     
     override func didEndTrial() {
@@ -68,21 +68,21 @@ class LongPressTaskTrialViewController: TaskTrialViewController<LongPressTrial> 
         
         
         // add new trial to events manager
-        var tapTrial = TapTrial(targetLocation: tapTrialView.targetView.center)
-        tapTrial.startTime = trialStartDate.timeIntervalSince1970
-        tapTrial.endTime = trialEndDate.timeIntervalSince1970
-        tapTrial.rawTouchTracks = tapTrialView.rawTracks
-        tapTrial.success = tapTrialView.success
-        tapTrial.allEvents = tapTrialView.gestureRecognizerEvents
+        var trial = LongPressTrial(targetFrame: longPressTrialView.targetView.frame)
+        trial.startTime = trialStartDate.timeIntervalSince1970
+        trial.endTime = trialEndDate.timeIntervalSince1970
+        trial.rawTouchTracks = longPressTrialView.rawTracks
+        trial.success = longPressTrialView.success
+        trial.allEvents = longPressTrialView.gestureRecognizerEvents
         
-        //task?.trials.append(tapTrial)
+        task?.trials.append(trial)
         // end of add new trial
         
         
         positions.removeFirst()
         
         if !positions.isEmpty {
-            tapTrialView.reloadData()
+            longPressTrialView.reloadData()
             title = "點擊測驗 \(totalTrialsCount - positions.count + 1)/\(totalTrialsCount)"
             navigationItem.rightBarButtonItem?.title = "\(totalTrialsCount - positions.count + 1)/\(totalTrialsCount)"
         } else {
@@ -91,21 +91,21 @@ class LongPressTaskTrialViewController: TaskTrialViewController<LongPressTrial> 
     }
 }
 
-extension LongPressTaskTrialViewController: TapTrialViewDataSource {
+extension LongPressTaskTrialViewController: LongPressTrialViewDataSource {
     
-    func numberOfColumn(_ tapTrialView: TapTrialView) -> Int {
+    func numberOfColumn(_ tapTrialView: LongPressTrialView) -> Int {
         return numberOfColumns
     }
     
-    func numberOfRow(_ tapTrialView: TapTrialView) -> Int {
+    func numberOfRow(_ tapTrialView: LongPressTrialView) -> Int {
         return numberOfRows
     }
     
-    func targetColumn(_ tapTrialView: TapTrialView) -> Int {
+    func targetColumn(_ tapTrialView: LongPressTrialView) -> Int {
         return positions.first!.0
     }
     
-    func targetRow(_ tapTrialView: TapTrialView) -> Int {
+    func targetRow(_ tapTrialView: LongPressTrialView) -> Int {
         return positions.first!.1
     }
 }
