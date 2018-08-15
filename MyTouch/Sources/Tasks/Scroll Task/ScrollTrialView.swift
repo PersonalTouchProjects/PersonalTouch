@@ -55,6 +55,7 @@ class ScrollTrialView: TrialCollectionView {
     private(set) var initialOffset: CGPoint = .zero
     private(set) var targetOffset:  CGPoint = .zero
     private(set) var finalOffset:   CGPoint = .zero
+    private(set) var timeIntervalBeforeStopDecelarating: TimeInterval = 0.0
     
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private let hintLabel = UILabel()
@@ -207,6 +208,19 @@ extension ScrollTrialView: UICollectionViewDataSource, UICollectionViewDelegateF
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         finalOffset = targetContentOffset.pointee
+        
+        let vx = abs(velocity.x)
+        let vy = abs(velocity.y)
+        let v = max(vx, vy)
+        
+        if v <= 0 {
+            timeIntervalBeforeStopDecelarating = 0
+        } else {
+            timeIntervalBeforeStopDecelarating = TimeInterval(log(v) * 0.5) + 2.3
+        }
+        
+//        print(velocity)
+//        print(timeIntervalBeforeStopDecelarating)
     }
 }
 

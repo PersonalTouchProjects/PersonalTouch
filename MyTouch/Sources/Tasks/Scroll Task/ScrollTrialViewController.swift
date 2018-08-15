@@ -52,6 +52,10 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
         return "開始"
     }
     
+    override func timeIntervalBeforeEndTrial() -> TimeInterval {
+        return scrollTrialView.timeIntervalBeforeStopDecelarating + 1
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

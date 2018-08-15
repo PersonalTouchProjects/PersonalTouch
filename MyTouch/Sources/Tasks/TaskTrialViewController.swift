@@ -295,6 +295,10 @@ class TaskTrialViewController<T: Trial>: TaskViewController<T> {
     func updateNextButton() {
         nextButton.isEnabled = prefersNextButtonEnabled()
     }
+    
+    func timeIntervalBeforeEndTrial() -> TimeInterval {
+        return 1.0
+    }
 }
 
 // MARK: - TouchTrackingViewDelegate
@@ -310,31 +314,23 @@ extension TaskTrialViewController: TouchTrackingViewDelegate {
     
     func touchTrackingViewDidCompleteNewTracks(_ touchTrackingView: TouchTrackingViewProtocol) {
         
-        // dismiss content views by masking a white view
-        // only run the animation on first time
-//        if lastTouchesUpDate == nil {
-//
-//            trialDidEndView.isHidden = false
-//            trialDidEndView.alpha = 0.0
-//
-//            UIView.animate(withDuration: 0.2) {
-//                self.trialDidEndView.alpha = 1.0
-//            }
-//        }
-        
         lastTouchesUpDate = Date()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [lastTouchesUpDate = self.lastTouchesUpDate] in
+        DispatchQueue.main.async { [lastTouchesUpDate = self.lastTouchesUpDate] in
             
-            if lastTouchesUpDate == self.lastTouchesUpDate {
+            DispatchQueue.main.asyncAfter(deadline: .now() + self.timeIntervalBeforeEndTrial()) {
                 
-                self.trialDidEndView.isHidden = false
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.endTrial()
+                if lastTouchesUpDate == self.lastTouchesUpDate {
+                    
+                    self.trialDidEndView.isHidden = false
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.endTrial()
+                    }
                 }
             }
         }
+        
     }
 }
 

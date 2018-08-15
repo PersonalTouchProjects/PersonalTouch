@@ -37,6 +37,10 @@ class ScrollTaskPracticeViewController: TaskTrialViewController<ScrollTrial> {
         return "練習"
     }
     
+    override func timeIntervalBeforeEndTrial() -> TimeInterval {
+        return scrollTrialView.timeIntervalBeforeStopDecelarating + 1
+    }
+    
     var axis = ScrollTrial.Axis.vertical
     
     override func viewDidLoad() {
