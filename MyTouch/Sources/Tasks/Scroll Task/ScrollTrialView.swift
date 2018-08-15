@@ -56,6 +56,9 @@ class ScrollTrialView: TrialCollectionView {
     private(set) var targetOffset:  CGPoint = .zero
     private(set) var finalOffset:   CGPoint = .zero
     
+    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    private let hintLabel = UILabel()
+    
     init(frame: CGRect) {
         super.init(frame: frame, collectionViewLayout: flowLayout)
         
@@ -66,6 +69,29 @@ class ScrollTrialView: TrialCollectionView {
         
         dataSource = self
         delegate = self
+        
+        hintLabel.textColor = .white
+        hintLabel.font = UIFont.systemFont(ofSize: 28, weight: .medium)
+        
+        blurView.clipsToBounds = true
+        blurView.layer.cornerRadius = 8
+        
+        insertSubview(blurView, at: 100000)
+        insertSubview(hintLabel, aboveSubview: blurView)
+        
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            hintLabel.centerXAnchor.constraint(equalTo: blurView.centerXAnchor),
+            hintLabel.centerYAnchor.constraint(equalTo: blurView.centerYAnchor),
+            
+            blurView.widthAnchor.constraint(equalTo: hintLabel.widthAnchor, multiplier: 1.0, constant: 20),
+            blurView.heightAnchor.constraint(equalTo: hintLabel.heightAnchor, multiplier: 1.0, constant: 20),
+            
+            blurView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40),
+            blurView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 40)
+        ])
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,6 +132,8 @@ class ScrollTrialView: TrialCollectionView {
         super.reloadData()
         setNeedsLayout()
         layoutIfNeeded()
+        
+        hintLabel.text = "目標：\(targetItem+1)"
         
         if flowLayout.scrollDirection == .horizontal {
             let width = bounds.width / visibleItems
