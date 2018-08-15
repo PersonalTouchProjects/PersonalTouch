@@ -10,7 +10,7 @@ import UIKit
 
 class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
     
-    let scrollTrialView = ScrollTrialView()
+    let scrollTrialView = ScrollTrialView(frame: .zero)
     
     var axis = ScrollTrial.Axis.vertical
     var rows = 5
@@ -60,32 +60,34 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
         title = "滾動測驗 1/\(totalTrialsCount)"
         navigationItem.rightBarButtonItem?.title = "1/\(totalTrialsCount)"
         
-        scrollTrialView.scrollView.isScrollEnabled = false
-        scrollTrialView.dataSource = self
+        scrollTrialView.isScrollEnabled = false
+        scrollTrialView.trialDataSource = self
+        
+        countDownView.label.textColor = .white
     }
     
     override func didStartTrial() {
         super.didStartTrial()
-        scrollTrialView.scrollView.isScrollEnabled = true
+        scrollTrialView.isScrollEnabled = true
     }
     
     override func didEndTrial() {
         super.didEndTrial()
         
-        scrollTrialView.scrollView.isScrollEnabled = false
+        scrollTrialView.isScrollEnabled = false
         
         // handle trial result
-        var trial = ScrollTrial(axis: axis, initialPosition: scrollTrialView.initialPosition, targetPosition: scrollTrialView.destinationPosition)
-        trial.endDraggingPosition = scrollTrialView.touchUpPosition
-        trial.predictedPosition = scrollTrialView.predictedPosition
-        
-        trial.startTime = trialStartDate.timeIntervalSince1970
-        trial.endTime = trialEndDate.timeIntervalSince1970
-        trial.rawTouchTracks = scrollTrialView.rawTracks
-        trial.success = scrollTrialView.success
-        trial.allEvents = scrollTrialView.gestureRecognizerEvents
-        
-        task?.trials.append(trial)
+//        var trial = ScrollTrial(axis: axis, initialPosition: scrollTrialView.initialPosition, targetPosition: scrollTrialView.destinationPosition)
+//        trial.endDraggingPosition = scrollTrialView.touchUpPosition
+//        trial.predictedPosition = scrollTrialView.predictedPosition
+//
+//        trial.startTime = trialStartDate.timeIntervalSince1970
+//        trial.endTime = trialEndDate.timeIntervalSince1970
+//        trial.rawTouchTracks = scrollTrialView.rawTracks
+//        trial.success = scrollTrialView.success
+//        trial.allEvents = scrollTrialView.gestureRecognizerEvents
+//
+//        task?.trials.append(trial)
         // end of add new trial
         
         positions.removeFirst()
@@ -102,16 +104,16 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
 
 extension ScrollTaskTrialViewController: ScrollTrialViewDataSource {
     
-    func numberOfRows(_ scrollTrialView: ScrollTrialView) -> Int {
-        return rows
+    func numberOfItems(_ scrollTrialView: ScrollTrialView) -> Int {
+        return 100
     }
     
-    func targetRow(_ scrollTrialView: ScrollTrialView) -> Int {
-        return positions.first!
+    func initialItem(_ scrollTrialView: ScrollTrialView) -> Int {
+        return 50
     }
     
-    func destinationRow(_ scrollTrialView: ScrollTrialView) -> Int {
-        return targetRow
+    func targetItem(_ scrollTrialView: ScrollTrialView) -> Int {
+        return 40
     }
     
     func axis(_ scrollTrialView: ScrollTrialView) -> ScrollTrial.Axis {

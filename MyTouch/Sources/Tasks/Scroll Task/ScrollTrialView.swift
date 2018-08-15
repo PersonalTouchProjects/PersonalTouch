@@ -9,59 +9,67 @@
 import UIKit
 
 protocol ScrollTrialViewDataSource: NSObjectProtocol {
-    func numberOfRows(_ scrollTrialView: ScrollTrialView) -> Int
-    func targetRow(_ scrollTrialView: ScrollTrialView) -> Int
-    func destinationRow(_ scrollTrialView: ScrollTrialView) -> Int
+    func numberOfItems(_ scrollTrialView: ScrollTrialView) -> Int
+    func initialItem(_ scrollTrialView: ScrollTrialView) -> Int
+    func targetItem(_ scrollTrialView: ScrollTrialView) -> Int
     func axis(_ scrollTrialView: ScrollTrialView) -> ScrollTrial.Axis
 }
 
-class ScrollTrialView: TrialScrollView {
-        
-    enum Distance: String {
-        case short, long
-        case unknown
-    }
+class ScrollTrialView: TrialCollectionView {
     
-    var dataSource: ScrollTrialViewDataSource? {
+    var trialDataSource: ScrollTrialViewDataSource? {
         didSet { if superview != nil { reloadData() } }
     }
     
-    let scrollView = TouchTrackingScrollView()
-    let targetView = TouchThroughView()
-    let destinationView = DashedBorderView()
+    private let visibleItems: CGFloat = 4
     
-    private var numberOfRows:   Int = 1
-    private var targetRow:      Int = 0
-    private var destinationRow: Int = 0
-    private var axis: ScrollTrial.Axis = .none
+    private var numberOfItems: Int = 1
+    private var initialItem:   Int = 0
+    private var targetItem:    Int = 0
+    private var axis: ScrollTrial.Axis = .none {
+        didSet {
+            switch axis {
+            case .horizontal:
+                self.showsHorizontalScrollIndicator = true
+                self.showsVerticalScrollIndicator = false
+                self.flowLayout.scrollDirection = .horizontal
+            case .vertical:
+                self.showsHorizontalScrollIndicator = false
+                self.showsVerticalScrollIndicator = true
+                self.flowLayout.scrollDirection = .vertical
+            default:
+                self.showsHorizontalScrollIndicator = true
+                self.showsVerticalScrollIndicator = false
+                self.flowLayout.scrollDirection = .horizontal
+            }
+        }
+    }
+    
+    private var flowLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        return layout
+    }()
     
     private(set) var success: Bool = false
+    private(set) var initialOffset: CGPoint = .zero
+    private(set) var targetOffset:  CGPoint = .zero
+    private(set) var finalOffset:   CGPoint = .zero
     
-    var initialPosition: CGPoint {
-        return targetView.frame.origin
-    }
-    var destinationPosition: CGPoint {
-        return destinationView.frame.origin
-    }
-    private(set) var touchUpPosition:     CGPoint?
-    private(set) var predictedPosition:   CGPoint?
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(frame: CGRect) {
+        super.init(frame: frame, collectionViewLayout: flowLayout)
         
         backgroundColor = .white
+        delaysContentTouches = false
         
-        scrollView.delaysContentTouches = false
-        scrollView.alwaysBounceVertical = false
-        scrollView.alwaysBounceHorizontal = false
-        scrollView.delegate = self
+        register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         
-        targetView.backgroundColor = tintColor
-        
-        scrollView.addSubview(targetView)
-
-        addSubview(scrollView)
-        addSubview(destinationView)
+        dataSource = self
+        delegate = self
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -75,108 +83,103 @@ class ScrollTrialView: TrialScrollView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        scrollView.frame = bounds
-        scrollView.contentSize = scrollView.bounds.size
-        
-        if axis == .horizontal {
-            
-            scrollView.contentInset.left = scrollView.bounds.width * 10
-            scrollView.contentInset.right = scrollView.bounds.width * 10
-            
-            let width   = scrollView.bounds.width / CGFloat(numberOfRows)
-            let height  = scrollView.bounds.height
-            let offsetX = width * CGFloat(targetRow)
-            
-            targetView.frame = CGRect(
-                x: scrollView.bounds.minX + offsetX,
-                y: scrollView.bounds.minY,
-                width: width,
-                height: height
-            )
-            
-            destinationView.frame = CGRect(
-                x: bounds.minX + width * CGFloat(destinationRow),
-                y: bounds.minY,
-                width: width,
-                height: height
-            )
-            
-        } else if axis == .vertical {
-            
-            scrollView.contentInset.top = scrollView.bounds.height * 10
-            scrollView.contentInset.bottom = scrollView.bounds.height * 10
-            
-            let width   = scrollView.bounds.width
-            let height  = scrollView.bounds.height / CGFloat(numberOfRows)
-            let offsetY = height * CGFloat(targetRow)
-            
-            targetView.frame = CGRect(
-                x: scrollView.bounds.minX,
-                y: scrollView.bounds.minY + offsetY,
-                width: width,
-                height: height
-            )
-            
-            destinationView.frame = CGRect(
-                x: bounds.minX,
-                y: bounds.minY + height * CGFloat(destinationRow),
-                width: width,
-                height: height
-            )
+        if flowLayout.scrollDirection == .horizontal {
+            let width = bounds.width / visibleItems
+            flowLayout.itemSize = CGSize(width: width, height: bounds.height)
+        } else {
+            let height = bounds.height / visibleItems
+            flowLayout.itemSize = CGSize(width: bounds.width, height: height)
         }
-        
-//        initialPosition = targetView.frame.origin
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func reloadData() {
+    override func reloadData() {
         
-        scrollView.reset()
+        reset()
         
         success = false
         
-        numberOfRows   = dataSource?.numberOfRows(self)   ?? 1
-        targetRow      = dataSource?.targetRow(self)      ?? 0
-        destinationRow = dataSource?.destinationRow(self) ?? 0
-        axis           = dataSource?.axis(self)           ?? .none
+        numberOfItems = trialDataSource?.numberOfItems(self) ?? 1
+        initialItem   = trialDataSource?.initialItem(self)   ?? 0
+        targetItem    = trialDataSource?.targetItem(self)    ?? 0
+        axis          = trialDataSource?.axis(self)          ?? .none
         
-        touchUpPosition   = nil
-        predictedPosition = nil
-        
+        super.reloadData()
         setNeedsLayout()
         layoutIfNeeded()
+        
+        if flowLayout.scrollDirection == .horizontal {
+            let width = bounds.width / visibleItems
+            contentOffset.x = (CGFloat(initialItem) - 0.5) * width
+            
+            targetOffset = CGPoint(x: CGFloat(targetItem) * width, y: bounds.minY)
+        } else {
+            let height = bounds.height / visibleItems
+            contentOffset.y = (CGFloat(initialItem) - 0.5) * height
+            
+            targetOffset = CGPoint(x: bounds.minX, y: CGFloat(targetItem) * height)
+        }
+        
+        initialOffset = contentOffset
     }
 }
 
-extension ScrollTrialView: UIScrollViewDelegate {
-    
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        success = true
+extension ScrollTrialView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return numberOfItems
     }
     
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if touchUpPosition == nil {
-            
-            let contentOffset = scrollView.contentOffset
-            let prediction = targetContentOffset.pointee
-            
-            touchUpPosition = CGPoint(
-                x: targetView.frame.origin.x - contentOffset.x,
-                y: targetView.frame.origin.y - contentOffset.y
-            )
-            
-            predictedPosition = CGPoint(
-                x: targetView.frame.origin.x - prediction.x,
-                y: targetView.frame.origin.y - prediction.y
-            )
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        
+        // label
+        if cell.contentView.viewWithTag(10000) == nil {
+            let label = UILabel()
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 42, weight: .bold)
+            label.tag = 10000
+            cell.contentView.addSubview(label)
+            label.frame = cell.contentView.bounds
+            label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
+        if let label = cell.contentView.viewWithTag(10000) as? UILabel {
+            label.text = "\(indexPath.item + 1)"
+        }
+        // end of label
+        
+        // background color
+        if indexPath.item == targetItem {
+            cell.contentView.backgroundColor = tintColor
+        }
+        else if indexPath.item % 2 == 0 {
+            cell.contentView.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+        } else {
+            cell.contentView.backgroundColor = .white
+        }
+        
+        return cell
+    }
+    
+    // UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.item == targetItem {
+            success = true
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.item == targetItem {
+            success = false
+        }
+    }
+    
+    // UIScrollViewDelegate
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        finalOffset = targetContentOffset.pointee
+    }
 }
 
 extension ScrollTrialView: UIGestureRecognizerDelegate {

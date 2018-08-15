@@ -10,7 +10,7 @@ import UIKit
 
 class ScrollTaskPracticeViewController: TaskTrialViewController<ScrollTrial> {
     
-    let scrollTrialView = ScrollTrialView()
+    let scrollTrialView = ScrollTrialView(frame: .zero)
     
     override func nextViewController() -> TaskViewController<ScrollTrial>? {
         let vc = ScrollTaskTrialViewController()
@@ -44,36 +44,38 @@ class ScrollTaskPracticeViewController: TaskTrialViewController<ScrollTrial> {
         
         title = "滾動測驗練習"
         
-        scrollTrialView.scrollView.isScrollEnabled = false
-        scrollTrialView.dataSource = self
+        scrollTrialView.isScrollEnabled = false
+        scrollTrialView.trialDataSource = self
+        
+        countDownView.label.textColor = .white
     }
     
     override func didStartTrial() {
         super.didStartTrial()
         
-        scrollTrialView.scrollView.isScrollEnabled = true
+        scrollTrialView.isScrollEnabled = true
     }
     
     override func didEndTrial() {
         super.didEndTrial()
         
-        scrollTrialView.scrollView.isScrollEnabled = false
+        scrollTrialView.isScrollEnabled = false
         scrollTrialView.reloadData()
     }
 }
 
 extension ScrollTaskPracticeViewController: ScrollTrialViewDataSource {
     
-    func numberOfRows(_ scrollTrialView: ScrollTrialView) -> Int {
-        return 5
+    func numberOfItems(_ scrollTrialView: ScrollTrialView) -> Int {
+        return 100
     }
     
-    func targetRow(_ scrollTrialView: ScrollTrialView) -> Int {
-        return [0,1,3,4].shuffled().first!
+    func initialItem(_ scrollTrialView: ScrollTrialView) -> Int {
+        return 50
     }
     
-    func destinationRow(_ scrollTrialView: ScrollTrialView) -> Int {
-        return 2
+    func targetItem(_ scrollTrialView: ScrollTrialView) -> Int {
+        return 40
     }
     
     func axis(_ scrollTrialView: ScrollTrialView) -> ScrollTrial.Axis {
