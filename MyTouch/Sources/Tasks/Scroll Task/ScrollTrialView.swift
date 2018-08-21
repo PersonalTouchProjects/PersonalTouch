@@ -54,7 +54,8 @@ class ScrollTrialView: TrialCollectionView {
     private(set) var success: Bool = false
     private(set) var initialOffset: CGPoint = .zero
     private(set) var targetOffset:  CGPoint = .zero
-    private(set) var finalOffset:   CGPoint = .zero
+    private(set) var endDraggingOffset: CGPoint = .zero
+    private(set) var predictedOffset:   CGPoint = .zero
     private(set) var timeIntervalBeforeStopDecelarating: TimeInterval = 0.0
     
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -149,6 +150,8 @@ class ScrollTrialView: TrialCollectionView {
         }
         
         initialOffset = contentOffset
+        endDraggingOffset = .zero
+        predictedOffset = .zero
     }
 }
 
@@ -207,7 +210,9 @@ extension ScrollTrialView: UICollectionViewDataSource, UICollectionViewDelegateF
     // UIScrollViewDelegate
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        finalOffset = targetContentOffset.pointee
+        
+        endDraggingOffset = scrollView.contentOffset
+        predictedOffset = targetContentOffset.pointee
         
         let vx = abs(velocity.x)
         let vy = abs(velocity.y)

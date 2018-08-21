@@ -81,17 +81,17 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
         scrollTrialView.isScrollEnabled = false
         
         // handle trial result
-//        var trial = ScrollTrial(axis: axis, initialPosition: scrollTrialView.initialPosition, targetPosition: scrollTrialView.destinationPosition)
-//        trial.endDraggingPosition = scrollTrialView.touchUpPosition
-//        trial.predictedPosition = scrollTrialView.predictedPosition
-//
-//        trial.startTime = trialStartDate.timeIntervalSince1970
-//        trial.endTime = trialEndDate.timeIntervalSince1970
-//        trial.rawTouchTracks = scrollTrialView.rawTracks
-//        trial.success = scrollTrialView.success
-//        trial.allEvents = scrollTrialView.gestureRecognizerEvents
-//
-//        task?.trials.append(trial)
+        var trial = ScrollTrial(axis: axis, initialPosition: scrollTrialView.initialOffset, targetPosition: scrollTrialView.targetOffset)
+        trial.endDraggingPosition = scrollTrialView.endDraggingOffset
+        trial.predictedPosition = scrollTrialView.predictedOffset
+
+        trial.startTime = trialStartDate.timeIntervalSince1970
+        trial.endTime = trialEndDate.timeIntervalSince1970
+        trial.rawTouchTracks = scrollTrialView.rawTracks
+        trial.success = scrollTrialView.success
+        trial.allEvents = scrollTrialView.gestureRecognizerEvents
+
+        task?.trials.append(trial)
         // end of add new trial
         
         positions.removeFirst()
