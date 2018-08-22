@@ -69,6 +69,6 @@ extension TapTaskPracticeViewController: TapTrialViewDataSource {
     }
     
     func targetSize(_ tapTrialView: TapTrialView) -> CGSize {
-        return CGSize(width: 80, height: 80)
+        return CGSize(width: 76, height: 76)
     }
 }

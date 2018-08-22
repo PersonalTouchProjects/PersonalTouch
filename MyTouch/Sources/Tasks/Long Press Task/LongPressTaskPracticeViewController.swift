@@ -69,6 +69,6 @@ extension LongPressTaskPracticeViewController: LongPressTrialViewDataSource {
     }
     
     func targetSize(_ tapTrialView: LongPressTrialView) -> CGSize {
-        return CGSize(width: 44, height: 44)
+        return CGSize(width: 76, height: 76)
     }
 }

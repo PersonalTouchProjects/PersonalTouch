@@ -10,7 +10,7 @@ import UIKit
 
 struct TapTrial: Trial {
     
-    let targetLocation: CGPoint
+    let targetFrame: CGRect
     
     var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
     
@@ -32,7 +32,7 @@ struct TapTrial: Trial {
     
     var rotationEvents: [RotationGestureRecognizerEvent] = []
     
-    init(targetLocation: CGPoint) {
-        self.targetLocation = targetLocation
+    init(targetFrame: CGRect) {
+        self.targetFrame = targetFrame
     }
 }

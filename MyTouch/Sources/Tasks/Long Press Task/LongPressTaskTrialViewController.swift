@@ -18,7 +18,7 @@ class LongPressTaskTrialViewController: TaskTrialViewController<LongPressTrial> 
     
     private var totalTrialsCount: Int = 0
     
-    private var positions: [(Int, Int)] = [] {
+    private var positions: [(Int, Int, CGSize)] = [] {
         didSet { updateNextButton() }
     }
     
@@ -53,7 +53,20 @@ class LongPressTaskTrialViewController: TaskTrialViewController<LongPressTrial> 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        positions = positionGenerator(columns: numberOfColumns, rows: numberOfRows, repeats: numberOfRepeats).shuffled()
+        let smalls = positionGenerator(
+            columns: numberOfColumns,
+            rows: numberOfRows,
+            size: CGSize(width: 44, height: 44),
+            repeats: numberOfRepeats
+        )
+        let larges = positionGenerator(
+            columns: numberOfColumns,
+            rows: numberOfRows,
+            size: CGSize(width: 76, height: 76),
+            repeats: numberOfRepeats
+        )
+        
+        positions = larges.shuffled() + smalls.shuffled()
         totalTrialsCount = positions.count
         
         title = "點擊測驗 1/\(totalTrialsCount)"
@@ -108,8 +121,12 @@ extension LongPressTaskTrialViewController: LongPressTrialViewDataSource {
     func targetRow(_ tapTrialView: LongPressTrialView) -> Int {
         return positions.first!.1
     }
+    
+    func targetSize(_ tapTrialView: LongPressTrialView) -> CGSize {
+        return positions.first!.2
+    }
 }
 
-private func positionGenerator(columns: Int, rows: Int, repeats: Int) -> [(Int, Int)] {
-    return (0..<repeats).flatMap { _ in (0..<columns).flatMap { c in (0..<rows).map { r in (c, r) } } }
+private func positionGenerator(columns: Int, rows: Int, size: CGSize, repeats: Int) -> [(Int, Int, CGSize)] {
+    return (0..<repeats).flatMap { _ in (0..<columns).flatMap { c in (0..<rows).map { r in (c, r, size) } } }
 }
