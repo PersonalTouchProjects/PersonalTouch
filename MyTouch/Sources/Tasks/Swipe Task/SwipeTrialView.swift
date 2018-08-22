@@ -9,27 +9,22 @@
 import UIKit
 
 protocol SwipeTrialViewDataSource: NSObjectProtocol {
-    func swipeArea(_ swipeTrialView: SwipeTrialView) -> SwipeTrialView.SwipeArea
     func direction(_ swipeTrialView: SwipeTrialView) -> SwipeTrial.Direction
 }
 
 class SwipeTrialView: TrialView {
-    
-    enum SwipeArea {
-        case left, right
-        case none
-    }
     
     var dataSource: SwipeTrialViewDataSource? {
         didSet { if superview != nil { reloadData() } }
     }
     
     let arrowView = UIImageView(image: UIImage(named: "arrow"))
-    let areaView = TouchThroughView()
-    let backgroundView = TouchThroughView()
-    let tzuchuanRecognizer = TzuChuanGestureRecognizer()
     
-    private var swipeArea = SwipeArea.none
+    let upRecognizer = UISwipeGestureRecognizer()
+    let downRecognizer = UISwipeGestureRecognizer()
+    let leftRecognizer = UISwipeGestureRecognizer()
+    let rightRecognizer = UISwipeGestureRecognizer()
+    
     private var targetDirection = SwipeTrial.Direction.none
     private(set) var recognizedDirection = SwipeTrial.Direction.none
     
@@ -38,17 +33,28 @@ class SwipeTrialView: TrialView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        arrowView.tintColor = .white
-        areaView.backgroundColor = tintColor
-        backgroundView.backgroundColor = .black
-        
-        contentView.addSubview(backgroundView)
-        contentView.addSubview(areaView)
         contentView.addSubview(arrowView)
         
-        tzuchuanRecognizer.addTarget(self, action: #selector(handleSwipe(_:)))
-        tzuchuanRecognizer.cancelsTouchesInView = false
-        addGestureRecognizer(tzuchuanRecognizer)
+        upRecognizer.direction = .up
+        upRecognizer.cancelsTouchesInView = false
+        upRecognizer.addTarget(self, action: #selector(handleSwipe(_:)))
+        
+        downRecognizer.direction = .down
+        downRecognizer.cancelsTouchesInView = false
+        downRecognizer.addTarget(self, action: #selector(handleSwipe(_:)))
+        
+        leftRecognizer.direction = .left
+        leftRecognizer.cancelsTouchesInView = false
+        leftRecognizer.addTarget(self, action: #selector(handleSwipe(_:)))
+        
+        rightRecognizer.direction = .right
+        rightRecognizer.cancelsTouchesInView = false
+        rightRecognizer.addTarget(self, action: #selector(handleSwipe(_:)))
+        
+        addGestureRecognizer(upRecognizer)
+        addGestureRecognizer(downRecognizer)
+        addGestureRecognizer(leftRecognizer)
+        addGestureRecognizer(rightRecognizer)
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -63,22 +69,11 @@ class SwipeTrialView: TrialView {
         super.layoutSubviews()
         
         contentView.frame = bounds
-        backgroundView.frame = bounds
-        
-        areaView.frame = CGRect(
-            x: contentView.bounds.minX,
-            y: contentView.bounds.minY,
-            width: contentView.bounds.width / 2,
-            height: contentView.bounds.height
-        )
-        if swipeArea == .right {
-            areaView.frame.origin.x += areaView.bounds.width
-        }
         
         arrowView.transform = .identity
         
         arrowView.frame.size = arrowView.intrinsicContentSize
-        arrowView.center = areaView.center
+        arrowView.center = contentView.center
         
         arrowView.transform = CGAffineTransform(rotationAngle: targetDirection.rotationRadian)
     }
@@ -87,8 +82,36 @@ class SwipeTrialView: TrialView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func handleSwipe(_ sender: TzuChuanGestureRecognizer) {
-        recognizedDirection = SwipeTrial.Direction(rawValue: sender.direction.rawValue) ?? .none
+    @objc private func handleSwipe(_ sender: UISwipeGestureRecognizer) {
+        
+        switch (sender.direction, targetDirection) {
+        case (.up, .up):
+            success = true
+            recognizedDirection = .up
+        case (.up, _):
+            recognizedDirection = .up
+            
+        case (.down, .down):
+            success = true
+            recognizedDirection = .down
+        case (.up, _):
+            recognizedDirection = .down
+            
+        case (.left, .left):
+            success = true
+            recognizedDirection = .left
+        case (.left, _):
+            recognizedDirection = .left
+            
+        case (.right, .right):
+            success = true
+            recognizedDirection = .right
+        case (.right, _):
+            recognizedDirection = .right
+            
+        default:
+            break
+        }
     }
     
     func reloadData() {
@@ -97,7 +120,6 @@ class SwipeTrialView: TrialView {
         
         success = false
 
-        swipeArea           = dataSource?.swipeArea(self) ?? .none
         targetDirection     = dataSource?.direction(self) ?? .none
         recognizedDirection = .none
         
@@ -113,13 +135,9 @@ private extension SwipeTrial.Direction {
         let angle: CGFloat
         switch self {
         case .right:     angle = 0
-        case .upRight:   angle = 45
         case .up:        angle = 90
-        case .upLeft:    angle = 135
         case .left:      angle = 180
-        case .downLeft:  angle = 225
         case .down:      angle = 270
-        case .downRight: angle = 315
         default:         angle = 0
         }
         

@@ -12,15 +12,15 @@ struct SwipeTrial: Trial {
     
     enum Direction: String, Codable {
         case up, left, right, down
-        case upLeft, upRight, downLeft, downRight
+        // case upLeft, upRight, downLeft, downRight
         case none
     }
     
-    let areaFrame: CGRect
+//    let areaFrame: CGRect
     
     let targetDirection: Direction
     
-    var resultDirection: Direction = .none
+    var recognizedDirection: Direction = .none
     
     var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
     
@@ -42,8 +42,7 @@ struct SwipeTrial: Trial {
     
     var rotationEvents: [RotationGestureRecognizerEvent] = []
     
-    init(areaFrame: CGRect, targetDirection: Direction) {
-        self.areaFrame = areaFrame
+    init(targetDirection: Direction) {
         self.targetDirection = targetDirection
     }
 }

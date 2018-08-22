@@ -13,7 +13,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
     let swipeTrialView = SwipeTrialView()
     
     var numberOfRepeats = 1
-    var directions: [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] = [] {
+    var directions: [SwipeTrial.Direction] = [] {
         didSet { updateNextButton() }
     }
     private var totalTrialsCount: Int = 0
@@ -58,21 +58,22 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
         navigationItem.rightBarButtonItem?.title = "1/\(totalTrialsCount)"
         
         swipeTrialView.dataSource = self
-        countDownView.label.textColor = .white
+//        countDownView.label.textColor = .white
     }
     
     override func didEndTrial() {
         super.didEndTrial()
         
         // handle trial result
-        let areaFrame = swipeTrialView.areaView.frame
-        let targetDirection = directions.first!.1
+//        let areaFrame = swipeTrialView.areaView.frame
+        let targetDirection = directions.first ?? .none
         
-        var swipeTrial = SwipeTrial(areaFrame: areaFrame, targetDirection: targetDirection)
+        var swipeTrial = SwipeTrial(targetDirection: targetDirection)
         swipeTrial.startTime = trialStartDate.timeIntervalSince1970
         swipeTrial.endTime = trialEndDate.timeIntervalSince1970
         swipeTrial.rawTouchTracks = swipeTrialView.rawTracks
-        swipeTrial.success = targetDirection == swipeTrialView.recognizedDirection
+        swipeTrial.success = swipeTrialView.success
+        swipeTrial.recognizedDirection = swipeTrialView.recognizedDirection
         swipeTrial.allEvents = swipeTrialView.gestureRecognizerEvents
         
         task?.trials.append(swipeTrial)
@@ -92,22 +93,20 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
 
 extension SwipeTaskTrialViewController: SwipeTrialViewDataSource {
     
-    func swipeArea(_ swipeTrialView: SwipeTrialView) -> SwipeTrialView.SwipeArea {
-        return directions.first!.0
-    }
-    
     func direction(_ swipeTrialView: SwipeTrialView) -> SwipeTrial.Direction {
-        return directions.first!.1
+        return directions.first ?? .none
     }
 }
 
-private func directionGenerator(repeats: Int) -> [(SwipeTrialView.SwipeArea, SwipeTrial.Direction)] {
+private func directionGenerator(repeats: Int) -> [SwipeTrial.Direction] {
     
 //    return [(.right, .right)]
-    
     return (0..<repeats).flatMap { _ in
-        return [.left, .right].flatMap { area in
-            return [.right, .upRight, .up, .upLeft, .left, .downLeft, .down, .downRight].map { direction in (area, direction) }
-        }
+        return [.up, .down, .left, .right]
     }
+//    return (0..<repeats).flatMap { _ in
+//        return [.left, .right].flatMap { area in
+//            return [.right, .upRight, .up, .upLeft, .left, .downLeft, .down, .downRight].map { direction in (area, direction) }
+//        }
+//    }
 }
