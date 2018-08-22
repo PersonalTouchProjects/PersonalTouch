@@ -12,7 +12,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
     
     let swipeTrialView = SwipeTrialView()
     
-    var numberOfRepeats = 1
+    var numberOfRepeats = 2
     var directions: [SwipeTrial.Direction] = [] {
         didSet { updateNextButton() }
     }
