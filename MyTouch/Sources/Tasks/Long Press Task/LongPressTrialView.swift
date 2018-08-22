@@ -207,6 +207,7 @@ extension LongPressTrialView {
             fatalError("init(coder:) has not been implemented")
         }
         
+        /*
         override func draw(_ rect: CGRect) {
             
             UIColor.white.setFill()
@@ -230,5 +231,6 @@ extension LongPressTrialView {
             rectangle = UIBezierPath(rect: frame)
             rectangle.fill()
         }
+        */
     }
 }
