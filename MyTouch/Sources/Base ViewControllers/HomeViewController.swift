@@ -85,9 +85,9 @@ class HomeViewController: UIViewController {
     
     @objc func handleButton(_ sender: UIButton) {
         
-//        presentTaskColleciton()
+        presentTaskColleciton()
 //        presentConsent()
-        presentSurvey()
+//        presentSurvey()
     }
     
     private func presentTaskColleciton() {

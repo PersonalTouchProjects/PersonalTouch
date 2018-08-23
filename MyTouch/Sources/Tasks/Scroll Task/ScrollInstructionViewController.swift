@@ -12,7 +12,7 @@ class ScrollTaskInstructionViewController: TaskInstructionViewController<ScrollT
     
     let instructionView = ScrollInstructionView()
     
-    var axis = ScrollTrial.Axis.vertical
+    var axis = ScrollTrial.Axis.horizontal
     
     override func nextViewController() -> TaskViewController<ScrollTrial>? {
         let vc = ScrollTaskPracticeViewController()
@@ -29,6 +29,8 @@ class ScrollTaskInstructionViewController: TaskInstructionViewController<ScrollT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        instructionView.axis = axis
         
         contentView.addSubview(instructionView)
         instructionView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +41,9 @@ class ScrollTaskInstructionViewController: TaskInstructionViewController<ScrollT
             instructionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             instructionView.widthAnchor.constraint(equalTo: contentView.readableContentGuide.widthAnchor, multiplier: 0.8, constant: 0.0)
         ])
+        
+        instructionLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        instructionView.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
     
     override func viewDidAppear(_ animated: Bool) {
