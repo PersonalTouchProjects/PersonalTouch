@@ -19,7 +19,7 @@ class SwipeTaskInstructionViewController: TaskInstructionViewController<SwipeTri
     override func instructionText() -> String {
         return """
         掃動測驗
-        本測驗共有 16 次嘗試，每次嘗試會需要在畫面的左邊或右邊順著箭頭方向快速掃動。
+        本測驗共有 8 次嘗試，每次嘗試會需要在畫面上順著箭頭方向快速掃動。
         """
     }
     

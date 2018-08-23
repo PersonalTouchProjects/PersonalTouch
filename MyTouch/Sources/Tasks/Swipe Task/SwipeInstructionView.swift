@@ -22,11 +22,6 @@ class SwipeInstructionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        
-        areaView.backgroundColor = tintColor.withAlphaComponent(0.7)
-        areaView.layer.cornerRadius = 8
-        
-        arrowView.tintColor = .white
         arrowView.contentMode = .scaleAspectFit
         
         addSubview(areaView)

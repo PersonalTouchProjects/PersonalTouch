@@ -26,7 +26,7 @@ class SwipeTaskPracticeViewController: TaskTrialViewController<SwipeTrial> {
     
     override func instructionText() -> String {
         return """
-        按下練習按鈕開始練習，請在畫面的左邊或右邊順著箭頭方向快速掃動。
+        按下練習按鈕開始練習，請在畫面上順著箭頭方向快速掃動。
         按下下一步正式開始測驗。
         """
     }

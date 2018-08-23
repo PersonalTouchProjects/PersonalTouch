@@ -23,7 +23,7 @@ class ScrollTaskInstructionViewController: TaskInstructionViewController<ScrollT
     override func instructionText() -> String {
         return """
         \(self.axis == .horizontal ? "水平" : "垂直")測驗
-        本測驗共有 8 次嘗試，請將藍色矩形滾動至目標區域。
+        本測驗共有 8 次嘗試，請將列表中的目標項目（藍色）滾動至畫面中。
         """
     }
     

@@ -43,7 +43,7 @@ class TapTaskTrialViewController: TaskTrialViewController<TapTrial> {
     }
     
     override func instructionText() -> String {
-        return "按下開始按鈕開始測驗，十字會出現在空白畫面中的任意位置，請用一隻手指點擊一次十字。"
+        return "按下開始按鈕開始測驗，方框會出現在空白畫面中的任意位置，請用一隻手指點擊一次方框。"
     }
     
     override func actionTitle() -> String {

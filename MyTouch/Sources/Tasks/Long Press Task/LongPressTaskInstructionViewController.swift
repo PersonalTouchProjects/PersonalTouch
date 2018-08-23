@@ -19,7 +19,7 @@ class LongPressTaskInstructionViewController: TaskInstructionViewController<Long
     override func instructionText() -> String {
         return """
         點擊測驗
-        本測驗共有 25 次嘗試，每次嘗試會有一個十字出現在空白畫面中的任意位置，請用一隻手指點擊一次十字。
+        本測驗共有 18 次嘗試，每次嘗試會有一個藍色方框出現在空白畫面中的任意位置，請用一隻手指長按方框直到方框變為綠色。
         """
     }
     

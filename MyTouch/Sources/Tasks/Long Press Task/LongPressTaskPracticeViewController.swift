@@ -26,7 +26,7 @@ class LongPressTaskPracticeViewController: TaskTrialViewController<LongPressTria
     
     override func instructionText() -> String {
         return """
-        按下練習按鈕開始練習，十字會出現在空白畫面中的任意位置，請用一隻手指點擊一次十字。
+        按下練習按鈕開始練習，方框會出現在空白畫面中的任意位置，請用一隻手指長按方框直到方框變為綠色。
         按下下一步正式開始測驗。
         """
     }

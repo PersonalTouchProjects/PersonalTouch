@@ -43,7 +43,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
     
     override func instructionText() -> String {
         return """
-        按下開始按鈕開始測驗，請將藍色矩形滾動至目標區域。
+        按下開始按鈕開始測驗，請將列表中的目標項目（藍色）滾動至畫面中。
         """
     }
     

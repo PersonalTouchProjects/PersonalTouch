@@ -40,7 +40,7 @@ class SwipeTaskTrialViewController: TaskTrialViewController<SwipeTrial> {
     
     override func instructionText() -> String {
         return """
-        按下開始按鈕開始測驗，請在畫面的左邊或右邊順著箭頭方向快速掃動。
+        按下開始按鈕開始測驗，請在畫面上順著箭頭方向快速掃動。
         """
     }
     
