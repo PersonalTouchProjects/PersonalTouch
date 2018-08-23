@@ -10,7 +10,7 @@ import UIKit
 
 class LongPressTaskInstructionViewController: TaskInstructionViewController<LongPressTrial> {
     
-    let instructionView = TapInstructionView()
+    let instructionView = LongPressInstructionView()
     
     override func nextViewController() -> TaskViewController<LongPressTrial>? {
         return LongPressTaskPracticeViewController()
