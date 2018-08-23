@@ -13,10 +13,9 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
     let scrollTrialView = ScrollTrialView(frame: .zero)
     
     var axis = ScrollTrial.Axis.vertical
-    var rows = 5
-    var targetRow = 2
+    var rows = 200
     var numberOfRepeats = 2
-    var positions: [Int] = [] {
+    var positionAndOffsets: [(Int, Int)] = [] {
         didSet { updateNextButton() }
     }
     
@@ -31,7 +30,7 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
     }
     
     override func prefersNextButtonEnabled() -> Bool {
-        return positions.isEmpty
+        return positionAndOffsets.isEmpty
     }
     
     override func dismissConfirmTitle() -> String? {
@@ -59,7 +58,9 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        positions = positionGenerator(rows: rows, targetRow: targetRow, repeats: numberOfRepeats).shuffled()
+        positionAndOffsets = positionAndOffsetsGenerator(total: rows, repeats: numberOfRepeats).shuffled()
+        totalTrialsCount = positionAndOffsets.count
+//        positions = positionGenerator(rows: rows, targetRow: targetRow, repeats: numberOfRepeats).shuffled()
         
         title = "滾動測驗 1/\(totalTrialsCount)"
         navigationItem.rightBarButtonItem?.title = "1/\(totalTrialsCount)"
@@ -94,12 +95,12 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
         task?.trials.append(trial)
         // end of add new trial
         
-        positions.removeFirst()
+        positionAndOffsets.removeFirst()
         
-        if !positions.isEmpty  {
+        if !positionAndOffsets.isEmpty  {
             scrollTrialView.reloadData()
-            title = "滾動測驗 \(totalTrialsCount - positions.count + 1)/\(totalTrialsCount)"
-            navigationItem.rightBarButtonItem?.title = "\(totalTrialsCount - positions.count + 1)/\(totalTrialsCount)"
+            title = "滾動測驗 \(totalTrialsCount - positionAndOffsets.count + 1)/\(totalTrialsCount)"
+            navigationItem.rightBarButtonItem?.title = "\(totalTrialsCount - positionAndOffsets.count + 1)/\(totalTrialsCount)"
         } else {
             presentNext()
         }
@@ -109,15 +110,15 @@ class ScrollTaskTrialViewController: TaskTrialViewController<ScrollTrial> {
 extension ScrollTaskTrialViewController: ScrollTrialViewDataSource {
     
     func numberOfItems(_ scrollTrialView: ScrollTrialView) -> Int {
-        return 100
+        return rows
     }
     
     func initialItem(_ scrollTrialView: ScrollTrialView) -> Int {
-        return 50
+        return positionAndOffsets.first!.0
     }
     
     func targetItem(_ scrollTrialView: ScrollTrialView) -> Int {
-        return 40
+        return positionAndOffsets.first!.0 + positionAndOffsets.first!.1
     }
     
     func axis(_ scrollTrialView: ScrollTrialView) -> ScrollTrial.Axis {
@@ -125,6 +126,16 @@ extension ScrollTaskTrialViewController: ScrollTrialViewDataSource {
     }
 }
 
-private func positionGenerator(rows: Int, targetRow: Int, repeats: Int) -> [Int] {
-    return (0..<repeats).flatMap { _ in (0..<rows).compactMap { ($0 == targetRow) ? nil : $0 } }
+private func positionAndOffsetsGenerator(total: Int, repeats: Int) -> [(Int, Int)] {
+    let center = total / 2
+    let value = [-5, -3, 3, 5].compactMap { offset in
+        return (center, offset)
+    }
+    
+    var result = [(Int, Int)]()
+    for _ in (0..<repeats)  {
+        result += value
+    }
+    
+    return result
 }

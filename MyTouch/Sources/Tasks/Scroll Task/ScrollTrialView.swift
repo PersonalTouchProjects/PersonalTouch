@@ -139,12 +139,12 @@ class ScrollTrialView: TrialCollectionView {
         
         if flowLayout.scrollDirection == .horizontal {
             let width = bounds.width / visibleItems
-            contentOffset.x = (CGFloat(initialItem) - 0.5) * width
+            contentOffset.x = (CGFloat(initialItem) + 0.5 - 2) * width
             
             targetOffset = CGPoint(x: CGFloat(targetItem) * width, y: bounds.minY)
         } else {
             let height = bounds.height / visibleItems
-            contentOffset.y = (CGFloat(initialItem) - 0.5) * height
+            contentOffset.y = (CGFloat(initialItem) + 0.5 - 2) * height
             
             targetOffset = CGPoint(x: bounds.minX, y: CGFloat(targetItem) * height)
         }
