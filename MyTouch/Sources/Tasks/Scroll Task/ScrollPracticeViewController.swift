@@ -71,15 +71,15 @@ class ScrollTaskPracticeViewController: TaskTrialViewController<ScrollTrial> {
 extension ScrollTaskPracticeViewController: ScrollTrialViewDataSource {
     
     func numberOfItems(_ scrollTrialView: ScrollTrialView) -> Int {
-        return 100
+        return 200
     }
     
     func initialItem(_ scrollTrialView: ScrollTrialView) -> Int {
-        return 50
+        return 100
     }
     
     func targetItem(_ scrollTrialView: ScrollTrialView) -> Int {
-        return [40, 43, 56, 60].shuffled().first!
+        return 100 + [-5, -3, 3, 5].shuffled().first!
     }
     
     func axis(_ scrollTrialView: ScrollTrialView) -> ScrollTrial.Axis {
