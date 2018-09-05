@@ -76,6 +76,9 @@ class TaskEndViewController<T: Trial>: TaskViewController<T> {
         if let task = task as? Task<RotationTrial> {
             SessionManager.shared.currentSession?.rotationTask = task
         }
+        if let task = task as? Task<LongPressTrial> {
+            SessionManager.shared.currentSession?.longPressTask = task
+        }
         
         dismiss(animated: true, completion: nil)
     }
