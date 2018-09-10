@@ -25,7 +25,7 @@ class SessionManager {
         return
             (session.tapTask?.trials.count              ?? 0) != 0 &&
             (session.swipeTask?.trials.count            ?? 0) != 0 &&
-            (session.dragAndDropTask?.trials.count      ?? 0) != 0 &&
+            (session.longPressTask?.trials.count        ?? 0) != 0 &&
             (session.horizontalScrollTask?.trials.count ?? 0) != 0 &&
             (session.verticalScrollTask?.trials.count   ?? 0) != 0 &&
             (session.pinchTask?.trials.count            ?? 0) != 0 &&

@@ -18,7 +18,8 @@ class SessionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "測驗結果"
+        title = "實驗結果"
+        navigationItem.title = "\(UIApplication.shared.appVersion) (build \(UIApplication.shared.appBuild))"
         
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .white

@@ -57,7 +57,7 @@ extension SessionContentsViewController: UITableViewDataSource, UITableViewDeleg
         switch section {
         case 0: return session.tapTask?.trials.count ?? 0
         case 1: return session.swipeTask?.trials.count ?? 0
-        case 2: return session.dragAndDropTask?.trials.count ?? 0
+        case 2: return session.longPressTask?.trials.count ?? 0
         case 3: return session.horizontalScrollTask?.trials.count ?? 0
         case 4: return session.verticalScrollTask?.trials.count ?? 0
         case 5: return session.pinchTask?.trials.count ?? 0
@@ -86,7 +86,7 @@ extension SessionContentsViewController: UITableViewDataSource, UITableViewDeleg
         switch indexPath.section {
         case 0: trial = session.tapTask?.trials[indexPath.row]
         case 1: trial = session.swipeTask?.trials[indexPath.row]
-        case 2: trial = session.dragAndDropTask?.trials[indexPath.row]
+        case 2: trial = session.longPressTask?.trials[indexPath.row]
         case 3: trial = session.horizontalScrollTask?.trials[indexPath.row]
         case 4: trial = session.verticalScrollTask?.trials[indexPath.row]
         case 5: trial = session.pinchTask?.trials[indexPath.row]
@@ -109,7 +109,7 @@ private func taskName(_ index: Int) -> String {
     switch index {
     case 0: taskName = "點擊"
     case 1: taskName = "掃動"
-    case 2: taskName = "拖放"
+    case 2: taskName = "長按"
     case 3: taskName = "水平滾動"
     case 4: taskName = "垂直滾動"
     case 5: taskName = "縮放"
