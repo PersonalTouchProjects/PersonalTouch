@@ -25,7 +25,7 @@ enum GestureRecognizerEventState: String, Codable {
     case cancelled
     case failed
     
-    init(state: UIGestureRecognizerState) {
+    init(state: UIGestureRecognizer.State) {
         switch state {
         case .possible:  self = .possible
         case .began:     self = .began
@@ -220,7 +220,7 @@ struct SwipeGestureRecognizerEvent: GestureRecognizerEvent {
         static var up    = Direction(rawValue: 1 << 2)
         static var down  = Direction(rawValue: 1 << 3)
         
-        static func convert(from: UISwipeGestureRecognizerDirection) -> Direction {
+        static func convert(from: UISwipeGestureRecognizer.Direction) -> Direction {
             var direction: Direction = []
             if from.contains(.right) {
                 direction.insert(.right)

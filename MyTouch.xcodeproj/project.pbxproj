@@ -8,40 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		65010AAD210068EC002EB953 /* ScrollTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AAC210068EC002EB953 /* ScrollTrial.swift */; };
-		65010AB0210069EB002EB953 /* ScrollTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AAF210069EB002EB953 /* ScrollTrialViewController.swift */; };
-		65010AB221006A77002EB953 /* ScrollTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AB121006A77002EB953 /* ScrollTrialView.swift */; };
-		65010AB421007A17002EB953 /* TouchTrackingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AB321007A17002EB953 /* TouchTrackingScrollView.swift */; };
-		65010AB621007D81002EB953 /* TouchTrackingRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AB521007D81002EB953 /* TouchTrackingRecognizer.swift */; };
-		65010AB821008A95002EB953 /* TrialScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AB721008A95002EB953 /* TrialScrollView.swift */; };
-		65010ABA21008E70002EB953 /* TouchTrackingViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AB921008E70002EB953 /* TouchTrackingViewProtocols.swift */; };
-		65010ABD2100957A002EB953 /* TouchThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ABC2100957A002EB953 /* TouchThroughView.swift */; };
-		65010AC02100BE9B002EB953 /* ScrollPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ABF2100BE9B002EB953 /* ScrollPracticeViewController.swift */; };
-		65010AC22100BFFD002EB953 /* ScrollInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC12100BFFD002EB953 /* ScrollInstructionViewController.swift */; };
-		65010AC42100C08A002EB953 /* ScrollInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC32100C08A002EB953 /* ScrollInstructionView.swift */; };
 		65010AC621018F1C002EB953 /* PinchTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC521018F1C002EB953 /* PinchTrial.swift */; };
 		65010AC821018FA1002EB953 /* RotationTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC721018FA1002EB953 /* RotationTrial.swift */; };
-		65010ACA2101C454002EB953 /* PinchTaskInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC92101C454002EB953 /* PinchTaskInstructionViewController.swift */; };
-		65010ACD2101C48E002EB953 /* PinchTaskPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ACC2101C48E002EB953 /* PinchTaskPracticeViewController.swift */; };
-		65010ACF2101C4CF002EB953 /* PinchTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ACE2101C4CF002EB953 /* PinchTrialView.swift */; };
-		65010AD12101D160002EB953 /* PinchTaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AD02101D160002EB953 /* PinchTaskTrialViewController.swift */; };
-		65010AD32101D55C002EB953 /* RotationTaskInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AD22101D55C002EB953 /* RotationTaskInstructionViewController.swift */; };
-		65010AD62101D594002EB953 /* RotationTaskPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AD52101D594002EB953 /* RotationTaskPracticeViewController.swift */; };
-		65010AD82101D5C8002EB953 /* RotationTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AD72101D5C8002EB953 /* RotationTrialView.swift */; };
 		65010ADA2101DF4B002EB953 /* CGAffineTransform+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */; };
-		65010ADC2101E6FE002EB953 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ADB2101E6FE002EB953 /* DashedLineView.swift */; };
-		65010ADE2101EF80002EB953 /* RotationTaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ADD2101EF7F002EB953 /* RotationTaskTrialViewController.swift */; };
-		65010AE021020B15002EB953 /* PinchInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010ADF21020B15002EB953 /* PinchInstructionView.swift */; };
-		65010AE221021472002EB953 /* RotationInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AE121021472002EB953 /* RotationInstructionView.swift */; };
-		65083185210319FB00C8A012 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65083184210319FB00C8A012 /* TaskViewController.swift */; };
-		6508318921034B7800C8A012 /* DashedBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6508318821034B7800C8A012 /* DashedBorderView.swift */; };
-		6508318D210352F200C8A012 /* ActiveTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6508318A210352F200C8A012 /* ActiveTask.swift */; };
-		6508318E210352F200C8A012 /* ConsentTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6508318B210352F200C8A012 /* ConsentTask.swift */; };
-		6508318F210352F200C8A012 /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6508318C210352F200C8A012 /* SurveyTask.swift */; };
 		65083192210357D400C8A012 /* Research.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65083191210357D400C8A012 /* Research.swift */; };
 		6514074820FC9770006BD17A /* TaskResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074720FC9770006BD17A /* TaskResultManager.swift */; };
-		6514074A20FDB013006BD17A /* Collection+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6514074920FDB013006BD17A /* Collection+HCI.swift */; };
-		65221BFF210DA50500EF9C6D /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65221BFE210DA50500EF9C6D /* SessionListViewController.swift */; };
-		65221C01210DA6AE00EF9C6D /* SessionContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65221C00210DA6AE00EF9C6D /* SessionContentsViewController.swift */; };
 		6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548A9EB20E663E700B7C73F /* AppDelegate.swift */; };
 		6548A9F120E663E800B7C73F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548A9EF20E663E800B7C73F /* Main.storyboard */; };
 		6548A9F320E663E900B7C73F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6548A9F220E663E900B7C73F /* Assets.xcassets */; };
@@ -52,99 +23,29 @@
 		6548AA0520E666A600B7C73F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA0420E666A600B7C73F /* Task.swift */; };
 		6548AA0720E666CF00B7C73F /* SwipeTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA0620E666CF00B7C73F /* SwipeTrial.swift */; };
 		6548AA0B20E667BB00B7C73F /* DragAndDropTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA0A20E667BB00B7C73F /* DragAndDropTrial.swift */; };
-		6548AA0F20E66DAD00B7C73F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA0E20E66DAD00B7C73F /* HomeViewController.swift */; };
 		6548AA1820E6717000B7C73F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6548AA1A20E6717000B7C73F /* Localizable.strings */; };
 		6548AA1F20E6770200B7C73F /* UIImage+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */; };
 		6548AA2D20E7A84000B7C73F /* RawTouchTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2C20E7A84000B7C73F /* RawTouchTrack.swift */; };
 		6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */; };
-		655B75B6210F858D00B580CF /* AccommodatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655B75B5210F858D00B580CF /* AccommodatedViewController.swift */; };
-		655E78B52123F67F005FA614 /* TouchTrackingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655E78B42123F67F005FA614 /* TouchTrackingCollectionView.swift */; };
-		655E78B72123F70F005FA614 /* TrialCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655E78B62123F70F005FA614 /* TrialCollectionView.swift */; };
-		65721BE920E9F4E900466E22 /* TapTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65721BE820E9F4E900466E22 /* TapTrialView.swift */; };
-		65721BEB20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65721BEA20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift */; };
-		6582148220ECF6B50025A03B /* TrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6582148120ECF6B50025A03B /* TrialView.swift */; };
-		658223E7212E99C100DD5975 /* LongPressInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658223E6212E99C100DD5975 /* LongPressInstructionView.swift */; };
-		65835923210360BE0072AECF /* TaskCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65835922210360BE0072AECF /* TaskCollectionViewController.swift */; };
-		65835926210367FE0072AECF /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65835925210367FE0072AECF /* TaskCollectionViewCell.swift */; };
-		658D8576210462110000CCB4 /* TaskCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D8575210462110000CCB4 /* TaskCollectionDelegate.swift */; };
 		658D857821046DEB0000CCB4 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D857721046DEB0000CCB4 /* SessionManager.swift */; };
-		6592ACF920E90667006A1BCB /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6592ACF820E90667006A1BCB /* CountdownView.swift */; };
-		65A470CC20EF967A0055E46E /* TaskInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A470CB20EF967A0055E46E /* TaskInstructionViewController.swift */; };
-		65A470CE20EF9EF20055E46E /* TapTaskInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A470CD20EF9EF10055E46E /* TapTaskInstructionViewController.swift */; };
 		65CBE34420FDE5470093F663 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE34320FDE5470093F663 /* Session.swift */; };
-		65CBE34920FE11620093F663 /* TapInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE34820FE11620093F663 /* TapInstructionView.swift */; };
-		65CBE34E20FF0C850093F663 /* SwipeTaskInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE34D20FF0C850093F663 /* SwipeTaskInstructionViewController.swift */; };
-		65CBE35020FF0CEC0093F663 /* SwipeTaskPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE34F20FF0CEC0093F663 /* SwipeTaskPracticeViewController.swift */; };
-		65CBE35220FF0CFD0093F663 /* SwipeTaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35120FF0CFD0093F663 /* SwipeTaskTrialViewController.swift */; };
-		65CBE35420FF0D220093F663 /* SwipeTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35320FF0D220093F663 /* SwipeTrialView.swift */; };
-		65CBE35620FF2E150093F663 /* SwipeInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35520FF2E150093F663 /* SwipeInstructionView.swift */; };
-		65CBE35B20FF3C5F0093F663 /* DragAndDropTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35A20FF3C5F0093F663 /* DragAndDropTrialView.swift */; };
-		65CBE35D20FF40060093F663 /* DragAndDropPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35C20FF40060093F663 /* DragAndDropPracticeViewController.swift */; };
-		65CBE35F20FF4C6D0093F663 /* DragAndDropTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE35E20FF4C6D0093F663 /* DragAndDropTrialViewController.swift */; };
-		65CBE36121005ED10093F663 /* DragAndDropInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE36021005ED10093F663 /* DragAndDropInstructionViewController.swift */; };
-		65CBE363210060300093F663 /* DragAndDropInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE362210060300093F663 /* DragAndDropInstructionView.swift */; };
-		65CEDCAF211D83B300809069 /* LongPressTaskInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CEDCAE211D83B300809069 /* LongPressTaskInstructionViewController.swift */; };
 		65CEDCB1211D83E900809069 /* LongPressTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CEDCB0211D83E900809069 /* LongPressTrial.swift */; };
-		65CEDCB3211D847500809069 /* LongPressTaskPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CEDCB2211D847500809069 /* LongPressTaskPracticeViewController.swift */; };
-		65CEDCB5211D84D700809069 /* LongPressTaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CEDCB4211D84D700809069 /* LongPressTaskTrialViewController.swift */; };
-		65CEDCB7211D852A00809069 /* LongPressTrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CEDCB6211D852A00809069 /* LongPressTrialView.swift */; };
-		65CF17DB2109CDD000E4B877 /* FingerCompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CF17DA2109CDD000E4B877 /* FingerCompassView.swift */; };
-		65DC072E20F141E70070A7A7 /* TapTaskPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DC072D20F141E70070A7A7 /* TapTaskPracticeViewController.swift */; };
 		65DE73BC20F0F04E009D5928 /* GestureRecognizerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DE73BB20F0F04E009D5928 /* GestureRecognizerEvent.swift */; };
-		65E4103D210F3583007353DF /* RecognizerAccommodator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4103C210F3583007353DF /* RecognizerAccommodator.swift */; };
-		65E4103F210F3666007353DF /* AccommodatedTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4103E210F3666007353DF /* AccommodatedTapGestureRecognizer.swift */; };
-		65E41041210F3694007353DF /* AccommodatedPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF1A492109FE3800294765 /* AccommodatedPanGestureRecognizer.swift */; };
 		65EE0F0920EF42F200EB8929 /* UIView+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */; };
-		65F8BD4D20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */; };
-		65F9245F20E800C900A32BB0 /* TouchTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9245E20E800C900A32BB0 /* TouchTrackingView.swift */; };
-		65F9246120E8A81100A32BB0 /* TaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9246020E8A81100A32BB0 /* TaskTrialViewController.swift */; };
-		65F9246320E8D24000A32BB0 /* TaskEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9246220E8D24000A32BB0 /* TaskEndViewController.swift */; };
-		65F9246620E8D39A00A32BB0 /* TapTaskTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9246520E8D39A00A32BB0 /* TapTaskTrialViewController.swift */; };
 		65FC45A320F39FAF00B2A7CF /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A220F39FAF00B2A7CF /* DeviceInfo.swift */; };
 		65FC45A520F3A00900B2A7CF /* UIDevice+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */; };
 		65FC45A720F3A04C00B2A7CF /* UIApplication+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */; };
 		65FC45A920F3A13300B2A7CF /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC45A820F3A13300B2A7CF /* Participant.swift */; };
-		65FD2C3821070790002B0A05 /* TracksVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FD2C3721070790002B0A05 /* TracksVisualizationView.swift */; };
-		65FD2C3A210708B3002B0A05 /* TracksVisualizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FD2C39210708B3002B0A05 /* TracksVisualizationViewController.swift */; };
 		9CCF570D62C6E4015845B0EF /* Pods_MyTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		65010AAC210068EC002EB953 /* ScrollTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTrial.swift; sourceTree = "<group>"; };
-		65010AAF210069EB002EB953 /* ScrollTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTrialViewController.swift; sourceTree = "<group>"; };
-		65010AB121006A77002EB953 /* ScrollTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTrialView.swift; sourceTree = "<group>"; };
-		65010AB321007A17002EB953 /* TouchTrackingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTrackingScrollView.swift; sourceTree = "<group>"; };
-		65010AB521007D81002EB953 /* TouchTrackingRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTrackingRecognizer.swift; sourceTree = "<group>"; };
-		65010AB721008A95002EB953 /* TrialScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialScrollView.swift; sourceTree = "<group>"; };
-		65010AB921008E70002EB953 /* TouchTrackingViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTrackingViewProtocols.swift; sourceTree = "<group>"; };
-		65010ABC2100957A002EB953 /* TouchThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchThroughView.swift; sourceTree = "<group>"; };
-		65010ABF2100BE9B002EB953 /* ScrollPracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollPracticeViewController.swift; sourceTree = "<group>"; };
-		65010AC12100BFFD002EB953 /* ScrollInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollInstructionViewController.swift; sourceTree = "<group>"; };
-		65010AC32100C08A002EB953 /* ScrollInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollInstructionView.swift; sourceTree = "<group>"; };
 		65010AC521018F1C002EB953 /* PinchTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTrial.swift; sourceTree = "<group>"; };
 		65010AC721018FA1002EB953 /* RotationTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTrial.swift; sourceTree = "<group>"; };
-		65010AC92101C454002EB953 /* PinchTaskInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTaskInstructionViewController.swift; sourceTree = "<group>"; };
-		65010ACC2101C48E002EB953 /* PinchTaskPracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTaskPracticeViewController.swift; sourceTree = "<group>"; };
-		65010ACE2101C4CF002EB953 /* PinchTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTrialView.swift; sourceTree = "<group>"; };
-		65010AD02101D160002EB953 /* PinchTaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTaskTrialViewController.swift; sourceTree = "<group>"; };
-		65010AD22101D55C002EB953 /* RotationTaskInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTaskInstructionViewController.swift; sourceTree = "<group>"; };
-		65010AD52101D594002EB953 /* RotationTaskPracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTaskPracticeViewController.swift; sourceTree = "<group>"; };
-		65010AD72101D5C8002EB953 /* RotationTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTrialView.swift; sourceTree = "<group>"; };
 		65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+HCI.swift"; sourceTree = "<group>"; };
-		65010ADB2101E6FE002EB953 /* DashedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineView.swift; sourceTree = "<group>"; };
-		65010ADD2101EF7F002EB953 /* RotationTaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTaskTrialViewController.swift; sourceTree = "<group>"; };
-		65010ADF21020B15002EB953 /* PinchInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchInstructionView.swift; sourceTree = "<group>"; };
-		65010AE121021472002EB953 /* RotationInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationInstructionView.swift; sourceTree = "<group>"; };
-		65083184210319FB00C8A012 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
-		6508318821034B7800C8A012 /* DashedBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedBorderView.swift; sourceTree = "<group>"; };
-		6508318A210352F200C8A012 /* ActiveTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveTask.swift; sourceTree = "<group>"; };
-		6508318B210352F200C8A012 /* ConsentTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentTask.swift; sourceTree = "<group>"; };
-		6508318C210352F200C8A012 /* SurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
 		65083191210357D400C8A012 /* Research.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Research.swift; sourceTree = "<group>"; };
 		6514074720FC9770006BD17A /* TaskResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResultManager.swift; sourceTree = "<group>"; };
-		6514074920FDB013006BD17A /* Collection+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+HCI.swift"; sourceTree = "<group>"; };
-		65221BFE210DA50500EF9C6D /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
-		65221C00210DA6AE00EF9C6D /* SessionContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionContentsViewController.swift; sourceTree = "<group>"; };
 		6548A9E820E663E700B7C73F /* MyTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6548A9EB20E663E700B7C73F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6548A9F020E663E800B7C73F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -157,7 +58,6 @@
 		6548AA0420E666A600B7C73F /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		6548AA0620E666CF00B7C73F /* SwipeTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTrial.swift; sourceTree = "<group>"; };
 		6548AA0A20E667BB00B7C73F /* DragAndDropTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropTrial.swift; sourceTree = "<group>"; };
-		6548AA0E20E66DAD00B7C73F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6548AA1920E6717000B7C73F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6548AA1B20E6718200B7C73F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		6548AA1C20E6718200B7C73F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -165,56 +65,15 @@
 		6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+HCI.swift"; sourceTree = "<group>"; };
 		6548AA2C20E7A84000B7C73F /* RawTouchTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawTouchTrack.swift; sourceTree = "<group>"; };
 		6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HCI.swift"; sourceTree = "<group>"; };
-		655B75B5210F858D00B580CF /* AccommodatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodatedViewController.swift; sourceTree = "<group>"; };
-		655E78B42123F67F005FA614 /* TouchTrackingCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTrackingCollectionView.swift; sourceTree = "<group>"; };
-		655E78B62123F70F005FA614 /* TrialCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialCollectionView.swift; sourceTree = "<group>"; };
-		65721BE820E9F4E900466E22 /* TapTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTrialView.swift; sourceTree = "<group>"; };
-		65721BEA20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchUpInsideGestureRecognizer.swift; sourceTree = "<group>"; };
-		6582148120ECF6B50025A03B /* TrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialView.swift; sourceTree = "<group>"; };
-		658223E6212E99C100DD5975 /* LongPressInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressInstructionView.swift; sourceTree = "<group>"; };
-		65835922210360BE0072AECF /* TaskCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewController.swift; sourceTree = "<group>"; };
-		65835925210367FE0072AECF /* TaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewCell.swift; sourceTree = "<group>"; };
-		658D8575210462110000CCB4 /* TaskCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionDelegate.swift; sourceTree = "<group>"; };
 		658D857721046DEB0000CCB4 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
-		6592ACF820E90667006A1BCB /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
-		65A470CB20EF967A0055E46E /* TaskInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInstructionViewController.swift; sourceTree = "<group>"; };
-		65A470CD20EF9EF10055E46E /* TapTaskInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTaskInstructionViewController.swift; sourceTree = "<group>"; };
 		65CBE34320FDE5470093F663 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		65CBE34820FE11620093F663 /* TapInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInstructionView.swift; sourceTree = "<group>"; };
-		65CBE34D20FF0C850093F663 /* SwipeTaskInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTaskInstructionViewController.swift; sourceTree = "<group>"; };
-		65CBE34F20FF0CEC0093F663 /* SwipeTaskPracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTaskPracticeViewController.swift; sourceTree = "<group>"; };
-		65CBE35120FF0CFD0093F663 /* SwipeTaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTaskTrialViewController.swift; sourceTree = "<group>"; };
-		65CBE35320FF0D220093F663 /* SwipeTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTrialView.swift; sourceTree = "<group>"; };
-		65CBE35520FF2E150093F663 /* SwipeInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeInstructionView.swift; sourceTree = "<group>"; };
-		65CBE35A20FF3C5F0093F663 /* DragAndDropTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropTrialView.swift; sourceTree = "<group>"; };
-		65CBE35C20FF40060093F663 /* DragAndDropPracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropPracticeViewController.swift; sourceTree = "<group>"; };
-		65CBE35E20FF4C6D0093F663 /* DragAndDropTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropTrialViewController.swift; sourceTree = "<group>"; };
-		65CBE36021005ED10093F663 /* DragAndDropInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropInstructionViewController.swift; sourceTree = "<group>"; };
-		65CBE362210060300093F663 /* DragAndDropInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropInstructionView.swift; sourceTree = "<group>"; };
-		65CEDCAE211D83B300809069 /* LongPressTaskInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressTaskInstructionViewController.swift; sourceTree = "<group>"; };
 		65CEDCB0211D83E900809069 /* LongPressTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressTrial.swift; sourceTree = "<group>"; };
-		65CEDCB2211D847500809069 /* LongPressTaskPracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressTaskPracticeViewController.swift; sourceTree = "<group>"; };
-		65CEDCB4211D84D700809069 /* LongPressTaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressTaskTrialViewController.swift; sourceTree = "<group>"; };
-		65CEDCB6211D852A00809069 /* LongPressTrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressTrialView.swift; sourceTree = "<group>"; };
-		65CF17DA2109CDD000E4B877 /* FingerCompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerCompassView.swift; sourceTree = "<group>"; };
-		65DC072D20F141E70070A7A7 /* TapTaskPracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTaskPracticeViewController.swift; sourceTree = "<group>"; };
 		65DE73BB20F0F04E009D5928 /* GestureRecognizerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizerEvent.swift; sourceTree = "<group>"; };
-		65DF1A492109FE3800294765 /* AccommodatedPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodatedPanGestureRecognizer.swift; sourceTree = "<group>"; };
-		65E41035210F0FD3007353DF /* UIGestureRecognizer+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+HCI.swift"; sourceTree = "<group>"; };
-		65E4103C210F3583007353DF /* RecognizerAccommodator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizerAccommodator.swift; sourceTree = "<group>"; };
-		65E4103E210F3666007353DF /* AccommodatedTapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodatedTapGestureRecognizer.swift; sourceTree = "<group>"; };
 		65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+HCI.swift"; sourceTree = "<group>"; };
-		65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TzuChuanGestureRecognizer.swift; sourceTree = "<group>"; };
-		65F9245E20E800C900A32BB0 /* TouchTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTrackingView.swift; sourceTree = "<group>"; };
-		65F9246020E8A81100A32BB0 /* TaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTrialViewController.swift; sourceTree = "<group>"; };
-		65F9246220E8D24000A32BB0 /* TaskEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEndViewController.swift; sourceTree = "<group>"; };
-		65F9246520E8D39A00A32BB0 /* TapTaskTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTaskTrialViewController.swift; sourceTree = "<group>"; };
 		65FC45A220F39FAF00B2A7CF /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+HCI.swift"; sourceTree = "<group>"; };
 		65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+HCI.swift"; sourceTree = "<group>"; };
 		65FC45A820F3A13300B2A7CF /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
-		65FD2C3721070790002B0A05 /* TracksVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksVisualizationView.swift; sourceTree = "<group>"; };
-		65FD2C39210708B3002B0A05 /* TracksVisualizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksVisualizationViewController.swift; sourceTree = "<group>"; };
 		84D8FC000E54AB0CD2054783 /* Pods-MyTouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch.debug.xcconfig"; sourceTree = "<group>"; };
 		85F9F8729020785E6D9076D8 /* Pods-MyTouch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouch.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch.release.xcconfig"; sourceTree = "<group>"; };
 		A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,67 +106,6 @@
 				A33E589E9CEAB5004BE7CF77 /* Pods_MyTouch.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		65010AAE210069BF002EB953 /* Scroll Task */ = {
-			isa = PBXGroup;
-			children = (
-				65010AC12100BFFD002EB953 /* ScrollInstructionViewController.swift */,
-				65010ABF2100BE9B002EB953 /* ScrollPracticeViewController.swift */,
-				65010AAF210069EB002EB953 /* ScrollTrialViewController.swift */,
-				65010AB121006A77002EB953 /* ScrollTrialView.swift */,
-				65010AC32100C08A002EB953 /* ScrollInstructionView.swift */,
-			);
-			path = "Scroll Task";
-			sourceTree = "<group>";
-		};
-		65010ABB210090F1002EB953 /* Touch Tracking Views */ = {
-			isa = PBXGroup;
-			children = (
-				65010AB921008E70002EB953 /* TouchTrackingViewProtocols.swift */,
-				65F9245E20E800C900A32BB0 /* TouchTrackingView.swift */,
-				6582148120ECF6B50025A03B /* TrialView.swift */,
-				65010AB321007A17002EB953 /* TouchTrackingScrollView.swift */,
-				65010AB721008A95002EB953 /* TrialScrollView.swift */,
-				655E78B42123F67F005FA614 /* TouchTrackingCollectionView.swift */,
-				655E78B62123F70F005FA614 /* TrialCollectionView.swift */,
-				65FD2C3721070790002B0A05 /* TracksVisualizationView.swift */,
-			);
-			path = "Touch Tracking Views";
-			sourceTree = "<group>";
-		};
-		65010ACB2101C45B002EB953 /* Pinch Task */ = {
-			isa = PBXGroup;
-			children = (
-				65010AC92101C454002EB953 /* PinchTaskInstructionViewController.swift */,
-				65010ACC2101C48E002EB953 /* PinchTaskPracticeViewController.swift */,
-				65010AD02101D160002EB953 /* PinchTaskTrialViewController.swift */,
-				65010ACE2101C4CF002EB953 /* PinchTrialView.swift */,
-				65010ADF21020B15002EB953 /* PinchInstructionView.swift */,
-			);
-			path = "Pinch Task";
-			sourceTree = "<group>";
-		};
-		65010AD42101D563002EB953 /* Rotation Task */ = {
-			isa = PBXGroup;
-			children = (
-				65010AD22101D55C002EB953 /* RotationTaskInstructionViewController.swift */,
-				65010AD52101D594002EB953 /* RotationTaskPracticeViewController.swift */,
-				65010ADD2101EF7F002EB953 /* RotationTaskTrialViewController.swift */,
-				65010AD72101D5C8002EB953 /* RotationTrialView.swift */,
-				65010AE121021472002EB953 /* RotationInstructionView.swift */,
-			);
-			path = "Rotation Task";
-			sourceTree = "<group>";
-		};
-		65083190210352F600C8A012 /* Pre Task */ = {
-			isa = PBXGroup;
-			children = (
-				6508318A210352F200C8A012 /* ActiveTask.swift */,
-				6508318B210352F200C8A012 /* ConsentTask.swift */,
-				6508318C210352F200C8A012 /* SurveyTask.swift */,
-			);
-			path = "Pre Task";
 			sourceTree = "<group>";
 		};
 		6548A9DF20E663E700B7C73F = {
@@ -355,40 +153,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		6548AA1020E66DB200B7C73F /* Base ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				6548AA0E20E66DAD00B7C73F /* HomeViewController.swift */,
-				65221BFE210DA50500EF9C6D /* SessionListViewController.swift */,
-				65221C00210DA6AE00EF9C6D /* SessionContentsViewController.swift */,
-				65FD2C39210708B3002B0A05 /* TracksVisualizationViewController.swift */,
-				655B75B5210F858D00B580CF /* AccommodatedViewController.swift */,
-			);
-			path = "Base ViewControllers";
-			sourceTree = "<group>";
-		};
-		6548AA2720E769A300B7C73F /* Tap Task */ = {
-			isa = PBXGroup;
-			children = (
-				65A470CD20EF9EF10055E46E /* TapTaskInstructionViewController.swift */,
-				65DC072D20F141E70070A7A7 /* TapTaskPracticeViewController.swift */,
-				65F9246520E8D39A00A32BB0 /* TapTaskTrialViewController.swift */,
-				65721BE820E9F4E900466E22 /* TapTrialView.swift */,
-				65CBE34820FE11620093F663 /* TapInstructionView.swift */,
-			);
-			path = "Tap Task";
-			sourceTree = "<group>";
-		};
-		65835924210365C40072AECF /* Task Selection */ = {
-			isa = PBXGroup;
-			children = (
-				65835922210360BE0072AECF /* TaskCollectionViewController.swift */,
-				658D8575210462110000CCB4 /* TaskCollectionDelegate.swift */,
-				65835925210367FE0072AECF /* TaskCollectionViewCell.swift */,
-			);
-			path = "Task Selection";
-			sourceTree = "<group>";
-		};
 		65CBE34520FDE64F0093F663 /* Touches & Gestures */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,87 +173,13 @@
 			path = Session;
 			sourceTree = "<group>";
 		};
-		65CBE34C20FF0C660093F663 /* Swipe Task */ = {
-			isa = PBXGroup;
-			children = (
-				65CBE34D20FF0C850093F663 /* SwipeTaskInstructionViewController.swift */,
-				65CBE34F20FF0CEC0093F663 /* SwipeTaskPracticeViewController.swift */,
-				65CBE35120FF0CFD0093F663 /* SwipeTaskTrialViewController.swift */,
-				65CBE35320FF0D220093F663 /* SwipeTrialView.swift */,
-				65CBE35520FF2E150093F663 /* SwipeInstructionView.swift */,
-			);
-			path = "Swipe Task";
-			sourceTree = "<group>";
-		};
-		65CBE35920FF3BA50093F663 /* Drag Task */ = {
-			isa = PBXGroup;
-			children = (
-				65CBE36021005ED10093F663 /* DragAndDropInstructionViewController.swift */,
-				65CBE35C20FF40060093F663 /* DragAndDropPracticeViewController.swift */,
-				65CBE35E20FF4C6D0093F663 /* DragAndDropTrialViewController.swift */,
-				65CBE35A20FF3C5F0093F663 /* DragAndDropTrialView.swift */,
-				65CBE362210060300093F663 /* DragAndDropInstructionView.swift */,
-			);
-			path = "Drag Task";
-			sourceTree = "<group>";
-		};
 		65CBE3642100606B0093F663 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				65FC45A020F39BA200B2A7CF /* Extensions */,
-				65FD2C362107071F002B0A05 /* Tasks */,
-				65F8BD4E20EB88FA002F7C69 /* Gesture Recognizers */,
-				6548AA1020E66DB200B7C73F /* Base ViewControllers */,
-				65F9246420E8D33F00A32BB0 /* Views */,
 				6548A9FD20E664C000B7C73F /* Models */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		65CEDCAD211D838900809069 /* Long Press Task */ = {
-			isa = PBXGroup;
-			children = (
-				65CEDCAE211D83B300809069 /* LongPressTaskInstructionViewController.swift */,
-				65CEDCB2211D847500809069 /* LongPressTaskPracticeViewController.swift */,
-				65CEDCB4211D84D700809069 /* LongPressTaskTrialViewController.swift */,
-				65CEDCB6211D852A00809069 /* LongPressTrialView.swift */,
-				658223E6212E99C100DD5975 /* LongPressInstructionView.swift */,
-			);
-			path = "Long Press Task";
-			sourceTree = "<group>";
-		};
-		65E4103B210F354E007353DF /* Accomodated Recognizers */ = {
-			isa = PBXGroup;
-			children = (
-				65E4103C210F3583007353DF /* RecognizerAccommodator.swift */,
-				65DF1A492109FE3800294765 /* AccommodatedPanGestureRecognizer.swift */,
-				65E4103E210F3666007353DF /* AccommodatedTapGestureRecognizer.swift */,
-			);
-			path = "Accomodated Recognizers";
-			sourceTree = "<group>";
-		};
-		65F8BD4E20EB88FA002F7C69 /* Gesture Recognizers */ = {
-			isa = PBXGroup;
-			children = (
-				65721BEA20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift */,
-				65F8BD4C20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift */,
-				65010AB521007D81002EB953 /* TouchTrackingRecognizer.swift */,
-				65E4103B210F354E007353DF /* Accomodated Recognizers */,
-			);
-			path = "Gesture Recognizers";
-			sourceTree = "<group>";
-		};
-		65F9246420E8D33F00A32BB0 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				65CF17DA2109CDD000E4B877 /* FingerCompassView.swift */,
-				65010ABB210090F1002EB953 /* Touch Tracking Views */,
-				6592ACF820E90667006A1BCB /* CountdownView.swift */,
-				65010ABC2100957A002EB953 /* TouchThroughView.swift */,
-				65010ADB2101E6FE002EB953 /* DashedLineView.swift */,
-				6508318821034B7800C8A012 /* DashedBorderView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		65FC45A020F39BA200B2A7CF /* Extensions */ = {
@@ -500,9 +190,7 @@
 				6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */,
 				65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */,
 				65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */,
-				6514074920FDB013006BD17A /* Collection+HCI.swift */,
 				65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */,
-				65E41035210F0FD3007353DF /* UIGestureRecognizer+HCI.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -521,26 +209,6 @@
 				65010AC721018FA1002EB953 /* RotationTrial.swift */,
 			);
 			path = "Trials & Tasks";
-			sourceTree = "<group>";
-		};
-		65FD2C362107071F002B0A05 /* Tasks */ = {
-			isa = PBXGroup;
-			children = (
-				65083184210319FB00C8A012 /* TaskViewController.swift */,
-				65A470CB20EF967A0055E46E /* TaskInstructionViewController.swift */,
-				65F9246020E8A81100A32BB0 /* TaskTrialViewController.swift */,
-				65F9246220E8D24000A32BB0 /* TaskEndViewController.swift */,
-				65083190210352F600C8A012 /* Pre Task */,
-				65835924210365C40072AECF /* Task Selection */,
-				6548AA2720E769A300B7C73F /* Tap Task */,
-				65CBE34C20FF0C660093F663 /* Swipe Task */,
-				65CBE35920FF3BA50093F663 /* Drag Task */,
-				65010AAE210069BF002EB953 /* Scroll Task */,
-				65010ACB2101C45B002EB953 /* Pinch Task */,
-				65010AD42101D563002EB953 /* Rotation Task */,
-				65CEDCAD211D838900809069 /* Long Press Task */,
-			);
-			path = Tasks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -577,7 +245,7 @@
 				TargetAttributes = {
 					6548A9E720E663E700B7C73F = {
 						CreatedOnToolsVersion = 10.0;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1010;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -663,101 +331,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65010ADE2101EF80002EB953 /* RotationTaskTrialViewController.swift in Sources */,
 				6548AA0520E666A600B7C73F /* Task.swift in Sources */,
-				65F9246320E8D24000A32BB0 /* TaskEndViewController.swift in Sources */,
-				65835923210360BE0072AECF /* TaskCollectionViewController.swift in Sources */,
 				65010AC821018FA1002EB953 /* RotationTrial.swift in Sources */,
 				65FC45A920F3A13300B2A7CF /* Participant.swift in Sources */,
 				65010ADA2101DF4B002EB953 /* CGAffineTransform+HCI.swift in Sources */,
-				65CEDCB7211D852A00809069 /* LongPressTrialView.swift in Sources */,
 				6548A9FF20E6655500B7C73F /* RawTouch.swift in Sources */,
-				65CBE363210060300093F663 /* DragAndDropInstructionView.swift in Sources */,
-				6514074A20FDB013006BD17A /* Collection+HCI.swift in Sources */,
 				65CEDCB1211D83E900809069 /* LongPressTrial.swift in Sources */,
-				65010ADC2101E6FE002EB953 /* DashedLineView.swift in Sources */,
-				65CEDCB3211D847500809069 /* LongPressTaskPracticeViewController.swift in Sources */,
-				655B75B6210F858D00B580CF /* AccommodatedViewController.swift in Sources */,
-				65010ABD2100957A002EB953 /* TouchThroughView.swift in Sources */,
 				65FC45A720F3A04C00B2A7CF /* UIApplication+HCI.swift in Sources */,
-				6508318F210352F200C8A012 /* SurveyTask.swift in Sources */,
-				65E41041210F3694007353DF /* AccommodatedPanGestureRecognizer.swift in Sources */,
-				6592ACF920E90667006A1BCB /* CountdownView.swift in Sources */,
 				6548AA0B20E667BB00B7C73F /* DragAndDropTrial.swift in Sources */,
-				65CBE35F20FF4C6D0093F663 /* DragAndDropTrialViewController.swift in Sources */,
-				65010AE021020B15002EB953 /* PinchInstructionView.swift in Sources */,
-				65721BE920E9F4E900466E22 /* TapTrialView.swift in Sources */,
-				655E78B52123F67F005FA614 /* TouchTrackingCollectionView.swift in Sources */,
-				65010AB821008A95002EB953 /* TrialScrollView.swift in Sources */,
-				65010ACA2101C454002EB953 /* PinchTaskInstructionViewController.swift in Sources */,
-				65835926210367FE0072AECF /* TaskCollectionViewCell.swift in Sources */,
-				65CEDCAF211D83B300809069 /* LongPressTaskInstructionViewController.swift in Sources */,
-				65A470CC20EF967A0055E46E /* TaskInstructionViewController.swift in Sources */,
 				65FC45A520F3A00900B2A7CF /* UIDevice+HCI.swift in Sources */,
 				65010AC621018F1C002EB953 /* PinchTrial.swift in Sources */,
 				65FC45A320F39FAF00B2A7CF /* DeviceInfo.swift in Sources */,
-				65010AC42100C08A002EB953 /* ScrollInstructionView.swift in Sources */,
-				65CBE35420FF0D220093F663 /* SwipeTrialView.swift in Sources */,
-				6508318D210352F200C8A012 /* ActiveTask.swift in Sources */,
-				65E4103F210F3666007353DF /* AccommodatedTapGestureRecognizer.swift in Sources */,
-				65010ABA21008E70002EB953 /* TouchTrackingViewProtocols.swift in Sources */,
-				65010AB621007D81002EB953 /* TouchTrackingRecognizer.swift in Sources */,
-				65F9246620E8D39A00A32BB0 /* TapTaskTrialViewController.swift in Sources */,
 				6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */,
 				6548AA0120E665E800B7C73F /* Trial.swift in Sources */,
-				65FD2C3821070790002B0A05 /* TracksVisualizationView.swift in Sources */,
-				65CBE35220FF0CFD0093F663 /* SwipeTaskTrialViewController.swift in Sources */,
-				658223E7212E99C100DD5975 /* LongPressInstructionView.swift in Sources */,
-				6548AA0F20E66DAD00B7C73F /* HomeViewController.swift in Sources */,
-				65F8BD4D20EAAB25002F7C69 /* TzuChuanGestureRecognizer.swift in Sources */,
 				6548AA2D20E7A84000B7C73F /* RawTouchTrack.swift in Sources */,
 				658D857821046DEB0000CCB4 /* SessionManager.swift in Sources */,
-				65010AC02100BE9B002EB953 /* ScrollPracticeViewController.swift in Sources */,
 				65CBE34420FDE5470093F663 /* Session.swift in Sources */,
 				6548AA1F20E6770200B7C73F /* UIImage+HCI.swift in Sources */,
-				655E78B72123F70F005FA614 /* TrialCollectionView.swift in Sources */,
-				65010AB421007A17002EB953 /* TouchTrackingScrollView.swift in Sources */,
 				65EE0F0920EF42F200EB8929 /* UIView+HCI.swift in Sources */,
-				65721BEB20EA28BE00466E22 /* TouchUpInsideGestureRecognizer.swift in Sources */,
-				65CBE36121005ED10093F663 /* DragAndDropInstructionViewController.swift in Sources */,
 				6548AA0320E6664A00B7C73F /* TapTrial.swift in Sources */,
-				6582148220ECF6B50025A03B /* TrialView.swift in Sources */,
-				65CBE35620FF2E150093F663 /* SwipeInstructionView.swift in Sources */,
 				6548AA0720E666CF00B7C73F /* SwipeTrial.swift in Sources */,
-				6508318921034B7800C8A012 /* DashedBorderView.swift in Sources */,
-				65010AC22100BFFD002EB953 /* ScrollInstructionViewController.swift in Sources */,
 				65DE73BC20F0F04E009D5928 /* GestureRecognizerEvent.swift in Sources */,
-				65A470CE20EF9EF20055E46E /* TapTaskInstructionViewController.swift in Sources */,
-				65F9246120E8A81100A32BB0 /* TaskTrialViewController.swift in Sources */,
 				65010AAD210068EC002EB953 /* ScrollTrial.swift in Sources */,
-				65010ACF2101C4CF002EB953 /* PinchTrialView.swift in Sources */,
-				65DC072E20F141E70070A7A7 /* TapTaskPracticeViewController.swift in Sources */,
-				65010AD82101D5C8002EB953 /* RotationTrialView.swift in Sources */,
-				65010ACD2101C48E002EB953 /* PinchTaskPracticeViewController.swift in Sources */,
-				65CBE34920FE11620093F663 /* TapInstructionView.swift in Sources */,
-				65CF17DB2109CDD000E4B877 /* FingerCompassView.swift in Sources */,
-				6508318E210352F200C8A012 /* ConsentTask.swift in Sources */,
 				65083192210357D400C8A012 /* Research.swift in Sources */,
-				65CBE35B20FF3C5F0093F663 /* DragAndDropTrialView.swift in Sources */,
-				65F9245F20E800C900A32BB0 /* TouchTrackingView.swift in Sources */,
-				658D8576210462110000CCB4 /* TaskCollectionDelegate.swift in Sources */,
-				65010AD62101D594002EB953 /* RotationTaskPracticeViewController.swift in Sources */,
 				6514074820FC9770006BD17A /* TaskResultManager.swift in Sources */,
-				65CBE35D20FF40060093F663 /* DragAndDropPracticeViewController.swift in Sources */,
-				65CBE35020FF0CEC0093F663 /* SwipeTaskPracticeViewController.swift in Sources */,
 				6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */,
-				65010AB0210069EB002EB953 /* ScrollTrialViewController.swift in Sources */,
-				65221C01210DA6AE00EF9C6D /* SessionContentsViewController.swift in Sources */,
-				65221BFF210DA50500EF9C6D /* SessionListViewController.swift in Sources */,
-				65E4103D210F3583007353DF /* RecognizerAccommodator.swift in Sources */,
-				65010AD32101D55C002EB953 /* RotationTaskInstructionViewController.swift in Sources */,
-				65010AD12101D160002EB953 /* PinchTaskTrialViewController.swift in Sources */,
-				65FD2C3A210708B3002B0A05 /* TracksVisualizationViewController.swift in Sources */,
-				65083185210319FB00C8A012 /* TaskViewController.swift in Sources */,
-				65CEDCB5211D84D700809069 /* LongPressTaskTrialViewController.swift in Sources */,
-				65010AE221021472002EB953 /* RotationInstructionView.swift in Sources */,
-				65010AB221006A77002EB953 /* ScrollTrialView.swift in Sources */,
-				65CBE34E20FF0C850093F663 /* SwipeTaskInstructionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,7 +444,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -901,7 +499,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -915,6 +513,7 @@
 			baseConfigurationReference = 84D8FC000E54AB0CD2054783 /* Pods-MyTouch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XR36VWF86K;
 				INFOPLIST_FILE = MyTouch/Info.plist;
@@ -924,8 +523,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = tw.edu.ntu.csie.hci.MyTouch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.1;
-				TARGETED_DEVICE_FAMILY = 2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -934,6 +534,7 @@
 			baseConfigurationReference = 85F9F8729020785E6D9076D8 /* Pods-MyTouch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XR36VWF86K;
 				INFOPLIST_FILE = MyTouch/Info.plist;
@@ -943,8 +544,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = tw.edu.ntu.csie.hci.MyTouch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.1;
-				TARGETED_DEVICE_FAMILY = 2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

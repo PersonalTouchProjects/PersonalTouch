@@ -12,7 +12,7 @@ extension UIView {
     
     func snapshot() -> UIImage {
         
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, self.window?.screen.scale ?? UIScreen.main.scale)
         
         defer {
             UIGraphicsEndImageContext()
