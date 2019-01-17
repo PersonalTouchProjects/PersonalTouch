@@ -24,6 +24,8 @@ class AboutViewController: UIViewController {
         tableView.estimatedRowHeight = 44
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = UIColor(white: 242/255, alpha: 1.0)
+        tableView.backgroundView = nil
         
         view.addSubview(tableView)
         
@@ -107,10 +109,17 @@ private extension AboutViewController {
         
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+            selectionStyle = .none
         }
         
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
+        }
+        
+        override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+            super.setHighlighted(highlighted, animated: animated)
+            
+            backgroundColor = highlighted ? UIColor(white: 230/255, alpha: 1.0) : UIColor.white
         }
     }
     
@@ -120,6 +129,8 @@ private extension AboutViewController {
         
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
+            
+            selectionStyle = .none
             
             buttonLabel.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .medium)
             buttonLabel.textColor = UIColor(red:0.92, green:0.01, blue:0.00, alpha:1.00)
@@ -133,6 +144,12 @@ private extension AboutViewController {
         
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
+        }
+        
+        override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+            super.setHighlighted(highlighted, animated: animated)
+            
+            backgroundColor = highlighted ? UIColor(white: 230/255, alpha: 1.0) : UIColor.white
         }
     }
 }

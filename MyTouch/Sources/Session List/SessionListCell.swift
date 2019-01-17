@@ -108,7 +108,7 @@ class SessionListCell: UITableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         
-        borderView.backgroundColor = highlighted ? UIColor(white: 242/255, alpha: 1.0) : UIColor.white
+        borderView.backgroundColor = highlighted ? UIColor(white: 230/255, alpha: 1.0) : UIColor.white
     }
 
 }

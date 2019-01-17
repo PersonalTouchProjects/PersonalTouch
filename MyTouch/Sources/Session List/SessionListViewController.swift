@@ -16,7 +16,7 @@ class SessionListViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = "MyTouch"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "開始測驗", style: .plain, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Test", style: .plain, target: self, action: #selector(handleNewTestButton(sender:)))
         
         view.backgroundColor = UIColor.white
         
@@ -39,6 +39,16 @@ class SessionListViewController: UIViewController {
         ])
     }
 
+    @objc private func handleNewTestButton(sender: UIBarButtonItem) {
+        
+        let alertController = UIAlertController(title: "New Test", message: "To infinity, and beyond!", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alertController.addAction(action)
+        alertController.preferredAction = action
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension SessionListViewController: UITableViewDataSource {
@@ -64,6 +74,7 @@ extension SessionListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let detailViewController = SessionDetailViewController()
+        detailViewController.hidesBottomBarWhenPushed = true
         show(detailViewController, sender: self)
     }
 }

@@ -8,27 +8,24 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: SessionDetailViewController {
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "MyTouch"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "開始測驗", style: .plain, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Test", style: .plain, target: self, action: #selector(handleNewTestButton(sender:)))
         
-        view.backgroundColor = UIColor.white
     }
     
+    @objc private func handleNewTestButton(sender: UIBarButtonItem) {
+        
+        let alertController = UIAlertController(title: "New Test", message: "To infinity, and beyond!", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        alertController.addAction(action)
+        alertController.preferredAction = action
+        
+        present(alertController, animated: true, completion: nil)
     }
-    */
-
 }

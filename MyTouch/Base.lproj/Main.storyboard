@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Session Detail View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="rt9-gE-PKn">
             <objects>
-                <viewController id="D83-z1-Cq8" customClass="SessionDetailViewController" customModule="MyTouch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="D83-z1-Cq8" customClass="HomeViewController" customModule="MyTouch" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="HBU-gQ-TaJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uo8-qC-Zaj" userLabel="First Responder" sceneMemberID="firstResponder"/>

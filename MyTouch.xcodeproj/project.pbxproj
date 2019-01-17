@@ -37,6 +37,7 @@
 		6594BE2221F0617C0006CA71 /* SessionInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */; };
 		6594BE2421F065650006CA71 /* SessionBriefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2321F065650006CA71 /* SessionBriefCell.swift */; };
 		6594BE2621F076D10006CA71 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2521F076D10006CA71 /* AboutViewController.swift */; };
+		6594BE2A21F082360006CA71 /* AccomodationActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2921F082360006CA71 /* AccomodationActionCell.swift */; };
 		65CBE34420FDE5470093F663 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE34320FDE5470093F663 /* Session.swift */; };
 		65CEDCB1211D83E900809069 /* LongPressTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CEDCB0211D83E900809069 /* LongPressTrial.swift */; };
 		65DE73BC20F0F04E009D5928 /* GestureRecognizerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DE73BB20F0F04E009D5928 /* GestureRecognizerEvent.swift */; };
@@ -84,6 +85,7 @@
 		6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInfoCell.swift; sourceTree = "<group>"; };
 		6594BE2321F065650006CA71 /* SessionBriefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionBriefCell.swift; sourceTree = "<group>"; };
 		6594BE2521F076D10006CA71 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		6594BE2921F082360006CA71 /* AccomodationActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationActionCell.swift; sourceTree = "<group>"; };
 		65CBE34320FDE5470093F663 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		65CEDCB0211D83E900809069 /* LongPressTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressTrial.swift; sourceTree = "<group>"; };
 		65DE73BB20F0F04E009D5928 /* GestureRecognizerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizerEvent.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				6594BE2321F065650006CA71 /* SessionBriefCell.swift */,
 				651D90F521EF54E200110588 /* AccomodationCell.swift */,
 				6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */,
+				6594BE2921F082360006CA71 /* AccomodationActionCell.swift */,
 			);
 			path = "Session Detail";
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				651D90F821EF588D00110588 /* SessionDetailHeaderView.swift in Sources */,
 				65CEDCB1211D83E900809069 /* LongPressTrial.swift in Sources */,
 				65FC45A720F3A04C00B2A7CF /* UIApplication+HCI.swift in Sources */,
+				6594BE2A21F082360006CA71 /* AccomodationActionCell.swift in Sources */,
 				6548AA0B20E667BB00B7C73F /* DragAndDropTrial.swift in Sources */,
 				65FC45A520F3A00900B2A7CF /* UIDevice+HCI.swift in Sources */,
 				651D90F621EF54E200110588 /* AccomodationCell.swift in Sources */,

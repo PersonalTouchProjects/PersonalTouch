@@ -17,10 +17,11 @@ class SessionDetailViewController: UIViewController {
 
         view.backgroundColor = UIColor.white
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .reply, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(handleShareButton(sender:)))
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.register(AccomodationCell.self, forCellReuseIdentifier: "accomodation")
+        tableView.register(AccomodationActionCell.self, forCellReuseIdentifier: "button")
         tableView.register(SessionInfoCell.self, forCellReuseIdentifier: "cell")
         tableView.register(SessionBriefCell.self, forCellReuseIdentifier: "brief")
         tableView.register(SessionDetailHeaderView.self, forHeaderFooterViewReuseIdentifier: "header")
@@ -45,6 +46,11 @@ class SessionDetailViewController: UIViewController {
         ])
     }
 
+    @objc private func handleShareButton(sender: UIBarButtonItem) {
+        
+        let activity = UIActivityViewController(activityItems: ["MyTouch Sharing"], applicationActivities: [])
+        present(activity, animated: true, completion: nil)
+    }
 }
 
 extension SessionDetailViewController: UITableViewDataSource {
@@ -56,7 +62,7 @@ extension SessionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return 2
+        case 1: return 3
         case 2: return 4
         default: return 0
         }
@@ -70,15 +76,26 @@ extension SessionDetailViewController: UITableViewDataSource {
             return cell
             
         } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "accomodation", for: indexPath) as! AccomodationCell
-            cell.titleLabel.text = "Hold Duration"
-            cell.valueLabel.text = "0.5"
-            cell.unitLabel.text = "Sec."
             
-            if indexPath.row == 1 {
-                cell.extraLabel.text = "Use initial touch location"
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "accomodation", for: indexPath) as! AccomodationCell
+                cell.titleLabel.text = "Hold Duration"
+                cell.valueLabel.text = "0.5"
+                cell.unitLabel.text = "Sec."
+                return cell
             }
-            return cell
+            else if indexPath.row == 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "accomodation", for: indexPath) as! AccomodationCell
+                cell.titleLabel.text = "Hold Duration"
+                cell.valueLabel.text = "0.5"
+                cell.unitLabel.text = "Sec."
+                cell.extraLabel.text = "Use initial touch location"
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "button", for: indexPath) as! AccomodationActionCell
+                cell.delegate = self
+                return cell
+            }
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -129,6 +146,24 @@ extension SessionDetailViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 40
+        return 32
+    }
+}
+
+extension SessionDetailViewController: AccomodationActionCellDelegate {
+    
+    func actionCellDidSelectButton(cell: AccomodationActionCell) {
+        
+        let alertController = UIAlertController(title: "Settings", message: "To infinity, and beyond!", preferredStyle: .alert)
+        let action = UIAlertAction(title: "GO", style: .default) { action in
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancel)
+        alertController.addAction(action)
+        alertController.preferredAction = action
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
