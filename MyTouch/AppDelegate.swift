@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Override point for customization after application launch.
-        // UIGestureRecognizer.swizzle()
+        
+        window?.tintColor = UIColor(red:0.00, green:0.64, blue:0.94, alpha:1.00)
+        
         return true
     }
 
