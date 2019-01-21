@@ -18,11 +18,11 @@
             </objects>
             <point key="canvasLocation" x="2536.8000000000002" y="419.64017991004499"/>
         </scene>
-        <!--Home Navigation Controller-->
+        <!--hello-->
         <scene sceneID="CuG-QZ-cb3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Zs-x1-88v" customClass="HomeNavigationController" customModule="MyTouch" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="featured" id="f3F-aV-Z8y"/>
+                    <tabBarItem key="tabBarItem" title="hello" image="icon" id="f3F-aV-Z8y"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fqg-5d-dXS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -116,4 +116,7 @@
             <point key="canvasLocation" x="1598" y="1803"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon" width="30" height="30"/>
+    </resources>
 </document>

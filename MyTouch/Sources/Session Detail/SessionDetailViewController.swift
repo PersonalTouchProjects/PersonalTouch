@@ -33,7 +33,7 @@ class SessionDetailViewController: UIViewController {
         tableView.delegate = self
         tableView.backgroundColor = .clear
         tableView.backgroundView = nil
-        
+
         view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,6 +44,11 @@ class SessionDetailViewController: UIViewController {
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
     }
 
     @objc private func handleShareButton(sender: UIBarButtonItem) {

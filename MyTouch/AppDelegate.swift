@@ -18,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.tintColor = UIColor(red:0.00, green:0.64, blue:0.94, alpha:1.00)
         
+        
+        print(UIDevice.current.localizedModel)
+        print(UIDevice.current.systemName, UIDevice.current.systemVersion)
+        
         return true
     }
 

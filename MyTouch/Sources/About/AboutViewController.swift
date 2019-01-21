@@ -19,6 +19,7 @@ class AboutViewController: UIViewController {
         
         view.backgroundColor = UIColor.white
         
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.register(DetailTextCell.self, forCellReuseIdentifier: "cell")
         tableView.register(ButtonCell.self, forCellReuseIdentifier: "button")
         tableView.estimatedRowHeight = 44

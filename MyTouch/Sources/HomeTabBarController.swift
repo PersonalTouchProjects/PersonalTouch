@@ -10,6 +10,16 @@ import UIKit
 
 class HomeTabBarController: UITabBarController {
 
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        
+        switch UIDevice.current.userInterfaceIdiom {
+        case .pad:
+            return [.landscapeLeft, .landscapeRight]
+        default:
+            return [.portrait]
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,16 +27,4 @@ class HomeTabBarController: UITabBarController {
         tabBar.shadowImage = UIImage()
         tabBar.backgroundImage = UIImage()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
