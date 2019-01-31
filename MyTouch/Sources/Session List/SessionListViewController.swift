@@ -11,6 +11,8 @@ import UIKit
 class SessionListViewController: UIViewController {
 
     let tableView = UITableView(frame: .zero, style: .plain)
+    let backgroundView = UIView()
+    let topShadowView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +20,10 @@ class SessionListViewController: UIViewController {
         navigationItem.title = "MyTouch"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Test", style: .plain, target: self, action: #selector(handleNewTestButton(sender:)))
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+        
+        backgroundView.backgroundColor = UIColor(hex: 0x00b894)
+        topShadowView.backgroundColor = UIColor(white: 0.0, alpha: 0.15)
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.register(SessionListCell.self, forCellReuseIdentifier: "cell")
@@ -26,17 +31,35 @@ class SessionListViewController: UIViewController {
         tableView.estimatedRowHeight = 88
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .clear
+        tableView.contentInset.bottom = 20
         
+        view.addSubview(backgroundView)
         view.addSubview(tableView)
+        view.addSubview(topShadowView)
         
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        topShadowView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/3),
+            
+            topShadowView.topAnchor.constraint(equalTo: view.topAnchor),
+            topShadowView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            topShadowView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            topShadowView.heightAnchor.constraint(equalToConstant: 1)
         ])
+        
+        topShadowView.alpha = 0.0
     }
 
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
@@ -76,5 +99,11 @@ extension SessionListViewController: UITableViewDelegate {
         let detailViewController = SessionDetailViewController()
         detailViewController.hidesBottomBarWhenPushed = true
         show(detailViewController, sender: self)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        UIView.animate(withDuration: 0.15, delay: 0.0, options: [.beginFromCurrentState], animations: {
+            self.topShadowView.alpha = scrollView.contentOffset.y > 0 ? 1.0 : 0.0
+        }, completion: nil)
     }
 }

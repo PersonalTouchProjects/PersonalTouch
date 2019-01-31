@@ -15,8 +15,14 @@ class HomeNavigationController: UINavigationController {
 
         navigationBar.isTranslucent = false
         navigationBar.shadowImage = UIImage()
+        navigationBar.barTintColor = UIColor(hex: 0x00b894)
+        navigationBar.tintColor = UIColor.white
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     /*
     // MARK: - Navigation

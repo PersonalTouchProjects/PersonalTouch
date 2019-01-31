@@ -8,44 +8,108 @@
 
 import UIKit
 
-class SessionInfoCell: UITableViewCell {
+class SessionInfoCell: MyTouchBaseCell {
 
-    let separator = UIView()
+    let titleLabel = UILabel()
+    private let itemViewStack = UIStackView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         
-        separator.backgroundColor = UIColor(red: 0.78, green: 0.78, blue: 0.8, alpha: 1.0)
+        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         
-        addSubview(separator)
+        itemViewStack.axis = .vertical
+        itemViewStack.alignment = .fill
+        itemViewStack.spacing = 0.0
+        
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(itemViewStack)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        itemViewStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: containerView.topAnchor, multiplier: 2.0),
+            titleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: containerView.readableContentGuide.leadingAnchor, multiplier: 1.0),
+            titleLabel.trailingAnchor.constraint(equalToSystemSpacingBefore: containerView.readableContentGuide.trailingAnchor, multiplier: 1.0),
+            
+            itemViewStack.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 1.0),
+            itemViewStack.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            itemViewStack.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            itemViewStack.bottomAnchor.constraint(equalToSystemSpacingAbove: containerView.bottomAnchor, multiplier: 1.0)
+        ])
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         
-        let left: CGFloat
-        let right: CGFloat
+        itemViewStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        itemViews().enumerated().forEach { itemViewStack.insertArrangedSubview($1, at: $0) }
+    }
+    
+    private func itemViews() -> [ItemView] {
         
-        if self.traitCollection.horizontalSizeClass == .compact {
-            left = layoutMargins.left
-            right = 0.0
-        } else {
-            left = layoutMargins.left
-            right = layoutMargins.right
+        let results: [ItemView] = (0..<4).map { _ in
+            let itemView = ItemView()
+            itemView.titleLabel.text = "Title"
+            itemView.textLabel.text = "text"
+            return itemView
         }
         
-        let height: CGFloat = 1.0 / (window?.screen.scale ?? UIScreen.main.scale)
-        let width: CGFloat = bounds.width - left - right
+        results.last?.separator.isHidden = true
         
-        separator.frame = CGRect(
-            x: left,
-            y: bounds.maxY - height,
-            width: width,
-            height: height
-        )
+        return results
+    }
+    
+}
+
+extension SessionInfoCell {
+    
+    private class ItemView: UIView {
+        
+        let titleLabel = UILabel()
+        let textLabel = UILabel()
+        let separator = UIView()
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+            textLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+            textLabel.textColor = UIColor(white: 0.3, alpha: 1.0)
+            
+            separator.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+            
+            addSubview(titleLabel)
+            addSubview(textLabel)
+            addSubview(separator)
+            
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            textLabel.translatesAutoresizingMaskIntoConstraints = false
+            separator.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1.5),
+                titleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: readableContentGuide.leadingAnchor, multiplier: 1.0),
+                titleLabel.bottomAnchor.constraint(equalToSystemSpacingAbove: bottomAnchor, multiplier: 1.5),
+                
+                textLabel.firstBaselineAnchor.constraint(equalTo: titleLabel.firstBaselineAnchor),
+                textLabel.trailingAnchor.constraint(equalToSystemSpacingBefore: readableContentGuide.trailingAnchor, multiplier: 1.0),
+                textLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: titleLabel.trailingAnchor, multiplier: 1.0),
+                
+                separator.bottomAnchor.constraint(equalTo: bottomAnchor),
+                separator.leadingAnchor.constraint(equalToSystemSpacingAfter: readableContentGuide.leadingAnchor, multiplier: 0.5),
+                separator.trailingAnchor.constraint(equalToSystemSpacingBefore: readableContentGuide.trailingAnchor, multiplier: 0.5),
+                separator.heightAnchor.constraint(equalToConstant: 1.0),
+            ])
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
     }
 }

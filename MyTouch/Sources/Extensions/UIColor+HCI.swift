@@ -17,4 +17,13 @@ extension UIColor {
         
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
     }
+    
+    convenience init(hex: UInt64) {
+        
+        let r = CGFloat((hex & 0xff0000) >> 16)
+        let g = CGFloat((hex & 0x00ff00) >> 8)
+        let b = CGFloat(hex & 0x0000ff)
+        
+        self.init(red: r / 0xff, green: g / 0xff, blue: b / 0xff, alpha: 1.0)
+    }
 }

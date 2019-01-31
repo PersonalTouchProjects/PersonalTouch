@@ -24,7 +24,9 @@ class HomeTabBarController: UITabBarController {
         super.viewDidLoad()
 
         tabBar.isTranslucent = false
-        tabBar.shadowImage = UIImage()
-        tabBar.backgroundImage = UIImage()
+//        tabBar.shadowImage = UIImage()
+//        tabBar.backgroundImage = UIImage()
+        tabBar.tintColor = UIColor(hex: 0x00b894)
+        tabBar.unselectedItemTintColor = UIColor(hex: 0xb2bec3)
     }
 }

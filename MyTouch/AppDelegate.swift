@@ -16,10 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Override point for customization after application launch.
         
-        window?.tintColor = UIColor(red:0.00, green:0.64, blue:0.94, alpha:1.00)
+        window?.tintColor = UIColor(hex: 0x00b894)
         
         
-        print(UIDevice.current.localizedModel)
+        print(UIDevice.current.modelName)
         print(UIDevice.current.systemName, UIDevice.current.systemVersion)
         
         return true

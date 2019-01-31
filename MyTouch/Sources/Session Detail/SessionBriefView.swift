@@ -8,23 +8,26 @@
 
 import UIKit
 
-class SessionBriefCell: UITableViewCell {
+class SessionBriefView: UIView {
     
     let briefLabel = UILabel()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        contentView.addSubview(briefLabel)
+        backgroundColor = .clear
+        
+        addSubview(briefLabel)
         
         briefLabel.numberOfLines = 0
         briefLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            briefLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            briefLabel.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
-            briefLabel.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor),
-            briefLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            briefLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1.0),
+            briefLabel.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
+            briefLabel.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
+            briefLabel.bottomAnchor.constraint(equalToSystemSpacingAbove: bottomAnchor, multiplier: 1.0),
+//            briefLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
     
@@ -41,7 +44,8 @@ class SessionBriefCell: UITableViewCell {
         
         let attrs = [
             NSAttributedString.Key.paragraphStyle: style,
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .light)
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)
         ]
         
         return NSAttributedString(string: text, attributes: attrs)
