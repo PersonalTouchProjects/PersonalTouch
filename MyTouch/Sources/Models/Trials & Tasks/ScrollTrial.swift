@@ -7,47 +7,31 @@
 //
 
 import UIKit
+import ResearchKit
 
-struct ScrollTrial: Trial {
+class ScrollTrial: Trial {
     
-    enum Axis: String, Codable {
-        case horizontal, vertical
-        case none
+    var isHorizontal = false
+    
+    var initialOffset = CGPoint.zero
+    var targetOffsetUpperBound = CGPoint.zero
+    var targetOffsetLowerBound = CGPoint.zero
+    var endDraggingOffset = CGPoint.zero
+    var endScrollingOffset = CGPoint.zero
+    
+    override init(trial: ORKTouchAbilityTrial) {
+        super.init(trial: trial)
+        if let trial = trial as? ORKTouchAbilityScrollTrial {
+            self.isHorizontal = trial.direction == .horizontal
+            self.initialOffset = trial.initialOffset
+            self.targetOffsetUpperBound = trial.targetOffsetUpperBound
+            self.targetOffsetLowerBound = trial.targetOffsetLowerBound
+            self.endDraggingOffset = trial.endDraggingOffset
+            self.endScrollingOffset = trial.endScrollingOffset
+        }
     }
     
-    let axis: Axis
-    
-    let initialPosition: CGPoint
-    
-    let targetPosition: CGPoint
-    
-    var endDraggingPosition: CGPoint?
-    
-    var predictedPosition: CGPoint?
-    
-    var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
-    
-    var endTime: TimeInterval = Date.distantFuture.timeIntervalSince1970
-    
-    var rawTouchTracks: [RawTouchTrack] = []
-    
-    var success: Bool = false
-    
-    var tapEvents: [TapGestureRecognizerEvent] = []
-    
-    var panEvents: [PanGestureRecognizerEvent] = []
-    
-    var longPressEvents: [LongPressGestureRecognizerEvent] = []
-    
-    var swipeEvents: [SwipeGestureRecognizerEvent] = []
-    
-    var pinchEvents: [PinchGestureRecognizerEvent] = []
-    
-    var rotationEvents: [RotationGestureRecognizerEvent] = []
-    
-    init(axis: Axis, initialPosition: CGPoint, targetPosition: CGPoint) {
-        self.axis = axis
-        self.initialPosition = initialPosition
-        self.targetPosition = targetPosition
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }

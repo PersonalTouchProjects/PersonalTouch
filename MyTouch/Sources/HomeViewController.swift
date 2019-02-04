@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import ResearchKit
 
 class HomeViewController: SessionDetailViewController {
 
+    let sessionController = SessionController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,12 +23,29 @@ class HomeViewController: SessionDetailViewController {
     
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
         
-        let alertController = UIAlertController(title: "New Test", message: "To infinity, and beyond!", preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-
-        alertController.addAction(action)
-        alertController.preferredAction = action
+//        let task = ORKOrderedTask.touchAbilityTask(withIdentifier: "touch", intendedUseDescription: nil, taskOptions: [.tap], options: [])
+//        let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
+//        taskViewController.delegate = self
+//        present(taskViewController, animated: true, completion: nil)
         
-        present(alertController, animated: true, completion: nil)
+        let taskViewController = ORKTaskViewController(task: Survey().task(), taskRun: nil)
+        taskViewController.delegate = self
+        present(taskViewController, animated: true, completion: nil)
+        
+//        let alertController = UIAlertController(title: "New Test", message: "To infinity, and beyond!", preferredStyle: .alert)
+//        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+//
+//        alertController.addAction(action)
+//        alertController.preferredAction = action
+//
+//        present(alertController, animated: true, completion: nil)
     }
+}
+
+extension HomeViewController: ORKTaskViewControllerDelegate {
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        taskViewController.dismiss(animated: true, completion: nil)
+    }
+
 }

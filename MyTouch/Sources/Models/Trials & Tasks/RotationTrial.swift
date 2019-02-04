@@ -7,37 +7,22 @@
 //
 
 import UIKit
+import ResearchKit
 
-struct RotationTrial: Trial {
+class RotationTrial: Trial {
     
-    let initialAngle: CGFloat
+    var targetRotation: CGFloat = 0.0
+    var resultRotation: CGFloat = 0.0
     
-    let targetAngle: CGFloat
+    override init(trial: ORKTouchAbilityTrial) {
+        super.init(trial: trial)
+        if let trial = trial as? ORKTouchAbilityRotationTrial {
+            self.targetRotation = trial.targetRotation
+            self.resultRotation = trial.resultRotation
+        }
+    }
     
-    var resultAngle: CGFloat = 0
-    
-    var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
-    
-    var endTime: TimeInterval = Date.distantFuture.timeIntervalSince1970
-    
-    var rawTouchTracks: [RawTouchTrack] = []
-    
-    var success: Bool = false
-    
-    var tapEvents: [TapGestureRecognizerEvent] = []
-    
-    var panEvents: [PanGestureRecognizerEvent] = []
-    
-    var longPressEvents: [LongPressGestureRecognizerEvent] = []
-    
-    var swipeEvents: [SwipeGestureRecognizerEvent] = []
-    
-    var pinchEvents: [PinchGestureRecognizerEvent] = []
-    
-    var rotationEvents: [RotationGestureRecognizerEvent] = []
-    
-    init(initialAngle: CGFloat, targetAngle: CGFloat) {
-        self.initialAngle = initialAngle
-        self.targetAngle = targetAngle
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }

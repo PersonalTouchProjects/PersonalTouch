@@ -32,10 +32,6 @@ class Session: Codable {
         didSet { try? archive() }
     }
 
-    var dragAndDropTask: Task<DragAndDropTrial>? {
-        didSet { try? archive() }
-    }
-
     var horizontalScrollTask: Task<ScrollTrial>? {
         didSet { try? archive() }
     }

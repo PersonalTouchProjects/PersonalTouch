@@ -14,7 +14,7 @@ class AccomodationCell: MyTouchBaseCell {
     var ignoreRepeatText: String?
     var accomodationText: String?
     
-    let button: UIButton = ActionButton()
+    let button = UIButton()
 
     private let titleLabel = UILabel()
     private let itemViewStack = UIStackView()
@@ -33,6 +33,7 @@ class AccomodationCell: MyTouchBaseCell {
         button.setTitle("Go to Settings", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: UIColor(hex: 0x00b894)), for: .normal)
+        button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
         
         containerView.addSubview(titleLabel)
         containerView.addSubview(itemViewStack)
@@ -173,13 +174,13 @@ extension AccomodationCell {
         }
     }
     
-    private class ActionButton: UIButton {
-        
-        override var intrinsicContentSize: CGSize {
-            let size = super.intrinsicContentSize
-            let width = max(size.width + 36, 100)
-            let height = max(size.height + 12, 40)
-            return CGSize(width: width, height: height)
-        }
-    }
+//    private class ActionButton: UIButton {
+//
+//        override var intrinsicContentSize: CGSize {
+//            let size = super.intrinsicContentSize
+//            let width = max(size.width + 36, 100)
+//            let height = max(size.height + 12, 40)
+//            return CGSize(width: width, height: height)
+//        }
+//    }
 }

@@ -7,32 +7,23 @@
 //
 
 import UIKit
+import ResearchKit
 
-struct TapTrial: Trial {
+class TapTrial: Trial {
     
-    let targetFrame: CGRect
+    var targetFrame = CGRect.zero
+    var success = false
     
-    var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
-    
-    var endTime: TimeInterval = Date.distantFuture.timeIntervalSince1970
-    
-    var rawTouchTracks: [RawTouchTrack] = []
-    
-    var success: Bool = false
-    
-    var tapEvents: [TapGestureRecognizerEvent] = []
-    
-    var panEvents: [PanGestureRecognizerEvent] = []
-    
-    var longPressEvents: [LongPressGestureRecognizerEvent] = []
-    
-    var swipeEvents: [SwipeGestureRecognizerEvent] = []
-    
-    var pinchEvents: [PinchGestureRecognizerEvent] = []
-    
-    var rotationEvents: [RotationGestureRecognizerEvent] = []
-    
-    init(targetFrame: CGRect) {
-        self.targetFrame = targetFrame
+    override init(trial: ORKTouchAbilityTrial) {
+        super.init(trial: trial)
+        if let trial = trial as? ORKTouchAbilityTapTrial {
+            self.targetFrame = trial.targetFrameInWindow
+            self.success = trial.success
+        }
     }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
+    
 }

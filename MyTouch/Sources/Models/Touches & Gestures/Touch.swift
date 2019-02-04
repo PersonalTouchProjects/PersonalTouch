@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ResearchKit
 
-extension RawTouch {
+extension Touch {
     
     enum Phase: String, Codable {
         case began
@@ -71,15 +72,15 @@ extension RawTouch {
     
 }
 
-struct RawTouch: Codable {
+class Touch: Codable {
     
     var timestamp: TimeInterval
     
-    var phase: RawTouch.Phase
+    var phase: Touch.Phase
     
-    var tapCount: Int
+    var tapCount: UInt
     
-    var type: RawTouch.TouchType
+    var type: Touch.TouchType
     
     var majorRadius: CGFloat
     
@@ -113,30 +114,30 @@ struct RawTouch: Codable {
     
     // A set of properties that has estimated values
     // Only denoting properties that are currently estimated
-    var estimatedProperties: RawTouch.Properties
+    var estimatedProperties: Touch.Properties
     
     // A set of properties that expect to have incoming updates in the future.
     // If no updates are expected for an estimated property the current value is our final estimate.
     // This happens e.g. for azimuth/altitude values when entering from the edges
-    var estimatedPropertiesExpectingUpdates: RawTouch.Properties
+    var estimatedPropertiesExpectingUpdates: Touch.Properties
     
     
-    init(touch: UITouch, systemUptime: TimeInterval) {
-        self.timestamp               = systemUptime + touch.timestamp
+    init(touch: ORKTouchAbilityTouch) {
+        self.timestamp               = touch.timestamp
         self.phase                   = Phase(phase: touch.phase)
         self.tapCount                = touch.tapCount
         self.type                    = TouchType(touchType: touch.type)
         self.majorRadius             = touch.majorRadius
         self.majorRadiusTolerance    = touch.majorRadiusTolerance
-        self.location                = touch.location(in: nil)
-        self.previousLocation        = touch.previousLocation(in: nil)
-        self.preciseLocation         = touch.preciseLocation(in: nil)
-        self.precisePreviousLocation = touch.precisePreviousLocation(in: nil)
+        self.location                = touch.locationInWindow
+        self.previousLocation        = touch.previousLocationInWindow
+        self.preciseLocation         = touch.preciseLocationInWindow
+        self.precisePreviousLocation = touch.precisePreviousLocationInWindow
         self.force                   = touch.force
         self.maximumPossibleForce    = touch.maximumPossibleForce
-        self.azimuthAngle            = touch.azimuthAngle(in: nil)
-        self.azimuthUnitVector       = touch.azimuthUnitVector(in: nil)
-        self.estimationUpdateIndex   = touch.estimationUpdateIndex.map { $0.doubleValue }
+        self.azimuthAngle            = touch.azimuthAngleInWindow
+        self.azimuthUnitVector       = touch.azimuthUnitVectorInWindow
+        self.estimationUpdateIndex   = touch.estimationUpdateIndex?.doubleValue
         self.estimatedProperties     = Properties.convert(from: touch.estimatedProperties)
         self.estimatedPropertiesExpectingUpdates = Properties.convert(from: touch.estimatedPropertiesExpectingUpdates)
     }

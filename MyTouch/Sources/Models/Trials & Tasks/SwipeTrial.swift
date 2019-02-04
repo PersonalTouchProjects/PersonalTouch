@@ -7,42 +7,26 @@
 //
 
 import UIKit
+import ResearchKit
 
-struct SwipeTrial: Trial {
+class SwipeTrial: Trial {
     
-    enum Direction: String, Codable {
-        case up, left, right, down
-        // case upLeft, upRight, downLeft, downRight
-        case none
+    typealias Direction = SwipeGestureRecognizerEvent.Direction
+    
+    var targetDirection: Direction = []
+    var resultDirection: Direction = []
+    var success = false
+    
+    override init(trial: ORKTouchAbilityTrial) {
+        super.init(trial: trial)
+        if let trial = trial as? ORKTouchAbilitySwipeTrial {
+            self.targetDirection = Direction.convert(from: trial.targetDirection)
+            self.resultDirection = Direction.convert(from: trial.resultDirection)
+            self.success = trial.success
+        }
     }
     
-//    let areaFrame: CGRect
-    
-    let targetDirection: Direction
-    
-    var recognizedDirection: Direction = .none
-    
-    var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
-    
-    var endTime: TimeInterval = Date.distantFuture.timeIntervalSince1970
-    
-    var rawTouchTracks: [RawTouchTrack] = []
-    
-    var success: Bool = false
-    
-    var tapEvents: [TapGestureRecognizerEvent] = []
-    
-    var panEvents: [PanGestureRecognizerEvent] = []
-    
-    var longPressEvents: [LongPressGestureRecognizerEvent] = []
-    
-    var swipeEvents: [SwipeGestureRecognizerEvent] = []
-    
-    var pinchEvents: [PinchGestureRecognizerEvent] = []
-    
-    var rotationEvents: [RotationGestureRecognizerEvent] = []
-    
-    init(targetDirection: Direction) {
-        self.targetDirection = targetDirection
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }

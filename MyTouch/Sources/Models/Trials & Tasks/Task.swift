@@ -12,15 +12,6 @@ class Task<T: MyTouch.Trial>: Codable {
     
     var trials: [T] = []
     
-    var successRate: Float {
-        
-        if trials.count == 0 { return 0.0 }
-        
-        let success = trials.filter { $0.success }
-        
-        return Float(success.count) / Float(trials.count)
-    }
-    
     // MARK: - Codable
     
     enum CodingKeys: CodingKey {
@@ -30,7 +21,6 @@ class Task<T: MyTouch.Trial>: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(trials, forKey: .trials)
-        try container.encode(successRate, forKey: .successRate)
     }
     
     required init(from decoder: Decoder) throws {

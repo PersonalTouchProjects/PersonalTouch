@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ResearchKit
 
 enum GestureRecognizerType: String, Codable {
     case tap
@@ -15,6 +16,7 @@ enum GestureRecognizerType: String, Codable {
     case swipe
     case pinch
     case rotation
+    case unknown
 }
 
 enum GestureRecognizerEventState: String, Codable {
@@ -37,179 +39,119 @@ enum GestureRecognizerEventState: String, Codable {
     }
 }
 
-protocol GestureRecognizerEvent: Codable {
+class GestureRecognizerEvent: Codable {
     
-    var type: GestureRecognizerType { get }
+    var type: GestureRecognizerType
     
-    var timestamp: TimeInterval { get }
+    var timestamp: TimeInterval
     
-    var state: GestureRecognizerEventState { get } // the current state of the gesture recognizer
+    var state: GestureRecognizerEventState // the current state of the gesture recognizer
     
-    var allowedTouchTypes: [Double] { get } // Array of UITouchTypes as NSNumbers.
+    var allowedTouchTypes: [Double] // Array of UITouchTypes as NSNumbers.
     
-    var location: CGPoint { get }
+    var location: CGPoint
     
-    var numberOfTouches: Int { get }
+    var numberOfTouches: UInt
     
-    var locationOfTouchAtIndex: [Int: CGPoint] { get }
+    var locationOfTouchAtIndex: [UInt: CGPoint]
+    
+    init(event: ORKTouchAbilityGestureRecoginzerEvent) {
+        self.type              = .unknown
+        self.timestamp         = event.timestamp
+        self.state             = GestureRecognizerEventState(state: event.state)
+        self.allowedTouchTypes = event.allowedTouchTypes.map { $0.doubleValue }
+        self.location          = event.locationInWindow
+        self.numberOfTouches   = event.numberOfTouches
+        self.locationOfTouchAtIndex = event.locationInWindowOfTouchAtIndex.mapValues({ $0.cgPointValue }) as! [UInt : CGPoint]
+    }
 }
 
 
 /// TapGestureRecognizerEvent
-struct TapGestureRecognizerEvent: GestureRecognizerEvent {
+class TapGestureRecognizerEvent: GestureRecognizerEvent {
     
-    var numberOfTapsRequired: Int // Default is 1. The number of taps required to match
+    var numberOfTapsRequired: UInt = 1 // Default is 1. The number of taps required to match
     
-    var numberOfTouchesRequired: Int // Default is 1. The number of fingers required to match
+    var numberOfTouchesRequired: UInt = 1 // Default is 1. The number of fingers required to match
     
-    
-    
-    var type: GestureRecognizerType = .tap
-    
-    var timestamp: TimeInterval
-    
-    var state: GestureRecognizerEventState
-    
-    var allowedTouchTypes: [Double]
-    
-    var location: CGPoint
-    
-    var numberOfTouches: Int // number of touches involved for which locations can be queried
-    
-    var locationOfTouchAtIndex: [Int: CGPoint] // the location of a particular touch
-    
-    init(recognizer: UITapGestureRecognizer) {
-        self.numberOfTapsRequired    = recognizer.numberOfTapsRequired
-        self.numberOfTouchesRequired = recognizer.numberOfTouchesRequired
+    override init(event: ORKTouchAbilityGestureRecoginzerEvent) {
         
-        self.timestamp         = Date().timeIntervalSince1970
-        self.state             = GestureRecognizerEventState(state: recognizer.state)
-        self.allowedTouchTypes = recognizer.allowedTouchTypes.map { $0.doubleValue }
-        self.location          = recognizer.location(in: nil)
-        self.numberOfTouches   = recognizer.numberOfTouches
-        
-        if recognizer.numberOfTouches > 0 {
-            self.locationOfTouchAtIndex = (0..<recognizer.numberOfTouches).reduce([Int: CGPoint]()) { result, index in
-                let location = recognizer.location(ofTouch: index, in: nil)
-                var result = result
-                result[index] = location
-                return result
-            }
+        if let event = event as? ORKTouchAbilityTapGestureRecoginzerEvent {
+            self.numberOfTapsRequired    = event.numberOfTapsRequired
+            self.numberOfTouchesRequired = event.numberOfTouchesRequired
+            super.init(event: event)
+            self.type = .tap
         } else {
-            self.locationOfTouchAtIndex = [:]
+            fatalError()
         }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }
 
 
 /// LongPressGestureRecognizerEvent
-struct LongPressGestureRecognizerEvent: GestureRecognizerEvent {
+class LongPressGestureRecognizerEvent: GestureRecognizerEvent {
     
-    var numberOfTapsRequired: Int // Default is 1. The number of taps required to match
+    var numberOfTapsRequired: UInt // Default is 1. The number of taps required to match
     
-    var numberOfTouchesRequired: Int // Default is 1. The number of fingers required to match
+    var numberOfTouchesRequired: UInt // Default is 1. The number of fingers required to match
     
     var minimumPressDuration: TimeInterval // Default is 0.5. Time in seconds the fingers must be held down for the gesture to be recognized
     
     var allowableMovement: CGFloat // Default is 10. Maximum movement in pixels allowed before the gesture fails. Once recognized (after minimumPressDuration) there is no limit on finger movement for the remainder of the touch tracking
     
-    
-    
-    var type: GestureRecognizerType = .longPress
-    
-    var timestamp: TimeInterval
-    
-    var state: GestureRecognizerEventState
-    
-    var allowedTouchTypes: [Double]
-    
-    var location: CGPoint
-    
-    var numberOfTouches: Int // number of touches involved for which locations can be queried
-    
-    var locationOfTouchAtIndex: [Int: CGPoint] // the location of a particular touch
-    
-    init(recognizer: UILongPressGestureRecognizer) {
-        self.numberOfTapsRequired    = recognizer.numberOfTapsRequired
-        self.numberOfTouchesRequired = recognizer.numberOfTouchesRequired
-        self.minimumPressDuration    = recognizer.minimumPressDuration
-        self.allowableMovement       = recognizer.allowableMovement
-        
-        self.timestamp         = Date().timeIntervalSince1970
-        self.state             = GestureRecognizerEventState(state: recognizer.state)
-        self.allowedTouchTypes = recognizer.allowedTouchTypes.map { $0.doubleValue }
-        self.location          = recognizer.location(in: nil)
-        self.numberOfTouches   = recognizer.numberOfTouches
-        
-        if recognizer.numberOfTouches > 0 {
-            self.locationOfTouchAtIndex = (0..<recognizer.numberOfTouches).reduce([Int: CGPoint]()) { result, index in
-                let location = recognizer.location(ofTouch: index, in: nil)
-                var result = result
-                result[index] = location
-                return result
-            }
+    override init(event: ORKTouchAbilityGestureRecoginzerEvent) {
+        if let event = event as? ORKTouchAbilityLongPressGestureRecoginzerEvent {
+            self.numberOfTapsRequired    = event.numberOfTapsRequired
+            self.numberOfTouchesRequired = event.numberOfTouchesRequired
+            self.minimumPressDuration    = event.minimumPressDuration
+            self.allowableMovement       = event.allowableMovement
+            super.init(event: event)
+            self.type = .longPress
         } else {
-            self.locationOfTouchAtIndex = [:]
+            fatalError()
         }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }
 
 
 /// PanGestureRecognizerEvent
-struct PanGestureRecognizerEvent: GestureRecognizerEvent {
+class PanGestureRecognizerEvent: GestureRecognizerEvent {
     
-    var minimumNumberOfTouches: Int // default is 1. the minimum number of touches required to match
+    var minimumNumberOfTouches: UInt // default is 1. the minimum number of touches required to match
     
-    var maximumNumberOfTouches: Int // default is UINT_MAX. the maximum number of touches that can be down
-    
-//    var translation: CGPoint // translation in the coordinate system of the window
+    var maximumNumberOfTouches: UInt // default is UINT_MAX. the maximum number of touches that can be down
     
     var velocity: CGPoint // velocity of the pan in points/second in the coordinate system of the window
     
     
-    
-    var type: GestureRecognizerType = .pan
-    
-    var timestamp: TimeInterval
-    
-    var state: GestureRecognizerEventState
-    
-    var allowedTouchTypes: [Double]
-    
-    var location: CGPoint
-    
-    var numberOfTouches: Int // number of touches involved for which locations can be queried
-    
-    var locationOfTouchAtIndex: [Int: CGPoint] // the location of a particular touch
-    
-    init(recognizer: UIPanGestureRecognizer) {
-        self.minimumNumberOfTouches = recognizer.minimumNumberOfTouches
-        self.maximumNumberOfTouches = recognizer.maximumNumberOfTouches
-//        self.translation            = recognizer.translation(in: nil)
-        self.velocity               = recognizer.velocity(in: nil)
-        
-        self.timestamp         = Date().timeIntervalSince1970
-        self.state             = GestureRecognizerEventState(state: recognizer.state)
-        self.allowedTouchTypes = recognizer.allowedTouchTypes.map { $0.doubleValue }
-        self.location          = recognizer.location(in: nil)
-        self.numberOfTouches   = recognizer.numberOfTouches
-        
-        if recognizer.numberOfTouches > 0 {
-            self.locationOfTouchAtIndex = (0..<recognizer.numberOfTouches).reduce([Int: CGPoint]()) { result, index in
-                let location = recognizer.location(ofTouch: index, in: nil)
-                var result = result
-                result[index] = location
-                return result
-            }
+    override init(event: ORKTouchAbilityGestureRecoginzerEvent) {
+        if let event = event as? ORKTouchAbilityPanGestureRecoginzerEvent {
+            self.minimumNumberOfTouches = event.minimumNumberOfTouches
+            self.maximumNumberOfTouches = event.maximumNumberOfTouches
+            self.velocity               = event.velocityInWindow
+            super.init(event: event)
+            self.type = .pan
         } else {
-            self.locationOfTouchAtIndex = [:]
+            fatalError()
         }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }
 
 
 /// SwipeGestureRecognizerEvent
-struct SwipeGestureRecognizerEvent: GestureRecognizerEvent {
+class SwipeGestureRecognizerEvent: GestureRecognizerEvent {
     
     struct Direction: OptionSet, Codable {
         
@@ -238,139 +180,70 @@ struct SwipeGestureRecognizerEvent: GestureRecognizerEvent {
         }
     }
     
-    var numberOfTouchesRequired: Int // default is 1. the number of fingers that must swipe
+    var numberOfTouchesRequired: UInt // default is 1. the number of fingers that must swipe
     
     var direction: SwipeGestureRecognizerEvent.Direction // the desired direction of the swipe.
     
-    
-    
-    var type: GestureRecognizerType = .swipe
-    
-    var timestamp: TimeInterval
-    
-    var state: GestureRecognizerEventState
-    
-    var allowedTouchTypes: [Double]
-    
-    var location: CGPoint
-    
-    var numberOfTouches: Int // number of touches involved for which locations can be queried
-    
-    var locationOfTouchAtIndex: [Int: CGPoint] // the location of a particular touch
-    
-    init(recognizer: UISwipeGestureRecognizer) {
-        self.numberOfTouchesRequired = recognizer.numberOfTouchesRequired
-        self.direction = Direction.convert(from: recognizer.direction)
-        
-        self.timestamp         = Date().timeIntervalSince1970
-        self.state             = GestureRecognizerEventState(state: recognizer.state)
-        self.allowedTouchTypes = recognizer.allowedTouchTypes.map { $0.doubleValue }
-        self.location          = recognizer.location(in: nil)
-        self.numberOfTouches   = recognizer.numberOfTouches
-        
-        if recognizer.numberOfTouches > 0 {
-            self.locationOfTouchAtIndex = (0..<recognizer.numberOfTouches).reduce([Int: CGPoint]()) { result, index in
-                let location = recognizer.location(ofTouch: index, in: nil)
-                var result = result
-                result[index] = location
-                return result
-            }
+    override init(event: ORKTouchAbilityGestureRecoginzerEvent) {
+        if let event = event as? ORKTouchAbilitySwipeGestureRecoginzerEvent {
+            self.numberOfTouchesRequired = event.numberOfTouchesRequired
+            self.direction = Direction.convert(from: event.direction)
+            super.init(event: event)
+            self.type = .swipe
         } else {
-            self.locationOfTouchAtIndex = [:]
+            fatalError()
         }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }
 
 
 /// PinchGestureRecognizerEvent
-struct PinchGestureRecognizerEvent: GestureRecognizerEvent {
+class PinchGestureRecognizerEvent: GestureRecognizerEvent {
     
     var scale: CGFloat // scale relative to the touch points in screen coordinates
     
     var velocity: CGFloat // velocity of the pinch in scale/second
     
-    
-    
-    var type: GestureRecognizerType = .pinch
-    
-    var timestamp: TimeInterval
-    
-    var state: GestureRecognizerEventState
-    
-    var allowedTouchTypes: [Double]
-    
-    var location: CGPoint
-    
-    var numberOfTouches: Int // number of touches involved for which locations can be queried
-    
-    var locationOfTouchAtIndex: [Int: CGPoint] // the location of a particular touch
-    
-    init(recognizer: UIPinchGestureRecognizer) {
-        self.scale    = recognizer.scale
-        self.velocity = recognizer.velocity
-        
-        self.timestamp         = Date().timeIntervalSince1970
-        self.state             = GestureRecognizerEventState(state: recognizer.state)
-        self.allowedTouchTypes = recognizer.allowedTouchTypes.map { $0.doubleValue }
-        self.location          = recognizer.location(in: nil)
-        self.numberOfTouches   = recognizer.numberOfTouches
-        
-        if recognizer.numberOfTouches > 0 {
-            self.locationOfTouchAtIndex = (0..<recognizer.numberOfTouches).reduce([Int: CGPoint]()) { result, index in
-                let location = recognizer.location(ofTouch: index, in: nil)
-                var result = result
-                result[index] = location
-                return result
-            }
+    override init(event: ORKTouchAbilityGestureRecoginzerEvent) {
+        if let event = event as? ORKTouchAbilityPinchGestureRecoginzerEvent {
+            self.scale    = event.scale
+            self.velocity = event.velocity
+            super.init(event: event)
+            self.type = .pinch
         } else {
-            self.locationOfTouchAtIndex = [:]
+            fatalError()
         }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }
 
 
 /// RotationGestureRecognizerEvent
-struct RotationGestureRecognizerEvent: GestureRecognizerEvent {
+class RotationGestureRecognizerEvent: GestureRecognizerEvent {
     
     var rotation: CGFloat // rotation in radians
     
     var velocity: CGFloat // velocity of the pinch in radians/second
     
-    
-    
-    var type: GestureRecognizerType = .rotation
-    
-    var timestamp: TimeInterval
-    
-    var state: GestureRecognizerEventState
-    
-    var allowedTouchTypes: [Double]
-    
-    var location: CGPoint
-    
-    var numberOfTouches: Int // number of touches involved for which locations can be queried
-    
-    var locationOfTouchAtIndex: [Int: CGPoint] // the location of a particular touch
-    
-    init(recognizer: UIRotationGestureRecognizer) {
-        self.rotation = recognizer.rotation
-        self.velocity = recognizer.velocity
-        
-        self.timestamp         = Date().timeIntervalSince1970
-        self.state             = GestureRecognizerEventState(state: recognizer.state)
-        self.allowedTouchTypes = recognizer.allowedTouchTypes.map { $0.doubleValue }
-        self.location          = recognizer.location(in: nil)
-        self.numberOfTouches   = recognizer.numberOfTouches
-        
-        if recognizer.numberOfTouches > 0 {
-            self.locationOfTouchAtIndex = (0..<recognizer.numberOfTouches).reduce([Int: CGPoint]()) { result, index in
-                let location = recognizer.location(ofTouch: index, in: nil)
-                var result = result
-                result[index] = location
-                return result
-            }
+    override init(event: ORKTouchAbilityGestureRecoginzerEvent) {
+        if let event = event as? ORKTouchAbilityRotationGestureRecoginzerEvent {
+            self.rotation = event.rotation
+            self.velocity = event.velocity
+            super.init(event: event)
+            self.type = .rotation
         } else {
-            self.locationOfTouchAtIndex = [:]
+            fatalError()
         }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }

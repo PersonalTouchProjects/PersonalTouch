@@ -7,37 +7,22 @@
 //
 
 import UIKit
+import ResearchKit
 
-struct PinchTrial: Trial {
+class PinchTrial: Trial {
     
-    let initialSize: CGSize
+    var targetScale: CGFloat = 1.0
+    var resultScale: CGFloat = 1.0
     
-    let targetSize: CGSize
+    override init(trial: ORKTouchAbilityTrial) {
+        super.init(trial: trial)
+        if let trial = trial as? ORKTouchAbilityPinchTrial {
+            self.targetScale = trial.targetScale
+            self.resultScale = trial.resultScale
+        }
+    }
     
-    var resultSize: CGSize = .zero
-    
-    var startTime: TimeInterval = Date.distantPast.timeIntervalSince1970
-    
-    var endTime: TimeInterval = Date.distantFuture.timeIntervalSince1970
-    
-    var rawTouchTracks: [RawTouchTrack] = []
-    
-    var success: Bool = false
-    
-    var tapEvents: [TapGestureRecognizerEvent] = []
-    
-    var panEvents: [PanGestureRecognizerEvent] = []
-    
-    var longPressEvents: [LongPressGestureRecognizerEvent] = []
-    
-    var swipeEvents: [SwipeGestureRecognizerEvent] = []
-    
-    var pinchEvents: [PinchGestureRecognizerEvent] = []
-    
-    var rotationEvents: [RotationGestureRecognizerEvent] = []
-    
-    init(initialSize: CGSize, targetSize: CGSize) {
-        self.initialSize = initialSize
-        self.targetSize = targetSize
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }
