@@ -1,0 +1,23 @@
+{
+    "id": "00000000-0000-0000-0000-000000000000",
+    "state": "completed",
+    "start": "2019-02-05T09:02:10Z",
+    "end": "2019-02-05T09:02:10Z",
+    "deviceInfo": {
+        "name": "John Appleseed's iPhone",
+        "model": "iPhone10,3",
+        "manufacturer": "Apple",
+        "platform": "iOS",
+        "osVersion": "12.1.3",
+        "appVersion": "2.0.0",
+        "screenSize": [375, 667]
+    },
+    "subject": {
+        "id": 9527,
+        "name": "John Appleseed",
+        "birthYear": 1991,
+        "gender": "male",
+        "dominantHand": "left",
+        "note": "Not a real person."
+    }
+}

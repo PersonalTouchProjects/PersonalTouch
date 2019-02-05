@@ -7,35 +7,80 @@
 //
 
 import Foundation
+import ResearchKit
 
 class Task<T: MyTouch.Trial>: Codable {
-    
     var trials: [T] = []
+}
+
+final class TapTask: Task<TapTrial> {
     
-    // MARK: - Codable
-    
-    enum CodingKeys: CodingKey {
-        case trials, successRate
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(trials, forKey: .trials)
+    init(result: ORKTouchAbilityTapResult) {
+        super.init()
+        self.trials = result.trials.map { TapTrial(trial: $0) }
     }
     
     required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        trials = try container.decode([T].self, forKey: .trials)
+        fatalError("init(from:) has not been implemented")
+    }
+}
+
+final class LongPressTask: Task<LongPressTrial> {
+    
+    init(result: ORKTouchAbilityLongPressResult) {
+        super.init()
+        self.trials = result.trials.map { LongPressTrial(trial: $0) }
     }
     
-    init() {}
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
+}
+
+final class SwipeTask: Task<SwipeTrial> {
+    
+    init(result: ORKTouchAbilitySwipeResult) {
+        super.init()
+        self.trials = result.trials.map { SwipeTrial(trial: $0) }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
 }
 
 final class ScrollTask: Task<ScrollTrial> {
-    var isHorizontal: Bool = false
     
-    convenience init(horizontal: Bool) {
-        self.init()
-        self.isHorizontal = horizontal
+    init(result: ORKTouchAbilityScrollResult) {
+        super.init()
+        self.trials = result.trials.map { ScrollTrial(trial: $0) }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
+}
+
+final class PinchTask: Task<PinchTrial> {
+    
+    init(result: ORKTouchAbilityPinchResult) {
+        super.init()
+        self.trials = result.trials.map { PinchTrial(trial: $0) }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
+}
+
+final class RotationTask: Task<RotationTrial> {
+    
+    init(result: ORKTouchAbilityRotationResult) {
+        super.init()
+        self.trials = result.trials.map { RotationTrial(trial: $0) }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }

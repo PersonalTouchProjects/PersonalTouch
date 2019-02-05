@@ -9,6 +9,8 @@
 import UIKit
 
 struct DeviceInfo: Codable {
+    
+    let name:          String // Timmy's iPhone
     let model:         String // iPad5,1
     let manufacturer:  String // always Apple
     let platform:      String // iOS
@@ -17,6 +19,7 @@ struct DeviceInfo: Codable {
     let screenSize:    CGSize
     
     init() {
+        name         = UIDevice.current.name
         model        = UIDevice.current.modelName
         manufacturer = UIDevice.current.manufacturer
         platform     = UIDevice.current.platform

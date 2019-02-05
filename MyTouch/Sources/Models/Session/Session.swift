@@ -16,7 +16,7 @@ class Session: Codable {
     
     var deviceInfo: DeviceInfo = DeviceInfo()
     
-    // var participant: Participant?
+    var subject: Subject = Subject(id: 0, name: "Foobar", birthYear: 1001, gender: .female, dominantHand: .left, note: nil)
     
     var participantId: Int?
     

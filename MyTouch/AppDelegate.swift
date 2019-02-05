@@ -19,9 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.tintColor = UIColor(hex: 0x00b894)
         
+        let path = Bundle.main.path(forResource: "sessionResultSample", ofType: "json")!
+        let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         
-        print(UIDevice.current.modelName)
-        print(UIDevice.current.systemName, UIDevice.current.systemVersion)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        
+        do {
+            let sessionResult = try decoder.decode(SessionResult.self, from: data)
+            print(sessionResult)
+        } catch {
+            print(error)
+        }
         
         return true
     }

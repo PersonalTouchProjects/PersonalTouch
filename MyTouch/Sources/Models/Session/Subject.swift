@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Participant: Codable {
+struct Subject: Codable {
     
     enum Gender: String, Codable {
         case female, male, other
@@ -24,5 +24,6 @@ struct Participant: Codable {
     var gender: Gender
     var dominantHand: DominantHand
     
-    var note: String
+    var note: String?
+    
 }
