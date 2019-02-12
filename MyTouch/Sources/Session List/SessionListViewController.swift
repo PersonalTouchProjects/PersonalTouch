@@ -10,7 +10,11 @@ import UIKit
 
 class SessionListViewController: UIViewController {
 
+    var client: APIClient?
+    var sessionResults: [SessionResult] = []
+    
     let tableView = UITableView(frame: .zero, style: .plain)
+    let refreshControl = UIRefreshControl()
     let backgroundView = UIView()
     let topShadowView = UIView()
     
@@ -33,6 +37,10 @@ class SessionListViewController: UIViewController {
         tableView.delegate = self
         tableView.backgroundColor = .clear
         tableView.contentInset.bottom = 20
+        
+        refreshControl.tintColor = UIColor.white
+        refreshControl.addTarget(self, action: #selector(handleRefreshControl(sender:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         
         view.addSubview(backgroundView)
         view.addSubview(tableView)
@@ -60,6 +68,27 @@ class SessionListViewController: UIViewController {
         ])
         
         topShadowView.alpha = 0.0
+        
+        client?.fetchSessionResults { (results, error) in
+            if let results = results {
+                self.sessionResults = results
+                self.refreshControl.endRefreshing()
+                self.tableView.reloadData()
+            }
+            if let error = error { print(error) }
+        }
+    }
+    
+    @objc private func handleRefreshControl(sender: UIRefreshControl) {
+        
+        client?.fetchSessionResults { (results, error) in
+            if let results = results {
+                self.sessionResults = results
+                self.refreshControl.endRefreshing()
+                self.tableView.reloadData()
+            }
+            if let error = error { print(error) }
+        }
     }
 
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
@@ -77,17 +106,21 @@ class SessionListViewController: UIViewController {
 extension SessionListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return sessionResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SessionListCell
         
-        cell.titleLabel.text = "Tommy's iPhone"
-        cell.dateLabel.text = "2019/01/01"
-        cell.stateLabel.text = "Completed"
-        cell.osLabel.text = "iOS 12.1.2"
-        cell.versionLabel.text = "MyTouch 2.0.0"
+        let result = sessionResults[indexPath.row]
+        
+        cell.titleLabel.text = result.deviceInfo.name // "Tommy's iPhone"
+        cell.dateLabel.text = APIClient.dateFormatter.string(from: result.end) // "2019/01/01"
+        cell.stateLabel.text = result.state.rawValue // "Completed"
+        cell.osLabel.text = "\(result.deviceInfo.platform) \(result.deviceInfo.osVersion)" // "iOS 12.1.2"
+        cell.versionLabel.text = "MyTouch \(result.deviceInfo.appVersion)" // "MyTouch 2.0.0"
+        cell.iconView.backgroundColor = result.state.color
+        
         return cell
     }
 }

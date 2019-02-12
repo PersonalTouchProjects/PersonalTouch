@@ -10,6 +10,12 @@ import UIKit
 
 class HomeNavigationController: UINavigationController {
 
+    var client: APIClient?
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,20 +24,17 @@ class HomeNavigationController: UINavigationController {
         navigationBar.barTintColor = UIColor(hex: 0x00b894)
         navigationBar.tintColor = UIColor.white
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        if let vc = topViewController as? SessionListViewController {
+            vc.client = client
+        }
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        super.pushViewController(viewController, animated: animated)
+        
+        if let vc = viewController as? SessionListViewController {
+            vc.client = client
+        }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

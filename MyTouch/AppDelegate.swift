@@ -12,6 +12,8 @@ import ResearchKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let client = APIClient()
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -19,17 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.tintColor = UIColor(hex: 0x00b894)
         
-        let path = Bundle.main.path(forResource: "sessionResultSample", ofType: "json")!
-        let data = try! Data(contentsOf: URL(fileURLWithPath: path))
-        
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        
-        do {
-            let sessionResult = try decoder.decode(SessionResult.self, from: data)
-            print(sessionResult)
-        } catch {
-            print(error)
+        if let tabBarController = window?.rootViewController as? HomeTabBarController {
+            tabBarController.client = client
         }
         
         return true

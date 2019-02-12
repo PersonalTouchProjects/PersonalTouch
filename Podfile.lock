@@ -1,16 +1,23 @@
 PODS:
+  - Alamofire (4.7.0)
   - ResearchKit (1.5.2)
 
 DEPENDENCIES:
+  - Alamofire
   - ResearchKit (from `/Users/tommy/Workspace/HCI/ResearchKit`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
 
 EXTERNAL SOURCES:
   ResearchKit:
     :path: "/Users/tommy/Workspace/HCI/ResearchKit"
 
 SPEC CHECKSUMS:
+  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   ResearchKit: 35c32ed3dc7ad48a26bb077515723d72fa1e8676
 
-PODFILE CHECKSUM: 0dad042980757f867e2ecc0752d736d8d74275d2
+PODFILE CHECKSUM: 574d5935a64262fe74a2c13ca7e6882da3ae3309
 
 COCOAPODS: 1.5.3

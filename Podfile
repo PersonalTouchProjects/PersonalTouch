@@ -9,6 +9,7 @@ target 'MyTouch' do
   use_frameworks!
 
   # Pods for MyTouch
+  pod 'Alamofire'
   pod 'ResearchKit', :path => '/Users/tommy/Workspace/HCI/ResearchKit'
 
 end

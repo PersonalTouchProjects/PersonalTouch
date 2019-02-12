@@ -1,3 +1,72 @@
+[{
+    "id": "00000000-0000-0000-0000-000000000000",
+    "state": "pending",
+    "start": "2019-02-10T09:02:10Z",
+    "end": "2019-02-10T09:02:10Z",
+    "deviceInfo": {
+        "name": "Jane Appleseed's iPad",
+        "model": "iPad5,1",
+        "manufacturer": "Apple",
+        "platform": "iOS",
+        "osVersion": "12.1",
+        "appVersion": "2.0.0",
+        "screenSize": [375, 667]
+    },
+    "subject": {
+        "id": 9530,
+        "name": "Jane Appleseed",
+        "birthYear": 1991,
+        "gender": "female",
+        "dominantHand": "right",
+        "note": "Not a real person."
+    }
+},
+{
+    "id": "00000000-0000-0000-0000-000000000000",
+    "state": "error",
+    "start": "2019-02-08T09:02:10Z",
+    "end": "2019-02-08T09:02:10Z",
+    "deviceInfo": {
+        "name": "Jane Appleseed's iPhone",
+        "model": "iPhone10,3",
+        "manufacturer": "Apple",
+        "platform": "iOS",
+        "osVersion": "12.1",
+        "appVersion": "2.0.0",
+        "screenSize": [375, 667]
+    },
+    "subject": {
+        "id": 9529,
+        "name": "Jane Appleseed",
+        "birthYear": 1991,
+        "gender": "female",
+        "dominantHand": "right",
+        "note": "Not a real person."
+    }
+},
+{
+    "id": "00000000-0000-0000-0000-000000000000",
+    "state": "analyzing",
+    "start": "2019-02-06T09:02:10Z",
+    "end": "2019-02-06T09:02:10Z",
+    "deviceInfo": {
+        "name": "John Appleseed's iPhone",
+        "model": "iPhone10,3",
+        "manufacturer": "Apple",
+        "platform": "iOS",
+        "osVersion": "12.1.3",
+        "appVersion": "2.0.0",
+        "screenSize": [375, 667]
+    },
+    "subject": {
+        "id": 9528,
+        "name": "John Appleseed",
+        "birthYear": 1991,
+        "gender": "male",
+        "dominantHand": "left",
+        "note": "Not a real person."
+    }
+},
 {
     "id": "00000000-0000-0000-0000-000000000000",
     "state": "completed",
@@ -19,5 +88,8 @@
         "gender": "male",
         "dominantHand": "left",
         "note": "Not a real person."
-    }
-}
+    },
+    "holdDuration": 0,
+    "ignoreRepeat": 0.1,
+    "touchAssistant": -0.3
+}]

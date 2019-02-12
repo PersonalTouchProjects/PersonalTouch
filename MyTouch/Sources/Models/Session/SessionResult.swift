@@ -8,13 +8,14 @@
 
 import UIKit
 
-class SessionResult: Codable {
+struct SessionResult: Codable {
 
     enum State: String, Codable {
         case temporary
         case pending
         case analyzing
         case completed
+        case error
     }
     
     enum TouchAssistant: Codable {
@@ -47,6 +48,16 @@ class SessionResult: Codable {
             }
         }
         
+        var value: TimeInterval {
+            switch self {
+            case .initial(let duration):
+                return duration
+            case .final(let duration):
+                return -duration
+            default:
+                return 0.0
+            }
+        }
     }
     
     var id: String = UUID().uuidString
@@ -62,4 +73,17 @@ class SessionResult: Codable {
     var holdDuration: TimeInterval?
     var ignoreRepeat: TimeInterval?
     var touchAssistant: TouchAssistant?
+}
+
+extension SessionResult.State {
+    
+    var color: UIColor {
+        switch self {
+        case .temporary: return UIColor(hex: 0xb2bec3)
+        case .pending: return UIColor(hex: 0xb2bec3)
+        case .analyzing: return UIColor(hex: 0xfdcb6e)
+        case .completed: return UIColor(hex: 0x00b894)
+        case .error: return UIColor(hex: 0xd63031)
+        }
+    }
 }
