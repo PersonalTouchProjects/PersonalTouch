@@ -25,16 +25,16 @@ class HomeNavigationController: UINavigationController {
         navigationBar.tintColor = UIColor.white
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
-        if let vc = topViewController as? SessionListViewController {
-            vc.client = client
-        }
+//        if let vc = topViewController as? SessionListViewController {
+//            vc.client = client
+//        }
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: animated)
         
-        if let vc = viewController as? SessionListViewController {
-            vc.client = client
-        }
+//        if let vc = viewController as? SessionListViewController {
+//            vc.client = client
+//        }
     }
 }

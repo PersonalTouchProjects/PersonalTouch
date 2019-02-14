@@ -11,8 +11,8 @@
 		65010AC621018F1C002EB953 /* PinchTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC521018F1C002EB953 /* PinchTrial.swift */; };
 		65010AC821018FA1002EB953 /* RotationTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AC721018FA1002EB953 /* RotationTrial.swift */; };
 		65010ADA2101DF4B002EB953 /* CGAffineTransform+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */; };
-		6504DA662209A55B006649D6 /* SessionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DA652209A55B006649D6 /* SessionResult.swift */; };
-		6504DA682209A8E7006649D6 /* sessionResultSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 6504DA672209A8E7006649D6 /* sessionResultSample.json */; };
+		6504DA662209A55B006649D6 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DA652209A55B006649D6 /* Session.swift */; };
+		6504DA682209A8E7006649D6 /* sessionsSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 6504DA672209A8E7006649D6 /* sessionsSample.json */; };
 		651D90E921EF26C100110588 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90E821EF26C100110588 /* HomeNavigationController.swift */; };
 		651D90EB21EF26DF00110588 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90EA21EF26DF00110588 /* HomeTabBarController.swift */; };
 		651D90ED21EF411000110588 /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90EC21EF411000110588 /* SessionListViewController.swift */; };
@@ -33,14 +33,12 @@
 		6548AA2D20E7A84000B7C73F /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2C20E7A84000B7C73F /* Track.swift */; };
 		6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */; };
 		65560E6B2205A1F800B06FB0 /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65560E6A2205A1F800B06FB0 /* SessionController.swift */; };
-		65560E6D2205AECB00B06FB0 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65560E6C2205AECB00B06FB0 /* Survey.swift */; };
+		6565F3592215605B00725BBD /* IMG_5893.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 6565F3582215605B00725BBD /* IMG_5893.JPG */; };
 		65767D1B21E73EBB0016BD80 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65767D1A21E73EBB0016BD80 /* HomeViewController.swift */; };
-		658D857821046DEB0000CCB4 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D857721046DEB0000CCB4 /* SessionManager.swift */; };
 		6594BE2221F0617C0006CA71 /* SessionInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */; };
 		6594BE2421F065650006CA71 /* SessionBriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2321F065650006CA71 /* SessionBriefView.swift */; };
 		6594BE2621F076D10006CA71 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2521F076D10006CA71 /* AboutViewController.swift */; };
 		659BAA502212A9EE00E45D5F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659BAA4F2212A9EE00E45D5F /* APIClient.swift */; };
-		65CBE34420FDE5470093F663 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBE34320FDE5470093F663 /* Session.swift */; };
 		65CEDCB1211D83E900809069 /* LongPressTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CEDCB0211D83E900809069 /* LongPressTrial.swift */; };
 		65DE73BC20F0F04E009D5928 /* GestureRecognizerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DE73BB20F0F04E009D5928 /* GestureRecognizerEvent.swift */; };
 		65E1553522020BD600731C41 /* MyTouchBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E1553422020BD600731C41 /* MyTouchBaseCell.swift */; };
@@ -58,8 +56,8 @@
 		65010AC521018F1C002EB953 /* PinchTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTrial.swift; sourceTree = "<group>"; };
 		65010AC721018FA1002EB953 /* RotationTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTrial.swift; sourceTree = "<group>"; };
 		65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+HCI.swift"; sourceTree = "<group>"; };
-		6504DA652209A55B006649D6 /* SessionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResult.swift; sourceTree = "<group>"; };
-		6504DA672209A8E7006649D6 /* sessionResultSample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sessionResultSample.json; sourceTree = "<group>"; };
+		6504DA652209A55B006649D6 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		6504DA672209A8E7006649D6 /* sessionsSample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sessionsSample.json; sourceTree = "<group>"; };
 		651D90E821EF26C100110588 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		651D90EA21EF26DF00110588 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		651D90EC21EF411000110588 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
@@ -85,14 +83,12 @@
 		6548AA2C20E7A84000B7C73F /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HCI.swift"; sourceTree = "<group>"; };
 		65560E6A2205A1F800B06FB0 /* SessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
-		65560E6C2205AECB00B06FB0 /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
+		6565F3582215605B00725BBD /* IMG_5893.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_5893.JPG; sourceTree = "<group>"; };
 		65767D1A21E73EBB0016BD80 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		658D857721046DEB0000CCB4 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInfoCell.swift; sourceTree = "<group>"; };
 		6594BE2321F065650006CA71 /* SessionBriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionBriefView.swift; sourceTree = "<group>"; };
 		6594BE2521F076D10006CA71 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		659BAA4F2212A9EE00E45D5F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		65CBE34320FDE5470093F663 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		65CEDCB0211D83E900809069 /* LongPressTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressTrial.swift; sourceTree = "<group>"; };
 		65DE73BB20F0F04E009D5928 /* GestureRecognizerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizerEvent.swift; sourceTree = "<group>"; };
 		65E1553422020BD600731C41 /* MyTouchBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTouchBaseCell.swift; sourceTree = "<group>"; };
@@ -178,8 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				6548A9EB20E663E700B7C73F /* AppDelegate.swift */,
-				65560E6A2205A1F800B06FB0 /* SessionController.swift */,
-				65560E6C2205AECB00B06FB0 /* Survey.swift */,
 				65CBE3642100606B0093F663 /* Sources */,
 				6548A9EF20E663E800B7C73F /* Main.storyboard */,
 				6548A9F220E663E900B7C73F /* Assets.xcassets */,
@@ -193,11 +187,9 @@
 		6548A9FD20E664C000B7C73F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				658D857721046DEB0000CCB4 /* SessionManager.swift */,
 				65CBE34520FDE64F0093F663 /* Touches & Gestures */,
 				65FC45A120F39F9A00B2A7CF /* Trials & Tasks */,
 				65CBE34620FDE6710093F663 /* Session */,
-				659BAA4F2212A9EE00E45D5F /* APIClient.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,9 +217,11 @@
 			children = (
 				65FC45A220F39FAF00B2A7CF /* DeviceInfo.swift */,
 				65FC45A820F3A13300B2A7CF /* Subject.swift */,
-				65CBE34320FDE5470093F663 /* Session.swift */,
-				6504DA652209A55B006649D6 /* SessionResult.swift */,
-				6504DA672209A8E7006649D6 /* sessionResultSample.json */,
+				6504DA652209A55B006649D6 /* Session.swift */,
+				65560E6A2205A1F800B06FB0 /* SessionController.swift */,
+				659BAA4F2212A9EE00E45D5F /* APIClient.swift */,
+				6504DA672209A8E7006649D6 /* sessionsSample.json */,
+				6565F3582215605B00725BBD /* IMG_5893.JPG */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -345,7 +339,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6548A9F620E663E900B7C73F /* LaunchScreen.storyboard in Resources */,
-				6504DA682209A8E7006649D6 /* sessionResultSample.json in Resources */,
+				6504DA682209A8E7006649D6 /* sessionsSample.json in Resources */,
+				6565F3592215605B00725BBD /* IMG_5893.JPG in Resources */,
 				6548AA1820E6717000B7C73F /* Localizable.strings in Resources */,
 				6548A9F320E663E900B7C73F /* Assets.xcassets in Resources */,
 				6548A9F120E663E800B7C73F /* Main.storyboard in Resources */,
@@ -413,7 +408,7 @@
 				65560E6B2205A1F800B06FB0 /* SessionController.swift in Sources */,
 				65FC45A720F3A04C00B2A7CF /* UIApplication+HCI.swift in Sources */,
 				65FC45A520F3A00900B2A7CF /* UIDevice+HCI.swift in Sources */,
-				6504DA662209A55B006649D6 /* SessionResult.swift in Sources */,
+				6504DA662209A55B006649D6 /* Session.swift in Sources */,
 				651D90F621EF54E200110588 /* AccomodationCell.swift in Sources */,
 				651D90F421EF532400110588 /* SessionDetailViewController.swift in Sources */,
 				65E1553522020BD600731C41 /* MyTouchBaseCell.swift in Sources */,
@@ -422,13 +417,10 @@
 				651D90ED21EF411000110588 /* SessionListViewController.swift in Sources */,
 				65767D1B21E73EBB0016BD80 /* HomeViewController.swift in Sources */,
 				6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */,
-				65560E6D2205AECB00B06FB0 /* Survey.swift in Sources */,
 				6548AA0120E665E800B7C73F /* Trial.swift in Sources */,
 				6548AA2D20E7A84000B7C73F /* Track.swift in Sources */,
 				659BAA502212A9EE00E45D5F /* APIClient.swift in Sources */,
 				651D90E921EF26C100110588 /* HomeNavigationController.swift in Sources */,
-				658D857821046DEB0000CCB4 /* SessionManager.swift in Sources */,
-				65CBE34420FDE5470093F663 /* Session.swift in Sources */,
 				651D90EF21EF424500110588 /* SessionListCell.swift in Sources */,
 				6594BE2621F076D10006CA71 /* AboutViewController.swift in Sources */,
 				6548AA1F20E6770200B7C73F /* UIImage+HCI.swift in Sources */,

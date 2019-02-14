@@ -11,15 +11,15 @@ import Alamofire
 
 class APIClient {
     
-    func fetchSessionResults(decoder: JSONDecoder = APIClient.decoder, completion: @escaping ([SessionResult]?, Error?) -> Void) {
+    func fetchSessionResults(decoder: JSONDecoder = APIClient.decoder, completion: @escaping ([Session]?, Error?) -> Void) {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         
-            let path = Bundle.main.path(forResource: "sessionResultSample", ofType: "json")!
+            let path = Bundle.main.path(forResource: "sessionsSample", ofType: "json")!
             let data = try! Data(contentsOf: URL(fileURLWithPath: path))
             
             do {
-                let sessionResults = try decoder.decode([SessionResult].self, from: data)
+                let sessionResults = try decoder.decode([Session].self, from: data)
                 
                 completion(sessionResults, nil)
             } catch {

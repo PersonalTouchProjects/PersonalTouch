@@ -22,8 +22,8 @@ struct DeviceInfo: Codable {
         name         = UIDevice.current.name
         model        = UIDevice.current.modelName
         manufacturer = UIDevice.current.manufacturer
-        platform     = UIDevice.current.platform
-        osVersion    = UIDevice.current.systemName
+        platform     = UIDevice.current.systemName
+        osVersion    = UIDevice.current.systemVersion
         appVersion   = UIApplication.shared.appVersion
         screenSize   = UIScreen.main.bounds.size
     }

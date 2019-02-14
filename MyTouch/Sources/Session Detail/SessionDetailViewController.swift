@@ -10,6 +10,10 @@ import UIKit
 
 class SessionDetailViewController: UIViewController {
     
+    var session: Session? {
+        didSet { tableView.reloadData() }
+    }
+    
     let topShadowView = UIView()
     let backgroundView = UIView()
     let briefLabel = UILabel()
@@ -121,9 +125,16 @@ extension SessionDetailViewController: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "accomodation", for: indexPath) as! AccomodationCell
-            cell.holdDurationText = "0.5"
-            cell.ignoreRepeatText = "0.2"
-            cell.accomodationText = "0.6"
+            
+            if let session = session {
+                if let value = session.holdDuration, value != 0 { cell.holdDurationText = "\(value)" }
+                if let value = session.ignoreRepeat, value != 0 { cell.ignoreRepeatText = "\(value)" }
+                if let value = session.touchAssistant?.value, value != 0 { cell.accomodationText = "\(value)" }
+            } else {
+                cell.holdDurationText = "0.5"
+                cell.ignoreRepeatText = "0.2"
+                cell.accomodationText = "0.6"
+            }
             cell.button.addTarget(self, action: #selector(handleAccomodationButton(sender:)), for: .touchUpInside)
             return cell
         case 1:

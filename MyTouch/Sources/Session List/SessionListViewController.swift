@@ -9,9 +9,8 @@
 import UIKit
 
 class SessionListViewController: UIViewController {
-
-    var client: APIClient?
-    var sessionResults: [SessionResult] = []
+    
+    var sessionResults: [Session] = []
     
     let tableView = UITableView(frame: .zero, style: .plain)
     let refreshControl = UIRefreshControl()
@@ -69,26 +68,46 @@ class SessionListViewController: UIViewController {
         
         topShadowView.alpha = 0.0
         
-        client?.fetchSessionResults { (results, error) in
-            if let results = results {
-                self.sessionResults = results
-                self.refreshControl.endRefreshing()
-                self.tableView.reloadData()
-            }
-            if let error = error { print(error) }
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSessionsNotification(notification:)), name: .sessionControllerDidChangeState, object: nil)
+        
+        SessionController.shared.fetchSessions()
+        
+//        client?.fetchSessionResults { (results, error) in
+//            if let results = results {
+//                self.sessionResults = results
+//                self.refreshControl.endRefreshing()
+//                self.tableView.reloadData()
+//            }
+//            if let error = error { print(error) }
+//        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func handleSessionsNotification(notification: Notification) {
+        
+        self.sessionResults = SessionController.shared.state.sessions ?? []
+        
+        if self.refreshControl.isRefreshing {
+            self.refreshControl.endRefreshing()
         }
+        self.tableView.reloadData()
     }
     
     @objc private func handleRefreshControl(sender: UIRefreshControl) {
         
-        client?.fetchSessionResults { (results, error) in
-            if let results = results {
-                self.sessionResults = results
-                self.refreshControl.endRefreshing()
-                self.tableView.reloadData()
-            }
-            if let error = error { print(error) }
-        }
+        SessionController.shared.fetchSessions()
+        
+//        client?.fetchSessionResults { (results, error) in
+//            if let results = results {
+//                self.sessionResults = results
+//                self.refreshControl.endRefreshing()
+//                self.tableView.reloadData()
+//            }
+//            if let error = error { print(error) }
+//        }
     }
 
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
@@ -130,6 +149,7 @@ extension SessionListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let detailViewController = SessionDetailViewController()
+        detailViewController.session = sessionResults[indexPath.row]
         detailViewController.hidesBottomBarWhenPushed = true
         show(detailViewController, sender: self)
     }

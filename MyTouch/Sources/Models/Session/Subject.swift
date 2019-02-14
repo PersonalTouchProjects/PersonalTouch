@@ -18,11 +18,11 @@ struct Subject: Codable {
         case left, right, both, none
     }
     
-    let id: Int
-    var name: String
-    var birthYear: Int
-    var gender: Gender
-    var dominantHand: DominantHand
+    let id: Int = 0
+    var name: String = "John Doe"
+    var birthYear: Int = 1991
+    var gender: Gender = .other
+    var dominantHand: DominantHand = .none
     
     var note: String?
     

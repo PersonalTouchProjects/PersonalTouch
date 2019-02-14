@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.7.0)
-  - ResearchKit (1.5.2)
+  - ResearchKit (2.0.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
-  ResearchKit: 35c32ed3dc7ad48a26bb077515723d72fa1e8676
+  ResearchKit: 9e63155b701480f7dc11139c1c4ff390c4dce1f7
 
 PODFILE CHECKSUM: 574d5935a64262fe74a2c13ca7e6882da3ae3309
 

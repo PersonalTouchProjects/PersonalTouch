@@ -9,9 +9,13 @@
 import UIKit
 import ResearchKit
 
+let consentUUID = UUID()
+let surveyUUID = UUID()
+let activityUUID = UUID()
+
 class HomeViewController: SessionDetailViewController {
 
-    let sessionController = SessionController()
+    let sessionController = SessionController.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +28,8 @@ class HomeViewController: SessionDetailViewController {
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
         
         let task = ORKOrderedTask.touchAbilityTask(withIdentifier: "touch", intendedUseDescription: nil, taskOptions: [.tap], options: [])
-        let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
+//        let taskViewController = ORKTaskViewController(task: task, taskRun: activityUUID)
+        let taskViewController = ORKTaskViewController(task: sessionController.consentTask(), taskRun: consentUUID)
         taskViewController.delegate = self
         present(taskViewController, animated: true, completion: nil)
         
@@ -46,20 +51,50 @@ extension HomeViewController: ORKTaskViewControllerDelegate {
     
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
+        if taskViewController.taskRunUUID == consentUUID {
+            
+            let task = taskViewController.task as! ORKOrderedTask
+            let step = task.step(withIdentifier: "visualConsent") as! ORKVisualConsentStep
+            
+            let documentCopy = step.consentDocument!.copy() as! ORKConsentDocument
+            
+            if let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "review")?.firstResult as? ORKConsentSignatureResult {
+                
+                if let image = signatureResult.signature?.signatureImage?.pngData() {
+                    let path = defaultDirectoryPath().appendingPathComponent("signature.png")
+                    try? image.write(to: path, options: .atomic)
+                }
+                
+                signatureResult.apply(to: documentCopy)
+            }
+            
+            documentCopy.makePDF { (data, error) in
+                if let data = data {
+                    let path = defaultDirectoryPath().appendingPathComponent("consent.pdf")
+                    do {
+                        try data.write(to: path, options: Data.WritingOptions.atomic)
+                    } catch {
+                        print(error)
+                    }
+                } else if let error = error {
+                    print(error)
+                }
+            }
+        }
+        
+        
+        var session = Session(deviceInfo: DeviceInfo(), subject: Subject())
+        
         for result in taskViewController.result.results ?? [] {
             if result.identifier == "touchAbilityTap" {
                 
                 let tapResult = (result as! ORKStepResult).results?.first as! ORKTouchAbilityTapResult
                 let tapTask = TapTask(result: tapResult)
                 
-                let encoder = JSONEncoder()
-                encoder.nonConformingFloatEncodingStrategy = .convertToString(positiveInfinity: "+inf", negativeInfinity: "-inf", nan: "nan")
-                encoder.dateEncodingStrategy = .iso8601
-                encoder.outputFormatting = .prettyPrinted
                 
-                if let json = try? encoder.encode(tapTask) {
-                    print(String(data: json, encoding: .utf8)!)
-                }
+                session.tap = tapTask
+                
+//                try? session.archive()
             }
         }
         

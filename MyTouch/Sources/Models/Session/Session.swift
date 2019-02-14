@@ -1,112 +1,106 @@
 //
-//  Session.swift
+//  SessionResult.swift
 //  MyTouch
 //
-//  Created by Tommy Lin on 2018/7/17.
-//  Copyright © 2018年 NTU HCI Lab. All rights reserved.
+//  Created by Tommy Lin on 2019/2/5.
+//  Copyright © 2019 NTU HCI Lab. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class Session: Codable {
-    
-    var startDate: Date = Date()
-    
-    var endDate: Date = Date.distantFuture
-    
-    var deviceInfo: DeviceInfo = DeviceInfo()
-    
-    var subject: Subject = Subject(id: 0, name: "Foobar", birthYear: 1001, gender: .female, dominantHand: .left, note: nil)
-    
-    var participantId: Int?
-    
-    var tapTask: Task<TapTrial>? {
-        didSet { try? archive() }
-    }
-    
-    var longPressTask: Task<LongPressTrial>? {
-        didSet { try? archive() }
-    }
+struct Session: Codable {
 
-    var swipeTask: Task<SwipeTrial>? {
-        didSet { try? archive() }
-    }
-
-    var horizontalScrollTask: Task<ScrollTrial>? {
-        didSet { try? archive() }
-    }
-    
-    var verticalScrollTask: Task<ScrollTrial>? {
-        didSet { try? archive() }
-    }
-
-    var pinchTask: Task<PinchTrial>? {
-        didSet { try? archive() }
-    }
-
-    var rotationTask: Task<RotationTrial>? {
-        didSet { try? archive() }
+    enum State: String, Codable {
+        case temporary
+        case analyzing
+        case completed
+        case error
     }
     
-    enum ArchiveError: Error {
-        case noParticipant
-        case incomplete
+    enum TouchAssistant: Codable {
+        case off
+        case initial(duration: TimeInterval)
+        case final(duration: TimeInterval)
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            let duration = try container.decode(TimeInterval.self)
+            
+            if duration == 0 {
+                self = .off
+            } else if duration > 0 {
+                self = .initial(duration: duration)
+            } else {
+                self = .final(duration: -duration)
+            }
+        }
+        
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.singleValueContainer()
+            switch self {
+            case .initial(let duration):
+                try container.encode(duration)
+            case .final(let duration):
+                try container.encode(-duration)
+            default:
+                try container.encode(0.0)
+            }
+        }
+        
+        var value: TimeInterval {
+            switch self {
+            case .initial(let duration):
+                return duration
+            case .final(let duration):
+                return -duration
+            default:
+                return 0.0
+            }
+        }
     }
     
-    func archive() throws {
-        
-//        guard let participant = participant else {
-//            throw ArchiveError.noParticipant
-//        }
-//
-//        guard let tapTask = tapTask, let swipeTask = swipeTask, let dragAndDropTask = dragAndDropTask else {
-//            throw ArchiveError.incomplete
-//        }
-        
-        self.endDate = Date()
-        
-        let jsonEncoder = JSONEncoder()
-        jsonEncoder.nonConformingFloatEncodingStrategy = .convertToString(
-            positiveInfinity: "infinity",
-            negativeInfinity: "-infinity",
-            nan: "nan"
-        )
-        jsonEncoder.dateEncodingStrategy = .iso8601
-        
-        let data = try jsonEncoder.encode(self)
-        
-        let dataPath = path(with: startDate)
-        print(dataPath)
-        
-        try data.write(to: dataPath, options: .atomic)
+    var id: String = UUID().uuidString
+    
+    var state: State = .temporary
+    
+    var start: Date = .distantPast
+    var end: Date = .distantFuture
+    
+    var deviceInfo: DeviceInfo
+    var subject: Subject
+    
+    var holdDuration: TimeInterval?
+    var ignoreRepeat: TimeInterval?
+    var touchAssistant: TouchAssistant?
+    
+    var tap: Task<TapTrial>?
+    
+    var longPress: Task<LongPressTrial>?
+    
+    var swipe: Task<SwipeTrial>?
+    
+    var horizontalScroll: Task<ScrollTrial>?
+    
+    var verticalScroll: Task<ScrollTrial>?
+    
+    var pinch: Task<PinchTrial>?
+    
+    var rotation: Task<RotationTrial>?
+    
+    init(deviceInfo: DeviceInfo, subject: Subject) {
+        self.deviceInfo = deviceInfo
+        self.subject = subject
     }
 }
 
-
-// -----------------------
-// MARK: - Utility Methods
-// -----------------------
-
-internal func defaultDirectoryPath() -> URL {
-    var url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-    url = url.appendingPathComponent("MyTouch/v1")
+extension Session.State {
     
-    do {
-        try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-    } catch {
-        print("Cannot create MyTouch directory under Application Support. error: \(error.localizedDescription)")
+    var color: UIColor {
+        switch self {
+        case .temporary: return UIColor(hex: 0xb2bec3)
+        case .analyzing: return UIColor(hex: 0xfdcb6e)
+        case .completed: return UIColor(hex: 0x00b894)
+        case .error: return UIColor(hex: 0xd63031)
+        }
     }
-    return url
 }
-
-internal func path(with date: Date) -> URL {
-    
-    let formatter = DateFormatter()
-    formatter.timeZone = TimeZone(identifier: "UTC")
-    formatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
-    
-    let formatted = formatter.string(from: date)
-    
-    return defaultDirectoryPath().appendingPathComponent("\(formatted).json")
-}
-

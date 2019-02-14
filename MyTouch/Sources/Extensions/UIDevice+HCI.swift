@@ -26,6 +26,16 @@ extension UIDevice {
     }
     
     var platform: String {
-        return "iOS"
+        #if os(iOS)
+            return "iOS"
+        #elseif os(watchOS)
+            return "watchOS"
+        #elseif os(tvOS)
+            return "tvOS"
+        #elseif os(macOS) || os(OSX)
+            return "macOS"
+        #else
+            return "unknown OS"
+        #endif
     }
 }
