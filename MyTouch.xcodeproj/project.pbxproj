@@ -13,6 +13,8 @@
 		65010ADA2101DF4B002EB953 /* CGAffineTransform+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */; };
 		6504DA662209A55B006649D6 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DA652209A55B006649D6 /* Session.swift */; };
 		6504DA682209A8E7006649D6 /* sessionsSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 6504DA672209A8E7006649D6 /* sessionsSample.json */; };
+		650918FD2223B70C00304789 /* SessionControllerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650918FC2223B70C00304789 /* SessionControllerConstants.swift */; };
+		650918FF2223B95E00304789 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650918FE2223B95E00304789 /* Utilities.swift */; };
 		651D90E921EF26C100110588 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90E821EF26C100110588 /* HomeNavigationController.swift */; };
 		651D90EB21EF26DF00110588 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90EA21EF26DF00110588 /* HomeTabBarController.swift */; };
 		651D90ED21EF411000110588 /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90EC21EF411000110588 /* SessionListViewController.swift */; };
@@ -58,6 +60,8 @@
 		65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+HCI.swift"; sourceTree = "<group>"; };
 		6504DA652209A55B006649D6 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		6504DA672209A8E7006649D6 /* sessionsSample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sessionsSample.json; sourceTree = "<group>"; };
+		650918FC2223B70C00304789 /* SessionControllerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControllerConstants.swift; sourceTree = "<group>"; };
+		650918FE2223B95E00304789 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		651D90E821EF26C100110588 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		651D90EA21EF26DF00110588 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		651D90EC21EF411000110588 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +191,10 @@
 		6548A9FD20E664C000B7C73F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				65560E6A2205A1F800B06FB0 /* SessionController.swift */,
+				650918FC2223B70C00304789 /* SessionControllerConstants.swift */,
+				659BAA4F2212A9EE00E45D5F /* APIClient.swift */,
+				650918FE2223B95E00304789 /* Utilities.swift */,
 				65CBE34520FDE64F0093F663 /* Touches & Gestures */,
 				65FC45A120F39F9A00B2A7CF /* Trials & Tasks */,
 				65CBE34620FDE6710093F663 /* Session */,
@@ -218,8 +226,6 @@
 				65FC45A220F39FAF00B2A7CF /* DeviceInfo.swift */,
 				65FC45A820F3A13300B2A7CF /* Subject.swift */,
 				6504DA652209A55B006649D6 /* Session.swift */,
-				65560E6A2205A1F800B06FB0 /* SessionController.swift */,
-				659BAA4F2212A9EE00E45D5F /* APIClient.swift */,
 				6504DA672209A8E7006649D6 /* sessionsSample.json */,
 				6565F3582215605B00725BBD /* IMG_5893.JPG */,
 			);
@@ -411,6 +417,7 @@
 				6504DA662209A55B006649D6 /* Session.swift in Sources */,
 				651D90F621EF54E200110588 /* AccomodationCell.swift in Sources */,
 				651D90F421EF532400110588 /* SessionDetailViewController.swift in Sources */,
+				650918FF2223B95E00304789 /* Utilities.swift in Sources */,
 				65E1553522020BD600731C41 /* MyTouchBaseCell.swift in Sources */,
 				65010AC621018F1C002EB953 /* PinchTrial.swift in Sources */,
 				65FC45A320F39FAF00B2A7CF /* DeviceInfo.swift in Sources */,
@@ -427,6 +434,7 @@
 				65EE0F0920EF42F200EB8929 /* UIView+HCI.swift in Sources */,
 				6548AA0320E6664A00B7C73F /* TapTrial.swift in Sources */,
 				6548AA0720E666CF00B7C73F /* SwipeTrial.swift in Sources */,
+				650918FD2223B70C00304789 /* SessionControllerConstants.swift in Sources */,
 				65DE73BC20F0F04E009D5928 /* GestureRecognizerEvent.swift in Sources */,
 				65010AAD210068EC002EB953 /* ScrollTrial.swift in Sources */,
 				6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */,
