@@ -42,30 +42,3 @@ class Trial: Codable {
         }
     }
 }
-
-//extension Trial {
-//
-//    var allEvents: [GestureRecognizerEvent] {
-//
-//        get {
-//            var events = [GestureRecognizerEvent]()
-//            events += tapEvents       as [GestureRecognizerEvent]
-//            events += panEvents       as [GestureRecognizerEvent]
-//            events += longPressEvents as [GestureRecognizerEvent]
-//            events += swipeEvents     as [GestureRecognizerEvent]
-//            events += pinchEvents     as [GestureRecognizerEvent]
-//            events += rotationEvents  as [GestureRecognizerEvent]
-//            return events
-//        }
-//
-//        set {
-//            tapEvents       += newValue.filter({ $0 is TapGestureRecognizerEvent })       as! [TapGestureRecognizerEvent]
-//            panEvents       += newValue.filter({ $0 is PanGestureRecognizerEvent })       as! [PanGestureRecognizerEvent]
-//            longPressEvents += newValue.filter({ $0 is LongPressGestureRecognizerEvent }) as! [LongPressGestureRecognizerEvent]
-//            swipeEvents     += newValue.filter({ $0 is SwipeGestureRecognizerEvent })     as! [SwipeGestureRecognizerEvent]
-//            pinchEvents     += newValue.filter({ $0 is PinchGestureRecognizerEvent })     as! [PinchGestureRecognizerEvent]
-//            rotationEvents  += newValue.filter({ $0 is RotationGestureRecognizerEvent })  as! [RotationGestureRecognizerEvent]
-//        }
-//    }
-//
-//}

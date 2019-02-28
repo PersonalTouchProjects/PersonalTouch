@@ -49,7 +49,8 @@ class SessionController: NSObject {
             if let error = error {
                 self.state = .error(error: error)
             } else if let sessions = sessions {
-                self.state = .success(sessions: sessions)
+                let results = (self.temporarySessions() + sessions).sorted { $0.start > $1.start } // latest on top
+                self.state = .success(sessions: results)
             } else {
                 self.state = .success(sessions: [])
             }
@@ -128,20 +129,24 @@ class SessionController: NSObject {
             // Generate subject object
             var subject = Subject()
             
-            let birthResult = taskViewController.result.stepResult(forStepIdentifier: "birth")?.result(forIdentifier: "birth") as! ORKNumericQuestionResult
-            subject.birthYear = birthResult.numericAnswer!.intValue
-            
-            let  nameResult = taskViewController.result.stepResult(forStepIdentifier: "name")?.result(forIdentifier: "name") as! ORKTextQuestionResult
-            subject.name = nameResult.textAnswer!
-            
-            let genderResult = taskViewController.result.stepResult(forStepIdentifier: "gender")?.result(forIdentifier: "gender") as! ORKChoiceQuestionResult
-            if let answer = genderResult.choiceAnswers?.first as? String {
-                subject.gender = Subject.Gender(rawValue: answer) ?? .other
+            if let birthResult = taskViewController.result.stepResult(forStepIdentifier: "birth")?.result(forIdentifier: "birth") as? ORKNumericQuestionResult {
+                subject.birthYear = birthResult.numericAnswer!.intValue
             }
             
-            let handResult = taskViewController.result.stepResult(forStepIdentifier: "hand")?.result(forIdentifier: "hand") as! ORKChoiceQuestionResult
-            if let answer = handResult.choiceAnswers?.first as? String {
-                subject.dominantHand = Subject.DominantHand(rawValue: answer) ?? .none
+            if let nameResult = taskViewController.result.stepResult(forStepIdentifier: "name")?.result(forIdentifier: "name") as? ORKTextQuestionResult {
+                subject.name = nameResult.textAnswer!
+            }
+            
+            if let genderResult = taskViewController.result.stepResult(forStepIdentifier: "gender")?.result(forIdentifier: "gender") as? ORKChoiceQuestionResult {
+                if let answer = genderResult.choiceAnswers?.first as? String {
+                    subject.gender = Subject.Gender(rawValue: answer) ?? .other
+                }
+            }
+            
+            if let handResult = taskViewController.result.stepResult(forStepIdentifier: "hand")?.result(forIdentifier: "hand") as? ORKChoiceQuestionResult {
+                if let answer = handResult.choiceAnswers?.first as? String {
+                    subject.dominantHand = Subject.DominantHand(rawValue: answer) ?? .none
+                }
             }
             
             // End of generate subject
@@ -189,26 +194,54 @@ class SessionController: NSObject {
         // End of Generate session object.
         
         // Save session as local cache
+        addTemporarySession(session)
+        fetchSessions()
+        // End of Save session
+    }
+    
+    
+    // MARK: - Temporary session list
+    
+    private func addTemporarySession(_ session: Session) {
+        
+        let path = defaultDocumentDirectoryPath().appendingPathComponent(session.filename)
         
         do {
             let data = try APIClient.encoder.encode(session)
-            let path = defaultDocumentDirectoryPath().appendingPathComponent("12345").appendingPathExtension("json")
-            
             try data.write(to: path, options: .atomic)
             
-            // Write session name to cache list
+            var temps = UserDefaults.standard.array(forKey: "localSessions") as? [String] ?? []
+            if !temps.contains(path.lastPathComponent) {
+                temps.append(path.lastPathComponent)
+                UserDefaults.standard.set(temps, forKey: "localSessions")
+                UserDefaults.standard.synchronize()
+            }
             
-            var cached = UserDefaults.standard.array(forKey: "localCached") as? [String] ?? []
-            cached.append(path.lastPathComponent)
-            
-            UserDefaults.standard.set(cached, forKey: "localCached")
-            UserDefaults.standard.synchronize()
-        }
-        catch {
+        } catch {
             print(error)
         }
         
-        // End of Save session
+    }
+    
+    private func temporarySessions() -> [Session] {
+        
+        var sessions = [Session]()
+        
+        let names = UserDefaults.standard.array(forKey: "localSessions") as? [String] ?? []
+        
+        for name in names {
+            do {
+                let url = defaultDocumentDirectoryPath().appendingPathComponent(name)
+                let data = try Data(contentsOf: url)
+                let session = try APIClient.decoder.decode(Session.self, from: data)
+                
+                sessions.append(session)
+            } catch {
+                print(error)
+            }
+        }
+        
+        return sessions
     }
     
     

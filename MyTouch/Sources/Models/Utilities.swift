@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let defaultPathComponent = "MyTouch/v1"
+private let defaultPathComponent = "MyTouch/v2"
 
 internal func defaultApplicationSupportDirectoryPath() -> URL {
     var url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!

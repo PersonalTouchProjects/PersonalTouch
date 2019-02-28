@@ -104,3 +104,14 @@ extension Session.State {
         }
     }
 }
+
+extension Session {
+    
+    var filename: String {
+        return APIClient.fileDateFormatter.string(from: start)
+    }
+    
+    var fileExtension: String {
+        return "json"
+    }
+}

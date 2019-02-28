@@ -23,7 +23,7 @@ class TapTrial: Trial {
     }
     
     required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
+        try super.init(from: decoder)
     }
     
 }
