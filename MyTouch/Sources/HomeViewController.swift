@@ -15,7 +15,7 @@ let activityUUID = UUID()
 
 class HomeViewController: SessionDetailViewController {
 
-    let sessionController = SessionController.shared
+    let appController = AppController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,10 @@ class HomeViewController: SessionDetailViewController {
     
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
 //        sessionController.showConsentIfNeeded(in: self)
-        sessionController.showSurvey(in: self)
+        
+        appController.researchController.showSurvey(in: self)
+        
+//        researchController.showSurvey(in: self)
     }
 }
 
