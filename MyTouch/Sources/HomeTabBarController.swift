@@ -10,8 +10,6 @@ import UIKit
 
 class HomeTabBarController: UITabBarController {
 
-    var client: APIClient?
-    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         
         switch UIDevice.current.userInterfaceIdiom {
@@ -28,11 +26,5 @@ class HomeTabBarController: UITabBarController {
         tabBar.isTranslucent = false
         tabBar.tintColor = UIColor(hex: 0x00b894)
         tabBar.unselectedItemTintColor = UIColor(hex: 0xb2bec3)
-        
-        for vc in viewControllers ?? [] {
-            if let navigationController = vc as? HomeNavigationController {
-                navigationController.client = client
-            }
-        }
     }
 }

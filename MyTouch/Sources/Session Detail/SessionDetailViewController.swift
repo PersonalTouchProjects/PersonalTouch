@@ -118,7 +118,7 @@ extension SessionDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return session != nil ? 3 : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -127,23 +127,46 @@ extension SessionDetailViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "accomodation", for: indexPath) as! AccomodationCell
             
             if let session = session {
-                if let value = session.holdDuration, value != 0 { cell.holdDurationText = "\(value)" }
-                if let value = session.ignoreRepeat, value != 0 { cell.ignoreRepeatText = "\(value)" }
-                if let value = session.touchAssistant?.value, value != 0 { cell.accomodationText = "\(value)" }
+                cell.session = session
+//                if let value = session.holdDuration, value != 0 { cell.holdDurationText = "\(value)" }
+//                if let value = session.ignoreRepeat, value != 0 { cell.ignoreRepeatText = "\(value)" }
+//                if let value = session.touchAssistant?.value, value != 0 { cell.accomodationText = "\(value)" }
             } else {
-                cell.holdDurationText = "0.5"
-                cell.ignoreRepeatText = "0.2"
-                cell.accomodationText = "0.6"
+//                cell.holdDurationText = "0.5"
+//                cell.ignoreRepeatText = "0.2"
+//                cell.accomodationText = "0.6"
             }
             cell.button.addTarget(self, action: #selector(handleAccomodationButton(sender:)), for: .touchUpInside)
+            cell.layoutItemViews()
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "info", for: indexPath) as! SessionInfoCell
             cell.titleLabel.text = "Device Info"
+            
+            if let deviceInfo = session?.deviceInfo {
+                cell.items = [
+                    SessionInfoCell.Item(title: "Device name", text: deviceInfo.name),
+                    SessionInfoCell.Item(title: "Model name", text: deviceInfo.model),
+                    SessionInfoCell.Item(title: "Manufacturer", text: deviceInfo.manufacturer),
+                    SessionInfoCell.Item(title: "OS version", text: "\(deviceInfo.platform) \(deviceInfo.osVersion)"),
+                    SessionInfoCell.Item(title: "MyTouch version", text: deviceInfo.appVersion)
+                ]
+            }
+            cell.layoutItemViews()
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "info", for: indexPath) as! SessionInfoCell
             cell.titleLabel.text = "Subject Info"
+            
+            if let subject = session?.subject {
+                cell.items = [
+                    SessionInfoCell.Item(title: "Name", text: subject.name),
+                    SessionInfoCell.Item(title: "Birth year", text: "\(subject.birthYear)"),
+                    SessionInfoCell.Item(title: "Gender", text: subject.gender.rawValue),
+                    SessionInfoCell.Item(title: "DominantHand", text: subject.dominantHand.rawValue),
+                ]
+            }
+            cell.layoutItemViews()
             return cell
         default:
             fatalError()

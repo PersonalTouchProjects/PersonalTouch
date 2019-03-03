@@ -10,6 +10,8 @@ import UIKit
 
 class SessionListViewController: UIViewController {
     
+    var appController: AppController?
+    
     var sessionResults: [Session] = []
     
     let tableView = UITableView(frame: .zero, style: .plain)
@@ -70,16 +72,8 @@ class SessionListViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleSessionsNotification(notification:)), name: .sessionControllerDidChangeState, object: nil)
         
-        SessionController.shared.fetchSessions()
-        
-//        client?.fetchSessionResults { (results, error) in
-//            if let results = results {
-//                self.sessionResults = results
-//                self.refreshControl.endRefreshing()
-//                self.tableView.reloadData()
-//            }
-//            if let error = error { print(error) }
-//        }
+        sessionResults = AppController.shared.sessionController.state.sessions ?? []
+//        AppController.shared.sessionController.fetchSessions()
     }
     
     deinit {
@@ -88,7 +82,7 @@ class SessionListViewController: UIViewController {
     
     @objc private func handleSessionsNotification(notification: Notification) {
         
-        self.sessionResults = SessionController.shared.state.sessions ?? []
+        self.sessionResults = AppController.shared.sessionController.state.sessions ?? []
         
         if self.refreshControl.isRefreshing {
             self.refreshControl.endRefreshing()
@@ -98,27 +92,12 @@ class SessionListViewController: UIViewController {
     
     @objc private func handleRefreshControl(sender: UIRefreshControl) {
         
-        SessionController.shared.fetchSessions()
-        
-//        client?.fetchSessionResults { (results, error) in
-//            if let results = results {
-//                self.sessionResults = results
-//                self.refreshControl.endRefreshing()
-//                self.tableView.reloadData()
-//            }
-//            if let error = error { print(error) }
-//        }
+        AppController.shared.sessionController.fetchSessions()
     }
 
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
         
-        let alertController = UIAlertController(title: "New Test", message: "To infinity, and beyond!", preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-        
-        alertController.addAction(action)
-        alertController.preferredAction = action
-        
-        present(alertController, animated: true, completion: nil)
+        AppController.shared.presentSurvey(in: self)
     }
 }
 

@@ -13,6 +13,7 @@ extension SessionController {
     
     enum State {
         case initial
+        case loading
         case success(sessions: [Session])
         case error(error: Error)
         
@@ -30,14 +31,9 @@ extension SessionController {
 
 class SessionController: NSObject {
 
-    static let shared = SessionController()
-    
-    var researchController = ResearchController()
-    
     private(set) var state: State = .initial
     
     private let client = APIClient()
-    private var isFetching = false
     private var fetchingLock = NSLock()
     
     
@@ -47,26 +43,32 @@ class SessionController: NSObject {
        
         fetchingLock.lock()
         
-        guard !isFetching else {
+        if case .loading = self.state {
             fetchingLock.unlock()
             return
         }
         
-        isFetching = true
+        self.state = .loading
         fetchingLock.unlock()
+        
         
         client.fetchSessionResults { (sessions, error) in
             
             if let error = error {
                 self.state = .error(error: error)
-            } else if let sessions = sessions {
+            }
+            else if let sessions = sessions {
+                // add local sessions
                 let results = (self.temporarySessions() + sessions).sorted { $0.start > $1.start } // latest on top
-                self.state = .success(sessions: results)
-            } else {
-                self.state = .success(sessions: [])
+                self.state = .success(sessions: results.reversed())
+            }
+            else {
+                // present only local sessions
+                self.state = .success(sessions: self.temporarySessions())
             }
             
-            self.isFetching = false
+            
+            // Post notification asap
             
             let notification = Notification(name: .sessionControllerDidChangeState, object: self, userInfo: nil)
             NotificationQueue.default.enqueue(notification, postingStyle: .asap)
@@ -84,10 +86,10 @@ class SessionController: NSObject {
             let data = try APIClient.encoder.encode(session)
             try data.write(to: path, options: .atomic)
             
-            var temps = UserDefaults.standard.array(forKey: "localSessions") as? [String] ?? []
+            var temps = UserDefaults.standard.array(forKey: UserDefaults.Key.localSessions) as? [String] ?? []
             if !temps.contains(path.lastPathComponent) {
                 temps.append(path.lastPathComponent)
-                UserDefaults.standard.set(temps, forKey: "localSessions")
+                UserDefaults.standard.set(temps, forKey: UserDefaults.Key.localSessions)
                 UserDefaults.standard.synchronize()
             }
             
@@ -101,7 +103,7 @@ class SessionController: NSObject {
         
         var sessions = [Session]()
         
-        let names = UserDefaults.standard.array(forKey: "localSessions") as? [String] ?? []
+        let names = UserDefaults.standard.array(forKey: UserDefaults.Key.localSessions) as? [String] ?? []
         
         for name in names {
             do {

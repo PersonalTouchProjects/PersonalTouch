@@ -10,8 +10,6 @@ import UIKit
 
 class HomeNavigationController: UINavigationController {
 
-    var client: APIClient?
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -24,17 +22,5 @@ class HomeNavigationController: UINavigationController {
         navigationBar.barTintColor = UIColor(hex: 0x00b894)
         navigationBar.tintColor = UIColor.white
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-//        if let vc = topViewController as? SessionListViewController {
-//            vc.client = client
-//        }
-    }
-    
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        super.pushViewController(viewController, animated: animated)
-        
-//        if let vc = viewController as? SessionListViewController {
-//            vc.client = client
-//        }
     }
 }

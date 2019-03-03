@@ -14,8 +14,6 @@ let surveyUUID = UUID()
 let activityUUID = UUID()
 
 class HomeViewController: SessionDetailViewController {
-
-    let appController = AppController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +21,22 @@ class HomeViewController: SessionDetailViewController {
         navigationItem.title = "MyTouch"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Test", style: .plain, target: self, action: #selector(handleNewTestButton(sender:)))
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSessionsNotification(notification:)), name: .sessionControllerDidChangeState, object: nil)
+        
+        session = AppController.shared.sessionController.state.sessions?.first
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func handleSessionsNotification(notification: Notification) {
+        session = AppController.shared.sessionController.state.sessions?.first
+        self.tableView.reloadData()
     }
     
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
-//        sessionController.showConsentIfNeeded(in: self)
-        
-        appController.researchController.showSurvey(in: self)
-        
-//        researchController.showSurvey(in: self)
+        AppController.shared.presentSurvey(in: self)
     }
 }
 

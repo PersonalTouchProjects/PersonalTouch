@@ -11,6 +11,8 @@ import ResearchKit
 
 class AppController: NSObject {
     
+    static let shared = AppController()
+    
     var sessionController = SessionController()
     var researchController = ResearchController()
     
@@ -18,10 +20,10 @@ class AppController: NSObject {
     
     var isConsented: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "\(Bundle.main.bundleIdentifier!).consented")
+            return UserDefaults.standard.bool(forKey: UserDefaults.Key.consented)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "\(Bundle.main.bundleIdentifier!).consented")
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Key.consented)
         }
     }
     
@@ -31,7 +33,6 @@ class AppController: NSObject {
     }
     
     func presentConsentIfNeeded(in viewController: UIViewController) {
-        
         if !isConsented {
             currentViewController = viewController
             researchController.showConsent(in: viewController)
@@ -47,6 +48,18 @@ class AppController: NSObject {
         currentViewController = viewController
         researchController.showActivity(with: session, in: viewController)
     }
+    
+    
+    // MARk: - Error Handling
+    
+    private func presentErrorAlert(with error: Error, in viewController: UIViewController) {
+        
+        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alertController.addAction(action)
+        viewController.present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension AppController: ResearchControllerDelegate {
@@ -57,6 +70,11 @@ extension AppController: ResearchControllerDelegate {
         case .completed:
             isConsented = true
         
+        case .failed:
+            if let error = error, let vc = currentViewController {
+                presentErrorAlert(with: error, in: vc)
+            }
+            
         default:
             break
         }
@@ -69,6 +87,12 @@ extension AppController: ResearchControllerDelegate {
             if let vc = currentViewController {
                 researchController.showActivity(with: session!, in: vc)
             }
+            
+        case .failed:
+            if let error = error, let vc = currentViewController {
+                presentErrorAlert(with: error, in: vc)
+            }
+            
         default:
             break
         }
@@ -83,6 +107,11 @@ extension AppController: ResearchControllerDelegate {
             }
             
             sessionController.fetchSessions()
+            
+        case .failed:
+            if let error = error, let vc = currentViewController {
+                presentErrorAlert(with: error, in: vc)
+            }
             
         default:
             break

@@ -10,14 +10,14 @@ import UIKit
 
 class AccomodationCell: MyTouchBaseCell {
     
-    var holdDurationText: String?
-    var ignoreRepeatText: String?
-    var accomodationText: String?
+    var session: Session?
     
     let button = UIButton()
-
+    
     private let titleLabel = UILabel()
     private let itemViewStack = UIStackView()
+    
+    private var buttonConstraints: [NSLayoutConstraint] = []
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -51,59 +51,178 @@ class AccomodationCell: MyTouchBaseCell {
             itemViewStack.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 1.0),
             itemViewStack.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             itemViewStack.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            
+            containerView.bottomAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: itemViewStack.bottomAnchor, multiplier: 2.0),
+        ])
+        
+        buttonConstraints = [
             button.topAnchor.constraint(equalToSystemSpacingBelow: itemViewStack.bottomAnchor, multiplier: 2.0),
             button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             button.bottomAnchor.constraint(equalToSystemSpacingAbove: containerView.bottomAnchor, multiplier: 2.0)
-        ])
+        ]
+        
+        NSLayoutConstraint.activate(buttonConstraints)
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
+        layoutItemViews()
+    }
+    
+    func layoutItemViews() {
         
         itemViewStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        itemViews().enumerated().forEach { itemViewStack.insertArrangedSubview($1, at: $0) }
+
+        guard let session = session else {
+            return
+        }
+
+        switch session.state {
+        case .analyzing:
+            button.isHidden = true
+            itemViewStack.insertArrangedSubview(analyzingView(), at: 0)
+            NSLayoutConstraint.deactivate(buttonConstraints)
+            
+        case .temporary:
+            button.isHidden = false
+            button.setTitle("Upload", for: .normal)
+            itemViewStack.insertArrangedSubview(localSessionView(), at: 0)
+            NSLayoutConstraint.activate(buttonConstraints)
+            
+        case .error:
+            button.isHidden = false
+            button.setTitle("Test Again", for: .normal)
+            itemViewStack.insertArrangedSubview(errorView(), at: 0)
+            NSLayoutConstraint.activate(buttonConstraints)
+            
+        case .completed:
+            button.isHidden = false
+            button.setTitle("Go to Settings", for: .normal)
+            itemViews().enumerated().forEach { itemViewStack.insertArrangedSubview($1, at: $0) }
+            NSLayoutConstraint.activate(buttonConstraints)
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func analyzingView() -> UIView {
+        let view = PromptView()
+        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
+        view.titleLabel.text = "正在分析中"
+        return view
+        
+    }
+    
+    private func localSessionView() -> UIView {
+        let view = PromptView()
+        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
+        view.titleLabel.text = "資料尚未上傳至伺服器"
+        return view
+    }
+    
+    private func errorView() -> UIView {
+        let view = PromptView()
+        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
+        view.titleLabel.text = "發生不可預期之錯誤"
+        return view
+    }
+    
     private func itemViews() -> [ItemView] {
+        
+        guard let session = session, session.state == .completed else {
+            return []
+        }
         
         var results: [ItemView] = []
         
-        if let text = holdDurationText {
+        if let value = session.holdDuration, value != 0 {
             let itemView = ItemView()
             itemView.titleLabel.text = "Hold Duration"
-            itemView.valueLabel.text = text
+            itemView.valueLabel.text = "\(value)"
             itemView.unitLabel.text = "Sec."
             itemView.separator.isHidden = results.count == 0
             results.append(itemView)
         }
-        if let text = ignoreRepeatText {
+        if let value = session.ignoreRepeat, value != 0 {
             let itemView = ItemView()
             itemView.titleLabel.text = "Ignore Repeat"
-            itemView.valueLabel.text = text
+            itemView.valueLabel.text = "\(value)"
             itemView.unitLabel.text = "Sec."
             itemView.separator.isHidden = results.count == 0
             results.append(itemView)
         }
-        if let text = accomodationText {
-            let itemView = ItemView()
-            itemView.titleLabel.text = "Touch Accomodation"
-            itemView.valueLabel.text = text
-            itemView.unitLabel.text = "Sec."
-            itemView.extraLabel.text = "Use initial touch location"
-            itemView.separator.isHidden = results.count == 0
-            results.append(itemView)
+        if let value = session.touchAssistant {
+            if case .initial(let sec) = value {
+                let itemView = ItemView()
+                itemView.titleLabel.text = "Touch Accomodation"
+                itemView.valueLabel.text = "\(sec)"
+                itemView.unitLabel.text = "Sec."
+                itemView.extraLabel.text = "Use initial touch location"
+                itemView.separator.isHidden = results.count == 0
+                results.append(itemView)
+            }
+            if case .final(let sec) = value {
+                let itemView = ItemView()
+                itemView.titleLabel.text = "Touch Accomodation"
+                itemView.valueLabel.text = "\(sec)"
+                itemView.unitLabel.text = "Sec."
+                itemView.extraLabel.text = "Use final touch location"
+                itemView.separator.isHidden = results.count == 0
+                results.append(itemView)
+            }
         }
         
         return results
+        
+    }
+    
+    override func prepareForReuse() {
+        session = nil
+        itemViewStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        super.prepareForReuse()
     }
 }
 
 extension AccomodationCell {
+    
+    private class PromptView: UIView {
+        
+        let imageView = UIView()
+        let titleLabel = UILabel()
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            imageView.backgroundColor = UIColor.gray
+            titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+            titleLabel.textAlignment = .center
+            
+            addSubview(imageView)
+            addSubview(titleLabel)
+            
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                imageView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 2.0),
+                imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+                imageView.widthAnchor.constraint(equalToConstant: 100),
+                imageView.heightAnchor.constraint(equalToConstant: 100),
+                
+                titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: imageView.bottomAnchor, multiplier: 2.0),
+                titleLabel.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
+                titleLabel.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
+                
+                titleLabel.bottomAnchor.constraint(equalToSystemSpacingAbove: bottomAnchor, multiplier: 2.0)
+            ])
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
     
     private class ItemView: UIView {
         
@@ -173,14 +292,4 @@ extension AccomodationCell {
             fatalError("init(coder:) has not been implemented")
         }
     }
-    
-//    private class ActionButton: UIButton {
-//
-//        override var intrinsicContentSize: CGSize {
-//            let size = super.intrinsicContentSize
-//            let width = max(size.width + 36, 100)
-//            let height = max(size.height + 12, 40)
-//            return CGSize(width: width, height: height)
-//        }
-//    }
 }

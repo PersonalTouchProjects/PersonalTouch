@@ -10,6 +10,8 @@ import UIKit
 
 class SessionInfoCell: MyTouchBaseCell {
 
+    var items: [Item] = []
+    
     let titleLabel = UILabel()
     private let itemViewStack = UIStackView()
     
@@ -46,17 +48,20 @@ class SessionInfoCell: MyTouchBaseCell {
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-        
+        layoutItemViews()
+    }
+    
+    func layoutItemViews() {
         itemViewStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         itemViews().enumerated().forEach { itemViewStack.insertArrangedSubview($1, at: $0) }
     }
     
     private func itemViews() -> [ItemView] {
         
-        let results: [ItemView] = (0..<4).map { _ in
+        let results: [ItemView] = items.map { item in
             let itemView = ItemView()
-            itemView.titleLabel.text = "Title"
-            itemView.textLabel.text = "text"
+            itemView.titleLabel.text = item.title
+            itemView.textLabel.text = item.text
             return itemView
         }
         
@@ -68,6 +73,11 @@ class SessionInfoCell: MyTouchBaseCell {
 }
 
 extension SessionInfoCell {
+    
+    struct Item {
+        var title: String
+        var text: String
+    }
     
     private class ItemView: UIView {
         
@@ -111,5 +121,11 @@ extension SessionInfoCell {
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
+    }
+    
+    override func prepareForReuse() {
+        items.removeAll()
+        itemViewStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        super.prepareForReuse()
     }
 }

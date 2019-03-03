@@ -12,8 +12,6 @@ import ResearchKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    let client = APIClient()
-    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -21,9 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.tintColor = UIColor(hex: 0x00b894)
         
-        if let tabBarController = window?.rootViewController as? HomeTabBarController {
-            tabBarController.client = client
-        }
+        AppController.shared.sessionController.fetchSessions()
         
         return true
     }
