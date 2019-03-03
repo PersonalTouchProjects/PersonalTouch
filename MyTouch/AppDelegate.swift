@@ -19,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.tintColor = UIColor(hex: 0x00b894)
         
-        AppController.shared.sessionController.fetchSessions()
-        
         return true
     }
 

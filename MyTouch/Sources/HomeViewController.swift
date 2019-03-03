@@ -15,11 +15,26 @@ let activityUUID = UUID()
 
 class HomeViewController: SessionDetailViewController {
     
+    let onboardingView = OnboardingView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "MyTouch"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Test", style: .plain, target: self, action: #selector(handleNewTestButton(sender:)))
+        
+        view.addSubview(onboardingView)
+
+        onboardingView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            onboardingView.topAnchor.constraint(equalTo: view.topAnchor),
+            onboardingView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            onboardingView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            onboardingView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
+        ])
+        
+        tableView.isHidden = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleSessionsNotification(notification:)), name: .sessionControllerDidChangeState, object: nil)
         
