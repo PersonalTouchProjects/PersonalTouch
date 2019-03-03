@@ -21,7 +21,12 @@ class HomeViewController: SessionDetailViewController {
         super.viewDidLoad()
         
         navigationItem.title = "MyTouch"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Test", style: .plain, target: self, action: #selector(handleNewTestButton(sender:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "New Test",
+            style: .plain,
+            target: self,
+            action: #selector(handleNewTestButton(sender:))
+        )
         
         view.addSubview(onboardingView)
 
@@ -36,9 +41,15 @@ class HomeViewController: SessionDetailViewController {
         
         tableView.isHidden = true
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleSessionsNotification(notification:)), name: .sessionControllerDidChangeState, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleSessionsNotification(notification:)),
+            name: .sessionControllerDidChangeState,
+            object: nil
+        )
         
         session = AppController.shared.sessionController.state.sessions?.first
+        layout()
     }
     
     deinit {
@@ -46,12 +57,33 @@ class HomeViewController: SessionDetailViewController {
     }
     
     @objc private func handleSessionsNotification(notification: Notification) {
-        session = AppController.shared.sessionController.state.sessions?.first
-        self.tableView.reloadData()
+        layout()
     }
     
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
         AppController.shared.presentSurvey(in: self)
+    }
+    
+    private func layout() {
+        
+        switch AppController.shared.sessionController.state {
+            
+        case .initial:
+            self.tableView.isHidden = true
+            self.onboardingView.isHidden = false
+            self.onboardingView.titleLabel.text = "載入中"
+            self.onboardingView.textLabel.text = nil
+            
+        case .success(let sessions):
+            self.session = sessions.first
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+            self.onboardingView.isHidden = true
+            
+        default:
+            self.tableView.isHidden = true
+            self.onboardingView.isHidden = false
+        }
     }
 }
 

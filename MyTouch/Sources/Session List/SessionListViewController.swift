@@ -14,6 +14,7 @@ class SessionListViewController: UIViewController {
     
     var sessionResults: [Session] = []
     
+    let onboardingView = OnboardingView()
     let tableView = UITableView(frame: .zero, style: .plain)
     let refreshControl = UIRefreshControl()
     let backgroundView = UIView()
@@ -23,7 +24,12 @@ class SessionListViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = "MyTouch"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Test", style: .plain, target: self, action: #selector(handleNewTestButton(sender:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "New Test",
+            style: .plain,
+            target: self,
+            action: #selector(handleNewTestButton(sender:))
+        )
         
         view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         
@@ -45,10 +51,12 @@ class SessionListViewController: UIViewController {
         
         view.addSubview(backgroundView)
         view.addSubview(tableView)
+        view.addSubview(onboardingView)        
         view.addSubview(topShadowView)
         
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        onboardingView.translatesAutoresizingMaskIntoConstraints = false
         topShadowView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -56,6 +64,11 @@ class SessionListViewController: UIViewController {
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            onboardingView.topAnchor.constraint(equalTo: view.topAnchor),
+            onboardingView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            onboardingView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            onboardingView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
             
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -68,26 +81,56 @@ class SessionListViewController: UIViewController {
             topShadowView.heightAnchor.constraint(equalToConstant: 1)
         ])
         
+        tableView.isHidden = true
         topShadowView.alpha = 0.0
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleSessionsNotification(notification:)), name: .sessionControllerDidChangeState, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleSessionsNotification(notification:)),
+            name: .sessionControllerDidChangeState,
+            object: nil
+        )
         
         sessionResults = AppController.shared.sessionController.state.sessions ?? []
-//        AppController.shared.sessionController.fetchSessions()
+        layout()
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc private func handleSessionsNotification(notification: Notification) {
+    private func layout() {
         
-        self.sessionResults = AppController.shared.sessionController.state.sessions ?? []
-        
-        if self.refreshControl.isRefreshing {
-            self.refreshControl.endRefreshing()
+        switch AppController.shared.sessionController.state {
+            
+        case .initial:
+            self.tableView.isHidden = true
+            self.onboardingView.isHidden = false
+            self.onboardingView.titleLabel.text = "載入中"
+            self.onboardingView.textLabel.text = nil
+            
+        case .success(let sessions):
+            self.sessionResults = sessions
+            if self.refreshControl.isRefreshing {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    self.refreshControl.endRefreshing()
+                }
+            }
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+            self.onboardingView.isHidden = true
+            
+        case .loading:
+            break
+            
+        default:
+            self.tableView.isHidden = true
+            self.onboardingView.isHidden = false
         }
-        self.tableView.reloadData()
+    }
+    
+    @objc private func handleSessionsNotification(notification: Notification) {
+        layout()
     }
     
     @objc private func handleRefreshControl(sender: UIRefreshControl) {

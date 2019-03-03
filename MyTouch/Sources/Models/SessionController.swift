@@ -31,7 +31,12 @@ extension SessionController {
 
 class SessionController: NSObject {
 
-    private(set) var state: State = .initial
+    private(set) var state: State = .initial {
+        didSet {
+            let notification = Notification(name: .sessionControllerDidChangeState, object: self, userInfo: nil)
+            NotificationQueue.default.enqueue(notification, postingStyle: .asap)
+        }
+    }
     
     private let client = APIClient()
     private var fetchingLock = NSLock()
@@ -59,19 +64,14 @@ class SessionController: NSObject {
             }
             else if let sessions = sessions {
                 // add local sessions
-                let results = (self.temporarySessions() + sessions).sorted { $0.start > $1.start } // latest on top
-                self.state = .success(sessions: results.reversed())
+//                let results = (self.temporarySessions() + sessions).sorted { $0.start > $1.start } // latest on top
+                let results = self.temporarySessions()
+                self.state = .success(sessions: results)
             }
             else {
                 // present only local sessions
                 self.state = .success(sessions: self.temporarySessions())
             }
-            
-            
-            // Post notification asap
-            
-            let notification = Notification(name: .sessionControllerDidChangeState, object: self, userInfo: nil)
-            NotificationQueue.default.enqueue(notification, postingStyle: .asap)
         }
     }
     
