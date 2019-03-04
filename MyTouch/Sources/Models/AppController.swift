@@ -13,12 +13,12 @@ class AppController: NSObject {
     
     static let shared = AppController()
     
-    var sessionController = SessionController()
-    var researchController = ResearchController()
+    let sessionController = SessionController()
+    let researchController = ResearchController()
     
     private var currentViewController: UIViewController?
     
-    var isConsented: Bool {
+    private(set) var isConsented: Bool {
         get {
             return UserDefaults.standard.bool(forKey: UserDefaults.Key.consented)
         }
@@ -84,8 +84,8 @@ extension AppController: ResearchControllerDelegate {
         
         switch reason {
         case .completed:
-            if let vc = currentViewController {
-                researchController.showActivity(with: session!, in: vc)
+            if let vc = currentViewController, let session = session {
+                researchController.showActivity(with: session, in: vc)
             }
             
         case .failed:
@@ -117,6 +117,4 @@ extension AppController: ResearchControllerDelegate {
             break
         }
     }
-    
-    
 }

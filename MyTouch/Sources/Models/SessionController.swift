@@ -14,18 +14,9 @@ extension SessionController {
     enum State {
         case initial
         case loading
-        case success(sessions: [Session])
+        case empty
+        case sessions(sessions: [Session])
         case error(error: Error)
-        
-        var sessions: [Session]? {
-            if case .success(let sessions) = self { return sessions }
-            return nil
-        }
-        
-        var error: Error? {
-            if case .error(let error) = self { return error }
-            return nil
-        }
     }
 }
 
@@ -63,14 +54,19 @@ class SessionController: NSObject {
                 self.state = .error(error: error)
             }
             else if let sessions = sessions {
-                // add local sessions
-//                let results = (self.temporarySessions() + sessions).sorted { $0.start > $1.start } // latest on top
-                let results = self.temporarySessions()
-                self.state = .success(sessions: results)
+                
+                let locals = self.temporarySessions()
+                let results = (locals + sessions).sorted { $0.start > $1.start } // latest on top
+                
+                if results.isEmpty {
+                    self.state = .empty
+                } else {
+                    self.state = .sessions(sessions: results)
+                }
             }
             else {
                 // present only local sessions
-                self.state = .success(sessions: self.temporarySessions())
+                self.state = .sessions(sessions: self.temporarySessions())
             }
         }
     }
@@ -97,6 +93,29 @@ class SessionController: NSObject {
             print(error)
         }
         
+    }
+    
+    func removeTemporarySession(_ session: Session) {
+        let path = defaultDocumentDirectoryPath().appendingPathComponent(session.filename)
+        removeTemporarySession(path: path)
+    }
+    
+    func removeTemporarySession(path: URL) {
+        
+        do {
+            if FileManager.default.fileExists(atPath: path.absoluteString) {
+                try FileManager.default.removeItem(at: path)
+            }
+            
+            let temps = UserDefaults.standard.array(forKey: UserDefaults.Key.localSessions) as? [String] ?? []
+            var set = Set(temps)
+            set.remove(path.lastPathComponent)
+            UserDefaults.standard.set(set, forKey: UserDefaults.Key.localSessions)
+            UserDefaults.standard.synchronize()
+            
+        } catch {
+            print(error)
+        }
     }
     
     func temporarySessions() -> [Session] {

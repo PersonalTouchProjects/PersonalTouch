@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import ResearchKit
 
 class HomeTabBarController: UITabBarController {
 
+    // MARK: - UIViewController
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         
         switch UIDevice.current.userInterfaceIdiom {
@@ -31,9 +34,357 @@ class HomeTabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        AppController.shared.sessionController.fetchSessions()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            AppController.shared.presentConsentIfNeeded(in: self)
-//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.reloadSessions()
+        }
+    }
+    
+    
+    // MARK: - Sessions
+    
+    private(set) var isLoaded: Bool = false
+    private(set) var sessions: [Session] = []
+    private(set) var error: Error?
+    
+    private let client = APIClient()
+    
+    func reloadSessions() {
+        
+        client.fetchSessionResults { (sessions, error) in
+            
+            self.isLoaded = true
+            
+            for session in sessions ?? [] {
+                do {
+                    try session.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            
+            self.sessions = Session.locals().sorted { $0.start > $1.start }
+            self.error = error
+            
+            
+            let notification = Notification(name: .sessionControllerDidChangeState, object: self, userInfo: nil)
+            NotificationQueue.default.enqueue(notification, postingStyle: .asap)
+        }
+    }
+    
+    
+    // MARK: - Research FLow
+
+    private var currentSession: Session?
+    
+    func presentConsent() {
+        let taskViewController = ORKTaskViewController(task: consentTask(), taskRun: consentID)
+        taskViewController.delegate = self
+        present(taskViewController, animated: true, completion: nil)
+    }
+    
+    func presentSurveyAndActivity() {
+        let taskViewController = ORKTaskViewController(task: surveyTask(), taskRun: surveyID)
+        taskViewController.delegate = self
+        present(taskViewController, animated: true, completion: nil)
+    }
+    
+    private func presentActivity(with session: Session) {
+        
+        self.currentSession = session
+        
+        let taskViewController = ORKTaskViewController(task: activityTask(), taskRun: activityID)
+        taskViewController.delegate = self
+        
+        present(taskViewController, animated: true) {
+            self.currentSession?.start = Date()
+        }
+    }
+    
+    private func consentDidFinish(taskViewController: ORKTaskViewController, with reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        taskViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    private func surveyDidFinish(taskViewController: ORKTaskViewController, with reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        switch reason {
+        case .completed:
+            
+            // Generate subject object
+            var subject = Subject()
+            
+            if let birthResult = taskViewController.result.stepResult(forStepIdentifier: "birth")?.result(forIdentifier: "birth") as? ORKNumericQuestionResult {
+                subject.birthYear = birthResult.numericAnswer!.intValue
+            }
+            
+            if let nameResult = taskViewController.result.stepResult(forStepIdentifier: "name")?.result(forIdentifier: "name") as? ORKTextQuestionResult {
+                subject.name = nameResult.textAnswer!
+            }
+            
+            if let genderResult = taskViewController.result.stepResult(forStepIdentifier: "gender")?.result(forIdentifier: "gender") as? ORKChoiceQuestionResult {
+                if let answer = genderResult.choiceAnswers?.first as? String {
+                    subject.gender = Subject.Gender(rawValue: answer) ?? .other
+                }
+            }
+            
+            if let handResult = taskViewController.result.stepResult(forStepIdentifier: "hand")?.result(forIdentifier: "hand") as? ORKChoiceQuestionResult {
+                if let answer = handResult.choiceAnswers?.first as? String {
+                    subject.dominantHand = Subject.DominantHand(rawValue: answer) ?? .none
+                }
+            }
+            
+            // End of generate subject
+            
+            taskViewController.dismiss(animated: true) {
+                self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
+            }
+            
+        default:
+            self.currentSession = nil
+            taskViewController.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    private func activityDidFinish(taskViewController: ORKTaskViewController, with reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        guard var session = currentSession else {
+            return
+        }
+        
+        switch reason {
+        case .completed:
+            
+            session.end = Date()
+            
+            if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityTap")?.result(forIdentifier: "touchAbilityTap") as? ORKTouchAbilityTapResult {
+                session.tap = TapTask(result: result)
+            }
+            
+            if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityLongPress")?.result(forIdentifier: "touchAbilityLongPress") as? ORKTouchAbilityLongPressResult {
+                session.longPress = LongPressTask(result: result)
+            }
+            
+            if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilitySwipe")?.result(forIdentifier: "touchAbilitySwipe") as? ORKTouchAbilitySwipeResult {
+                session.swipe = SwipeTask(result: result)
+            }
+            
+            if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityHorizontalScroll")?.result(forIdentifier: "touchAbilityHorizontalScroll") as? ORKTouchAbilityScrollResult {
+                session.horizontalScroll = ScrollTask(result: result)
+            }
+            
+            if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityVerticalScroll")?.result(forIdentifier: "touchAbilityVerticalScroll") as? ORKTouchAbilityScrollResult {
+                session.verticalScroll = ScrollTask(result: result)
+            }
+            
+            if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityPinch")?.result(forIdentifier: "touchAbilityPinch") as? ORKTouchAbilityPinchResult {
+                session.pinch = PinchTask(result: result)
+            }
+            
+            if let result = taskViewController.result.stepResult(forStepIdentifier: "touchAbilityRotation")?.result(forIdentifier: "touchAbilityrotation") as? ORKTouchAbilityRotationResult {
+                session.rotation = RotationTask(result: result)
+            }
+            
+            
+            // Save session
+            do {
+                try session.save()
+            }
+            catch {
+                let alertController = UIAlertController(
+                    title: "錯誤",
+                    message: error.localizedDescription,
+                    preferredStyle: .alert
+                )
+                alertController.addAction(UIAlertAction(
+                    title: "OK",
+                    style: .default,
+                    handler: nil)
+                )
+                
+                present(alertController, animated: true, completion: nil)
+            }
+            
+            taskViewController.dismiss(animated: true, completion: nil)
+            
+        default:
+            currentSession = nil
+            taskViewController.dismiss(animated: true, completion: nil)
+            
+        }
     }
 }
+
+
+// MARK: - ORKTaskViewControllerDelegate
+
+extension HomeTabBarController: ORKTaskViewControllerDelegate {
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        switch taskViewController.taskRunUUID {
+        case consentID:
+            consentDidFinish(taskViewController: taskViewController, with: reason, error: error)
+            
+        case surveyID:
+            surveyDidFinish(taskViewController: taskViewController, with: reason, error: error)
+            
+        case activityID:
+            activityDidFinish(taskViewController: taskViewController, with: reason, error: error)
+            
+        default:
+            break
+        }
+    }
+}
+
+
+// MARK: - ResearchKit Flow
+
+private func consentTask() -> ORKOrderedTask {
+    
+    let document = ORKConsentDocument()
+    document.title = "MyTouch 使用同意書"
+    
+    /*
+     * Supported types (in ResearchKit recommanded order):
+     * .overview, .dataGathering, .privacy, .dataUse, .timeCommitment, .studySurvey, .studyTasks, .withdrawing
+     */
+    let sectionTypes: [ORKConsentSectionType] = [
+        .overview,
+        .dataGathering,
+        .privacy,
+        .studySurvey,
+        .withdrawing
+    ]
+    
+    let consentSections: [ORKConsentSection] = sectionTypes.map { contentSectionType in
+        let consentSection = ORKConsentSection(type: contentSectionType)
+        switch contentSectionType {
+        case .overview:
+            consentSection.summary = "歡迎來到 MyTouch！由於檢測資料將會提供學術研究使用，於是在使用本 app 前，有以下事項須向您做說明。"
+            // consentSection.content = ""
+            
+        case .dataGathering:
+            consentSection.summary = "接下來之測驗進行方式，為進行一系列的測驗，約耗時 20 分鐘。本 app 測驗結果除了為您帶來更順暢的觸控體驗，亦會將您的測驗資料作為日後學術研究使用。"
+            
+        case .privacy:
+            consentSection.summary = "為確保您的個人權益，我們僅將資料結果做學術上的研究使用，並不會將您的個人資料外流，或做其他商業利用。"
+            
+        case .studySurvey:
+            consentSection.summary = "除前述測驗外，我們亦須向您蒐集個人資料（如：年齡、性別、手機、信箱、同意書簽名等），以增進日後研究之樣本蒐集。"
+            
+        case .withdrawing:
+            consentSection.summary = "若您無法配合 MyTouch 之資料用途，我們雖深感遺憾但亦尊重您的決定。期待未來能有機會再與您合作！"
+            
+        default:
+            break
+        }
+        return consentSection
+    }
+    
+    document.sections = consentSections
+    document.addSignature(ORKConsentSignature(forPersonWithTitle: "User", dateFormatString: nil, identifier: "signature"))
+    
+    var steps = [ORKStep]()
+    
+    let visualConsentStep = ORKVisualConsentStep(identifier: "visualConsent", document: document)
+    steps.append(visualConsentStep)
+    
+    let signature = document.signatures?.first
+    let reviewStep = ORKConsentReviewStep(identifier: "review", signature: signature, in: document)
+    reviewStep.text = "檢閱同意書" // "Review the consent"
+    reviewStep.reasonForConsent = "MyTouch 使用同意書"// "Consent to join the Research Study."
+    steps.append(reviewStep)
+    
+    let completionStep = ORKCompletionStep(identifier: "completion")
+    completionStep.title = "歡迎" // "Welcome"
+    completionStep.text = "謝謝您" // "Thank you."
+    steps.append(completionStep)
+    
+    return ORKOrderedTask(identifier: "consentTask", steps: steps)
+}
+
+private func surveyTask() -> ORKOrderedTask {
+    
+    var steps = [ORKStep]()
+    
+    let instructionStep = ORKInstructionStep(identifier: "intro")
+    instructionStep.title = "Test Survey"
+    instructionStep.text = "Answer three questions to complete the survey."
+    steps += [instructionStep]
+    
+    let emailFormat = ORKEmailAnswerFormat()
+    
+    let nameAnswerFormat = ORKTextAnswerFormat(maximumLength: 100)
+    nameAnswerFormat.multipleLines = false
+    
+    let birthYearFormat = ORKNumericAnswerFormat.integerAnswerFormat(withUnit: nil)
+    birthYearFormat.minimum = NSNumber(value: Calendar(identifier: .iso8601).component(.year, from: Date.distantPast))
+    birthYearFormat.maximum = NSNumber(value: Calendar(identifier: .iso8601).component(.year, from: Date()))
+    
+    let genderFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: "Female", value: Subject.Gender.female.rawValue as NSString),
+        ORKTextChoice(text: "Male", value: Subject.Gender.male.rawValue as NSString),
+        ORKTextChoice(text: "Other", value: Subject.Gender.other.rawValue as NSString),
+        ])
+    
+    let dominantHandFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: "Left Handed", value: Subject.DominantHand.left.rawValue as NSString),
+        ORKTextChoice(text: "Right Handed", value: Subject.DominantHand.right.rawValue as NSString),
+        ORKTextChoice(text: "Both", value: Subject.DominantHand.both.rawValue as NSString),
+        ORKTextChoice(text: "None", value: Subject.DominantHand.none.rawValue as NSString)
+        ])
+    
+    steps += [
+        ORKQuestionStep(identifier: "email", title: "Information", question: "email address", answer: emailFormat),
+        ORKQuestionStep(identifier: "name", title: "Information", question: "name", answer: nameAnswerFormat),
+        ORKQuestionStep(identifier: "birth", title: "Information", question: "birth year", answer: birthYearFormat),
+        ORKQuestionStep(identifier: "gender", title: "Information", question: "gender", answer: genderFormat),
+        ORKQuestionStep(identifier: "hand", title: "Information", question: "dominant hand", answer: dominantHandFormat)
+    ]
+    
+    let symptomFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: [
+        ORKTextChoice(text: "Slow Movement", value: Subject.Symptom.slowMovement.rawValue as NSNumber),
+        ORKTextChoice(text: "Rapid Fatigue", value: Subject.Symptom.rapidFatigue.rawValue as NSNumber),
+        ORKTextChoice(text: "Poor Coordination", value: Subject.Symptom.poorCoordination.rawValue as NSNumber),
+        ORKTextChoice(text: "Low Strength", value: Subject.Symptom.lowStrength.rawValue as NSNumber),
+        ORKTextChoice(text: "Difficulty Gripping", value: Subject.Symptom.difficultyGripping.rawValue as NSNumber),
+        ORKTextChoice(text: "Difficulty Holding", value: Subject.Symptom.difficultyHolding.rawValue as NSNumber),
+        ORKTextChoice(text: "Tremor", value: Subject.Symptom.tremor.rawValue as NSNumber),
+        ORKTextChoice(text: "Spasm", value: Subject.Symptom.spasm.rawValue as NSNumber),
+        ORKTextChoice(text: "Lack of Sensation", value: Subject.Symptom.lackOfSensation.rawValue as NSNumber),
+        ORKTextChoice(text: "Difficulty Controlling Direction", value: Subject.Symptom.difficultyControllingDirection.rawValue as NSNumber),
+        ORKTextChoice(text: "Difficulty Controlling Distance", value: Subject.Symptom.difficultyControllingDistance.rawValue as NSNumber),
+        ])
+    
+    steps += [
+        ORKQuestionStep(identifier: "symptom", title: "Symptom", question: "Your symptoms", answer: symptomFormat)
+    ]
+    
+    
+    let completionStep = ORKCompletionStep(identifier: "summary")
+    completionStep.title = "Thank You!!"
+    completionStep.text = "You have completed the survey"
+    steps += [completionStep]
+    
+    
+    // skip name question if age is 20
+    
+//        let predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: ORKResultSelector(resultIdentifier: ageQuestionStep.identifier), expectedAnswer: 20)
+//        let rule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [(predicate, completionStep.identifier)])
+//
+//        let task = ORKNavigableOrderedTask(identifier: "survey", steps: steps)
+//        task.setNavigationRule(rule, forTriggerStepIdentifier: ageQuestionStep.identifier)
+    
+    return ORKOrderedTask(identifier: "survey", steps: steps)
+}
+
+private func activityTask() -> ORKOrderedTask {
+    return ORKOrderedTask.touchAbilityTask(withIdentifier: "touch", intendedUseDescription: nil, taskOptions: [.tap], options: [])
+}
+
+private let consentID = UUID()
+
+private let surveyID = UUID()
+
+private let activityID = UUID()

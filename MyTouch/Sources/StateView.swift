@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingView: UIView {
+class StateView: UIView {
     
     let containerView = UIView()
     let imageView = UIImageView()

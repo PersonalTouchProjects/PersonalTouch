@@ -11,7 +11,7 @@ import UIKit
 struct Session: Codable {
 
     enum State: String, Codable {
-        case temporary
+        case local
         case analyzing
         case completed
         case error
@@ -61,7 +61,7 @@ struct Session: Codable {
     
     var id: String = UUID().uuidString
     
-    var state: State = .temporary
+    var state: State = .local
     
     var start: Date = .distantPast
     var end: Date = .distantFuture
@@ -97,21 +97,57 @@ extension Session.State {
     
     var color: UIColor {
         switch self {
-        case .temporary: return UIColor(hex: 0xb2bec3)
+        case .local:     return UIColor(hex: 0xb2bec3)
         case .analyzing: return UIColor(hex: 0xfdcb6e)
         case .completed: return UIColor(hex: 0x00b894)
-        case .error: return UIColor(hex: 0xd63031)
+        case .error:     return UIColor(hex: 0xd63031)
         }
     }
 }
 
+// MARK: - Local File Cache
+
 extension Session {
     
     var filename: String {
-        return APIClient.fileDateFormatter.string(from: start)
+        return fileDateFormatter.string(from: start)
     }
     
-    var fileExtension: String {
-        return "json"
+    static var directory: String {
+        return "sessions"
+    }
+    
+    func save() throws {
+        
+        let data = try APIClient.encoder.encode(self)
+        try data.write(to: defaultSessionsDirectoryPath().appendingPathComponent(filename), options: .atomic)
+    }
+    
+    static func locals() -> [Session] {
+        
+        var sessions = [Session]()
+        
+        do {
+            let files = try FileManager.default.contentsOfDirectory(at: defaultSessionsDirectoryPath(), includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
+            
+            for file in files {
+                let data = try Data(contentsOf: file)
+                sessions.append(try APIClient.decoder.decode(Session.self, from: data))
+            }
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        
+        return sessions
     }
 }
+
+private var fileDateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.calendar = Calendar(identifier: .iso8601)
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+    return formatter
+}()

@@ -7,15 +7,11 @@
 //
 
 import UIKit
-import ResearchKit
-
-let consentUUID = UUID()
-let surveyUUID = UUID()
-let activityUUID = UUID()
 
 class HomeViewController: SessionDetailViewController {
     
-    let onboardingView = OnboardingView()
+    let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+    let stateView = StateView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,18 +24,27 @@ class HomeViewController: SessionDetailViewController {
             action: #selector(handleNewTestButton(sender:))
         )
         
-        view.addSubview(onboardingView)
-
-        onboardingView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        
+        view.addSubview(stateView)
+        view.addSubview(activityIndicator)
+        
+        stateView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            onboardingView.topAnchor.constraint(equalTo: view.topAnchor),
-            onboardingView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            onboardingView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            onboardingView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
+            stateView.topAnchor.constraint(equalTo: view.topAnchor),
+            stateView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            stateView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            stateView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor)
         ])
         
+        stateView.isHidden = true
         tableView.isHidden = true
+        briefLabel.isHidden = true
         
         NotificationCenter.default.addObserver(
             self,
@@ -48,8 +53,12 @@ class HomeViewController: SessionDetailViewController {
             object: nil
         )
         
-        session = AppController.shared.sessionController.state.sessions?.first
-        layout()
+        if homeTabBarController.isLoaded {
+            activityIndicator.stopAnimating()
+            layoutContents()
+        } else {
+            activityIndicator.startAnimating()
+        }
     }
     
     deinit {
@@ -57,33 +66,54 @@ class HomeViewController: SessionDetailViewController {
     }
     
     @objc private func handleSessionsNotification(notification: Notification) {
-        layout()
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.layoutContents()
+        }
     }
     
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
-        AppController.shared.presentSurvey(in: self)
+        homeTabBarController.presentSurveyAndActivity()
     }
     
-    private func layout() {
+    @objc private func handleStateViewButton(sender: UIButton) {
+        homeTabBarController.presentSurveyAndActivity()
+    }
+    
+    private func layoutContents() {
         
-        switch AppController.shared.sessionController.state {
+        if homeTabBarController.error == nil && homeTabBarController.sessions.first == nil {
             
-        case .initial:
-            self.tableView.isHidden = true
-            self.onboardingView.isHidden = false
-            self.onboardingView.titleLabel.text = "載入中"
-            self.onboardingView.textLabel.text = nil
+            briefLabel.isHidden = true
+            tableView.isHidden = true
+            stateView.isHidden = false
             
-        case .success(let sessions):
-            self.session = sessions.first
-            self.tableView.reloadData()
-            self.tableView.isHidden = false
-            self.onboardingView.isHidden = true
+            // Display onboarding view
             
-        default:
-            self.tableView.isHidden = true
-            self.onboardingView.isHidden = false
+            stateView.titleLabel.text = "Welcom to MyTouch"
+            stateView.textLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            stateView.button.setTitle("Start", for: .normal)
+            
+        } else {
+            
+            session = homeTabBarController.sessions.first
+            
+            briefLabel.isHidden = false
+            tableView.isHidden = false
+            stateView.isHidden = true
+            
+            if let error = homeTabBarController.error {
+                let alertController = UIAlertController(title: "錯誤", message: error.localizedDescription, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                
+                alertController.addAction(action)
+                present(alertController, animated: true, completion: nil)
+            }
         }
+    }
+    
+    private var homeTabBarController: HomeTabBarController {
+        return tabBarController as! HomeTabBarController
     }
 }
 

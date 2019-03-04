@@ -14,7 +14,10 @@ class APIClient {
     func fetchSessionResults(decoder: JSONDecoder = APIClient.decoder, completion: @escaping ([Session]?, Error?) -> Void) {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-        
+            
+//            completion(nil, NSError(domain: "aaa", code: 123, userInfo: nil))
+//            return
+            
             let path = Bundle.main.path(forResource: "sessionsSample", ofType: "json")!
             let data = try! Data(contentsOf: URL(fileURLWithPath: path))
             

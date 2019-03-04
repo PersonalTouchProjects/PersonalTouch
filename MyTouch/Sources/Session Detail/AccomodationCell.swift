@@ -82,7 +82,7 @@ class AccomodationCell: MyTouchBaseCell {
             itemViewStack.insertArrangedSubview(analyzingView(), at: 0)
             NSLayoutConstraint.deactivate(buttonConstraints)
             
-        case .temporary:
+        case .local:
             button.isHidden = false
             button.setTitle("Upload", for: .normal)
             itemViewStack.insertArrangedSubview(localSessionView(), at: 0)
