@@ -97,9 +97,10 @@ class HomeTabBarController: UITabBarController {
                 alertController.addAction(action)
                 self.present(alertController, animated: true, completion: nil)
                 
-            } else {
-                self.reloadSessions()
             }
+//            else {
+//                self.reloadSessions()
+//            }
         }
     }
     

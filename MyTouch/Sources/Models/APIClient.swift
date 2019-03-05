@@ -33,17 +33,35 @@ class APIClient {
     
     func uploadSession(_ session: Session, encoder: JSONEncoder = APIClient.encoder, completion: @escaping (Session?, Error?) -> Void) {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+        do {
+            let data = try encoder.encode(session)
             
-            do {
-                let data = try encoder.encode(session)
-                print(data.count)
+            Alamofire.upload(data, to: "https://httpbin.org/post", headers: ["Content-Type": "application/json"])
+            .responseJSON { res in
                 
-                completion(session, nil)
+                if let error = res.error {
+                    completion(nil, error)
+                }
+                else {
+                    do {
+                        
+                        // TODO: real implementation
+                        
+                        let value = res.value as! [String: Any]
+                        let json = value["json"]!
+                        let data = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+                        
+                        let session = try APIClient.decoder.decode(Session.self, from: data)
+                        completion(session, nil)
+                    }
+                    catch {
+                        completion(nil, error)
+                    }
+                }
             }
-            catch {
-                completion(nil, error)
-            }
+        }
+        catch {
+            completion(nil, error)
         }
     }
 }

@@ -70,6 +70,10 @@ class HomeViewController: SessionDetailViewController {
             self.activityIndicator.stopAnimating()
             self.layoutContents()
         }
+        
+        if let session = homeTabBarController.sessions.first {
+            homeTabBarController.uploadSession(session)
+        }
     }
     
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
