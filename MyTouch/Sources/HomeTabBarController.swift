@@ -345,37 +345,62 @@ private func surveyTask() -> ORKOrderedTask {
     instructionStep.text = "Answer three questions to complete the survey."
     steps += [instructionStep]
     
-    let emailFormat = ORKEmailAnswerFormat()
+    // let emailFormat = ORKEmailAnswerFormat()
     
+    // name
     let nameAnswerFormat = ORKTextAnswerFormat(maximumLength: 100)
     nameAnswerFormat.multipleLines = false
+    steps.append(ORKQuestionStep(identifier: "name", title: "Information", question: "name", answer: nameAnswerFormat))
     
+    
+    // birth year
     let birthYearFormat = ORKNumericAnswerFormat.integerAnswerFormat(withUnit: nil)
     birthYearFormat.minimum = NSNumber(value: Calendar(identifier: .iso8601).component(.year, from: Date.distantPast))
     birthYearFormat.maximum = NSNumber(value: Calendar(identifier: .iso8601).component(.year, from: Date()))
+    steps.append(ORKQuestionStep(identifier: "birth", title: "Information", question: "birth year", answer: birthYearFormat))
     
+    
+    // gender
     let genderFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
         ORKTextChoice(text: "Female", value: Subject.Gender.female.rawValue as NSString),
         ORKTextChoice(text: "Male", value: Subject.Gender.male.rawValue as NSString),
         ORKTextChoice(text: "Other", value: Subject.Gender.other.rawValue as NSString),
-        ])
+    ])
+    steps.append(ORKQuestionStep(identifier: "gender", title: "Information", question: "gender", answer: genderFormat))
     
+    
+    // dominant hand
     let dominantHandFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
         ORKTextChoice(text: "Left Handed", value: Subject.DominantHand.left.rawValue as NSString),
         ORKTextChoice(text: "Right Handed", value: Subject.DominantHand.right.rawValue as NSString),
         ORKTextChoice(text: "Both", value: Subject.DominantHand.both.rawValue as NSString),
         ORKTextChoice(text: "None", value: Subject.DominantHand.none.rawValue as NSString)
-        ])
+    ])
+    steps.append(ORKQuestionStep(identifier: "hand", title: "Information", question: "dominant hand", answer: dominantHandFormat))
     
-    steps += [
-        ORKQuestionStep(identifier: "email", title: "Information", question: "email address", answer: emailFormat),
-        ORKQuestionStep(identifier: "name", title: "Information", question: "name", answer: nameAnswerFormat),
-        ORKQuestionStep(identifier: "birth", title: "Information", question: "birth year", answer: birthYearFormat),
-        ORKQuestionStep(identifier: "gender", title: "Information", question: "gender", answer: genderFormat),
-        ORKQuestionStep(identifier: "hand", title: "Information", question: "dominant hand", answer: dominantHandFormat)
-    ]
     
+    // health impairment
+    let impairmentFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
+        ORKTextChoice(text: "None", value: Subject.Impairment.none.rawValue as NSString),
+        ORKTextChoice(text: "Parkinson's", value: Subject.Impairment.parkinsons.rawValue as NSString),
+        ORKTextChoice(text: "Cerebral Palsy", value: Subject.Impairment.cerebralPalsy.rawValue as NSString),
+        ORKTextChoice(text: "Muscular Dystrophy", value: Subject.Impairment.muscularDystrophy.rawValue as NSString),
+        ORKTextChoice(text: "Spinal Cord Injury", value: Subject.Impairment.spinalCordInjury.rawValue as NSString),
+        ORKTextChoice(text: "Tetraplegia", value: Subject.Impairment.tetraplegia.rawValue as NSString),
+        ORKTextChoice(text: "Friedreichs Ataxia", value: Subject.Impairment.friedreichsAtaxia.rawValue as NSString),
+        ORKTextChoice(text: "Multiple Sclerosis", value: Subject.Impairment.multipleSclerosis.rawValue as NSString),
+        ORKTextChoice(text: "Others", value: Subject.Impairment.others.rawValue as NSString),
+    ])
+    steps.append(ORKQuestionStep(identifier: "impairment", title: "Impairment", question: "Your impairment", answer: impairmentFormat))
+    
+    // health impairment free text
+    let impairmentFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
+    impairmentFreeTextFormat.multipleLines = true
+    steps.append(ORKQuestionStep(identifier: "impairmentFreeText", title: "Impairment", question: "Your impairment", answer: impairmentFreeTextFormat))
+    
+    // symptom
     let symptomFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: [
+        ORKTextChoice(text: "None", value: 0 as NSNumber),
         ORKTextChoice(text: "Slow Movement", value: Subject.Symptom.slowMovement.rawValue as NSNumber),
         ORKTextChoice(text: "Rapid Fatigue", value: Subject.Symptom.rapidFatigue.rawValue as NSNumber),
         ORKTextChoice(text: "Poor Coordination", value: Subject.Symptom.poorCoordination.rawValue as NSNumber),
@@ -387,11 +412,8 @@ private func surveyTask() -> ORKOrderedTask {
         ORKTextChoice(text: "Lack of Sensation", value: Subject.Symptom.lackOfSensation.rawValue as NSNumber),
         ORKTextChoice(text: "Difficulty Controlling Direction", value: Subject.Symptom.difficultyControllingDirection.rawValue as NSNumber),
         ORKTextChoice(text: "Difficulty Controlling Distance", value: Subject.Symptom.difficultyControllingDistance.rawValue as NSNumber),
-        ])
-    
-    steps += [
-        ORKQuestionStep(identifier: "symptom", title: "Symptom", question: "Your symptoms", answer: symptomFormat)
-    ]
+    ])
+    steps.append(ORKQuestionStep(identifier: "symptom", title: "Symptom", question: "Your symptoms", answer: symptomFormat))
     
     
     let completionStep = ORKCompletionStep(identifier: "summary")
@@ -399,16 +421,7 @@ private func surveyTask() -> ORKOrderedTask {
     completionStep.text = "You have completed the survey"
     steps += [completionStep]
     
-    
-    // skip name question if age is 20
-    
-//        let predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: ORKResultSelector(resultIdentifier: ageQuestionStep.identifier), expectedAnswer: 20)
-//        let rule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [(predicate, completionStep.identifier)])
-//
-//        let task = ORKNavigableOrderedTask(identifier: "survey", steps: steps)
-//        task.setNavigationRule(rule, forTriggerStepIdentifier: ageQuestionStep.identifier)
-    
-    return ORKOrderedTask(identifier: "survey", steps: steps)
+    return OrderedTask(identifier: "survey", steps: steps)
 }
 
 private func activityTask() -> ORKOrderedTask {
@@ -420,3 +433,51 @@ private let consentID = UUID()
 private let surveyID = UUID()
 
 private let activityID = UUID()
+
+
+// MARK: - Private OrderedTask for skipping steps
+
+private class OrderedTask: ORKOrderedTask {
+    
+    override func step(after step: ORKStep?, with result: ORKTaskResult) -> ORKStep? {
+        
+        guard step?.identifier == "impairment" else {
+            return super.step(after: step, with: result)
+        }
+        
+        guard let choice = result.stepResult(forStepIdentifier: "impairment")?.result(forIdentifier: "impairment") as? ORKChoiceQuestionResult else {
+            return super.step(after: step, with: result)
+        }
+        
+        guard let answer = choice.choiceAnswers?.first as? String else {
+            return super.step(after: step, with: result)
+        }
+        
+        if answer == "others" {
+            return self.step(withIdentifier: "impairmentFreeText")
+        } else {
+            return self.step(withIdentifier: "symptom")
+        }
+    }
+    
+    override func step(before step: ORKStep?, with result: ORKTaskResult) -> ORKStep? {
+        
+        guard step?.identifier == "symptom" else {
+            return super.step(before: step, with: result)
+        }
+        
+        guard let choice = result.stepResult(forStepIdentifier: "impairment")?.result(forIdentifier: "impairment") as? ORKChoiceQuestionResult else {
+            return super.step(before: step, with: result)
+        }
+        
+        guard let answer = choice.choiceAnswers?.first as? String else {
+            return super.step(before: step, with: result)
+        }
+        
+        if answer == "others" {
+            return self.step(withIdentifier: "impairmentFreeText")
+        } else {
+            return self.step(withIdentifier: "impairment")
+        }
+    }
+}

@@ -35,7 +35,7 @@ struct Subject: Codable {
     }
     
     enum Impairment: String, Codable {
-        case parkinsonss
+        case parkinsons
         case cerebralPalsy
         case muscularDystrophy
         case spinalCordInjury
