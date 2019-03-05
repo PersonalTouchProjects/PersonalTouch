@@ -49,7 +49,7 @@ class HomeViewController: SessionDetailViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleSessionsNotification(notification:)),
-            name: .sessionControllerDidChangeState,
+            name: .sessionsDidLoad,
             object: nil
         )
         

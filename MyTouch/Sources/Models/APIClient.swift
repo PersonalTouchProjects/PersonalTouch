@@ -11,9 +11,9 @@ import Alamofire
 
 class APIClient {
     
-    func fetchSessionResults(decoder: JSONDecoder = APIClient.decoder, completion: @escaping ([Session]?, Error?) -> Void) {
+    func loadSessions(decoder: JSONDecoder = APIClient.decoder, completion: @escaping ([Session]?, Error?) -> Void) {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             
 //            completion(nil, NSError(domain: "aaa", code: 123, userInfo: nil))
 //            return
@@ -22,10 +22,26 @@ class APIClient {
             let data = try! Data(contentsOf: URL(fileURLWithPath: path))
             
             do {
-                let sessionResults = try decoder.decode([Session].self, from: data)
+                let sessions = try decoder.decode([Session].self, from: data)
                 
-                completion(sessionResults, nil)
+                completion(sessions, nil)
             } catch {
+                completion(nil, error)
+            }
+        }
+    }
+    
+    func uploadSession(_ session: Session, encoder: JSONEncoder = APIClient.encoder, completion: @escaping (Session?, Error?) -> Void) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            
+            do {
+                let data = try encoder.encode(session)
+                print(data.count)
+                
+                completion(session, nil)
+            }
+            catch {
                 completion(nil, error)
             }
         }
@@ -33,23 +49,6 @@ class APIClient {
 }
 
 extension APIClient {
-    
-    static let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        return formatter
-    }()
-    
-    static let fileDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-        return formatter
-    }()
     
     static let decoder: JSONDecoder = {
         let decoder = JSONDecoder()

@@ -13,10 +13,7 @@
 		65010ADA2101DF4B002EB953 /* CGAffineTransform+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */; };
 		6504DA662209A55B006649D6 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DA652209A55B006649D6 /* Session.swift */; };
 		6504DA682209A8E7006649D6 /* sessionsSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 6504DA672209A8E7006649D6 /* sessionsSample.json */; };
-		650918FD2223B70C00304789 /* SessionControllerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650918FC2223B70C00304789 /* SessionControllerConstants.swift */; };
 		650918FF2223B95E00304789 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650918FE2223B95E00304789 /* Utilities.swift */; };
-		650E62BE22291AC3007F8DAA /* ResearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650E62BD22291AC3007F8DAA /* ResearchController.swift */; };
-		650E62C0222922F8007F8DAA /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650E62BF222922F8007F8DAA /* AppController.swift */; };
 		651D90E921EF26C100110588 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90E821EF26C100110588 /* HomeNavigationController.swift */; };
 		651D90EB21EF26DF00110588 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90EA21EF26DF00110588 /* HomeTabBarController.swift */; };
 		651D90ED21EF411000110588 /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90EC21EF411000110588 /* SessionListViewController.swift */; };
@@ -36,7 +33,6 @@
 		6548AA1F20E6770200B7C73F /* UIImage+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */; };
 		6548AA2D20E7A84000B7C73F /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2C20E7A84000B7C73F /* Track.swift */; };
 		6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */; };
-		65560E6B2205A1F800B06FB0 /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65560E6A2205A1F800B06FB0 /* SessionController.swift */; };
 		65767D1B21E73EBB0016BD80 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65767D1A21E73EBB0016BD80 /* HomeViewController.swift */; };
 		65804F4E222A747D0051C649 /* UserDefaults+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65804F4D222A747D0051C649 /* UserDefaults+HCI.swift */; };
 		6594BE2221F0617C0006CA71 /* SessionInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */; };
@@ -64,10 +60,7 @@
 		65010AD92101DF4B002EB953 /* CGAffineTransform+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+HCI.swift"; sourceTree = "<group>"; };
 		6504DA652209A55B006649D6 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		6504DA672209A8E7006649D6 /* sessionsSample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sessionsSample.json; sourceTree = "<group>"; };
-		650918FC2223B70C00304789 /* SessionControllerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControllerConstants.swift; sourceTree = "<group>"; };
 		650918FE2223B95E00304789 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		650E62BD22291AC3007F8DAA /* ResearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchController.swift; sourceTree = "<group>"; };
-		650E62BF222922F8007F8DAA /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		651D90E821EF26C100110588 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		651D90EA21EF26DF00110588 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		651D90EC21EF411000110588 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
@@ -92,7 +85,6 @@
 		6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+HCI.swift"; sourceTree = "<group>"; };
 		6548AA2C20E7A84000B7C73F /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		6548AA2F20E7B2B400B7C73F /* UIColor+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HCI.swift"; sourceTree = "<group>"; };
-		65560E6A2205A1F800B06FB0 /* SessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
 		65767D1A21E73EBB0016BD80 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		65804F4D222A747D0051C649 /* UserDefaults+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+HCI.swift"; sourceTree = "<group>"; };
 		6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInfoCell.swift; sourceTree = "<group>"; };
@@ -199,10 +191,6 @@
 		6548A9FD20E664C000B7C73F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				650E62BF222922F8007F8DAA /* AppController.swift */,
-				65560E6A2205A1F800B06FB0 /* SessionController.swift */,
-				650E62BD22291AC3007F8DAA /* ResearchController.swift */,
-				650918FC2223B70C00304789 /* SessionControllerConstants.swift */,
 				659BAA4F2212A9EE00E45D5F /* APIClient.swift */,
 				650918FE2223B95E00304789 /* Utilities.swift */,
 				65CBE34520FDE64F0093F663 /* Touches & Gestures */,
@@ -414,7 +402,6 @@
 			files = (
 				6594BE2421F065650006CA71 /* SessionBriefView.swift in Sources */,
 				6594BE2221F0617C0006CA71 /* SessionInfoCell.swift in Sources */,
-				650E62C0222922F8007F8DAA /* AppController.swift in Sources */,
 				6548AA0520E666A600B7C73F /* Task.swift in Sources */,
 				65010AC821018FA1002EB953 /* RotationTrial.swift in Sources */,
 				65FC45A920F3A13300B2A7CF /* Subject.swift in Sources */,
@@ -424,7 +411,6 @@
 				651D90EB21EF26DF00110588 /* HomeTabBarController.swift in Sources */,
 				6548A9FF20E6655500B7C73F /* Touch.swift in Sources */,
 				65CEDCB1211D83E900809069 /* LongPressTrial.swift in Sources */,
-				65560E6B2205A1F800B06FB0 /* SessionController.swift in Sources */,
 				65FC45A720F3A04C00B2A7CF /* UIApplication+HCI.swift in Sources */,
 				65FC45A520F3A00900B2A7CF /* UIDevice+HCI.swift in Sources */,
 				6504DA662209A55B006649D6 /* Session.swift in Sources */,
@@ -448,9 +434,7 @@
 				65EE0F0920EF42F200EB8929 /* UIView+HCI.swift in Sources */,
 				6548AA0320E6664A00B7C73F /* TapTrial.swift in Sources */,
 				6548AA0720E666CF00B7C73F /* SwipeTrial.swift in Sources */,
-				650918FD2223B70C00304789 /* SessionControllerConstants.swift in Sources */,
 				65DE73BC20F0F04E009D5928 /* GestureRecognizerEvent.swift in Sources */,
-				650E62BE22291AC3007F8DAA /* ResearchController.swift in Sources */,
 				65010AAD210068EC002EB953 /* ScrollTrial.swift in Sources */,
 				6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */,
 				65804F4E222A747D0051C649 /* UserDefaults+HCI.swift in Sources */,

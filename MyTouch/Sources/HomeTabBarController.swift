@@ -9,6 +9,12 @@
 import UIKit
 import ResearchKit
 
+extension Notification.Name {
+    static let sessionsDidLoad = Notification.Name("sessionsDidLoad")
+    static let sessionDidUpload = Notification.Name("sessionDidUpload")
+}
+
+
 class HomeTabBarController: UITabBarController {
 
     // MARK: - UIViewController
@@ -46,17 +52,20 @@ class HomeTabBarController: UITabBarController {
     private(set) var sessions: [Session] = []
     private(set) var error: Error?
     
+    
+    // MARK: - API
+    
     private let client = APIClient()
     
     func reloadSessions() {
         
-        client.fetchSessionResults { (sessions, error) in
+        client.loadSessions { (sessions, error) in
             
             self.isLoaded = true
             
-            for session in sessions ?? [] {
+            sessions?.forEach {
                 do {
-                    try session.save()
+                    try $0.save()
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -66,11 +75,33 @@ class HomeTabBarController: UITabBarController {
             self.error = error
             
             
-            let notification = Notification(name: .sessionControllerDidChangeState, object: self, userInfo: nil)
+            let notification = Notification(name: .sessionsDidLoad, object: self, userInfo: nil)
             NotificationQueue.default.enqueue(notification, postingStyle: .asap)
         }
     }
     
+    func uploadSession(_ session: Session) {
+        
+        client.uploadSession(session) { (session, error) in
+            
+//            print(session, error)
+//
+//            let notification = Notification(name: .sessionDidUpload, object: self, userInfo: nil)
+//            NotificationQueue.default.enqueue(notification, postingStyle: .asap)
+            
+            if let error = error {
+                
+                let alertController = UIAlertController(title: "錯誤", message: error.localizedDescription, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                
+                alertController.addAction(action)
+                self.present(alertController, animated: true, completion: nil)
+                
+            } else {
+                self.reloadSessions()
+            }
+        }
+    }
     
     // MARK: - Research FLow
 

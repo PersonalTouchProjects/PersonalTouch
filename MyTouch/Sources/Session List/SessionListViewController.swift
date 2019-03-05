@@ -105,7 +105,7 @@ class SessionListViewController: UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleSessionsNotification(notification:)),
-            name: .sessionControllerDidChangeState,
+            name: .sessionsDidLoad,
             object: nil
         )
         
