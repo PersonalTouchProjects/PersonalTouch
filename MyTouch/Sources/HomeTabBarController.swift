@@ -290,6 +290,20 @@ class HomeTabBarController: UITabBarController {
                 alert(error: error, vc: taskViewController)
             }
             
+        case .discarded:
+            
+            let alertController = UIAlertController(title: "結束測驗？", message: "現在結束測驗將會放棄所有已完成的問卷和測驗資料", preferredStyle: .alert)
+            let confirm = UIAlertAction(title: "結束", style: .destructive) { _ in
+                self.currentSession = nil
+                taskViewController.dismiss(animated: true, completion: nil)
+            }
+            let cancel = UIAlertAction(title: "繼續測驗", style: .default, handler: nil)
+            
+            alertController.addAction(confirm)
+            alertController.addAction(cancel)
+            
+            taskViewController.present(alertController, animated: true, completion: nil)
+            
         default:
             currentSession = nil
             taskViewController.dismiss(animated: true, completion: nil)
