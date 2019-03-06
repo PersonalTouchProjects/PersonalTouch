@@ -80,28 +80,30 @@ class HomeTabBarController: UITabBarController {
         }
     }
     
-    func uploadSession(_ session: Session) {
+    func uploadSession(_ session: Session, completion: @escaping (Session?, Error?) -> Void) {
         
-        client.uploadSession(session) { (session, error) in
-            
-//            print(session, error)
+        client.uploadSession(session, completion: completion)
+        
+//        client.uploadSession(session) { (session, error) in
 //
-//            let notification = Notification(name: .sessionDidUpload, object: self, userInfo: nil)
-//            NotificationQueue.default.enqueue(notification, postingStyle: .asap)
-            
-            if let error = error {
-                
-                let alertController = UIAlertController(title: "錯誤", message: error.localizedDescription, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                
-                alertController.addAction(action)
-                self.present(alertController, animated: true, completion: nil)
-                
-            }
+////            print(session, error)
+////
+////            let notification = Notification(name: .sessionDidUpload, object: self, userInfo: nil)
+////            NotificationQueue.default.enqueue(notification, postingStyle: .asap)
+//
+//            if let error = error {
+//
+//                let alertController = UIAlertController(title: "錯誤", message: error.localizedDescription, preferredStyle: .alert)
+//                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+//
+//                alertController.addAction(action)
+//                self.present(alertController, animated: true, completion: nil)
+//
+//            }
 //            else {
 //                self.reloadSessions()
 //            }
-        }
+//        }
     }
     
     // MARK: - Research FLow
@@ -165,6 +167,33 @@ class HomeTabBarController: UITabBarController {
                 }
             }
             
+            if let impairmentResult = taskViewController.result.stepResult(forStepIdentifier: "impairment")?.result(forIdentifier: "impairment") as? ORKChoiceQuestionResult {
+                if let answer = impairmentResult.choiceAnswers?.first as? String {
+                    subject.impairment = Subject.Impairment(rawValue: answer) ?? .none
+                }
+            }
+            
+            if let symptomResult = taskViewController.result.stepResult(forStepIdentifier: "symptom")?.result(forIdentifier: "symptom") as? ORKChoiceQuestionResult {
+                if let answer = symptomResult.choiceAnswers as? [UInt] {
+                    for n in answer {
+                        switch Subject.Symptom(rawValue: n) {
+                        case .slowMovement: subject.slowMovement = true
+                        case .rapidFatigue: subject.rapidFatigue = true
+                        case .poorCoordination: subject.poorCoordination = true
+                        case .lowStrength: subject.lowStrength = true
+                        case .difficultyGripping: subject.difficultyGripping = true
+                        case .difficultyHolding: subject.difficultyHolding = true
+                        case .tremor: subject.tremor = true
+                        case .spasm: subject.spasm = true
+                        case .lackOfSensation: subject.lackOfSensation = true
+                        case .difficultyControllingDirection: subject.difficultyControllingDirection = true
+                        case .difficultyControllingDistance: subject.difficultyControllingDistance = true
+                        default: break
+                        }
+                    }
+                }
+            }
+            
             // End of generate subject
             
             taskViewController.dismiss(animated: true) {
@@ -217,11 +246,9 @@ class HomeTabBarController: UITabBarController {
             }
             
             
-            // Save session
-            do {
-                try session.save()
-            }
-            catch {
+            // error alert closure
+            func alert(error: Error, vc: UIViewController) {
+                
                 let alertController = UIAlertController(
                     title: "錯誤",
                     message: error.localizedDescription,
@@ -233,10 +260,35 @@ class HomeTabBarController: UITabBarController {
                     handler: nil)
                 )
                 
-                present(alertController, animated: true, completion: nil)
+                // present error message, DO NOT dismiss task view controller
+                vc.present(alertController, animated: true, completion: nil)
             }
             
-            taskViewController.dismiss(animated: true, completion: nil)
+            do {
+                // Save session as local cache first
+                try session.save()
+                
+                // upload it to the server
+                uploadSession(session) { session, error in
+                    
+                    // if error occured, present error message
+                    if let error = error {
+                        alert(error: error, vc: taskViewController)
+                    }
+                    
+                    // else, dismiss task view controller and refetch sessions from server
+                    else {
+                        taskViewController.dismiss(animated: true) {
+                            self.reloadSessions()
+                        }
+                    }
+                }
+            }
+            catch {
+                
+                // error occured when saving session, present error and DO NOT dismiss task view controller
+                alert(error: error, vc: taskViewController)
+            }
             
         default:
             currentSession = nil
