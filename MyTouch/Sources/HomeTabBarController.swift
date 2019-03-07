@@ -83,27 +83,6 @@ class HomeTabBarController: UITabBarController {
     func uploadSession(_ session: Session, completion: @escaping (Session?, Error?) -> Void) {
         
         client.uploadSession(session, completion: completion)
-        
-//        client.uploadSession(session) { (session, error) in
-//
-////            print(session, error)
-////
-////            let notification = Notification(name: .sessionDidUpload, object: self, userInfo: nil)
-////            NotificationQueue.default.enqueue(notification, postingStyle: .asap)
-//
-//            if let error = error {
-//
-//                let alertController = UIAlertController(title: "錯誤", message: error.localizedDescription, preferredStyle: .alert)
-//                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-//
-//                alertController.addAction(action)
-//                self.present(alertController, animated: true, completion: nil)
-//
-//            }
-//            else {
-//                self.reloadSessions()
-//            }
-//        }
     }
     
     // MARK: - Research FLow
@@ -117,9 +96,46 @@ class HomeTabBarController: UITabBarController {
     }
     
     func presentSurveyAndActivity() {
-        let taskViewController = ORKTaskViewController(task: surveyTask(), taskRun: surveyID)
-        taskViewController.delegate = self
-        present(taskViewController, animated: true, completion: nil)
+        
+        var subject: Subject?
+        if let data = UserDefaults.standard.data(forKey: UserDefaults.Key.latestSubject) {
+            subject = try? APIClient.decoder.decode(Subject.self, from: data)
+        }
+
+        // if latest subject exists, ask user if he/she wants to auto fill in with it.
+        if let subject = subject {
+            
+            // present subject summary view controller
+            let vc = SubjectSummaryViewController(subject: subject) { [unowned self] vc, autoFillIn in
+                
+                // dismiss subject summary view controller
+                vc.dismiss(animated: true) {
+                    
+                    // if should auto fill in, present activity flow with that subject
+                    if autoFillIn {
+                        self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
+                    }
+                    
+                    // else, present subject survey
+                    else {
+                        let taskViewController = ORKTaskViewController(task: surveyTask(), taskRun: surveyID)
+                        taskViewController.delegate = self
+                        self.present(taskViewController, animated: true, completion: nil)
+                    }
+                }
+            }
+            
+            vc.modalPresentationStyle = .custom
+            vc.transitioningDelegate = self
+            present(vc, animated: true, completion: nil)
+        }
+            
+        // latest subject not exists, present subject survey directly
+        else {
+            let taskViewController = ORKTaskViewController(task: surveyTask(), taskRun: surveyID)
+            taskViewController.delegate = self
+            present(taskViewController, animated: true, completion: nil)
+        }
     }
     
     private func presentActivity(with session: Session) {
@@ -143,6 +159,25 @@ class HomeTabBarController: UITabBarController {
         
         switch reason {
         case .completed:
+            
+            if let autoFillResult = taskViewController.result.stepResult(forStepIdentifier: "autoFill")?.result(forIdentifier: "autoFill") as? ORKBooleanQuestionResult,
+                autoFillResult.booleanAnswer == NSNumber(booleanLiteral: true) {
+                
+                let data = UserDefaults.standard.data(forKey: UserDefaults.Key.latestSubject)
+                assert(data != nil, "Cannot load latest subject")
+                
+                do {
+                    let subject = try APIClient.decoder.decode(Subject.self, from: data!)
+                    taskViewController.dismiss(animated: true) {
+                        self.presentActivity(with: Session(deviceInfo: DeviceInfo(), subject: subject))
+                    }
+                } catch {
+                    print(error)
+                    fatalError()
+                }
+                
+                return
+            }
             
             // Generate subject object
             var subject = Subject()
@@ -192,6 +227,15 @@ class HomeTabBarController: UITabBarController {
                         }
                     }
                 }
+            }
+            
+            do {
+                let data = try APIClient.encoder.encode(subject)
+                UserDefaults.standard.set(data, forKey: UserDefaults.Key.latestSubject)
+                UserDefaults.standard.synchronize()
+            }
+            catch {
+                print(error)
             }
             
             // End of generate subject
@@ -335,6 +379,18 @@ extension HomeTabBarController: ORKTaskViewControllerDelegate {
     }
 }
 
+extension HomeTabBarController: UIViewControllerTransitioningDelegate {
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        
+        if presented is SubjectSummaryViewController {
+            return CenterModalPresentationController(presentedViewController: presented, presenting: presenting)
+        }
+        
+        return nil
+    }
+}
+
 
 // MARK: - ResearchKit Flow
 
@@ -402,7 +458,7 @@ private func consentTask() -> ORKOrderedTask {
     return ORKOrderedTask(identifier: "consentTask", steps: steps)
 }
 
-private func surveyTask() -> ORKOrderedTask {
+private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     
     var steps = [ORKStep]()
     
@@ -410,6 +466,13 @@ private func surveyTask() -> ORKOrderedTask {
     instructionStep.title = "Test Survey"
     instructionStep.text = "Answer three questions to complete the survey."
     steps += [instructionStep]
+    
+    if let subject = subject {
+        let autoFillFormat = ORKBooleanAnswerFormat(yesString: "帶入", noString: "重新填寫")
+        let autoFillStep = ORKQuestionStep(identifier: "autoFill", title: "Auto Fill", question: nil, answer: autoFillFormat)
+        autoFillStep.text = subject.stringValue
+        steps.append(autoFillStep)
+    }
     
     // let emailFormat = ORKEmailAnswerFormat()
     
@@ -507,43 +570,75 @@ private class OrderedTask: ORKOrderedTask {
     
     override func step(after step: ORKStep?, with result: ORKTaskResult) -> ORKStep? {
         
-        guard step?.identifier == "impairment" else {
-            return super.step(after: step, with: result)
+        if step?.identifier == "impairment" {
+            
+            guard let choice = result.stepResult(forStepIdentifier: "impairment")?.result(forIdentifier: "impairment") as? ORKChoiceQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+            
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(after: step, with: result)
+            }
+            
+            if answer == "others" {
+                return self.step(withIdentifier: "impairmentFreeText")
+            } else {
+                return self.step(withIdentifier: "symptom")
+            }
+        }
+        else if step?.identifier == "autoFill" {
+            
+            guard let choice = result.stepResult(forStepIdentifier: "autoFill")?.result(forIdentifier: "autoFill") as? ORKBooleanQuestionResult else {
+                return super.step(after: step, with: result)
+            }
+            
+            if choice.booleanAnswer == NSNumber(booleanLiteral: true) {
+                return self.step(withIdentifier: "summary")
+            } else {
+                return super.step(after: step, with: result)
+            }
         }
         
-        guard let choice = result.stepResult(forStepIdentifier: "impairment")?.result(forIdentifier: "impairment") as? ORKChoiceQuestionResult else {
-            return super.step(after: step, with: result)
-        }
-        
-        guard let answer = choice.choiceAnswers?.first as? String else {
-            return super.step(after: step, with: result)
-        }
-        
-        if answer == "others" {
-            return self.step(withIdentifier: "impairmentFreeText")
-        } else {
-            return self.step(withIdentifier: "symptom")
-        }
+        return super.step(after: step, with: result)
     }
     
     override func step(before step: ORKStep?, with result: ORKTaskResult) -> ORKStep? {
         
-        guard step?.identifier == "symptom" else {
-            return super.step(before: step, with: result)
+        if step?.identifier == "symptom" {
+            
+            guard let choice = result.stepResult(forStepIdentifier: "impairment")?.result(forIdentifier: "impairment") as? ORKChoiceQuestionResult else {
+                return super.step(before: step, with: result)
+            }
+            
+            guard let answer = choice.choiceAnswers?.first as? String else {
+                return super.step(before: step, with: result)
+            }
+            
+            if answer == "others" {
+                return self.step(withIdentifier: "impairmentFreeText")
+            } else {
+                return self.step(withIdentifier: "impairment")
+            }
+        }
+        else if step?.identifier == "summary" {
+            
+            guard let choice = result.stepResult(forStepIdentifier: "autoFill")?.result(forIdentifier: "autoFill") as? ORKBooleanQuestionResult else {
+                return super.step(before: step, with: result)
+            }
+            
+            if choice.booleanAnswer == NSNumber(booleanLiteral: true) {
+                return self.step(withIdentifier: "autoFill")
+            } else {
+                return super.step(before: step, with: result)
+            }
         }
         
-        guard let choice = result.stepResult(forStepIdentifier: "impairment")?.result(forIdentifier: "impairment") as? ORKChoiceQuestionResult else {
-            return super.step(before: step, with: result)
-        }
-        
-        guard let answer = choice.choiceAnswers?.first as? String else {
-            return super.step(before: step, with: result)
-        }
-        
-        if answer == "others" {
-            return self.step(withIdentifier: "impairmentFreeText")
-        } else {
-            return self.step(withIdentifier: "impairment")
-        }
+        return super.step(before: step, with: result)
+    }
+}
+
+extension Subject {
+    var stringValue: String {
+        return "Name: \(name)\nBirth Year: \(birthYear)"
     }
 }

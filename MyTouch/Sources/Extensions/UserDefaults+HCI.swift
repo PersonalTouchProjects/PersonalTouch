@@ -13,5 +13,6 @@ extension UserDefaults {
     struct Key {
         static let consented = "\(Bundle.main.bundleIdentifier!).consented"
         static let localSessions = "\(Bundle.main.bundleIdentifier!).localSessions"
+        static let latestSubject = "\(Bundle.main.bundleIdentifier!).latestSubject"
     }
 }
