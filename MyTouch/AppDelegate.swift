@@ -8,6 +8,7 @@
 
 import UIKit
 import ResearchKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,6 +37,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.synchronize()
         }
         
+        
+        let center = UNUserNotificationCenter.current()
+        // Request permission to display alerts and play sounds.
+        center.requestAuthorization(options: [.alert, .sound])
+        { (granted, error) in
+            // Enable or disable features based on authorization.
+        }
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        
         return true
     }
 
@@ -51,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         NSUbiquitousKeyValueStore.default.synchronize()
     }
 

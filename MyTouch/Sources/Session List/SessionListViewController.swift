@@ -109,7 +109,7 @@ class SessionListViewController: UIViewController {
             object: nil
         )
         
-        if homeTabBarController.isLoaded {
+        if homeTabBarController.isSessionsLoaded {
             activityIndicator.stopAnimating()
             layoutContents()
         } else {

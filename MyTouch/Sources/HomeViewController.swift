@@ -24,6 +24,7 @@ class HomeViewController: SessionDetailViewController {
             action: #selector(handleNewTestButton(sender:))
         )
         
+        stateView.button.addTarget(self, action: #selector(handleStateViewButton(sender:)), for: .touchUpInside)
         activityIndicator.hidesWhenStopped = true
         
         view.addSubview(stateView)
@@ -53,7 +54,7 @@ class HomeViewController: SessionDetailViewController {
             object: nil
         )
         
-        if homeTabBarController.isLoaded {
+        if homeTabBarController.isSessionsLoaded {
             activityIndicator.stopAnimating()
             layoutContents()
         } else {

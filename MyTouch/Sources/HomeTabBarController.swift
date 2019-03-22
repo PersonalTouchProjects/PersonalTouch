@@ -8,6 +8,7 @@
 
 import UIKit
 import ResearchKit
+import UserNotifications
 
 extension Notification.Name {
     static let sessionsDidLoad = Notification.Name("sessionsDidLoad")
@@ -35,6 +36,10 @@ class HomeTabBarController: UITabBarController {
         tabBar.isTranslucent = false
         tabBar.tintColor = UIColor(hex: 0x00b894)
         tabBar.unselectedItemTintColor = UIColor(hex: 0xb2bec3)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillEnterForeground(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillResignActive(_:)), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillResignActive(_:)), name: UIApplication.willTerminateNotification, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,10 +50,13 @@ class HomeTabBarController: UITabBarController {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     // MARK: - Sessions
     
-    private(set) var isLoaded: Bool = false
+    private(set) var isSessionsLoaded: Bool = false
     private(set) var sessions: [Session] = []
     private(set) var error: Error?
     
@@ -61,7 +69,7 @@ class HomeTabBarController: UITabBarController {
         
         client.loadSessions { (sessions, error) in
             
-            self.isLoaded = true
+            self.isSessionsLoaded = true
             
             sessions?.forEach {
                 do {
@@ -77,6 +85,13 @@ class HomeTabBarController: UITabBarController {
             
             let notification = Notification(name: .sessionsDidLoad, object: self, userInfo: nil)
             NotificationQueue.default.enqueue(notification, postingStyle: .asap)
+            
+            
+            if let cache = self.sessions.filter({ $0.state == .local }).last {
+                self.uploadSession(cache) { (_, _) in
+                    self.reloadSessions()
+                }
+            }
         }
     }
     
@@ -84,6 +99,39 @@ class HomeTabBarController: UITabBarController {
         
         client.uploadSession(session, completion: completion)
     }
+    
+    
+    // MARK: - Handle App State Notification
+    
+    @objc private func handleApplicationWillEnterForeground(_ notification: Notification) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.reloadSessions()
+        }
+    }
+    
+    @objc private func handleApplicationWillResignActive(_ notification: Notification) {
+        
+        if self.sessions.filter({ $0.state == .local }).count > 0 {
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Test Title"
+            content.body = "Test notification body"
+            
+            // trigger every 15:30
+            var dateComponents = DateComponents()
+            dateComponents.hour = 15
+            dateComponents.minute = 30
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            let request = UNNotificationRequest(identifier: "test", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request) { (error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
     
     // MARK: - Research FLow
 
