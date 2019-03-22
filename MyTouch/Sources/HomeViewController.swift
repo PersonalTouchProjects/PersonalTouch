@@ -73,7 +73,12 @@ class HomeViewController: SessionDetailViewController {
     }
     
     @objc private func handleNewTestButton(sender: UIBarButtonItem) {
-        homeTabBarController.presentSurveyAndActivity()
+        let uuid = UUID()
+        print(uuid)
+        NSUbiquitousKeyValueStore.default.set(uuid.uuidString, forKey: UserDefaults.Key.userIdentity)
+        
+        navigationItem.title = uuid.uuidString
+//        homeTabBarController.presentSurveyAndActivity()
     }
     
     @objc private func handleStateViewButton(sender: UIButton) {

@@ -11,12 +11,48 @@ import Alamofire
 
 class APIClient {
     
+    private func userIdentify() -> String? {
+        
+        let key = UserDefaults.Key.userIdentity
+        
+        if let id = UserDefaults.standard.string(forKey: key) {
+            print("found in UserDefaults")
+            return id
+        }
+        
+        if let id = NSUbiquitousKeyValueStore.default.string(forKey: key) {
+            print("found in NSUbiquitousKeyValueStore")
+            UserDefaults.standard.set(id, forKey: key)
+            UserDefaults.standard.synchronize()
+            return id
+        }
+        
+        return nil
+    }
+    
+    private func generateUserIdentity() -> String {
+        
+        let id = UUID().uuidString
+        
+        print("generate id: \(id)")
+        
+        let key = UserDefaults.Key.userIdentity
+        
+        UserDefaults.standard.set(id, forKey: key)
+        UserDefaults.standard.synchronize()
+        
+        NSUbiquitousKeyValueStore.default.set(id, forKey: key)
+        NSUbiquitousKeyValueStore.default.synchronize()
+        
+        return id
+    }
+    
     func loadSessions(decoder: JSONDecoder = APIClient.decoder, completion: @escaping ([Session]?, Error?) -> Void) {
         
+        let id = userIdentify() ?? generateUserIdentity()
+        print("header: id - \(id)")
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            
-//            completion(nil, NSError(domain: "aaa", code: 123, userInfo: nil))
-//            return
             
             let path = Bundle.main.path(forResource: "sessionsSample", ofType: "json")!
             let data = try! Data(contentsOf: URL(fileURLWithPath: path))
@@ -32,6 +68,9 @@ class APIClient {
     }
     
     func uploadSession(_ session: Session, encoder: JSONEncoder = APIClient.encoder, completion: @escaping (Session?, Error?) -> Void) {
+        
+        let id = userIdentify() ?? generateUserIdentity()
+        print("header: id - \(id)")
         
         do {
             let data = try encoder.encode(session)

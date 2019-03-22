@@ -102,6 +102,7 @@
 		65E1553422020BD600731C41 /* MyTouchBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTouchBaseCell.swift; sourceTree = "<group>"; };
 		65E15536220219FE00731C41 /* NSLayoutAnchor+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+HCI.swift"; sourceTree = "<group>"; };
 		65EE0F0820EF42F200EB8929 /* UIView+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+HCI.swift"; sourceTree = "<group>"; };
+		65F5CE3822422BD7005A5B38 /* MyTouch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyTouch.entitlements; sourceTree = "<group>"; };
 		65FC45A220F39FAF00B2A7CF /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		65FC45A420F3A00900B2A7CF /* UIDevice+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+HCI.swift"; sourceTree = "<group>"; };
 		65FC45A620F3A04C00B2A7CF /* UIApplication+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+HCI.swift"; sourceTree = "<group>"; };
@@ -181,6 +182,7 @@
 		6548A9EA20E663E700B7C73F /* MyTouch */ = {
 			isa = PBXGroup;
 			children = (
+				65F5CE3822422BD7005A5B38 /* MyTouch.entitlements */,
 				6548A9EB20E663E700B7C73F /* AppDelegate.swift */,
 				65CBE3642100606B0093F663 /* Sources */,
 				6548A9EF20E663E800B7C73F /* Main.storyboard */,
@@ -321,6 +323,12 @@
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
 							};
 						};
 					};
@@ -603,6 +611,7 @@
 			baseConfigurationReference = 84D8FC000E54AB0CD2054783 /* Pods-MyTouch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyTouch/MyTouch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XR36VWF86K;
@@ -624,6 +633,7 @@
 			baseConfigurationReference = 85F9F8729020785E6D9076D8 /* Pods-MyTouch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyTouch/MyTouch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XR36VWF86K;

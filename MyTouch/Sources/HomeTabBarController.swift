@@ -212,17 +212,17 @@ class HomeTabBarController: UITabBarController {
                 if let answer = symptomResult.choiceAnswers as? [UInt] {
                     for n in answer {
                         switch Subject.Symptom(rawValue: n) {
-                        case .slowMovement: subject.slowMovement = true
-                        case .rapidFatigue: subject.rapidFatigue = true
-                        case .poorCoordination: subject.poorCoordination = true
-                        case .lowStrength: subject.lowStrength = true
-                        case .difficultyGripping: subject.difficultyGripping = true
-                        case .difficultyHolding: subject.difficultyHolding = true
-                        case .tremor: subject.tremor = true
-                        case .spasm: subject.spasm = true
-                        case .lackOfSensation: subject.lackOfSensation = true
+                        case .slowMovement:                   subject.slowMovement = true
+                        case .rapidFatigue:                   subject.rapidFatigue = true
+                        case .poorCoordination:               subject.poorCoordination = true
+                        case .lowStrength:                    subject.lowStrength = true
+                        case .difficultyGripping:             subject.difficultyGripping = true
+                        case .difficultyHolding:              subject.difficultyHolding = true
+                        case .tremor:                         subject.tremor = true
+                        case .spasm:                          subject.spasm = true
+                        case .lackOfSensation:                subject.lackOfSensation = true
                         case .difficultyControllingDirection: subject.difficultyControllingDirection = true
-                        case .difficultyControllingDistance: subject.difficultyControllingDistance = true
+                        case .difficultyControllingDistance:  subject.difficultyControllingDistance = true
                         default: break
                         }
                     }
