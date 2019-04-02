@@ -109,7 +109,8 @@ class AccomodationCell: MyTouchBaseCell {
     
     private func analyzingView() -> UIView {
         let view = PromptView()
-        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
+//        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
+        view.imageView.image = UIImage(named: "image_analyzing_inversed")
         view.titleLabel.text = "正在分析中"
         return view
         
@@ -117,14 +118,16 @@ class AccomodationCell: MyTouchBaseCell {
     
     private func localSessionView() -> UIView {
         let view = PromptView()
-        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
+//        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
+        view.imageView.image = UIImage(named: "image_cached")
         view.titleLabel.text = "資料尚未上傳至伺服器"
         return view
     }
     
     private func errorView() -> UIView {
         let view = PromptView()
-        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
+//        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
+        view.imageView.image = UIImage(named: "image_error")
         view.titleLabel.text = "發生不可預期之錯誤"
         return view
     }
@@ -189,13 +192,14 @@ extension AccomodationCell {
     
     private class PromptView: UIView {
         
-        let imageView = UIView()
+        let imageView = UIImageView()
         let titleLabel = UILabel()
         
         override init(frame: CGRect) {
             super.init(frame: frame)
             
-            imageView.backgroundColor = UIColor.gray
+//            imageView.backgroundColor = UIColor.gray
+            imageView.image = UIImage(named: "image_analyzing_inversed")
             titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             titleLabel.textAlignment = .center
             

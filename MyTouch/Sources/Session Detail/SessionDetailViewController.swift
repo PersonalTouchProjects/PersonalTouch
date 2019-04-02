@@ -11,7 +11,10 @@ import UIKit
 class SessionDetailViewController: UIViewController {
     
     var session: Session? {
-        didSet { tableView.reloadData() }
+        didSet {
+            navigationItem.rightBarButtonItem = session?.state == .completed ? shareButton : nil
+            tableView.reloadData()
+        }
     }
     
     let topShadowView = UIView()
@@ -19,11 +22,14 @@ class SessionDetailViewController: UIViewController {
     let briefLabel = UILabel()
     let tableView = UITableView(frame: .zero, style: .plain)
     
+    private lazy var shareButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(named: "icon_share"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(handleShareButton(sender:)))
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(handleShareButton(sender:)))
         
         backgroundView.backgroundColor = UIColor(hex: 0x00b894)
         topShadowView.backgroundColor = UIColor(white: 0.0, alpha: 0.15)
