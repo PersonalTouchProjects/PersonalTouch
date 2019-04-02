@@ -46,7 +46,7 @@ class StateView: UIView {
     
         // Subviews
         
-        imageView.image = UIImage(named: "compass")
+        imageView.image = UIImage(named: "image_welcome")
         imageView.tintColor = UIColor.black
         imageView.contentMode = .scaleAspectFit
         
@@ -91,7 +91,7 @@ class StateView: UIView {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 30),
             imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 150),
+            imageView.heightAnchor.constraint(equalToConstant: 200),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30),
