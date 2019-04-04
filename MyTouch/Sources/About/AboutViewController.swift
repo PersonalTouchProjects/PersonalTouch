@@ -103,10 +103,24 @@ extension AboutViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        if (indexPath.section, indexPath.row) == (0, 1) {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 1):
             let licensesController = LicensesViewController()
             licensesController.loadPlist(Bundle.main, resourceName: "Credits")
             show(licensesController, sender: self)
+            
+        default:
+            break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            return false
+            
+        default:
+            return true
         }
     }
 }

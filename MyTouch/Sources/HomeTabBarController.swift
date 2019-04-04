@@ -45,6 +45,10 @@ class HomeTabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        if UserDefaults.standard.bool(forKey: UserDefaults.Key.consented) == false {
+            presentConsent()
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.reloadSessions()
         }
@@ -200,7 +204,19 @@ class HomeTabBarController: UITabBarController {
     
     private func consentDidFinish(taskViewController: ORKTaskViewController, with reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
-        taskViewController.dismiss(animated: true, completion: nil)
+        if reason == .completed {
+            UserDefaults.standard.set(true, forKey: UserDefaults.Key.consented)
+            UserDefaults.standard.synchronize()
+            
+            taskViewController.dismiss(animated: true, completion: nil)
+        } else {
+            
+            let alertController = UIAlertController(title: "Oops", message: "You must consent to use this service.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            
+            alertController.addAction(action)
+            taskViewController.present(alertController, animated: true, completion: nil)
+        }
     }
     
     private func surveyDidFinish(taskViewController: ORKTaskViewController, with reason: ORKTaskViewControllerFinishReason, error: Error?) {
@@ -492,11 +508,11 @@ private func consentTask() -> ORKOrderedTask {
     let visualConsentStep = ORKVisualConsentStep(identifier: "visualConsent", document: document)
     steps.append(visualConsentStep)
     
-    let signature = document.signatures?.first
-    let reviewStep = ORKConsentReviewStep(identifier: "review", signature: signature, in: document)
-    reviewStep.text = "檢閱同意書" // "Review the consent"
-    reviewStep.reasonForConsent = "MyTouch 使用同意書"// "Consent to join the Research Study."
-    steps.append(reviewStep)
+//    let signature = document.signatures?.first
+//    let reviewStep = ORKConsentReviewStep(identifier: "review", signature: signature, in: document)
+//    reviewStep.text = "檢閱同意書" // "Review the consent"
+//    reviewStep.reasonForConsent = "MyTouch 使用同意書"// "Consent to join the Research Study."
+//    steps.append(reviewStep)
     
     let completionStep = ORKCompletionStep(identifier: "completion")
     completionStep.title = "歡迎" // "Welcome"
