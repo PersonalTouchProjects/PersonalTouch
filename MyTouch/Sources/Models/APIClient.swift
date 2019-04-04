@@ -52,19 +52,22 @@ class APIClient {
         let id = userIdentify() ?? generateUserIdentity()
         print("header: id - \(id)")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            
-            let path = Bundle.main.path(forResource: "sessionsSample", ofType: "json")!
-            let data = try! Data(contentsOf: URL(fileURLWithPath: path))
-            
-            do {
-                let sessions = try decoder.decode([Session].self, from: data)
-                
-                completion(sessions, nil)
-            } catch {
-                completion(nil, error)
-            }
-        }
+        completion([], nil)
+        return
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+//            
+//            let path = Bundle.main.path(forResource: "sessionsSample", ofType: "json")!
+//            let data = try! Data(contentsOf: URL(fileURLWithPath: path))
+//            
+//            do {
+//                let sessions = try decoder.decode([Session].self, from: data)
+//                
+//                completion(sessions, nil)
+//            } catch {
+//                completion(nil, error)
+//            }
+//        }
     }
     
     func uploadSession(_ session: Session, encoder: JSONEncoder = APIClient.encoder, completion: @escaping (Session?, Error?) -> Void) {

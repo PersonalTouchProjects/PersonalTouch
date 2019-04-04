@@ -1,14 +1,17 @@
 PODS:
   - Alamofire (4.7.0)
+  - LicensesViewController (0.7.0)
   - ResearchKit (2.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - LicensesViewController (~> 0.7.0)
   - ResearchKit (from `/Users/tommy/Workspace/HCI/ResearchKit`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - LicensesViewController
 
 EXTERNAL SOURCES:
   ResearchKit:
@@ -16,8 +19,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
-  ResearchKit: 9e63155b701480f7dc11139c1c4ff390c4dce1f7
+  LicensesViewController: 2f7bba13b3cec7516d4990e41df297720fdbaaab
+  ResearchKit: eaf0dd6d6b8a2c3768cc0f84bcd22a38c84b626b
 
-PODFILE CHECKSUM: 574d5935a64262fe74a2c13ca7e6882da3ae3309
+PODFILE CHECKSUM: 710d8fd7cd5741ebf1b4b67e41391b3a940dd2c1
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

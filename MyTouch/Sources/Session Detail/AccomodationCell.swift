@@ -110,7 +110,7 @@ class AccomodationCell: MyTouchBaseCell {
     private func analyzingView() -> UIView {
         let view = PromptView()
 //        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
-        view.imageView.image = UIImage(named: "image_analyzing_inversed")
+        view.imageView.image = UIImage(named: "image_analyzing_1")
         view.titleLabel.text = "正在分析中"
         return view
         
@@ -199,7 +199,7 @@ extension AccomodationCell {
             super.init(frame: frame)
             
 //            imageView.backgroundColor = UIColor.gray
-            imageView.image = UIImage(named: "image_analyzing_inversed")
+            imageView.image = UIImage(named: "image_analyzing_1")
             titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             titleLabel.textAlignment = .center
             

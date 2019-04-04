@@ -37,6 +37,7 @@
 		656F6AA2223117E50009F3E3 /* CenterModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F6AA1223117E50009F3E3 /* CenterModalPresentationController.swift */; };
 		65767D1B21E73EBB0016BD80 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65767D1A21E73EBB0016BD80 /* HomeViewController.swift */; };
 		65804F4E222A747D0051C649 /* UserDefaults+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65804F4D222A747D0051C649 /* UserDefaults+HCI.swift */; };
+		659480192256074100F1BEC9 /* Credits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 659480182256074100F1BEC9 /* Credits.plist */; };
 		6594BE2221F0617C0006CA71 /* SessionInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */; };
 		6594BE2421F065650006CA71 /* SessionBriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2321F065650006CA71 /* SessionBriefView.swift */; };
 		6594BE2621F076D10006CA71 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2521F076D10006CA71 /* AboutViewController.swift */; };
@@ -91,6 +92,7 @@
 		656F6AA1223117E50009F3E3 /* CenterModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterModalPresentationController.swift; sourceTree = "<group>"; };
 		65767D1A21E73EBB0016BD80 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		65804F4D222A747D0051C649 /* UserDefaults+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+HCI.swift"; sourceTree = "<group>"; };
+		659480182256074100F1BEC9 /* Credits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credits.plist; sourceTree = "<group>"; };
 		6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInfoCell.swift; sourceTree = "<group>"; };
 		6594BE2321F065650006CA71 /* SessionBriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionBriefView.swift; sourceTree = "<group>"; };
 		6594BE2521F076D10006CA71 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				65F5CE3822422BD7005A5B38 /* MyTouch.entitlements */,
+				659480182256074100F1BEC9 /* Credits.plist */,
 				6548A9EB20E663E700B7C73F /* AppDelegate.swift */,
 				65CBE3642100606B0093F663 /* Sources */,
 				6548A9EF20E663E800B7C73F /* Main.storyboard */,
@@ -297,6 +300,7 @@
 				6548A9E520E663E700B7C73F /* Frameworks */,
 				6548A9E620E663E700B7C73F /* Resources */,
 				336144C81A3FD580218B33F7 /* [CP] Embed Pods Frameworks */,
+				65948017225605F000F1BEC9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -359,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6548A9F620E663E900B7C73F /* LaunchScreen.storyboard in Resources */,
+				659480192256074100F1BEC9 /* Credits.plist in Resources */,
 				6504DA682209A8E7006649D6 /* sessionsSample.json in Resources */,
 				6548AA1820E6717000B7C73F /* Localizable.strings in Resources */,
 				6548A9F320E663E900B7C73F /* Assets.xcassets in Resources */,
@@ -393,19 +398,38 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MyTouch/Pods-MyTouch-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/LicensesViewController/LicensesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/ResearchKit/ResearchKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LicensesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ResearchKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyTouch/Pods-MyTouch-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyTouch/Pods-MyTouch-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		65948017225605F000F1BEC9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./credits.py -s \"$SRCROOT\" -o \"$SRCROOT/MyTouch/Credits.plist\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -11,5 +11,6 @@ target 'MyTouch' do
   # Pods for MyTouch
   pod 'Alamofire'
   pod 'ResearchKit', :path => '/Users/tommy/Workspace/HCI/ResearchKit'
+  pod 'LicensesViewController', '~> 0.7.0'
 
 end

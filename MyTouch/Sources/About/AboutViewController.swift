@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LicensesViewController
 
 class AboutViewController: UIViewController {
 
@@ -45,7 +46,7 @@ class AboutViewController: UIViewController {
 extension AboutViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -101,6 +102,12 @@ extension AboutViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        if (indexPath.section, indexPath.row) == (0, 1) {
+            let licensesController = LicensesViewController()
+            licensesController.loadPlist(Bundle.main, resourceName: "Credits")
+            show(licensesController, sender: self)
+        }
     }
 }
 
