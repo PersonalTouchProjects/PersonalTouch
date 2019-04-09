@@ -9,6 +9,9 @@
 import Foundation
 import Alamofire
 
+private let host = "http://127.0.0.1:3000"
+private let userHeaderField = "X-Mytouch-User"
+
 class APIClient {
     
     private func userIdentify() -> String? {
@@ -52,53 +55,56 @@ class APIClient {
         let id = userIdentify() ?? generateUserIdentity()
         print("header: id - \(id)")
         
-        completion([], nil)
-        return
+        let headers = [userHeaderField: id]
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-//            
-//            let path = Bundle.main.path(forResource: "sessionsSample", ofType: "json")!
-//            let data = try! Data(contentsOf: URL(fileURLWithPath: path))
-//            
-//            do {
-//                let sessions = try decoder.decode([Session].self, from: data)
-//                
-//                completion(sessions, nil)
-//            } catch {
-//                completion(nil, error)
-//            }
-//        }
+        Alamofire.request("\(host)/sessions", headers: headers).responseJSON { res in
+            
+            if let error = res.error {
+                completion(nil, error)
+            }
+            else if let data = res.data {
+                
+                do {
+                    let sessions = try decoder.decode([Session].self, from: data)
+                    completion(sessions, nil)
+                }
+                catch {
+                    completion(nil, error)
+                }
+            }
+            else {
+                completion(nil, nil)
+            }
+        }
     }
     
-    func uploadSession(_ session: Session, encoder: JSONEncoder = APIClient.encoder, completion: @escaping (Session?, Error?) -> Void) {
+    func uploadSession(_ session: Session, encoder: JSONEncoder = APIClient.encoder, decoder: JSONDecoder = APIClient.decoder, completion: @escaping (Session?, Error?) -> Void) {
         
         let id = userIdentify() ?? generateUserIdentity()
         print("header: id - \(id)")
         
         do {
+            let headers = [
+                "Content-Type": "application/json",
+                userHeaderField: id
+            ]
             let data = try encoder.encode(session)
             
-            Alamofire.upload(data, to: "https://httpbin.org/post", headers: ["Content-Type": "application/json"])
+            Alamofire.upload(data, to: "\(host)/sessions", headers: headers)
             .responseJSON { res in
                 
                 if let error = res.error {
                     completion(nil, error)
                 }
-                else {
+                else if let data = res.data {
                     do {
-                        
-                        // TODO: real implementation
-                        
-                        let value = res.value as! [String: Any]
-                        let json = value["json"]!
-                        let data = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-                        
-                        let session = try APIClient.decoder.decode(Session.self, from: data)
-                        completion(session, nil)
-                    }
-                    catch {
+                        let uploaded = try decoder.decode(Session.self, from: data)
+                        completion(uploaded, nil)
+                    } catch {
                         completion(nil, error)
                     }
+                } else {
+                    completion(nil, nil)
                 }
             }
         }
@@ -131,3 +137,13 @@ extension APIClient {
     }()
     
 }
+
+
+private var formatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.calendar = Calendar(identifier: .iso8601)
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+    return formatter
+}()

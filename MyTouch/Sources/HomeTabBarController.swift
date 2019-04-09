@@ -91,11 +91,11 @@ class HomeTabBarController: UITabBarController {
             NotificationQueue.default.enqueue(notification, postingStyle: .asap)
             
             
-            if let cache = self.sessions.filter({ $0.state == .local }).last {
-                self.uploadSession(cache) { (_, _) in
-                    self.reloadSessions()
-                }
-            }
+//            if let cache = self.sessions.filter({ $0.state == .local }).last {
+//                self.uploadSession(cache) { (_, _) in
+//                    self.reloadSessions()
+//                }
+//            }
         }
     }
     
