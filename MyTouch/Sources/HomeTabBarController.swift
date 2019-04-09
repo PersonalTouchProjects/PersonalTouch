@@ -354,48 +354,58 @@ class HomeTabBarController: UITabBarController {
             }
             
             
-            // error alert closure
-            func alert(error: Error, vc: UIViewController) {
+            // upload it to the server
+            uploadSession(session) { uploaded, error in
                 
-                let alertController = UIAlertController(
-                    title: "錯誤",
-                    message: error.localizedDescription,
-                    preferredStyle: .alert
-                )
-                alertController.addAction(UIAlertAction(
-                    title: "OK",
-                    style: .default,
-                    handler: nil)
-                )
-                
-                // present error message, DO NOT dismiss task view controller
-                vc.present(alertController, animated: true, completion: nil)
-            }
-            
-            do {
-                // Save session as local cache first
-                try session.save()
-                
-                // upload it to the server
-                uploadSession(session) { session, error in
+                // if success, save and reload
+                if let uploaded = uploaded {
                     
-                    // if error occured, present error message
-                    if let error = error {
-                        alert(error: error, vc: taskViewController)
-                    }
-                    
-                    // else, dismiss task view controller and refetch sessions from server
-                    else {
-                        taskViewController.dismiss(animated: true) {
-                            self.reloadSessions()
-                        }
+                    try? uploaded.save()
+                    taskViewController.dismiss(animated: true) {
+                        self.reloadSessions()
                     }
                 }
-            }
-            catch {
                 
-                // error occured when saving session, present error and DO NOT dismiss task view controller
-                alert(error: error, vc: taskViewController)
+                // if error occured, present error message
+                else if let error = error {
+                    
+                    let alertController = UIAlertController(
+                        title: "錯誤",
+                        message: error.localizedDescription,
+                        preferredStyle: .alert
+                    )
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default) { action in
+                        
+                        // try to save local cache after presenting upload error meesage
+                        do {
+                            // Save session as local cache
+                            try session.save()
+                            taskViewController.dismiss(animated: true) {
+                                self.reloadSessions()
+                            }
+                            
+                        } catch {
+                            
+                            // error occured when saving session, present error and DO NOT dismiss task view controller
+                            let alertController = UIAlertController(
+                                title: "錯誤",
+                                message: error.localizedDescription,
+                                preferredStyle: .alert
+                            )
+                            alertController.addAction(UIAlertAction(
+                                title: "OK",
+                                style: .default,
+                                handler: nil)
+                            )
+                            
+                            // present error message, DO NOT dismiss task view controller
+                            taskViewController.present(alertController, animated: true, completion: nil)
+                        }
+                    })
+                    
+                    // present error message, DO NOT dismiss task view controller
+                    taskViewController.present(alertController, animated: true, completion: nil)
+                }
             }
             
         case .discarded:
