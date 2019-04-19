@@ -113,28 +113,19 @@ class SessionDetailViewController: UIViewController {
         case .local:
             // TODO: Upload
             print("To be uploaded")
-            break
+            let homeTabBarController = tabBarController as? HomeTabBarController
+            homeTabBarController?.uploadSession(session) { [weak self] (session, error) in
+                if let session = session {
+                    self?.session = session
+                }
+            }
             
         case .completed:
             presentGoToSettings()
-//            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-//            UIApplication.shared.open(URL(string:"App-Prefs:root=General&path=ACCESSIBILITY")!, options: [:], completionHandler: nil)
             
         default:
             break
         }
-        
-//        let alertController = UIAlertController(title: "Settings", message: "To infinity, and beyond!", preferredStyle: .alert)
-//        let action = UIAlertAction(title: "GO", style: .default) { action in
-//            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-//        }
-//        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//
-//        alertController.addAction(cancel)
-//        alertController.addAction(action)
-//        alertController.preferredAction = action
-//
-//        present(alertController, animated: true, completion: nil)
     }
     
     private func presentGoToSettings() {
@@ -163,13 +154,6 @@ extension SessionDetailViewController: UITableViewDataSource {
             
             if let session = session {
                 cell.session = session
-//                if let value = session.holdDuration, value != 0 { cell.holdDurationText = "\(value)" }
-//                if let value = session.ignoreRepeat, value != 0 { cell.ignoreRepeatText = "\(value)" }
-//                if let value = session.touchAssistant?.value, value != 0 { cell.accomodationText = "\(value)" }
-            } else {
-//                cell.holdDurationText = "0.5"
-//                cell.ignoreRepeatText = "0.2"
-//                cell.accomodationText = "0.6"
             }
             cell.button.addTarget(self, action: #selector(handleAccomodationButton(sender:)), for: .touchUpInside)
             cell.layoutItemViews()

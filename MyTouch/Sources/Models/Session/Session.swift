@@ -110,7 +110,8 @@ extension Session.State {
 extension Session {
     
     var filename: String {
-        return fileDateFormatter.string(from: start)
+        return id
+//        return fileDateFormatter.string(from: start)
     }
     
     static var directory: String {
