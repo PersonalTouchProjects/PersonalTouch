@@ -47,10 +47,8 @@ class HomeTabBarController: UITabBarController {
         
         if UserDefaults.standard.bool(forKey: UserDefaults.Key.consented) == false {
             presentConsent()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.reloadSessions()
+        } else {
+            uploadCachedSessions()
         }
     }
     
@@ -69,7 +67,7 @@ class HomeTabBarController: UITabBarController {
     
     private let client = APIClient()
     
-    func reloadSessions() {
+    func reloadSessions(completion: (() -> Void)? = nil) {
         
         client.loadSessions { (sessions, error) in
             
@@ -90,12 +88,7 @@ class HomeTabBarController: UITabBarController {
             let notification = Notification(name: .sessionsDidLoad, object: self, userInfo: nil)
             NotificationQueue.default.enqueue(notification, postingStyle: .asap)
             
-            
-//            if let cache = self.sessions.filter({ $0.state == .local }).last {
-//                self.uploadSession(cache) { (_, _) in
-//                    self.reloadSessions()
-//                }
-//            }
+            completion?()
         }
     }
     
@@ -104,13 +97,24 @@ class HomeTabBarController: UITabBarController {
         client.uploadSession(session, completion: completion)
     }
     
+    func uploadCachedSessions() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.reloadSessions {
+                
+                for cache in self.sessions.filter({ $0.state == .local }) {
+                    self.uploadSession(cache) { (_, _) in
+                        self.reloadSessions()
+                    }
+                }
+            }
+        }
+    }
+    
     
     // MARK: - Handle App State Notification
     
     @objc private func handleApplicationWillEnterForeground(_ notification: Notification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.reloadSessions()
-        }
+        uploadCachedSessions()
     }
     
     @objc private func handleApplicationWillResignActive(_ notification: Notification) {

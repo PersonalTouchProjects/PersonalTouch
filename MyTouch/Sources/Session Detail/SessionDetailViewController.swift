@@ -105,17 +105,44 @@ class SessionDetailViewController: UIViewController {
     
     @objc private func handleAccomodationButton(sender: UIButton) {
         
-        let alertController = UIAlertController(title: "Settings", message: "To infinity, and beyond!", preferredStyle: .alert)
-        let action = UIAlertAction(title: "GO", style: .default) { action in
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        guard let session = session else {
+            return
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        alertController.addAction(cancel)
-        alertController.addAction(action)
-        alertController.preferredAction = action
+        switch session.state {
+        case .local:
+            // TODO: Upload
+            print("To be uploaded")
+            break
+            
+        case .completed:
+            presentGoToSettings()
+//            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+//            UIApplication.shared.open(URL(string:"App-Prefs:root=General&path=ACCESSIBILITY")!, options: [:], completionHandler: nil)
+            
+        default:
+            break
+        }
         
-        present(alertController, animated: true, completion: nil)
+//        let alertController = UIAlertController(title: "Settings", message: "To infinity, and beyond!", preferredStyle: .alert)
+//        let action = UIAlertAction(title: "GO", style: .default) { action in
+//            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+//        }
+//        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//
+//        alertController.addAction(cancel)
+//        alertController.addAction(action)
+//        alertController.preferredAction = action
+//
+//        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func presentGoToSettings() {
+        
+        let viewController = SettingsStepByStepViewController()
+        viewController.modalPresentationStyle = .custom
+        viewController.transitioningDelegate = self
+        present(viewController, animated: true, completion: nil)
     }
 }
 
@@ -204,5 +231,20 @@ extension SessionDetailViewController: UITableViewDelegate {
         UIView.animate(withDuration: 0.15, delay: 0.0, options: [.beginFromCurrentState], animations: {
             self.topShadowView.alpha = scrollView.contentOffset.y > 0 ? 1.0 : 0.0
         }, completion: nil)
+    }
+}
+
+
+extension SessionDetailViewController: UIViewControllerTransitioningDelegate {
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        
+        if presented is SettingsStepByStepViewController {
+            let presentation = CenterModalPresentationController(presentedViewController: presented, presenting: presenting)
+            presentation.tapToDismiss = true
+            return presentation
+        }
+        
+        return nil
     }
 }

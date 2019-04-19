@@ -20,6 +20,7 @@
 		651D90EF21EF424500110588 /* SessionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90EE21EF424500110588 /* SessionListCell.swift */; };
 		651D90F421EF532400110588 /* SessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90F321EF532400110588 /* SessionDetailViewController.swift */; };
 		651D90F621EF54E200110588 /* AccomodationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651D90F521EF54E200110588 /* AccomodationCell.swift */; };
+		653F6902225F040A00BFB7DB /* SettingsStepByStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653F6901225F040A00BFB7DB /* SettingsStepByStepViewController.swift */; };
 		6548A9EC20E663E700B7C73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548A9EB20E663E700B7C73F /* AppDelegate.swift */; };
 		6548A9F120E663E800B7C73F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548A9EF20E663E800B7C73F /* Main.storyboard */; };
 		6548A9F320E663E900B7C73F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6548A9F220E663E900B7C73F /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		651D90EE21EF424500110588 /* SessionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListCell.swift; sourceTree = "<group>"; };
 		651D90F321EF532400110588 /* SessionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailViewController.swift; sourceTree = "<group>"; };
 		651D90F521EF54E200110588 /* AccomodationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccomodationCell.swift; sourceTree = "<group>"; };
+		653F6901225F040A00BFB7DB /* SettingsStepByStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStepByStepViewController.swift; sourceTree = "<group>"; };
 		6548A9E820E663E700B7C73F /* MyTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6548A9EB20E663E700B7C73F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6548A9F020E663E800B7C73F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				6594BE2321F065650006CA71 /* SessionBriefView.swift */,
 				651D90F521EF54E200110588 /* AccomodationCell.swift */,
 				6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */,
+				653F6901225F040A00BFB7DB /* SettingsStepByStepViewController.swift */,
 			);
 			path = "Session Detail";
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				65767D1B21E73EBB0016BD80 /* HomeViewController.swift in Sources */,
 				6548AA3020E7B2B400B7C73F /* UIColor+HCI.swift in Sources */,
 				6548AA0120E665E800B7C73F /* Trial.swift in Sources */,
+				653F6902225F040A00BFB7DB /* SettingsStepByStepViewController.swift in Sources */,
 				6548AA2D20E7A84000B7C73F /* Track.swift in Sources */,
 				659BAA502212A9EE00E45D5F /* APIClient.swift in Sources */,
 				651D90E921EF26C100110588 /* HomeNavigationController.swift in Sources */,
