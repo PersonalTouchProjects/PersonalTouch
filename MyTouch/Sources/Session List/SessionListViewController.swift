@@ -30,9 +30,9 @@ class SessionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "MyTouch"
+        navigationItem.title = NSLocalizedString("NAVIGATION_TITLE_HISTORY", comment: "")
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "New Test",
+            title: NSLocalizedString("BUTTON_NEW_TEST", comment: ""),
             style: .plain,
             target: self,
             action: #selector(handleNewTestButton(sender:))
@@ -129,10 +129,9 @@ class SessionListViewController: UIViewController {
             stateView.isHidden = false
             
             // Display onboarding view
-            
-            stateView.titleLabel.text = "Welcom to MyTouch"
-            stateView.textLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-            stateView.button.setTitle("Start", for: .normal)
+            stateView.titleLabel.text = NSLocalizedString("ONBOARDING_TITLE", comment: "")
+            stateView.textLabel.text = NSLocalizedString("ONBOARDING_MESSEGE", comment: "")
+            stateView.button.setTitle(NSLocalizedString("BUTTON_NEW_TEST", comment: ""), for: .normal)
             
         } else {
             
@@ -140,8 +139,8 @@ class SessionListViewController: UIViewController {
             stateView.isHidden = true
             
             if let error = homeTabBarController.error {
-                let alertController = UIAlertController(title: "錯誤", message: error.localizedDescription, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                let alertController = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
+                let action = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
                 
                 alertController.addAction(action)
                 present(alertController, animated: true, completion: nil)
@@ -190,7 +189,7 @@ extension SessionListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SessionListCell
         cell.titleLabel.text          = result.deviceInfo.name                                         // "Tommy's iPhone"
         cell.dateLabel.text           = result.end.readableString                                      // "2019/01/01"
-        cell.stateLabel.text          = result.state.rawValue                                          // "Completed"
+        cell.stateLabel.text          = result.state.localizedString                                   // "Completed"
         cell.osLabel.text             = "\(result.deviceInfo.platform) \(result.deviceInfo.osVersion)" // "iOS 12.1.2"
         cell.versionLabel.text        = "MyTouch \(result.deviceInfo.appVersion)"                      // "MyTouch 2.0.0"
         cell.iconView.backgroundColor = result.state.color

@@ -13,6 +13,29 @@ class SessionDetailViewController: UIViewController {
     var session: Session? {
         didSet {
             navigationItem.rightBarButtonItem = session?.state == .completed ? shareButton : nil
+            
+            if let session = session {
+                let style = NSMutableParagraphStyle()
+                style.lineBreakMode = .byWordWrapping
+                style.lineSpacing = 8.0
+                style.alignment = .center
+                
+                let attrs = [
+                    NSAttributedString.Key.paragraphStyle: style,
+                    NSAttributedString.Key.foregroundColor: UIColor.white,
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)
+                ]
+                
+                let formatter = DateFormatter()
+                formatter.calendar = Calendar.current
+                formatter.timeZone = TimeZone.current
+                formatter.dateStyle = .long
+                
+                let dateString = formatter.string(from: session.start)
+                
+                briefLabel.attributedText = NSAttributedString(string: "\(dateString)\n Tommy’s iPhone", attributes: attrs)
+            }
+            
             tableView.reloadData()
         }
     }
@@ -34,18 +57,6 @@ class SessionDetailViewController: UIViewController {
         backgroundView.backgroundColor = UIColor(hex: 0x00b894)
         topShadowView.backgroundColor = UIColor(white: 0.0, alpha: 0.15)
         
-        let style = NSMutableParagraphStyle()
-        style.lineBreakMode = .byWordWrapping
-        style.lineSpacing = 8.0
-        style.alignment = .center
-        
-        let attrs = [
-            NSAttributedString.Key.paragraphStyle: style,
-            NSAttributedString.Key.foregroundColor: UIColor.white,
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)
-        ]
-        
-        briefLabel.attributedText = NSAttributedString(string: "2019/1/1 10:05pm\nTest on Tommy’s iPhone", attributes: attrs)
         briefLabel.numberOfLines = 0
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
@@ -97,6 +108,7 @@ class SessionDetailViewController: UIViewController {
 
     @objc private func handleShareButton(sender: UIBarButtonItem) {
         
+        // TODO: share content
         let shareText = "此中軍則己料友看始紙成我。活算上德，沒知反最年上護獲有了。設持什河一說重音輕的情，能現英會？火再地過明玩一登的，人五下……年畫成，神自部：增強燈舉力開家善數手半告依效化任南場坡家坐朋蘭經表遠族教動……實盡裡筆切得連國整商表父。"
         
         let activity = UIActivityViewController(activityItems: [shareText], applicationActivities: [])
@@ -111,8 +123,7 @@ class SessionDetailViewController: UIViewController {
         
         switch session.state {
         case .local:
-            // TODO: Upload
-            print("To be uploaded")
+            
             let homeTabBarController = tabBarController as? HomeTabBarController
             homeTabBarController?.uploadSession(session) { [weak self] (session, error) in
                 if let session = session {
@@ -160,29 +171,32 @@ extension SessionDetailViewController: UITableViewDataSource {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "info", for: indexPath) as! SessionInfoCell
-            cell.titleLabel.text = "Device Info"
+            cell.titleLabel.text = NSLocalizedString("DEVICE_INFO_TITLE", comment: "")
             
             if let deviceInfo = session?.deviceInfo {
                 cell.items = [
-                    SessionInfoCell.Item(title: "Device name", text: deviceInfo.name),
-                    SessionInfoCell.Item(title: "Model name", text: deviceInfo.model),
-                    SessionInfoCell.Item(title: "Manufacturer", text: deviceInfo.manufacturer),
-                    SessionInfoCell.Item(title: "OS version", text: "\(deviceInfo.platform) \(deviceInfo.osVersion)"),
-                    SessionInfoCell.Item(title: "MyTouch version", text: deviceInfo.appVersion)
+                    SessionInfoCell.Item(title: NSLocalizedString("DEVICE_INFO_DEVICE_NAME", comment: ""), text: deviceInfo.name),
+                    SessionInfoCell.Item(title: NSLocalizedString("DEVICE_INFO_MODEL_NAME", comment: ""), text: deviceInfo.model),
+                    SessionInfoCell.Item(title: NSLocalizedString("DEVICE_INFO_MANUFACTURER", comment: ""), text: deviceInfo.manufacturer),
+                    SessionInfoCell.Item(title: NSLocalizedString("DEVICE_INFO_OS_VERSION", comment: ""), text: "\(deviceInfo.platform) \(deviceInfo.osVersion)"),
+                    SessionInfoCell.Item(title: NSLocalizedString("DEVICE_INFO_APP_VERSION", comment: ""), text: deviceInfo.appVersion)
                 ]
             }
             cell.layoutItemViews()
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "info", for: indexPath) as! SessionInfoCell
-            cell.titleLabel.text = "Subject Info"
+            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_TITLE", comment: "")
             
+            // TODO: symptoms
             if let subject = session?.subject {
                 cell.items = [
-                    SessionInfoCell.Item(title: "Name", text: subject.name),
-                    SessionInfoCell.Item(title: "Birth year", text: "\(subject.birthYear)"),
-                    SessionInfoCell.Item(title: "Gender", text: subject.gender.rawValue),
-                    SessionInfoCell.Item(title: "DominantHand", text: subject.dominantHand.rawValue),
+                    SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_NAME", comment: ""), text: subject.name),
+                    SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_BIRTH_YEAR", comment: ""), text: "\(subject.birthYear)"),
+                    SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_GENDER", comment: ""), text: subject.gender.localizedString),
+                    SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_DOMINANT_HAND", comment: ""), text: subject.dominantHand.localizedString),
+                    SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_IMPAIRMENT", comment: ""), text: subject.impairment.localizedString),
+                    SessionInfoCell.Item(title: NSLocalizedString("SUBJECT_INFO_SYMPTOMS", comment: ""), text: subject.symptomStrings.joined(separator: ", ")),
                 ]
             }
             cell.layoutItemViews()

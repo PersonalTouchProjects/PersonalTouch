@@ -35,10 +35,10 @@ class SubjectSummaryViewController: UIViewController {
 
         view.backgroundColor = UIColor.white
         
-        titleLabel.text = "受測者資料"
+        titleLabel.text = NSLocalizedString("SUBJECT_INFO_TITLE", comment: "")
         titleLabel.font = UIFont.systemFont(ofSize: 21, weight: .semibold)
         
-        textLabel.text = "道燈投，劇說為友全子一對工：業二也光是水影正學一口，的的說學性員多，新有起往我人然傷曾作能學片件幾解，經數去小著市有智子易別好在，快說感。"
+        textLabel.text = NSLocalizedString("SUBJECT_AUTO_FILL_IN_MESSEGE", comment: "")
         textLabel.font = UIFont.systemFont(ofSize: 15)
         textLabel.numberOfLines = 0
         
@@ -48,14 +48,14 @@ class SubjectSummaryViewController: UIViewController {
         tableView.allowsSelection = false
         
         confirmButton.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .medium)
-        confirmButton.setTitle("使用這筆資料", for: .normal)
+        confirmButton.setTitle(NSLocalizedString("SUBJECT_AUTO_FILL_IN_YES", comment: ""), for: .normal)
         confirmButton.setTitleColor(UIColor.white, for: .normal)
         confirmButton.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: UIColor(hex: 0x00b894)), for: .normal)
         confirmButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
         confirmButton.addTarget(self, action: #selector(handleConfirmButton), for: .touchUpInside)
         
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .regular)
-        cancelButton.setTitle("全部重填", for: .normal)
+        cancelButton.setTitle(NSLocalizedString("SUBJECT_AUTO_FILL_IN_NO", comment: ""), for: .normal)
         cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
         
         view.addSubview(titleLabel)
@@ -117,63 +117,28 @@ extension SubjectSummaryViewController: UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell.titleLabel.text = "姓名"
+            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_NAME", comment: "")
             cell.valueLabel.text = subject.name
             
         case 1:
-            cell.titleLabel.text = "出生年"
+            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_BIRTH_YEAR", comment: "")
             cell.valueLabel.text = "\(subject.birthYear)"
             
         case 2:
-            cell.titleLabel.text = "性別"
-            cell.valueLabel.text = subject.gender.rawValue.localizedUppercase
+            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_GENDER", comment: "")
+            cell.valueLabel.text = subject.gender.localizedString
             
         case 3:
-            cell.titleLabel.text = "慣用手"
-            cell.valueLabel.text = subject.dominantHand.rawValue.localizedUppercase
+            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_DOMINANT_HAND", comment: "")
+            cell.valueLabel.text = subject.dominantHand.localizedString
             
         case 4:
-            cell.titleLabel.text = "診斷"
-            cell.valueLabel.text = subject.impairment.rawValue.localizedUppercase
+            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_IMPAIRMENT", comment: "")
+            cell.valueLabel.text = subject.impairment.localizedString
             
         case 5:
-            cell.titleLabel.text = "症狀"
-            var texts = [String]()
-            if subject.slowMovement {
-                texts.append("行動遲緩")
-            }
-            if subject.rapidFatigue {
-                texts.append("易於疲勞")
-            }
-            if subject.poorCoordination {
-                texts.append("缺乏協調性")
-            }
-            if subject.lowStrength {
-                texts.append("低張")
-            }
-            if subject.difficultyGripping {
-                texts.append("執行抓取動作有困難")
-            }
-            if subject.difficultyHolding {
-                texts.append("執行抓握動作有困難")
-            }
-            if subject.tremor {
-                texts.append("顫抖")
-            }
-            if subject.spasm {
-                texts.append("痙攣、抽搐")
-            }
-            if subject.lackOfSensation {
-                texts.append("知覺失調")
-            }
-            if subject.difficultyControllingDirection {
-                texts.append("difficulty controlling direction")
-            }
-            if subject.difficultyControllingDistance {
-                texts.append("difficulty controlling distance")
-            }
-            
-            cell.valueLabel.text = texts.joined(separator: "\n")
+            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_SYMPTOMS", comment: "")
+            cell.valueLabel.text = subject.symptomStrings.joined(separator: "\n")
             
         default:
             break

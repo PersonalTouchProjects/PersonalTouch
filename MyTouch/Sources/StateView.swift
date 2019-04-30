@@ -51,7 +51,7 @@ class StateView: UIView {
         imageView.contentMode = .scaleAspectFit
         
         titleLabel.font = UIFont.systemFont(ofSize: 27)
-        titleLabel.text = "歡迎使用 MyTouch"
+        titleLabel.text = NSLocalizedString("ONBOARDING_TITLE", comment: "")
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         
@@ -65,14 +65,14 @@ class StateView: UIView {
             .font: UIFont.systemFont(ofSize: 17)
         ]
         
-        let text = "於入最中公同及親了。月事念樹裡生保年指在思少員王技制的不毛響選、長能方向極，票領研因真未看的務，被念到觀存司的如善現緊。布會地生留經之跑要題計長們並布能我時回賣不的？應據有西產，港我進生。笑帶等的大思環情頭業、提鄉父條不參然經工光樂香月活的到。"
+        let text = NSLocalizedString("ONBOARDING_MESSEGE", comment: "")
         textLabel.attributedText = NSAttributedString(string: text, attributes: textAttrs)
         textLabel.numberOfLines = 0
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.minimumScaleFactor = 0.5
         
         button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .medium)
-        button.setTitle("開始測驗", for: .normal)
+        button.setTitle(NSLocalizedString("BUTTON_NEW_TEST", comment: ""), for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: UIColor(hex: 0x00b894)), for: .normal)
         button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)

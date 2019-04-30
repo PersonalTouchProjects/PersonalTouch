@@ -16,7 +16,7 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = "About MyTouch"
+        navigationItem.title = NSLocalizedString("NAVIGATION_TITLE_ABOUT", comment: "")
         
         view.backgroundColor = UIColor.white
         
@@ -60,28 +60,28 @@ extension AboutViewController: UITableViewDataSource {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = "Version"
-            cell.detailTextLabel?.text = "2.0.0"
+            cell.textLabel?.text = NSLocalizedString("ABOUT_VERSION_TITLE", comment: "")
+            cell.detailTextLabel?.text = UIApplication.shared.appVersion
             
         case (0, 1):
             cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = "License"
+            cell.textLabel?.text = NSLocalizedString("ABOUT_LICENSE_TITLE", comment: "")
             cell.accessoryType = .disclosureIndicator
             
         case (1, 0):
             cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = "About MyTouch"
+            cell.textLabel?.text = NSLocalizedString("ABOUT_MYTOUCH_TITLE", comment: "")
             cell.accessoryType = .disclosureIndicator
             
         case (1, 1):
             cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = "Contact Us"
+            cell.textLabel?.text = NSLocalizedString("ABOUT_CONTACT_TITLE", comment: "")
             cell.accessoryType = .disclosureIndicator
             
-        case (2, 0):
-            let button = tableView.dequeueReusableCell(withIdentifier: "button", for: indexPath) as! ButtonCell
-            button.buttonLabel.text = "Clear Data"
-            cell = button
+//        case (2, 0):
+//            let button = tableView.dequeueReusableCell(withIdentifier: "button", for: indexPath) as! ButtonCell
+//            button.buttonLabel.text = "Clear Data"
+//            cell = button
             
         default: fatalError()
         }
@@ -94,8 +94,8 @@ extension AboutViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return "Version Info"
-        case 1: return "About"
+        case 0: return NSLocalizedString("ABOUT_VERSION_INFO_SECTION_TITLE", comment: "")
+        case 1: return NSLocalizedString("ABOUT_ABOUT_APP_SECTION_TITLE", comment: "")
         default: return nil
         }
     }

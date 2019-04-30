@@ -9,7 +9,9 @@
 import Foundation
 import Alamofire
 
-private let host = "http://127.0.0.1:3000"
+private let host = "http://127.0.0.1:3000/api/v1"
+//private let host = "http://10.0.1.19:3000"
+//private let host = "http://ec2-18-216-53-251.us-east-2.compute.amazonaws.com:3000"
 private let userHeaderField = "X-Mytouch-User"
 
 class APIClient {

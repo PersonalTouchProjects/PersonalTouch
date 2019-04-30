@@ -16,9 +16,9 @@ class HomeViewController: SessionDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "MyTouch"
+        navigationItem.title = NSLocalizedString("NAVIGATION_TITLE_HOME", comment: "")
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "New Test",
+            title: NSLocalizedString("BUTTON_NEW_TEST", comment: ""),
             style: .plain,
             target: self,
             action: #selector(handleNewTestButton(sender:))
@@ -91,9 +91,9 @@ class HomeViewController: SessionDetailViewController {
             
             // Display onboarding view
             
-            stateView.titleLabel.text = "Welcom to MyTouch"
-            stateView.textLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-            stateView.button.setTitle("Start", for: .normal)
+            stateView.titleLabel.text = NSLocalizedString("ONBOARDING_TITLE", comment: "")
+            stateView.textLabel.text = NSLocalizedString("ONBOARDING_MESSEGE", comment: "")
+            stateView.button.setTitle(NSLocalizedString("BUTTON_NEW_TEST", comment: ""), for: .normal)
             
         } else {
             
@@ -104,8 +104,8 @@ class HomeViewController: SessionDetailViewController {
             stateView.isHidden = true
             
             if let error = homeTabBarController.error {
-                let alertController = UIAlertController(title: "錯誤", message: error.localizedDescription, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                let alertController = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
+                let action = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
                 
                 alertController.addAction(action)
                 present(alertController, animated: true, completion: nil)

@@ -40,7 +40,6 @@
 		65804F4E222A747D0051C649 /* UserDefaults+HCI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65804F4D222A747D0051C649 /* UserDefaults+HCI.swift */; };
 		659480192256074100F1BEC9 /* Credits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 659480182256074100F1BEC9 /* Credits.plist */; };
 		6594BE2221F0617C0006CA71 /* SessionInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */; };
-		6594BE2421F065650006CA71 /* SessionBriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2321F065650006CA71 /* SessionBriefView.swift */; };
 		6594BE2621F076D10006CA71 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594BE2521F076D10006CA71 /* AboutViewController.swift */; };
 		659BAA502212A9EE00E45D5F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659BAA4F2212A9EE00E45D5F /* APIClient.swift */; };
 		65B1A2DC222C199E00AEC151 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1A2DB222C199E00AEC151 /* StateView.swift */; };
@@ -65,6 +64,7 @@
 		6504DA652209A55B006649D6 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		6504DA672209A8E7006649D6 /* sessionsSample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sessionsSample.json; sourceTree = "<group>"; };
 		650918FE2223B95E00304789 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		651C7DCE2278333A0009CF39 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hant"; path = "zh-Hant.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		651D90E821EF26C100110588 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		651D90EA21EF26DF00110588 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		651D90EC21EF411000110588 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
@@ -84,7 +84,6 @@
 		6548AA0420E666A600B7C73F /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		6548AA0620E666CF00B7C73F /* SwipeTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTrial.swift; sourceTree = "<group>"; };
 		6548AA1920E6717000B7C73F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		6548AA1B20E6718200B7C73F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		6548AA1C20E6718200B7C73F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		6548AA1D20E6718200B7C73F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6548AA1E20E6770200B7C73F /* UIImage+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+HCI.swift"; sourceTree = "<group>"; };
@@ -96,7 +95,6 @@
 		65804F4D222A747D0051C649 /* UserDefaults+HCI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+HCI.swift"; sourceTree = "<group>"; };
 		659480182256074100F1BEC9 /* Credits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credits.plist; sourceTree = "<group>"; };
 		6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInfoCell.swift; sourceTree = "<group>"; };
-		6594BE2321F065650006CA71 /* SessionBriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionBriefView.swift; sourceTree = "<group>"; };
 		6594BE2521F076D10006CA71 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		659BAA4F2212A9EE00E45D5F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		65B1A2DB222C199E00AEC151 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				651D90F321EF532400110588 /* SessionDetailViewController.swift */,
-				6594BE2321F065650006CA71 /* SessionBriefView.swift */,
 				651D90F521EF54E200110588 /* AccomodationCell.swift */,
 				6594BE2121F0617C0006CA71 /* SessionInfoCell.swift */,
 				653F6901225F040A00BFB7DB /* SettingsStepByStepViewController.swift */,
@@ -442,7 +439,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				656F6AA2223117E50009F3E3 /* CenterModalPresentationController.swift in Sources */,
-				6594BE2421F065650006CA71 /* SessionBriefView.swift in Sources */,
 				6594BE2221F0617C0006CA71 /* SessionInfoCell.swift in Sources */,
 				6548AA0520E666A600B7C73F /* Task.swift in Sources */,
 				65010AC821018FA1002EB953 /* RotationTrial.swift in Sources */,
@@ -492,7 +488,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6548A9F020E663E800B7C73F /* Base */,
-				6548AA1B20E6718200B7C73F /* zh-Hant */,
+				651C7DCE2278333A0009CF39 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

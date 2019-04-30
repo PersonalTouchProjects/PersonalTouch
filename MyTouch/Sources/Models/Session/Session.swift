@@ -103,6 +103,10 @@ extension Session.State {
         case .error:     return UIColor(hex: 0xd63031)
         }
     }
+    
+    var localizedString: String {
+        return NSLocalizedString("SESSION_STATE_\(self.rawValue.uppercased())", comment: "")
+    }
 }
 
 // MARK: - Local File Cache
@@ -111,7 +115,6 @@ extension Session {
     
     var filename: String {
         return id
-//        return fileDateFormatter.string(from: start)
     }
     
     static var directory: String {

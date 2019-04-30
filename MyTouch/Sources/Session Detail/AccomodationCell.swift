@@ -23,14 +23,14 @@ class AccomodationCell: MyTouchBaseCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        titleLabel.text = "Accomodation Suggestions"
+        titleLabel.text = NSLocalizedString("ACCOMMODATION_SUGGESTIONS_TITLE", comment: "")
         
         itemViewStack.axis = .vertical
         itemViewStack.alignment = .fill
         itemViewStack.spacing = 0.0
         
         button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .medium)
-        button.setTitle("Go to Settings", for: .normal)
+        button.setTitle(NSLocalizedString("BUTTON_GO_TO_SETTINGS", comment: ""), for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: UIColor(hex: 0x00b894)), for: .normal)
         button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
@@ -84,19 +84,19 @@ class AccomodationCell: MyTouchBaseCell {
             
         case .local:
             button.isHidden = false
-            button.setTitle("Upload", for: .normal)
+            button.setTitle(NSLocalizedString("BUTTON_UPLOAD", comment: ""), for: .normal)
             itemViewStack.insertArrangedSubview(localSessionView(), at: 0)
             NSLayoutConstraint.activate(buttonConstraints)
             
         case .error:
             button.isHidden = false
-            button.setTitle("Test Again", for: .normal)
+            button.setTitle(NSLocalizedString("BUTTON_TEST_AGAIN", comment: ""), for: .normal)
             itemViewStack.insertArrangedSubview(errorView(), at: 0)
             NSLayoutConstraint.activate(buttonConstraints)
             
         case .completed:
             button.isHidden = false
-            button.setTitle("Go to Settings", for: .normal)
+            button.setTitle(NSLocalizedString("BUTTON_GO_TO_SETTINGS", comment: ""), for: .normal)
             itemViews().enumerated().forEach { itemViewStack.insertArrangedSubview($1, at: $0) }
             NSLayoutConstraint.activate(buttonConstraints)
         }
@@ -109,26 +109,23 @@ class AccomodationCell: MyTouchBaseCell {
     
     private func analyzingView() -> UIView {
         let view = PromptView()
-//        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
         view.imageView.image = UIImage(named: "image_analyzing_1")
-        view.titleLabel.text = "正在分析中"
+        view.titleLabel.text = NSLocalizedString("ACCOMMODATION_SUGGESTIONS_ANALYZING", comment: "")
         return view
         
     }
     
     private func localSessionView() -> UIView {
         let view = PromptView()
-//        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
         view.imageView.image = UIImage(named: "image_cached")
-        view.titleLabel.text = "資料尚未上傳至伺服器"
+        view.titleLabel.text = NSLocalizedString("ACCOMMODATION_SUGGESTIONS_LOCAL_CACHE", comment: "")
         return view
     }
     
     private func errorView() -> UIView {
         let view = PromptView()
-//        view.imageView.backgroundColor = session?.state.color ?? UIColor.gray
         view.imageView.image = UIImage(named: "image_error")
-        view.titleLabel.text = "發生不可預期之錯誤"
+        view.titleLabel.text = NSLocalizedString("ACCOMMODATION_SUGGESTIONS_ERROR", comment: "")
         return view
     }
     
@@ -142,36 +139,36 @@ class AccomodationCell: MyTouchBaseCell {
         
         if let value = session.holdDuration, value != 0 {
             let itemView = ItemView()
-            itemView.titleLabel.text = "Hold Duration"
+            itemView.titleLabel.text = NSLocalizedString("ACCOMMODATION_SUGGESTIONS_HOLD_DURATION", comment: "")
             itemView.valueLabel.text = "\(value)"
-            itemView.unitLabel.text = "Sec."
+            itemView.unitLabel.text = NSLocalizedString("TIME_SECOND", comment: "")
             itemView.separator.isHidden = results.count == 0
             results.append(itemView)
         }
         if let value = session.ignoreRepeat, value != 0 {
             let itemView = ItemView()
-            itemView.titleLabel.text = "Ignore Repeat"
+            itemView.titleLabel.text = NSLocalizedString("ACCOMMODATION_SUGGESTIONS_IGNORE_REPEAT", comment: "")
             itemView.valueLabel.text = "\(value)"
-            itemView.unitLabel.text = "Sec."
+            itemView.unitLabel.text = NSLocalizedString("TIME_SECOND", comment: "")
             itemView.separator.isHidden = results.count == 0
             results.append(itemView)
         }
         if let value = session.touchAssistant {
             if case .initial(let sec) = value {
                 let itemView = ItemView()
-                itemView.titleLabel.text = "Touch Accomodation"
+                itemView.titleLabel.text = NSLocalizedString("ACCOMMODATION_SUGGESTIONS_TOUCH_ACCOMMODATION", comment: "")
                 itemView.valueLabel.text = "\(sec)"
-                itemView.unitLabel.text = "Sec."
-                itemView.extraLabel.text = "Use initial touch location"
+                itemView.unitLabel.text = NSLocalizedString("TIME_SECOND", comment: "")
+                itemView.extraLabel.text = NSLocalizedString("ACCOMMODATION_SUGGESTIONS_USE_INITIAL", comment: "")
                 itemView.separator.isHidden = results.count == 0
                 results.append(itemView)
             }
             if case .final(let sec) = value {
                 let itemView = ItemView()
-                itemView.titleLabel.text = "Touch Accomodation"
+                itemView.titleLabel.text = NSLocalizedString("ACCOMMODATION_SUGGESTIONS_TOUCH_ACCOMMODATION", comment: "")
                 itemView.valueLabel.text = "\(sec)"
-                itemView.unitLabel.text = "Sec."
-                itemView.extraLabel.text = "Use final touch location"
+                itemView.unitLabel.text = NSLocalizedString("TIME_SECOND", comment: "")
+                itemView.extraLabel.text = NSLocalizedString("ACCOMMODATION_SUGGESTIONS_USE_FINAL", comment: "")
                 itemView.separator.isHidden = results.count == 0
                 results.append(itemView)
             }
@@ -198,7 +195,6 @@ extension AccomodationCell {
         override init(frame: CGRect) {
             super.init(frame: frame)
             
-//            imageView.backgroundColor = UIColor.gray
             imageView.image = UIImage(named: "image_analyzing_1")
             titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             titleLabel.textAlignment = .center

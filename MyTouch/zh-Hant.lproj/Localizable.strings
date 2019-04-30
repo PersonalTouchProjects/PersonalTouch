@@ -6,18 +6,133 @@
   Copyright © 2018年 NTU HCI Lab. All rights reserved.
 */
 
-"Exam" = "測驗";
-"Exam Description" = "岸邊信精一動也於時讀山！切去都；數大小參構為理大開年去歡代天老媽政治場太算畫而……過少廣喜的來了笑林壓想；可化光區：害雄媽不起相速歡心，或去出留自了輕更自的地吃大真，最考山也的們名望注難原知爾到元勢你下國：和名水，為間育河輕開才港一去以調只不相離學他，成童法訴值而全；效改類國光會小的食可功？備你安業毒現有雙樣廣其，盡現帶是書，個具我了就金今致著賽前們，回來資，定下去精經現點在了成造我決作地舉在長回外、對明人家你麼地土談來……進坐運到小例旅，孩著體以化來品法構。起國中明企談行才不樹門認來區怎效……我在前他約票，金生議，學出戰賽身子石在長是？國醫負師車平！留選切手關去經；院公這！";
-"Start Exam" = "開始測驗";
+"OK" = "好";
+"END" = "結束";
+"ERROR" = "錯誤";
+"OOPS" = "噢噢";
+"WELCOME" = "歡迎";
+"THANK_YOU" = "謝謝您";
+"TIME_SECOND" = "秒";
+"CONTINUE_EXAM" = "繼續測驗";
+"MUST_CONSENT_MESSAGE" = "您必須同意才能繼續使用本服務。";
 
-"Tap Task Title" = "點擊測驗";
-"Tap Task Description" = "請點擊螢幕上出現的藍色方塊";
-"Very Good" = "非常好！";
-"Next Trial" = "下一題";
-"Tap Task End Title" = "點擊測驗結束";
+"NAVIGATION_TITLE_HOME" = "MyTouch";
+"NAVIGATION_TITLE_HISTORY" = "MyTouch";
+"NAVIGATION_TITLE_ABOUT" = "關於 MyTouch";
 
-"TASK_INSTRUCTION_TITLE" = "測驗說明";
-"TASK_INSTRUCTION" = "岸邊信精一動也於時讀山！切去都；數大小參構為理大開年去歡代天老媽政治場太算畫而……過少廣喜的來了笑林壓想。";
+"ABOUT_VERSION_INFO_SECTION_TITLE" = "版本資訊";
+"ABOUT_ABOUT_APP_SECTION_TITLE" = "關於";
+"ABOUT_VERSION_TITLE" = "程式版本";
+"ABOUT_LICENSE_TITLE" = "版權資訊";
+"ABOUT_MYTOUCH_TITLE" = "關於 MyTouch";
+"ABOUT_CONTACT_TITLE" = "聯絡我們";
 
-"NEXT_BUTTON" = "下一步";
-"CANCEL_TASK_BUTTON" = "離開測驗";
+"ONBOARDING_TITLE" = "歡迎使用 MyTouch";
+"ONBOARDING_MESSEGE" = "於入最中公同及親了。月事念樹裡生保年指在思少員王技制的不毛響選、長能方向極，票領研因真未看的務，被念到觀存司的如善現緊。布會地生留經之跑要題計長們並布能我時回賣不的？應據有西產，港我進生。笑帶等的大思環情頭業、提鄉父條不參然經工光樂香月活的到。";
+
+"FINISH_EXAM_QUESTION_TITLE" = "結束測驗？";
+"FINISH_EXAM_QUESTION_BODY" = "現在結束測驗將會放棄所有已完成的測驗資料。";
+
+"MYTOUCH_CONSENT_DOCUMENT" = "MyTouch 使用同意書";
+"MYTOUCH_CONSENT_OVERVIEW_SUMMARY" = "歡迎來到 MyTouch！由於檢測資料將會提供學術研究使用，於是在使用本 app 前，有以下事項須向您做說明。";
+"MYTOUCH_CONSENT_DATA_GATHERING_SUMMARY" = "接下來之測驗進行方式，為進行一系列的測驗，約耗時 20 分鐘。本 app 測驗結果除了為您帶來更順暢的觸控體驗，亦會將您的測驗資料作為日後學術研究使用。";
+"MYTOUCH_CONSENT_PRIVACY_SUMMARY" = "為確保您的個人權益，我們僅將資料結果做學術上的研究使用，並不會將您的個人資料外流，或做其他商業利用。";
+"MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY" = "除前述測驗外，我們亦須向您蒐集個人資料（如：年齡、性別、手機、信箱、同意書簽名等），以增進日後研究之樣本蒐集。";
+"MYTOUCH_CONSENT_WITHDRAWING_SUMMARY" = "若您無法配合 MyTouch 之資料用途，我們雖深感遺憾但亦尊重您的決定。期待未來能有機會再與您合作！";
+"MYOTUCH_USER_TITLE" = "使用者";
+
+"SURVEY_INSTRUCTION_TITLE" = "填寫基本資料";
+"SURVEY_INSTRUCTION_TEXT" = "為維護資料完整性，請先填寫您的基本資料。";
+"SURVEY_NAME_TITLE" = "基本資料";
+"SURVEY_NAME_QUESTION" = "您的姓名";
+"SURVEY_BIRTH_YEAR_TITLE" = "基本資料";
+"SURVEY_BIRTH_YEAR_QUESTION" = "您的出生年（西元）";
+"SURVEY_GENDER_TITLE" = "基本資料";
+"SURVEY_GENDER_QUESTION" = "您的生理性別";
+"SURVEY_DOMINANT_HAND_TITLE" = "基本資料";
+"SURVEY_DOMINANT_HAND_QUESTION" = "您的慣用手";
+"SURVEY_IMPAIRMENT_TITLE" = "運動障礙";
+"SURVEY_IMPAIRMENT_QUESTION" = "您的運動障礙診斷為";
+"SURVEY_SYMPTOMS_TITLE" = "症狀";
+"SURVEY_SYMPTOMS_QUESTION" = "您有下列何種症狀？（可複選）";
+"SURVEY_COMPLETION_TEXT" = "您已經填寫完基本資料";
+
+"GENDER_MALE" = "男性";
+"GENDER_FEMALE" = "女性";
+"GENDER_OTHER" = "其他";
+
+"DOMINANT_HAND_LEFT" = "左撇子";
+"DOMINANT_HAND_RIGHT" = "右撇子";
+"DOMINANT_HAND_BOTH" = "雙手";
+"DOMINANT_HAND_NONE" = "無";
+
+"IMPAIRMENT_PARKINSONS" = "帕金森氏症";
+"IMPAIRMENT_CEREBRAL_PALSY" = "腦性麻痺";
+"IMPAIRMENT_MUSCULAR_DYSTROPHY" = "肌營養不良症";
+"IMPAIRMENT_SPINAL_CORD_INJURY" = "脊髓受損";
+"IMPAIRMENT_TETRAPLEGIA" = "四肢癱瘓";
+"IMPAIRMENT_FRIEDREICHS_ATAXIA" = "弗里德賴希共濟失調";
+"IMPAIRMENT_MULTIPLE_SCLEROSIS" = "多發性硬化症";
+"IMPAIRMENT_OTHERS" = "其他";
+"IMPAIRMENT_NONE" = "無";
+
+"SYMPTOM_SLOW_MOVEMENT" = "行動遲緩";
+"SYMPTOM_RAPID_FATIGUE" = "易於疲勞";
+"SYMPTOM_POOR_COORDINATION" = "缺乏協調性";
+"SYMPTOM_LOW_STRENGTH" = "低張";
+"SYMPTOM_DIFFICULTY_GRIPPING" = "難以抓握";
+"SYMPTOM_DIFFICULTY_HOLDING" = "難以抓住";
+"SYMPTOM_TREMOR" = "顫抖";
+"SYMPTOM_SPASM" = "痙攣";
+"SYMPTOM_LACK_OF_SENSATION" = "知覺失調";
+"SYMPTOM_DIFFICULTY_CONTROLLING_DIRECTION" = "難以控制方向";
+"SYMPTOM_DIFFICULTY_CONTROLLING_DISTANCE" = "難以控制距離";
+"SYMPTOM_NONE" = "無";
+"SYMPTOM_UNKNOWN" = "未知";
+
+"DEVICE_INFO_TITLE" = "裝置資訊";
+"DEVICE_INFO_DEVICE_NAME" = "裝置名稱";
+"DEVICE_INFO_MODEL_NAME" = "裝置型號";
+"DEVICE_INFO_MANUFACTURER" = "製造商";
+"DEVICE_INFO_OS_VERSION" = "作業系統版本";
+"DEVICE_INFO_APP_VERSION" = "MyTouch 版本";
+
+"SUBJECT_INFO_TITLE" = "受測者資訊";
+"SUBJECT_INFO_NAME" = "姓名";
+"SUBJECT_INFO_BIRTH_YEAR" = "出生年";
+"SUBJECT_INFO_GENDER" = "性別";
+"SUBJECT_INFO_DOMINANT_HAND" = "慣用手";
+"SUBJECT_INFO_IMPAIRMENT" = "障礙診斷";
+"SUBJECT_INFO_SYMPTOMS" = "症狀";
+"SUBJECT_AUTO_FILL_IN_MESSEGE" = "請問您是這個人嗎？";
+"SUBJECT_AUTO_FILL_IN_YES" = "是";
+"SUBJECT_AUTO_FILL_IN_NO" = "不是";
+
+"ACCOMMODATION_SUGGESTIONS_TITLE" = "觸控調節建議";
+"ACCOMMODATION_SUGGESTIONS_ANALYZING" = "正在分析中";
+"ACCOMMODATION_SUGGESTIONS_LOCAL_CACHE" = "資料尚未上傳至伺服器";
+"ACCOMMODATION_SUGGESTIONS_ERROR" = "發生不可預期之錯誤";
+"ACCOMMODATION_SUGGESTIONS_HOLD_DURATION" = "按住持續時間";
+"ACCOMMODATION_SUGGESTIONS_IGNORE_REPEAT" = "忽略重複項目";
+"ACCOMMODATION_SUGGESTIONS_TOUCH_ACCOMMODATION" = "輕點輔助";
+"ACCOMMODATION_SUGGESTIONS_USE_INITIAL" = "使用最初觸控位置";
+"ACCOMMODATION_SUGGESTIONS_USE_FINAL" = "使用最終觸控位置";
+
+"SESSION_STATE_LOCAL" = "本機暫存";
+"SESSION_STATE_ANALYZING" = "分析中";
+"SESSION_STATE_COMPLETED" = "完成";
+"SESSION_STATE_ERROR" = "發生錯誤";
+
+"BUTTON_GO_TO_SETTINGS" = "前往設定";
+"BUTTON_UPLOAD" = "上傳";
+"BUTTON_TEST_AGAIN" = "重新測驗";
+"BUTTON_NEW_TEST" = "開始測驗";
+
+"SETTING_INSTRUCTION_TITLE" = "如何設定觸控調節";
+"SETTING_INSTRUCTION_STEP_1" = "1. 前往「設定」app，點擊「一般」。";
+"SETTING_INSTRUCTION_STEP_2" = "2. 點擊「輔助使用」選項。";
+"SETTING_INSTRUCTION_STEP_3" = "3. 點擊「觸控調節」選項。";
+"SETTING_INSTRUCTION_STEP_4" = "4. 根據測驗結果調整各項設定值。";
+
+"LOCAL_SESSIONS_NOTIFICATION_TITLE" = "您有測驗資料還尚未上傳";
+"LOCAL_SESSIONS_NOTIFICATION_BODY" = "資料上傳到雲端伺服器之前不會被分析處理。";

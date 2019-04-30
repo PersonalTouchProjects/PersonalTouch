@@ -122,8 +122,8 @@ class HomeTabBarController: UITabBarController {
         if self.sessions.filter({ $0.state == .local }).count > 0 {
             
             let content = UNMutableNotificationContent()
-            content.title = "Test Title"
-            content.body = "Test notification body"
+            content.title = NSLocalizedString("LOCAL_SESSIONS_NOTIFICATION_TITLE", comment: "local sessions notification title")
+            content.body = NSLocalizedString("LOCAL_SESSIONS_NOTIFICATION_BODY", comment: "local sessions notification body")
             
             // trigger every 15:30
             var dateComponents = DateComponents()
@@ -215,8 +215,10 @@ class HomeTabBarController: UITabBarController {
             taskViewController.dismiss(animated: true, completion: nil)
         } else {
             
-            let alertController = UIAlertController(title: "Oops", message: "You must consent to use this service.", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            let title = NSLocalizedString("OOPS", comment: "")
+            let message = NSLocalizedString("MUST_CONSENT_MESSAGE", comment: "")
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let action = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
             
             alertController.addAction(action)
             taskViewController.present(alertController, animated: true, completion: nil)
@@ -374,11 +376,11 @@ class HomeTabBarController: UITabBarController {
                 else if let error = error {
                     
                     let alertController = UIAlertController(
-                        title: "錯誤",
+                        title: NSLocalizedString("ERROR", comment: ""),
                         message: error.localizedDescription,
                         preferredStyle: .alert
                     )
-                    alertController.addAction(UIAlertAction(title: "OK", style: .default) { action in
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) { action in
                         
                         // try to save local cache after presenting upload error meesage
                         do {
@@ -392,12 +394,12 @@ class HomeTabBarController: UITabBarController {
                             
                             // error occured when saving session, present error and DO NOT dismiss task view controller
                             let alertController = UIAlertController(
-                                title: "錯誤",
+                                title: NSLocalizedString("ERROR", comment: ""),
                                 message: error.localizedDescription,
                                 preferredStyle: .alert
                             )
                             alertController.addAction(UIAlertAction(
-                                title: "OK",
+                                title: NSLocalizedString("OK", comment: ""),
                                 style: .default,
                                 handler: nil)
                             )
@@ -414,12 +416,14 @@ class HomeTabBarController: UITabBarController {
             
         case .discarded:
             
-            let alertController = UIAlertController(title: "結束測驗？", message: "現在結束測驗將會放棄所有已完成的問卷和測驗資料", preferredStyle: .alert)
-            let confirm = UIAlertAction(title: "結束", style: .destructive) { _ in
+            let title = NSLocalizedString("FINISH_EXAM_QUESTION_TITLE", comment: "")
+            let message = NSLocalizedString("FINISH_EXAM_QUESTION_BODY", comment: "")
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let confirm = UIAlertAction(title: NSLocalizedString("END", comment: ""), style: .destructive) { _ in
                 self.currentSession = nil
                 taskViewController.dismiss(animated: true, completion: nil)
             }
-            let cancel = UIAlertAction(title: "繼續測驗", style: .default, handler: nil)
+            let cancel = UIAlertAction(title: NSLocalizedString("CONTINUE_EXAM", comment: ""), style: .default, handler: nil)
             
             alertController.addAction(confirm)
             alertController.addAction(cancel)
@@ -475,7 +479,7 @@ extension HomeTabBarController: UIViewControllerTransitioningDelegate {
 private func consentTask() -> ORKOrderedTask {
     
     let document = ORKConsentDocument()
-    document.title = "MyTouch 使用同意書"
+    document.title = NSLocalizedString("MYTOUCH_CONSENT_DOCUMENT", comment: "")
     
     /*
      * Supported types (in ResearchKit recommanded order):
@@ -493,20 +497,20 @@ private func consentTask() -> ORKOrderedTask {
         let consentSection = ORKConsentSection(type: contentSectionType)
         switch contentSectionType {
         case .overview:
-            consentSection.summary = "歡迎來到 MyTouch！由於檢測資料將會提供學術研究使用，於是在使用本 app 前，有以下事項須向您做說明。"
+            consentSection.summary = NSLocalizedString("MYTOUCH_CONSENT_OVERVIEW_SUMMARY", comment: "")
             // consentSection.content = ""
             
         case .dataGathering:
-            consentSection.summary = "接下來之測驗進行方式，為進行一系列的測驗，約耗時 20 分鐘。本 app 測驗結果除了為您帶來更順暢的觸控體驗，亦會將您的測驗資料作為日後學術研究使用。"
+            consentSection.summary = NSLocalizedString("MYTOUCH_CONSENT_DATA_GATHERING_SUMMARY", comment: "")
             
         case .privacy:
-            consentSection.summary = "為確保您的個人權益，我們僅將資料結果做學術上的研究使用，並不會將您的個人資料外流，或做其他商業利用。"
+            consentSection.summary = NSLocalizedString("MYTOUCH_CONSENT_PRIVACY_SUMMARY", comment: "")
             
         case .studySurvey:
-            consentSection.summary = "除前述測驗外，我們亦須向您蒐集個人資料（如：年齡、性別、手機、信箱、同意書簽名等），以增進日後研究之樣本蒐集。"
+            consentSection.summary = NSLocalizedString("MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY", comment: "")
             
         case .withdrawing:
-            consentSection.summary = "若您無法配合 MyTouch 之資料用途，我們雖深感遺憾但亦尊重您的決定。期待未來能有機會再與您合作！"
+            consentSection.summary = NSLocalizedString("MYTOUCH_CONSENT_WITHDRAWING_SUMMARY", comment: "")
             
         default:
             break
@@ -515,7 +519,7 @@ private func consentTask() -> ORKOrderedTask {
     }
     
     document.sections = consentSections
-    document.addSignature(ORKConsentSignature(forPersonWithTitle: "User", dateFormatString: nil, identifier: "signature"))
+    document.addSignature(ORKConsentSignature(forPersonWithTitle: NSLocalizedString("MYOTUCH_USER_TITLE", comment: ""), dateFormatString: nil, identifier: "signature"))
     
     var steps = [ORKStep]()
     
@@ -529,8 +533,8 @@ private func consentTask() -> ORKOrderedTask {
 //    steps.append(reviewStep)
     
     let completionStep = ORKCompletionStep(identifier: "completion")
-    completionStep.title = "歡迎" // "Welcome"
-    completionStep.text = "謝謝您" // "Thank you."
+    completionStep.title = NSLocalizedString("WELCOME", comment: "")
+    completionStep.text = NSLocalizedString("THANK_YOU", comment: "")
     steps.append(completionStep)
     
     return ORKOrderedTask(identifier: "consentTask", steps: steps)
@@ -541,91 +545,118 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     var steps = [ORKStep]()
     
     let instructionStep = ORKInstructionStep(identifier: "intro")
-    instructionStep.title = "Test Survey"
-    instructionStep.text = "Answer three questions to complete the survey."
+    instructionStep.title = NSLocalizedString("SURVEY_INSTRUCTION_TITLE", comment: "")
+    instructionStep.text = NSLocalizedString("SURVEY_INSTRUCTION_TEXT", comment: "")
     steps += [instructionStep]
     
-    if let subject = subject {
-        let autoFillFormat = ORKBooleanAnswerFormat(yesString: "帶入", noString: "重新填寫")
-        let autoFillStep = ORKQuestionStep(identifier: "autoFill", title: "Auto Fill", question: nil, answer: autoFillFormat)
-        autoFillStep.text = subject.stringValue
-        steps.append(autoFillStep)
-    }
-    
-    // let emailFormat = ORKEmailAnswerFormat()
     
     // name
     let nameAnswerFormat = ORKTextAnswerFormat(maximumLength: 100)
     nameAnswerFormat.multipleLines = false
-    steps.append(ORKQuestionStep(identifier: "name", title: "Information", question: "name", answer: nameAnswerFormat))
+    steps.append(ORKQuestionStep(
+        identifier: "name",
+        title: NSLocalizedString("SURVEY_NAME_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_NAME_QUESTION", comment: ""),
+        answer: nameAnswerFormat)
+    )
     
     
     // birth year
     let birthYearFormat = ORKNumericAnswerFormat.integerAnswerFormat(withUnit: nil)
     birthYearFormat.minimum = NSNumber(value: Calendar(identifier: .iso8601).component(.year, from: Date.distantPast))
     birthYearFormat.maximum = NSNumber(value: Calendar(identifier: .iso8601).component(.year, from: Date()))
-    steps.append(ORKQuestionStep(identifier: "birth", title: "Information", question: "birth year", answer: birthYearFormat))
+    steps.append(ORKQuestionStep(
+        identifier: "birth",
+        title: NSLocalizedString("SURVEY_BIRTH_YEAR_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_BIRTH_YEAR_QUESTION", comment: ""),
+        answer: birthYearFormat)
+    )
     
     
     // gender
     let genderFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
-        ORKTextChoice(text: "Female", value: Subject.Gender.female.rawValue as NSString),
-        ORKTextChoice(text: "Male", value: Subject.Gender.male.rawValue as NSString),
-        ORKTextChoice(text: "Other", value: Subject.Gender.other.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("GENDER_FEMALE", comment: ""), value: Subject.Gender.female.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("GENDER_MALE", comment: ""), value: Subject.Gender.male.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("GENDER_OTHER", comment: ""), value: Subject.Gender.other.rawValue as NSString),
     ])
-    steps.append(ORKQuestionStep(identifier: "gender", title: "Information", question: "gender", answer: genderFormat))
+    steps.append(ORKQuestionStep(
+        identifier: "gender",
+        title: NSLocalizedString("SURVEY_GENDER_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_GENDER_QUESTION", comment: ""),
+        answer: genderFormat)
+    )
     
     
     // dominant hand
     let dominantHandFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
-        ORKTextChoice(text: "Left Handed", value: Subject.DominantHand.left.rawValue as NSString),
-        ORKTextChoice(text: "Right Handed", value: Subject.DominantHand.right.rawValue as NSString),
-        ORKTextChoice(text: "Both", value: Subject.DominantHand.both.rawValue as NSString),
-        ORKTextChoice(text: "None", value: Subject.DominantHand.none.rawValue as NSString)
+        ORKTextChoice(text: NSLocalizedString("DOMINANT_HAND_LEFT", comment: ""), value: Subject.DominantHand.left.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("DOMINANT_HAND_RIGHT", comment: ""), value: Subject.DominantHand.right.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("DOMINANT_HAND_BOTH", comment: ""), value: Subject.DominantHand.both.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("DOMINANT_HAND_NONE", comment: ""), value: Subject.DominantHand.none.rawValue as NSString)
     ])
-    steps.append(ORKQuestionStep(identifier: "hand", title: "Information", question: "dominant hand", answer: dominantHandFormat))
+    steps.append(ORKQuestionStep(
+        identifier: "hand",
+        title: NSLocalizedString("SURVEY_DOMINANT_HAND_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_DOMINANT_HAND_QUESTION", comment: ""),
+        answer: dominantHandFormat)
+    )
     
     
     // health impairment
     let impairmentFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [
-        ORKTextChoice(text: "None", value: Subject.Impairment.none.rawValue as NSString),
-        ORKTextChoice(text: "Parkinson's", value: Subject.Impairment.parkinsons.rawValue as NSString),
-        ORKTextChoice(text: "Cerebral Palsy", value: Subject.Impairment.cerebralPalsy.rawValue as NSString),
-        ORKTextChoice(text: "Muscular Dystrophy", value: Subject.Impairment.muscularDystrophy.rawValue as NSString),
-        ORKTextChoice(text: "Spinal Cord Injury", value: Subject.Impairment.spinalCordInjury.rawValue as NSString),
-        ORKTextChoice(text: "Tetraplegia", value: Subject.Impairment.tetraplegia.rawValue as NSString),
-        ORKTextChoice(text: "Friedreichs Ataxia", value: Subject.Impairment.friedreichsAtaxia.rawValue as NSString),
-        ORKTextChoice(text: "Multiple Sclerosis", value: Subject.Impairment.multipleSclerosis.rawValue as NSString),
-        ORKTextChoice(text: "Others", value: Subject.Impairment.others.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("IMPAIRMENT_NONE", comment: ""), value: Subject.Impairment.none.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("IMPAIRMENT_PARKINSONS", comment: ""), value: Subject.Impairment.parkinsons.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("IMPAIRMENT_CEREBRAL_PALSY", comment: ""), value: Subject.Impairment.cerebralPalsy.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("IMPAIRMENT_MUSCULAR_DYSTROPHY", comment: ""), value: Subject.Impairment.muscularDystrophy.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("IMPAIRMENT_SPINAL_CORD_INJURY", comment: ""), value: Subject.Impairment.spinalCordInjury.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("IMPAIRMENT_TETRAPLEGIA", comment: ""), value: Subject.Impairment.tetraplegia.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("IMPAIRMENT_FRIEDREICHS_ATAXIA", comment: ""), value: Subject.Impairment.friedreichsAtaxia.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("IMPAIRMENT_MULTIPLE_SCLEROSIS", comment: ""), value: Subject.Impairment.multipleSclerosis.rawValue as NSString),
+        ORKTextChoice(text: NSLocalizedString("IMPAIRMENT_OTHERS", comment: ""), value: Subject.Impairment.others.rawValue as NSString),
     ])
-    steps.append(ORKQuestionStep(identifier: "impairment", title: "Impairment", question: "Your impairment", answer: impairmentFormat))
+    steps.append(ORKQuestionStep(
+        identifier: "impairment",
+        title: NSLocalizedString("SURVEY_IMPAIRMENT_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_IMPAIRMENT_QUESTION", comment: ""),
+        answer: impairmentFormat)
+    )
     
     // health impairment free text
     let impairmentFreeTextFormat = ORKTextAnswerFormat(maximumLength: 200)
     impairmentFreeTextFormat.multipleLines = true
-    steps.append(ORKQuestionStep(identifier: "impairmentFreeText", title: "Impairment", question: "Your impairment", answer: impairmentFreeTextFormat))
+    steps.append(ORKQuestionStep(
+        identifier: "impairmentFreeText",
+        title: NSLocalizedString("SURVEY_IMPAIRMENT_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_IMPAIRMENT_QUESTION", comment: ""),
+        answer: impairmentFreeTextFormat)
+    )
     
     // symptom
     let symptomFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: [
-        ORKTextChoice(text: "None", value: 0 as NSNumber),
-        ORKTextChoice(text: "Slow Movement", value: Subject.Symptom.slowMovement.rawValue as NSNumber),
-        ORKTextChoice(text: "Rapid Fatigue", value: Subject.Symptom.rapidFatigue.rawValue as NSNumber),
-        ORKTextChoice(text: "Poor Coordination", value: Subject.Symptom.poorCoordination.rawValue as NSNumber),
-        ORKTextChoice(text: "Low Strength", value: Subject.Symptom.lowStrength.rawValue as NSNumber),
-        ORKTextChoice(text: "Difficulty Gripping", value: Subject.Symptom.difficultyGripping.rawValue as NSNumber),
-        ORKTextChoice(text: "Difficulty Holding", value: Subject.Symptom.difficultyHolding.rawValue as NSNumber),
-        ORKTextChoice(text: "Tremor", value: Subject.Symptom.tremor.rawValue as NSNumber),
-        ORKTextChoice(text: "Spasm", value: Subject.Symptom.spasm.rawValue as NSNumber),
-        ORKTextChoice(text: "Lack of Sensation", value: Subject.Symptom.lackOfSensation.rawValue as NSNumber),
-        ORKTextChoice(text: "Difficulty Controlling Direction", value: Subject.Symptom.difficultyControllingDirection.rawValue as NSNumber),
-        ORKTextChoice(text: "Difficulty Controlling Distance", value: Subject.Symptom.difficultyControllingDistance.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_NONE", comment: ""), value: 0 as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_SLOW_MOVEMENT", comment: ""), value: Subject.Symptom.slowMovement.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_RAPID_FATIGUE", comment: ""), value: Subject.Symptom.rapidFatigue.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_POOR_COORDINATION", comment: ""), value: Subject.Symptom.poorCoordination.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_LOW_STRENGTH", comment: ""), value: Subject.Symptom.lowStrength.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_DIFFICULTY_GRIPPING", comment: ""), value: Subject.Symptom.difficultyGripping.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_DIFFICULTY_HOLDING", comment: ""), value: Subject.Symptom.difficultyHolding.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_TREMOR", comment: ""), value: Subject.Symptom.tremor.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_SPASM", comment: ""), value: Subject.Symptom.spasm.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_LACK_OF_SENSATION", comment: ""), value: Subject.Symptom.lackOfSensation.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_DIFFICULTY_CONTROLLING_DIRECTION", comment: ""), value: Subject.Symptom.difficultyControllingDirection.rawValue as NSNumber),
+        ORKTextChoice(text: NSLocalizedString("SYMPTOM_DIFFICULTY_CONTROLLING_DISTANCE", comment: ""), value: Subject.Symptom.difficultyControllingDistance.rawValue as NSNumber),
     ])
-    steps.append(ORKQuestionStep(identifier: "symptom", title: "Symptom", question: "Your symptoms", answer: symptomFormat))
+    steps.append(ORKQuestionStep(
+        identifier: "symptom",
+        title: NSLocalizedString("SURVEY_SYMPTOMS_TITLE", comment: ""),
+        question: NSLocalizedString("SURVEY_SYMPTOMS_QUESTION", comment: ""),
+        answer: symptomFormat)
+    )
     
     
     let completionStep = ORKCompletionStep(identifier: "summary")
-    completionStep.title = "Thank You!!"
-    completionStep.text = "You have completed the survey"
+    completionStep.title = NSLocalizedString("THANK_YOU", comment: "")
+    completionStep.text = NSLocalizedString("SURVEY_COMPLETION_TEXT", comment: "")
     steps += [completionStep]
     
     return OrderedTask(identifier: "survey", steps: steps)
@@ -712,11 +743,5 @@ private class OrderedTask: ORKOrderedTask {
         }
         
         return super.step(before: step, with: result)
-    }
-}
-
-extension Subject {
-    var stringValue: String {
-        return "Name: \(name)\nBirth Year: \(birthYear)"
     }
 }

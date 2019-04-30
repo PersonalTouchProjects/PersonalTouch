@@ -23,7 +23,7 @@ class SettingsStepByStepViewController: UIViewController {
 
         view.backgroundColor = UIColor.white
         
-        titleLabel.text = "如何設定觸控調節"
+        titleLabel.text = NSLocalizedString("SETTING_INSTRUCTION_TITLE", comment: "")
         titleLabel.font = UIFont.systemFont(ofSize: 21, weight: .semibold)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.5
@@ -33,7 +33,7 @@ class SettingsStepByStepViewController: UIViewController {
         bottomView.backgroundColor = UIColor.white
         
         button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .medium)
-        button.setTitle("立即前往設定", for: .normal)
+        button.setTitle(NSLocalizedString("BUTTON_GO_TO_SETTINGS", comment: ""), for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIImage.primaryButtonBackgroundImage(color: UIColor(hex: 0x00b894)), for: .normal)
         button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
