@@ -89,20 +89,20 @@ class SettingsStepByStepViewController: UIViewController {
         ])
         
         let stepView1 = StepView()
-        stepView1.textLabel.text = "1. 前往「設定」app，點擊「一般」。"
-        stepView1.imageView.image = UIImage(named: "image_settings_general_en")
+        stepView1.textLabel.text = NSLocalizedString("SETTING_INSTRUCTION_STEP_1", comment: "")
+        stepView1.imageView.image = UIImage(named: NSLocalizedString("SETTING_INSTRUCTION_IMAGE_1", comment: ""))
         
         let stepView2 = StepView()
-        stepView2.textLabel.text = "2. 點擊「輔助使用」選項。"
-        stepView2.imageView.image = UIImage(named: "image_settings_accessibility_en")
+        stepView2.textLabel.text = NSLocalizedString("SETTING_INSTRUCTION_STEP_2", comment: "")
+        stepView2.imageView.image = UIImage(named: NSLocalizedString("SETTING_INSTRUCTION_IMAGE_2", comment: ""))
         
         let stepView3 = StepView()
-        stepView3.textLabel.text = "3. 點擊「觸控調節」選項。"
-        stepView3.imageView.image = UIImage(named: "image_settings_accommodations_en")
+        stepView3.textLabel.text = NSLocalizedString("SETTING_INSTRUCTION_STEP_3", comment: "")
+        stepView3.imageView.image = UIImage(named: NSLocalizedString("SETTING_INSTRUCTION_IMAGE_3", comment: ""))
         
         let stepView4 = StepView()
-        stepView4.textLabel.text = "4. 根據測驗結果調整各項設定值。"
-        stepView4.imageView.image = UIImage(named: "image_settings_configs_en")
+        stepView4.textLabel.text = NSLocalizedString("SETTING_INSTRUCTION_STEP_4", comment: "")
+        stepView4.imageView.image = UIImage(named: NSLocalizedString("SETTING_INSTRUCTION_IMAGE_4", comment: ""))
         
         
         let stackView = UIStackView(arrangedSubviews: [stepView1, stepView2, stepView3, stepView4])
