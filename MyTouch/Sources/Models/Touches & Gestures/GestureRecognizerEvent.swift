@@ -35,6 +35,7 @@ enum GestureRecognizerEventState: String, Codable {
         case .ended:     self = .ended
         case .cancelled: self = .cancelled
         case .failed:    self = .failed
+        @unknown default: fatalError()
         }
     }
 }

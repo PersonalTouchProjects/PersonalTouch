@@ -25,6 +25,7 @@ extension Touch {
             case .stationary: self = .stationary
             case .ended:      self = .ended
             case .cancelled:  self = .cancelled
+            @unknown default: fatalError()
             }
         }
     }
@@ -39,6 +40,7 @@ extension Touch {
             case .direct:   self = .direct
             case .indirect: self = .indirect
             case .pencil:   self = .pencil
+            @unknown default: fatalError()
             }
         }
     }
