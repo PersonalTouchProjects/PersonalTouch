@@ -104,10 +104,26 @@ extension AboutViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
         
         switch (indexPath.section, indexPath.row) {
+        
+        // License
         case (0, 1):
             let licensesController = LicensesViewController()
             licensesController.loadPlist(Bundle.main, resourceName: "Credits")
             show(licensesController, sender: self)
+            
+        // About MyTouch
+        case (1, 0):
+            let url = URL(string: "https://doi.org/10.1145/3290605.3300913")!
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            
+        // Contact
+        case (1, 1):
+            let url = URL(string: "https://mikechen.com")!
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
             
         default:
             break
