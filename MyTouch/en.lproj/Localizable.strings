@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  MyTouch
-
-  Created by Tommy Lin on 2018/6/29.
-  Copyright © 2018年 NTU HCI Lab. All rights reserved.
-*/
+/*
+ Localizable.strings
+ MyTouch
+ 
+ Created by Tommy Lin on 2018/6/29.
+ Copyright © 2018年 NTU HCI Lab. All rights reserved.
+ */
 
 "OK" = "OK";
 "END" = "Finish";
@@ -31,50 +31,50 @@
 "ONBOARDING_MESSEGE" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
 "FINISH_EXAM_QUESTION_TITLE" = "Quit now?";
-"FINISH_EXAM_QUESTION_BODY" = "現在結束測驗將會放棄所有已完成的測驗資料。";
+"FINISH_EXAM_QUESTION_BODY" = "Quitting current session will discard all finished testing data";
 
 "MYTOUCH_CONSENT_DOCUMENT" = "MyTouch Consent";
-"MYTOUCH_CONSENT_OVERVIEW_SUMMARY" = "歡迎來到 MyTouch！由於檢測資料將會提供學術研究使用，於是在使用本 app 前，有以下事項須向您做說明。";
-"MYTOUCH_CONSENT_DATA_GATHERING_SUMMARY" = "接下來之測驗進行方式，為進行一系列的測驗，約耗時 20 分鐘。本 app 測驗結果除了為您帶來更順暢的觸控體驗，亦會將您的測驗資料作為日後學術研究使用。";
-"MYTOUCH_CONSENT_PRIVACY_SUMMARY" = "為確保您的個人權益，我們僅將資料結果做學術上的研究使用，並不會將您的個人資料外流，或做其他商業利用。";
-"MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY" = "除前述測驗外，我們亦須向您蒐集個人資料（如：年齡、性別、手機、信箱、同意書簽名等），以增進日後研究之樣本蒐集。";
-"MYTOUCH_CONSENT_WITHDRAWING_SUMMARY" = "若您無法配合 MyTouch 之資料用途，我們雖深感遺憾但亦尊重您的決定。期待未來能有機會再與您合作！";
+"MYTOUCH_CONSENT_OVERVIEW_SUMMARY" = "Welcome to MyTouch! Because of following data will be provided to academtic  research purpose, please read the following terms of agreement";
+"MYTOUCH_CONSENT_DATA_GATHERING_SUMMARY" = "For the following testing demonstaration, we will conduct a series of testing for approximately 20 minutes. This application will provide you with smoother screen touch experience. These data will also used for future research purpose.";
+"MYTOUCH_CONSENT_PRIVACY_SUMMARY" = "To protect your personal right and privacy, collected data will only used for research purpose. Your personal information will not be shared, or used for any consumer purpose.";
+"MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY" = "In addition to data collection, we will collect your personal information (Ex: age, gender, phone number, email, and signed agreement.) to enhance future research data sample.";
+"MYTOUCH_CONSENT_WITHDRAWING_SUMMARY" = "If you cannot cooperate with MyTouch data usage, we sincerely respect your decision. We hope to cooperate in the near future.";
 "MYOTUCH_USER_TITLE" = "User";
 
-"SURVEY_INSTRUCTION_TITLE" = "填寫基本資料";
-"SURVEY_INSTRUCTION_TEXT" = "為維護資料完整性，請先填寫您的基本資料。";
-"SURVEY_NAME_TITLE" = "基本資料";
-"SURVEY_NAME_QUESTION" = "您的姓名";
-"SURVEY_BIRTH_YEAR_TITLE" = "基本資料";
-"SURVEY_BIRTH_YEAR_QUESTION" = "您的出生年（西元）";
-"SURVEY_GENDER_TITLE" = "基本資料";
-"SURVEY_GENDER_QUESTION" = "您的生理性別";
-"SURVEY_DOMINANT_HAND_TITLE" = "基本資料";
-"SURVEY_DOMINANT_HAND_QUESTION" = "您的慣用手";
-"SURVEY_IMPAIRMENT_TITLE" = "運動障礙";
-"SURVEY_IMPAIRMENT_QUESTION" = "您的運動障礙診斷為";
-"SURVEY_SYMPTOMS_TITLE" = "症狀";
-"SURVEY_SYMPTOMS_QUESTION" = "您有下列何種症狀？（可複選）";
-"SURVEY_COMPLETION_TEXT" = "您已經填寫完基本資料";
+"SURVEY_INSTRUCTION_TITLE" = "Fill out basic infomation";
+"SURVEY_INSTRUCTION_TEXT" = "To ensure completion of data, please fill in your basic information.";
+"SURVEY_NAME_TITLE" = "Basic Information";
+"SURVEY_NAME_QUESTION" = "Name";
+"SURVEY_BIRTH_YEAR_TITLE" = "Basic Information";
+"SURVEY_BIRTH_YEAR_QUESTION" = "Year of Birth";
+"SURVEY_GENDER_TITLE" = "Basic Information";
+"SURVEY_GENDER_QUESTION" = "Gender";
+"SURVEY_DOMINANT_HAND_TITLE" = "Basic Information";
+"SURVEY_DOMINANT_HAND_QUESTION" = "Your Dominant Hand";
+"SURVEY_IMPAIRMENT_TITLE" = "Physical impairment";
+"SURVEY_IMPAIRMENT_QUESTION" = "Your physical impairment diagnosis ";
+"SURVEY_SYMPTOMS_TITLE" = "Symptoms";
+"SURVEY_SYMPTOMS_QUESTION" = "Do you have any following symptoms (multiple choice) ";
+"SURVEY_COMPLETION_TEXT" = "You have completed basic information";
 
 "GENDER_MALE" = "Male";
 "GENDER_FEMALE" = "Female";
 "GENDER_OTHER" = "Other";
 
-"DOMINANT_HAND_LEFT" = "左撇子";
-"DOMINANT_HAND_RIGHT" = "右撇子";
-"DOMINANT_HAND_BOTH" = "雙手";
-"DOMINANT_HAND_NONE" = "無";
+"DOMINANT_HAND_LEFT" = "Left handed";
+"DOMINANT_HAND_RIGHT" = "Right handed";
+"DOMINANT_HAND_BOTH" = "Both hand";
+"DOMINANT_HAND_NONE" = "No preference";
 
-"IMPAIRMENT_PARKINSONS" = "帕金森氏症";
-"IMPAIRMENT_CEREBRAL_PALSY" = "腦性麻痺";
-"IMPAIRMENT_MUSCULAR_DYSTROPHY" = "肌營養不良症";
-"IMPAIRMENT_SPINAL_CORD_INJURY" = "脊髓受損";
-"IMPAIRMENT_TETRAPLEGIA" = "四肢癱瘓";
-"IMPAIRMENT_FRIEDREICHS_ATAXIA" = "弗里德賴希共濟失調";
-"IMPAIRMENT_MULTIPLE_SCLEROSIS" = "多發性硬化症";
-"IMPAIRMENT_OTHERS" = "其他";
-"IMPAIRMENT_NONE" = "無";
+"IMPAIRMENT_PARKINSONS" = "parkinsons";
+"IMPAIRMENT_CEREBRAL_PALSY" = "cerebral palsy";
+"IMPAIRMENT_MUSCULAR_DYSTROPHY" = "muscular dystrophy";
+"IMPAIRMENT_SPINAL_CORD_INJURY" = "spinal cord injury";
+"IMPAIRMENT_TETRAPLEGIA" = "tetraplegia";
+"IMPAIRMENT_FRIEDREICHS_ATAXIA" = "Friedreichs Ataxia";
+"IMPAIRMENT_MULTIPLE_SCLEROSIS" = "Multiple Sclerosis";
+"IMPAIRMENT_OTHERS" = "Other";
+"IMPAIRMENT_NONE" = "None";
 
 "SYMPTOM_SLOW_MOVEMENT" = "Slow Movement";
 "SYMPTOM_RAPID_FATIGUE" = "Rapid Fatigue";
@@ -104,19 +104,19 @@
 "SUBJECT_INFO_DOMINANT_HAND" = "Dominant Hand";
 "SUBJECT_INFO_IMPAIRMENT" = "Impairment";
 "SUBJECT_INFO_SYMPTOMS" = "Symptoms";
-"SUBJECT_AUTO_FILL_IN_MESSEGE" = "請問您是這個人嗎？";
+"SUBJECT_AUTO_FILL_IN_MESSEGE" = "Are you this person?";
 "SUBJECT_AUTO_FILL_IN_YES" = "Yes";
 "SUBJECT_AUTO_FILL_IN_NO" = "No";
 
 "ACCOMMODATION_SUGGESTIONS_TITLE" = "Accommodation Suggestions";
-"ACCOMMODATION_SUGGESTIONS_ANALYZING" = "正在分析中";
-"ACCOMMODATION_SUGGESTIONS_LOCAL_CACHE" = "資料尚未上傳至伺服器";
-"ACCOMMODATION_SUGGESTIONS_ERROR" = "發生不可預期之錯誤";
+"ACCOMMODATION_SUGGESTIONS_ANALYZING" = "Analyzing";
+"ACCOMMODATION_SUGGESTIONS_LOCAL_CACHE" = "Data has not uploaded to server";
+"ACCOMMODATION_SUGGESTIONS_ERROR" = "Unknown error occured";
 "ACCOMMODATION_SUGGESTIONS_HOLD_DURATION" = "Hold Duration";
 "ACCOMMODATION_SUGGESTIONS_IGNORE_REPEAT" = "Ignore Repeat";
 "ACCOMMODATION_SUGGESTIONS_TOUCH_ACCOMMODATION" = "Touch Accommodation";
-"ACCOMMODATION_SUGGESTIONS_USE_INITIAL" = "使用最初觸控位置";
-"ACCOMMODATION_SUGGESTIONS_USE_FINAL" = "使用最終觸控位置";
+"ACCOMMODATION_SUGGESTIONS_USE_INITIAL" = "Use initial location";
+"ACCOMMODATION_SUGGESTIONS_USE_FINAL" = "Use final location";
 
 "SESSION_STATE_LOCAL" = "Local Cached";
 "SESSION_STATE_ANALYZING" = "Analyzing";
@@ -128,16 +128,16 @@
 "BUTTON_TEST_AGAIN" = "Test Again";
 "BUTTON_NEW_TEST" = "Start Test";
 
-"SETTING_INSTRUCTION_TITLE" = "如何設定觸控調節";
-"SETTING_INSTRUCTION_STEP_1" = "1. 前往「設定」app，點擊「一般」。";
-"SETTING_INSTRUCTION_STEP_2" = "2. 點擊「輔助使用」選項。";
-"SETTING_INSTRUCTION_STEP_3" = "3. 點擊「觸控調節」選項。";
-"SETTING_INSTRUCTION_STEP_4" = "4. 根據測驗結果調整各項設定值。";
+"SETTING_INSTRUCTION_TITLE" = "How to set up Touch Accommodations";
+"SETTING_INSTRUCTION_STEP_1" = "1. Go to \"Setting\", press \"general";
+"SETTING_INSTRUCTION_STEP_2" = "2. Press \"Accessibility\" option";
+"SETTING_INSTRUCTION_STEP_3" = "3. Press \"Touch Accommodations\" option";
+"SETTING_INSTRUCTION_STEP_4" = "4. Adjust the value setting according to the tested result";
 
 "SETTING_INSTRUCTION_IMAGE_1" = "image_settings_general_en";
 "SETTING_INSTRUCTION_IMAGE_2" = "image_settings_accessibility_en";
 "SETTING_INSTRUCTION_IMAGE_3" = "image_settings_accommodations_en";
 "SETTING_INSTRUCTION_IMAGE_4" = "image_settings_configs_en";
 
-"LOCAL_SESSIONS_NOTIFICATION_TITLE" = "您有測驗資料還尚未上傳";
-"LOCAL_SESSIONS_NOTIFICATION_BODY" = "資料上傳到雲端伺服器之前不會被分析處理。";
+"LOCAL_SESSIONS_NOTIFICATION_TITLE" = "You have testing data not uploaded";
+"LOCAL_SESSIONS_NOTIFICATION_BODY" = "Your data will not be processed before your data is uploaded to cloud server";
