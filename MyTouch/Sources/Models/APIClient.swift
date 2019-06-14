@@ -9,14 +9,13 @@
 import Foundation
 import Alamofire
 
-private let host = "http://127.0.0.1:3000/api/v1"
-//private let host = "http://10.0.1.19:3000"
-//private let host = "http://ec2-18-216-53-251.us-east-2.compute.amazonaws.com:3000"
+private let host = "https://secret-fjord-21101.herokuapp.com/api/v1"
 private let userHeaderField = "X-Mytouch-User"
+private let apnsTokenField = "X-Mytouch-APNS-Token"
 
 class APIClient {
     
-    private func userIdentify() -> String? {
+    private func userIdentify() -> String {
         
         let key = UserDefaults.Key.userIdentity
         
@@ -25,14 +24,7 @@ class APIClient {
             return id
         }
         
-        if let id = NSUbiquitousKeyValueStore.default.string(forKey: key) {
-            print("found in NSUbiquitousKeyValueStore")
-            UserDefaults.standard.set(id, forKey: key)
-            UserDefaults.standard.synchronize()
-            return id
-        }
-        
-        return nil
+        return generateUserIdentity()
     }
     
     private func generateUserIdentity() -> String {
@@ -46,15 +38,12 @@ class APIClient {
         UserDefaults.standard.set(id, forKey: key)
         UserDefaults.standard.synchronize()
         
-        NSUbiquitousKeyValueStore.default.set(id, forKey: key)
-        NSUbiquitousKeyValueStore.default.synchronize()
-        
         return id
     }
     
     func loadSessions(decoder: JSONDecoder = APIClient.decoder, completion: @escaping ([Session]?, Error?) -> Void) {
         
-        let id = userIdentify() ?? generateUserIdentity()
+        let id = userIdentify()
         print("header: id - \(id)")
         
         let headers = [userHeaderField: id]
@@ -82,14 +71,18 @@ class APIClient {
     
     func uploadSession(_ session: Session, encoder: JSONEncoder = APIClient.encoder, decoder: JSONDecoder = APIClient.decoder, completion: @escaping (Session?, Error?) -> Void) {
         
-        let id = userIdentify() ?? generateUserIdentity()
+        let id = userIdentify()
         print("header: id - \(id)")
         
         do {
-            let headers = [
+            var headers = [
                 "Content-Type": "application/json",
                 userHeaderField: id
             ]
+            if let token = UserDefaults.standard.string(forKey: UserDefaults.Key.apnsToken) {
+                headers[apnsTokenField] = token
+            }
+            
             let data = try encoder.encode(session)
             
             Alamofire.upload(data, to: "\(host)/sessions", headers: headers)

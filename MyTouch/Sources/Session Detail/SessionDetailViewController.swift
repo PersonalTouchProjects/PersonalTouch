@@ -12,8 +12,6 @@ class SessionDetailViewController: UIViewController {
     
     var session: Session? {
         didSet {
-            navigationItem.rightBarButtonItem = session?.state == .completed ? shareButton : nil
-            
             if let session = session {
                 let style = NSMutableParagraphStyle()
                 style.lineBreakMode = .byWordWrapping
@@ -44,10 +42,6 @@ class SessionDetailViewController: UIViewController {
     let backgroundView = UIView()
     let briefLabel = UILabel()
     let tableView = UITableView(frame: .zero, style: .plain)
-    
-    private lazy var shareButton: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: "icon_share"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(handleShareButton(sender:)))
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,15 +98,6 @@ class SessionDetailViewController: UIViewController {
         ])
         
         topShadowView.alpha = 0.0
-    }
-
-    @objc private func handleShareButton(sender: UIBarButtonItem) {
-        
-        // TODO: share content
-        let shareText = "此中軍則己料友看始紙成我。活算上德，沒知反最年上護獲有了。設持什河一說重音輕的情，能現英會？火再地過明玩一登的，人五下……年畫成，神自部：增強燈舉力開家善數手半告依效化任南場坡家坐朋蘭經表遠族教動……實盡裡筆切得連國整商表父。"
-        
-        let activity = UIActivityViewController(activityItems: [shareText], applicationActivities: [])
-        present(activity, animated: true, completion: nil)
     }
     
     @objc private func handleAccomodationButton(sender: UIButton) {

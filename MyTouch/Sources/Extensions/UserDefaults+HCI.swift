@@ -15,5 +15,6 @@ extension UserDefaults {
         static let localSessions = "\(Bundle.main.bundleIdentifier!).localSessions"
         static let latestSubject = "\(Bundle.main.bundleIdentifier!).latestSubject"
         static let userIdentity = "\(Bundle.main.bundleIdentifier!).userIdentity"
+        static let apnsToken = "\(Bundle.main.bundleIdentifier!).apnsToken"
     }
 }
