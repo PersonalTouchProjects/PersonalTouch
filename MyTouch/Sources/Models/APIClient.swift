@@ -9,8 +9,8 @@
 import Foundation
 import Alamofire
 
-private let host = "http://192.168.1.109:3000/api/v1"
-//private let host = "https://secret-fjord-21101.herokuapp.com/api/v1"
+//private let host = "http://192.168.1.109:3000/api/v1"
+private let host = "https://secret-fjord-21101.herokuapp.com/api/v1"
 private let userHeaderField = "X-Mytouch-User"
 private let apnsTokenField = "X-Mytouch-APNS-Token"
 
