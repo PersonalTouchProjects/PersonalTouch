@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print(defaultApplicationSupportDirectoryPath())
         
-        window?.tintColor = UIColor(hex: 0xa7d453)
+        window?.tintColor = UIColor(hex: 0x00b894)
         
         let center = UNUserNotificationCenter.current()
         // Request permission to display alerts and play sounds.

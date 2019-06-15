@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.7.0)
+  - Alamofire (4.8.2)
   - LicensesViewController (0.7.0)
   - ResearchKit (2.0.0)
 
@@ -24,7 +24,7 @@ CHECKOUT OPTIONS:
     :git: "git@github.com:PersonalTouchProjects/ResearchKit.git"
 
 SPEC CHECKSUMS:
-  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   LicensesViewController: 2f7bba13b3cec7516d4990e41df297720fdbaaab
   ResearchKit: 0133d483eb85d977c96e5dbbf2a234ac7bd43545
 
