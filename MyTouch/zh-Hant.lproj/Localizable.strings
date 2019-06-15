@@ -16,29 +16,29 @@
 "CONTINUE_EXAM" = "繼續測驗";
 "MUST_CONSENT_MESSAGE" = "您必須同意才能繼續使用本服務。";
 
-"NAVIGATION_TITLE_HOME" = "MyTouch";
-"NAVIGATION_TITLE_HISTORY" = "MyTouch";
-"NAVIGATION_TITLE_ABOUT" = "關於 MyTouch";
+"NAVIGATION_TITLE_HOME" = "PersonalTouch";
+"NAVIGATION_TITLE_HISTORY" = "PersonalTouch";
+"NAVIGATION_TITLE_ABOUT" = "關於 PersonalTouch";
 
 "ABOUT_VERSION_INFO_SECTION_TITLE" = "版本資訊";
 "ABOUT_ABOUT_APP_SECTION_TITLE" = "關於";
 "ABOUT_VERSION_TITLE" = "程式版本";
 "ABOUT_LICENSE_TITLE" = "版權資訊";
-"ABOUT_MYTOUCH_TITLE" = "關於 MyTouch";
+"ABOUT_MYTOUCH_TITLE" = "關於 PersonalTouch";
 "ABOUT_CONTACT_TITLE" = "聯絡我們";
 
-"ONBOARDING_TITLE" = "歡迎使用 MyTouch";
+"ONBOARDING_TITLE" = "歡迎使用 PersonalTouch";
 "ONBOARDING_MESSEGE" = "於入最中公同及親了。月事念樹裡生保年指在思少員王技制的不毛響選、長能方向極，票領研因真未看的務，被念到觀存司的如善現緊。布會地生留經之跑要題計長們並布能我時回賣不的？應據有西產，港我進生。笑帶等的大思環情頭業、提鄉父條不參然經工光樂香月活的到。";
 
 "FINISH_EXAM_QUESTION_TITLE" = "結束測驗？";
 "FINISH_EXAM_QUESTION_BODY" = "現在結束測驗將會放棄所有已完成的測驗資料。";
 
-"MYTOUCH_CONSENT_DOCUMENT" = "MyTouch 使用同意書";
-"MYTOUCH_CONSENT_OVERVIEW_SUMMARY" = "歡迎來到 MyTouch！由於檢測資料將會提供學術研究使用，於是在使用本 app 前，有以下事項須向您做說明。";
+"MYTOUCH_CONSENT_DOCUMENT" = "PersonalTouch 使用同意書";
+"MYTOUCH_CONSENT_OVERVIEW_SUMMARY" = "歡迎來到 PersonalTouch！由於檢測資料將會提供學術研究使用，於是在使用本 app 前，有以下事項須向您做說明。";
 "MYTOUCH_CONSENT_DATA_GATHERING_SUMMARY" = "接下來之測驗進行方式，為進行一系列的測驗，約耗時 20 分鐘。本 app 測驗結果除了為您帶來更順暢的觸控體驗，亦會將您的測驗資料作為日後學術研究使用。";
 "MYTOUCH_CONSENT_PRIVACY_SUMMARY" = "為確保您的個人權益，我們僅將資料結果做學術上的研究使用，並不會將您的個人資料外流，或做其他商業利用。";
 "MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY" = "除前述測驗外，我們亦須向您蒐集個人資料（如：年齡、性別、手機、信箱、同意書簽名等），以增進日後研究之樣本蒐集。";
-"MYTOUCH_CONSENT_WITHDRAWING_SUMMARY" = "若您無法配合 MyTouch 之資料用途，我們雖深感遺憾但亦尊重您的決定。期待未來能有機會再與您合作！";
+"MYTOUCH_CONSENT_WITHDRAWING_SUMMARY" = "若您無法配合 PersonalTouch 之資料用途，我們雖深感遺憾但亦尊重您的決定。期待未來能有機會再與您合作！";
 "MYOTUCH_USER_TITLE" = "使用者";
 
 "SURVEY_INSTRUCTION_TITLE" = "填寫基本資料";
@@ -95,7 +95,7 @@
 "DEVICE_INFO_MODEL_NAME" = "裝置型號";
 "DEVICE_INFO_MANUFACTURER" = "製造商";
 "DEVICE_INFO_OS_VERSION" = "作業系統版本";
-"DEVICE_INFO_APP_VERSION" = "MyTouch 版本";
+"DEVICE_INFO_APP_VERSION" = "PersonalTouch 版本";
 
 "SUBJECT_INFO_TITLE" = "受測者資訊";
 "SUBJECT_INFO_NAME" = "姓名";

@@ -16,29 +16,29 @@
 "CONTINUE_EXAM" = "Continue";
 "MUST_CONSENT_MESSAGE" = "You must consent to use this app.";
 
-"NAVIGATION_TITLE_HOME" = "MyTouch";
-"NAVIGATION_TITLE_HISTORY" = "MyTouch";
-"NAVIGATION_TITLE_ABOUT" = "About MyTouch";
+"NAVIGATION_TITLE_HOME" = "PersonalTouch";
+"NAVIGATION_TITLE_HISTORY" = "PersonalTouch";
+"NAVIGATION_TITLE_ABOUT" = "About PersonalTouch";
 
 "ABOUT_VERSION_INFO_SECTION_TITLE" = "Version Info";
 "ABOUT_ABOUT_APP_SECTION_TITLE" = "About";
 "ABOUT_VERSION_TITLE" = "App Version";
 "ABOUT_LICENSE_TITLE" = "License";
-"ABOUT_MYTOUCH_TITLE" = "About MyTouch";
+"ABOUT_MYTOUCH_TITLE" = "About PersonalTouch";
 "ABOUT_CONTACT_TITLE" = "Contact Us";
 
-"ONBOARDING_TITLE" = "Welcome to MyTouch";
+"ONBOARDING_TITLE" = "Welcome to PersonalTouch";
 "ONBOARDING_MESSEGE" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
 "FINISH_EXAM_QUESTION_TITLE" = "Quit now?";
 "FINISH_EXAM_QUESTION_BODY" = "Quitting current session will discard all finished testing data";
 
-"MYTOUCH_CONSENT_DOCUMENT" = "MyTouch Consent";
-"MYTOUCH_CONSENT_OVERVIEW_SUMMARY" = "Welcome to MyTouch! Because of following data will be provided to academtic  research purpose, please read the following terms of agreement";
+"MYTOUCH_CONSENT_DOCUMENT" = "PersonalTouch Consent";
+"MYTOUCH_CONSENT_OVERVIEW_SUMMARY" = "Welcome to PersonalTouch! Because of following data will be provided to academtic  research purpose, please read the following terms of agreement";
 "MYTOUCH_CONSENT_DATA_GATHERING_SUMMARY" = "For the following testing demonstaration, we will conduct a series of testing for approximately 20 minutes. This application will provide you with smoother screen touch experience. These data will also used for future research purpose.";
 "MYTOUCH_CONSENT_PRIVACY_SUMMARY" = "To protect your personal right and privacy, collected data will only used for research purpose. Your personal information will not be shared, or used for any consumer purpose.";
 "MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY" = "In addition to data collection, we will collect your personal information (Ex: age, gender, phone number, email, and signed agreement.) to enhance future research data sample.";
-"MYTOUCH_CONSENT_WITHDRAWING_SUMMARY" = "If you cannot cooperate with MyTouch data usage, we sincerely respect your decision. We hope to cooperate in the near future.";
+"MYTOUCH_CONSENT_WITHDRAWING_SUMMARY" = "If you cannot cooperate with PersonalTouch data usage, we sincerely respect your decision. We hope to cooperate in the near future.";
 "MYOTUCH_USER_TITLE" = "User";
 
 "SURVEY_INSTRUCTION_TITLE" = "Fill out basic infomation";
@@ -95,7 +95,7 @@
 "DEVICE_INFO_MODEL_NAME" = "Model Name";
 "DEVICE_INFO_MANUFACTURER" = "Manufacturer";
 "DEVICE_INFO_OS_VERSION" = "OS Version";
-"DEVICE_INFO_APP_VERSION" = "MyTouch Version";
+"DEVICE_INFO_APP_VERSION" = "PersonalTouch Version";
 
 "SUBJECT_INFO_TITLE" = "Subject Info";
 "SUBJECT_INFO_NAME" = "Name";
