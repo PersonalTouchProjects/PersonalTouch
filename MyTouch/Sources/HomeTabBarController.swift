@@ -663,7 +663,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
 }
 
 private func activityTask() -> ORKOrderedTask {
-    return ORKOrderedTask.touchAbilityTask(withIdentifier: "touch", intendedUseDescription: nil, taskOptions: [.tap], options: [])
+    return ORKOrderedTask.touchAbilityTask(withIdentifier: "touch", intendedUseDescription: nil, taskOptions: [.tap, .longPress, .swipe, .verticalScroll, .horizontalScroll, .pinch, .rotation], options: [])
 }
 
 private let consentID = UUID()

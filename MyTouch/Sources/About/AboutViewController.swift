@@ -50,7 +50,12 @@ extension AboutViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 2 ? 1 : 2
+        switch section {
+        case 0: return 2
+        case 1: return 2
+        case 2: return 1
+        default: return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,10 +83,6 @@ extension AboutViewController: UITableViewDataSource {
             cell.textLabel?.text = NSLocalizedString("ABOUT_CONTACT_TITLE", comment: "")
             cell.accessoryType = .disclosureIndicator
             
-//        case (2, 0):
-//            let button = tableView.dequeueReusableCell(withIdentifier: "button", for: indexPath) as! ButtonCell
-//            button.buttonLabel.text = "Clear Data"
-//            cell = button
             
         default: fatalError()
         }
