@@ -12,10 +12,19 @@ class SubjectSummaryViewController: UIViewController {
 
     let subject: Subject
     let callback: (UIViewController, Bool) -> Void
+    private let subjectParsed: [(title: String, value: String)]
     
     init(subject: Subject, callback: @escaping (UIViewController, Bool) -> Void) {
         self.subject = subject
         self.callback = callback
+        self.subjectParsed = [
+            // (NSLocalizedString("SUBJECT_INFO_NAME", comment: ""), subject.name),
+            (NSLocalizedString("SUBJECT_INFO_BIRTH_YEAR", comment: ""), "\(subject.birthYear)"),
+            (NSLocalizedString("SUBJECT_INFO_GENDER", comment: ""), subject.gender.localizedString),
+            (NSLocalizedString("SUBJECT_INFO_DOMINANT_HAND", comment: ""), subject.dominantHand.localizedString),
+            (NSLocalizedString("SUBJECT_INFO_IMPAIRMENT", comment: ""), subject.impairment.localizedString),
+            (NSLocalizedString("SUBJECT_INFO_SYMPTOMS", comment: ""), subject.symptomStrings.joined(separator: "\n"))
+        ]
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -109,41 +118,13 @@ class SubjectSummaryViewController: UIViewController {
 extension SubjectSummaryViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return subjectParsed.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemCell
-        
-        switch indexPath.row {
-        case 0:
-            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_NAME", comment: "")
-            cell.valueLabel.text = subject.name
-            
-        case 1:
-            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_BIRTH_YEAR", comment: "")
-            cell.valueLabel.text = "\(subject.birthYear)"
-            
-        case 2:
-            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_GENDER", comment: "")
-            cell.valueLabel.text = subject.gender.localizedString
-            
-        case 3:
-            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_DOMINANT_HAND", comment: "")
-            cell.valueLabel.text = subject.dominantHand.localizedString
-            
-        case 4:
-            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_IMPAIRMENT", comment: "")
-            cell.valueLabel.text = subject.impairment.localizedString
-            
-        case 5:
-            cell.titleLabel.text = NSLocalizedString("SUBJECT_INFO_SYMPTOMS", comment: "")
-            cell.valueLabel.text = subject.symptomStrings.joined(separator: "\n")
-            
-        default:
-            break
-        }
-        
+        cell.titleLabel.text = subjectParsed[indexPath.row].title
+        cell.valueLabel.text = subjectParsed[indexPath.row].value
         return cell
     }
 }

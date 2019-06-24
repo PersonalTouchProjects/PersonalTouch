@@ -37,7 +37,7 @@
 "MYTOUCH_CONSENT_OVERVIEW_SUMMARY" = "歡迎來到 PersonalTouch！由於檢測資料將會提供學術研究使用，於是在使用本 app 前，有以下事項須向您做說明。";
 "MYTOUCH_CONSENT_DATA_GATHERING_SUMMARY" = "接下來之測驗進行方式，為進行一系列的測驗，約耗時 20 分鐘。本 app 測驗結果除了為您帶來更順暢的觸控體驗，亦會將您的測驗資料作為日後學術研究使用。";
 "MYTOUCH_CONSENT_PRIVACY_SUMMARY" = "為確保您的個人權益，我們僅將資料結果做學術上的研究使用，並不會將您的個人資料外流，或做其他商業利用。";
-"MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY" = "除前述測驗外，我們亦須向您蒐集個人資料（如：年齡、性別、手機、信箱、同意書簽名等），以增進日後研究之樣本蒐集。";
+"MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY" = "除前述測驗外，我們亦須向您蒐集個人資料（如：年齡、性別等），以增進日後研究之樣本蒐集。";
 "MYTOUCH_CONSENT_WITHDRAWING_SUMMARY" = "若您無法配合 PersonalTouch 之資料用途，我們雖深感遺憾但亦尊重您的決定。期待未來能有機會再與您合作！";
 "MYOTUCH_USER_TITLE" = "使用者";
 

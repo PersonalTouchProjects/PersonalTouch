@@ -550,6 +550,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
     steps += [instructionStep]
     
     
+    /* skipping name
     // name
     let nameAnswerFormat = ORKTextAnswerFormat(maximumLength: 100)
     nameAnswerFormat.multipleLines = false
@@ -559,6 +560,7 @@ private func surveyTask(with subject: Subject? = nil) -> ORKOrderedTask {
         question: NSLocalizedString("SURVEY_NAME_QUESTION", comment: ""),
         answer: nameAnswerFormat)
     )
+    */
     
     
     // birth year
