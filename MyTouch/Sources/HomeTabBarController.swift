@@ -15,13 +15,17 @@ extension Notification.Name {
     static let sessionDidUpload = Notification.Name("sessionDidUpload")
 }
 
-
+/// The root view controller of This app.
+///
+/// It handles API client actions and store the sessions returned by the client.
+///
+/// It also handles ResearchKit-related flow, such as creating and handling consent, survey, and active task.
 class HomeTabBarController: UITabBarController {
 
     // MARK: - UIViewController
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        
+        // Display in landscape mode in iPad and in protrait mode on other devices (currently iPhone only).
         switch UIDevice.current.userInterfaceIdiom {
         case .pad:
             return [.landscapeLeft, .landscapeRight]
@@ -33,10 +37,12 @@ class HomeTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Set up tab bar appearance.
         tabBar.isTranslucent = false
         tabBar.tintColor = UIColor(hex: 0x00b894)
         tabBar.unselectedItemTintColor = UIColor(hex: 0xb2bec3)
         
+        // Set up notification observation.
         NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillEnterForeground(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillResignActive(_:)), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillResignActive(_:)), name: UIApplication.willTerminateNotification, object: nil)
@@ -45,6 +51,7 @@ class HomeTabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // If not consented, present consent form, else upload cached sessions if needed.
         if UserDefaults.standard.bool(forKey: UserDefaults.Key.consented) == false {
             presentConsent()
         } else {
@@ -73,6 +80,7 @@ class HomeTabBarController: UITabBarController {
             
             self.isSessionsLoaded = true
             
+            // save sessions in storage
             sessions?.forEach {
                 do {
                     try $0.save()
@@ -81,10 +89,11 @@ class HomeTabBarController: UITabBarController {
                 }
             }
             
+            // sort sessions by date, newest on top
             self.sessions = Session.locals().sorted { $0.start > $1.start }
             self.error = error
             
-            
+            // notify everyone that sessions are loadeds
             let notification = Notification(name: .sessionsDidLoad, object: self, userInfo: nil)
             NotificationQueue.default.enqueue(notification, postingStyle: .asap)
             
@@ -93,7 +102,6 @@ class HomeTabBarController: UITabBarController {
     }
     
     func uploadSession(_ session: Session, completion: @escaping (Session?, Error?) -> Void) {
-        
         client.uploadSession(session, completion: completion)
     }
     
@@ -119,6 +127,7 @@ class HomeTabBarController: UITabBarController {
     
     @objc private func handleApplicationWillResignActive(_ notification: Notification) {
         
+        // If any local cached session exists, schedule an local notification.
         if self.sessions.filter({ $0.state == .local }).count > 0 {
             
             let content = UNMutableNotificationContent()
