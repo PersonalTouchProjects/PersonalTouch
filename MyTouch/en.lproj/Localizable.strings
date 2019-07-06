@@ -37,7 +37,7 @@
 "MYTOUCH_CONSENT_OVERVIEW_SUMMARY" = "Welcome to PersonalTouch! Because of following data will be provided to academtic  research purpose, please read the following terms of agreement";
 "MYTOUCH_CONSENT_DATA_GATHERING_SUMMARY" = "For the following testing demonstaration, we will conduct a series of testing for approximately 20 minutes. This application will provide you with smoother screen touch experience. These data will also used for future research purpose.";
 "MYTOUCH_CONSENT_PRIVACY_SUMMARY" = "To protect your personal right and privacy, collected data will only used for research purpose. Your personal information will not be shared, or used for any consumer purpose.";
-"MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY" = "In addition to data collection, we will collect your personal information (Ex: age, gender, phone number, email, and signed agreement.) to enhance future research data sample.";
+"MYTOUCH_CONSENT_STUDY_SURVEY_SUMMARY" = "In addition to data collection, we will collect your personal information (Ex: age, gender.) to enhance future research data sample.";
 "MYTOUCH_CONSENT_WITHDRAWING_SUMMARY" = "If you cannot cooperate with PersonalTouch data usage, we sincerely respect your decision. We hope to cooperate in the near future.";
 "MYOTUCH_USER_TITLE" = "User";
 
